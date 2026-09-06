@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-xs: 450px;
+  --breakpoint-sm: 575px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1400px;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, "Times New Roman",
+    serif;
+
+  --color-current: currentColor;
+  --color-transparent: transparent;
+  --color-white: #ffffff;
+  --color-navy: #0b1628;
+  --color-navy-soft: #1a2332;
+  --color-gold: #c9a96e;
+  --color-gold-dark: #b08d4f;
+  --color-cream: #f6f4ef;
+  --color-cream-dark: #ece7dc;
+  --color-primary: #c9a96e;
+  --color-black: #0b1628;
+  --color-dark: #1a2332;
+  --color-body-color: #5b6472;
+  --color-body-color-dark: #c5c0b6;
+  --color-bg-color-dark: #0b1628;
+  --color-gray-dark: #1a2332;
+  --color-gray-light: #f6f4ef;
+  --color-stroke-stroke: #e3ddd2;
+  --color-stroke-dark: #2a3444;
+
+  --shadow-one: 0px 2px 3px rgba(11, 22, 40, 0.05);
+  --shadow-two: 0px 12px 40px rgba(11, 22, 40, 0.1);
+  --shadow-three: 0px 8px 24px rgba(11, 22, 40, 0.08);
+  --shadow-sticky: inset 0 -1px 0 0 rgba(11, 22, 40, 0.08);
+  --shadow-btn: 0px 1px 2px rgba(11, 22, 40, 0.15);
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-stroke-stroke, currentcolor);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-navy);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .gold-rule {
+    @apply inline-flex items-center gap-3 text-[11px] font-semibold tracking-[0.22em] text-gold uppercase;
+  }
+
+  .gold-rule::before {
+    content: "";
+    @apply block h-px w-8 bg-gold;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-gold px-6 py-3 text-sm font-semibold tracking-wide text-navy transition hover:bg-gold-dark;
+  }
+
+  .btn-navy {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-navy px-6 py-3 text-sm font-semibold tracking-wide text-white transition hover:bg-navy-soft;
+  }
+
+  .btn-outline-light {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm border border-white/40 px-6 py-3 text-sm font-semibold tracking-wide text-white transition hover:border-gold hover:text-gold;
+  }
+
+  .btn-outline-navy {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm border border-navy/15 px-6 py-3 text-sm font-semibold tracking-wide text-navy transition hover:border-gold hover:text-gold-dark;
+  }
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes hero-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-hero-zoom {
+  animation: hero-zoom 22s ease-out forwards;
+}
+
+.hero-copy {
+  animation: hero-copy-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.card-lift {
+  box-shadow: var(--shadow-one);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-two);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-hero-zoom,
+  .hero-copy {
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .card-lift:hover {
+    transform: none;
+  }
+}
