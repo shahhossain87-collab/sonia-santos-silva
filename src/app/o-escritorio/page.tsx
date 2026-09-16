@@ -1,6 +1,7 @@
 import PageHero from "@/components/PageHero";
 import Team from "@/components/Home/Team";
 import Office from "@/components/Home/Office";
+import OfficeGallery from "@/components/Home/OfficeGallery";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { site } from "@/config/site";
 import type { Metadata } from "next";
@@ -75,6 +76,7 @@ export default function EscritorioPage() {
         </div>
       </section>
       <Team />
+      <OfficeGallery />
       <Office />
     </>
   );

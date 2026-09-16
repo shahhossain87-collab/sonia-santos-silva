@@ -8,7 +8,7 @@ export default function ConversionCta() {
   return (
     <section className="relative overflow-hidden py-20 text-white">
       <Image
-        src="/images/home/office.jpg"
+        src="/images/office/03-corridor-armando.jpg"
         alt=""
         fill
         className="object-cover"

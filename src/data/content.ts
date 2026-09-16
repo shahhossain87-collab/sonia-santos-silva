@@ -104,7 +104,7 @@ export type TeamMember = {
 
 export const team: TeamMember[] = [
   {
-    name: "Sónia Santos Silva",
+    name: "Sónia Santos da Silva",
     role: "Advogada",
     license: "Cédula profissional 55852L",
     bio: "Acompanhamento em nacionalidade, vistos e residência em Portugal.",
@@ -113,15 +113,57 @@ export const team: TeamMember[] = [
     featured: true,
   },
   {
-    photo: "/images/team/membro-01.jpg",
+    name: "Armando Oliveira",
+    role: "Solicitador e agente de execução",
+    photo: "/images/team/armando.jpg",
   },
   {
-    photo: "/images/team/membro-02.jpg",
+    name: "Carolina Mendes",
+    role: "Solicitadora",
+    photo: "/images/team/carolina.jpg",
   },
   {
-    photo: "/images/team/membro-03.jpg",
+    name: "Kelvin Batista",
+    role: "Assistente jurídico",
+    photo: "/images/team/kelvin.jpg",
+  },
+  {
+    name: "Nadir Meggy",
+    role: "Coordenador de processos",
+    photo: "/images/team/nadir.jpg",
   },
 ];
+
+export const officeVisuals = [
+  {
+    src: "/images/office/01-reception.jpg",
+    alt: "Visualização da recepção compacta, com secretária em nogueira e vista para o gabinete vidrado.",
+    label: "Recepção",
+  },
+  {
+    src: "/images/office/02-sonia-cabin.jpg",
+    alt: "Visualização do gabinete vidrado junto à recepção, com secretária e cadeiras de consulta.",
+    label: "Gabinete",
+  },
+  {
+    src: "/images/office/03-corridor-armando.jpg",
+    alt: "Visualização do corredor, com um gabinete à esquerda e a sala de reuniões ao fundo.",
+    label: "Corredor",
+  },
+  {
+    src: "/images/office/04-conference.jpg",
+    alt: "Visualização da sala de consultas alongada, com mesa longa e estante de livros.",
+    label: "Sala de consultas",
+  },
+  {
+    src: "/images/office/05-establishing.jpg",
+    alt: "Vista de conjunto da recepção, do gabinete vidrado e do corredor até à sala de reuniões.",
+    label: "Vista geral",
+  },
+] as const;
+
+export const officeVisualDisclaimer =
+  "Imagens de visualização arquitectónica inspiradas na descrição do escritório em Laranjeiras. Não são fotografias das instalações existentes.";
 
 export const testimonials = [
   {

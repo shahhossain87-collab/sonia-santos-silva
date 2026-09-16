@@ -8,7 +8,7 @@ export default function MidCta() {
   return (
     <section className="relative overflow-hidden py-16 text-white md:py-20">
       <Image
-        src="/images/home/midcta-books.jpg"
+        src="/images/office/04-conference.jpg"
         alt=""
         fill
         className="object-cover object-center"

@@ -17,8 +17,8 @@ export default function About() {
         <Reveal>
           <div className="relative aspect-[4/3] overflow-hidden sm:min-h-[380px] sm:aspect-auto">
             <Image
-              src="/images/home/about-books.jpg"
-              alt="Livros numa estante de escritório. Fotografia Unsplash."
+              src="/images/office/01-reception.jpg"
+              alt="Visualização arquitectónica da recepção do escritório. Não é uma fotografia das instalações existentes."
               fill
               className="object-cover"
               sizes="(min-width: 992px) 50vw, 100vw"

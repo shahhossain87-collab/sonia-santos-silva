@@ -6,8 +6,8 @@ export default function Hero() {
   return (
     <section className="relative isolate min-h-[calc(100svh-7.25rem)] overflow-hidden text-white">
       <Image
-        src="/images/home/meeting.jpg"
-        alt="Sala de reuniões num escritório. Fotografia Unsplash."
+        src="/images/office/05-establishing.jpg"
+        alt="Visualização arquitectónica da recepção e do corredor do escritório em Laranjeiras. Não é uma fotografia das instalações existentes."
         fill
         priority
         className="animate-hero-zoom object-cover object-center"

@@ -83,14 +83,14 @@ export default function Team() {
         ) : null}
 
         {rest.length > 0 ? (
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {rest.map((member, index) => (
               <Reveal key={member.photo} delay={0.08 * (index + 1)}>
                 <article className="card-lift overflow-hidden bg-cream">
                   <div className="relative aspect-square">
                     <TeamPhoto
                       member={member}
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                     />
                   </div>
                   {member.name || member.role ? (
