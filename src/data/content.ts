@@ -92,13 +92,34 @@ export const metrics = [
   },
 ];
 
-export const team = [
+export type TeamMember = {
+  name?: string;
+  role?: string;
+  license?: string;
+  bio?: string;
+  initials?: string;
+  photo: string;
+  featured?: boolean;
+};
+
+export const team: TeamMember[] = [
   {
     name: "Sónia Santos Silva",
     role: "Advogada",
-    cédula: "Cédula profissional 55852L",
+    license: "Cédula profissional 55852L",
     bio: "Acompanhamento em nacionalidade, vistos e residência em Portugal.",
     initials: "SSS",
+    photo: "/images/team/sonia-santos-silva.jpg",
+    featured: true,
+  },
+  {
+    photo: "/images/team/equipa-01.jpg",
+  },
+  {
+    photo: "/images/team/equipa-02.jpg",
+  },
+  {
+    photo: "/images/team/equipa-03.jpg",
   },
 ];
 
