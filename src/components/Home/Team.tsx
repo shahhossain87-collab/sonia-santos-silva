@@ -29,7 +29,7 @@ function TeamPhoto({
       alt={memberAlt(member)}
       fill
       priority={priority}
-      className="object-cover object-top"
+      className="object-cover object-center"
       sizes={sizes}
     />
   );
@@ -87,7 +87,7 @@ export default function Team() {
             {rest.map((member, index) => (
               <Reveal key={member.photo} delay={0.08 * (index + 1)}>
                 <article className="card-lift overflow-hidden bg-cream">
-                  <div className="relative aspect-[4/5]">
+                  <div className="relative aspect-square">
                     <TeamPhoto
                       member={member}
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"

@@ -109,17 +109,17 @@ export const team: TeamMember[] = [
     license: "Cédula profissional 55852L",
     bio: "Acompanhamento em nacionalidade, vistos e residência em Portugal.",
     initials: "SSS",
-    photo: "/images/team/sonia-santos-silva.jpg",
+    photo: "/images/team/sonia.jpg",
     featured: true,
   },
   {
-    photo: "/images/team/equipa-01.jpg",
+    photo: "/images/team/membro-01.jpg",
   },
   {
-    photo: "/images/team/equipa-02.jpg",
+    photo: "/images/team/membro-02.jpg",
   },
   {
-    photo: "/images/team/equipa-03.jpg",
+    photo: "/images/team/membro-03.jpg",
   },
 ];
 
