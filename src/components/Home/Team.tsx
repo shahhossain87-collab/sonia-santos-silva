@@ -46,6 +46,17 @@ export default function Team() {
           <p className="gold-rule">Equipa</p>
           <h2 className="mt-3 font-display text-3xl sm:text-4xl">A equipa</h2>
         </Reveal>
+        <Reveal delay={0.06}>
+          <figure className="card-lift relative mt-10 aspect-[3/2] overflow-hidden">
+            <Image
+              src="/images/team/equipa.jpg"
+              alt="A equipa do Gabinete Jurídico Laranjeiras."
+              fill
+              className="object-cover object-[50%_30%]"
+              sizes="100vw"
+            />
+          </figure>
+        </Reveal>
         {featured ? (
           <Reveal delay={0.1}>
             <article className="card-lift mt-10 grid overflow-hidden md:grid-cols-[300px_1fr]">
