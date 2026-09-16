@@ -60,7 +60,7 @@ export default function Team() {
         {featured ? (
           <Reveal delay={0.1}>
             <article className="card-lift mt-10 grid overflow-hidden md:grid-cols-[300px_1fr]">
-              <div className="relative min-h-[360px] md:min-h-[420px]">
+              <div className="relative aspect-square min-h-[280px] md:min-h-0">
                 <TeamPhoto
                   member={featured}
                   sizes="300px"
