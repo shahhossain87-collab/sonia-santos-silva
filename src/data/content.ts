@@ -166,6 +166,9 @@ export const officeVisualDisclaimer =
 
 export const officeExterior = {
   src: "/images/office/exterior.jpg",
+  // Temporary layout asset only. The file shows door plate "9A" and must not
+  // be treated as proof of site.addressLine ("Rua Abranches Ferrão, 11 A...").
+  temporary: true,
 } as const;
 
 export const testimonials = [

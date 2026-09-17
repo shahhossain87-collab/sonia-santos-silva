@@ -6,14 +6,14 @@ export default function OfficeMap({
   className?: string;
 }) {
   return (
-    <div>
+    <div className="min-w-0 max-w-full">
       <div
-        className={`w-full overflow-hidden bg-cream ${className ?? "aspect-[4/3] min-h-[280px]"}`}
+        className={`w-full min-w-0 overflow-hidden bg-cream ${className ?? "aspect-[4/3] min-h-[280px]"}`}
       >
         <iframe
           title={`${site.officeName} — ${site.addressLine}`}
           src={mapsEmbedUrl}
-          className="h-full min-h-[280px] w-full border-0"
+          className="h-full min-h-[280px] w-full max-w-full border-0"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           allowFullScreen
