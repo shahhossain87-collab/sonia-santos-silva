@@ -35,7 +35,7 @@ export default function Hero() {
             <p className="mt-5 max-w-md text-sm leading-relaxed text-white/80 sm:text-base">
               {copy.home.heroLead}
             </p>
-            <ul className="mt-6 grid max-w-lg grid-cols-1 gap-x-10 gap-y-1.5 text-sm text-white/70 sm:grid-cols-2">
+            <ul className="mt-6 grid max-w-lg grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-white/70 sm:gap-x-10">
               {areas.map((area) => (
                 <li key={area} className="border-l border-gold/60 pl-3">
                   {area}
