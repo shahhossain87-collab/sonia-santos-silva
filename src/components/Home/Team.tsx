@@ -4,29 +4,32 @@ import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
 import Reveal from "@/components/Reveal";
 import { site } from "@/config/site";
 import { team, type TeamMember } from "@/data/content";
+import { useCopy } from "@/i18n/use-locale";
 import Image from "next/image";
 
-function memberAlt(member: TeamMember) {
+function memberAlt(member: TeamMember, fallback: string) {
   if (member.name && member.role) {
     return `${member.name}, ${member.role.toLowerCase()}`;
   }
   if (member.name) return member.name;
-  return "Membro da equipa do escritório";
+  return fallback;
 }
 
 function TeamPhoto({
   member,
   sizes,
+  fallbackAlt,
   priority = false,
 }: {
   member: TeamMember;
   sizes: string;
+  fallbackAlt: string;
   priority?: boolean;
 }) {
   return (
     <Image
       src={member.photo}
-      alt={memberAlt(member)}
+      alt={memberAlt(member, fallbackAlt)}
       fill
       priority={priority}
       className="object-cover object-center"
@@ -36,6 +39,7 @@ function TeamPhoto({
 }
 
 export default function Team() {
+  const { copy } = useCopy();
   const featured = team.find((member) => member.featured) ?? team[0];
   const rest = team.filter((member) => member !== featured);
 
@@ -43,14 +47,14 @@ export default function Team() {
     <section id="equipa" className="bg-white py-16 md:py-20">
       <div className="container">
         <Reveal>
-          <p className="gold-rule">Equipa</p>
-          <h2 className="mt-3 font-display text-3xl sm:text-4xl">A equipa</h2>
+          <p className="gold-rule">{copy.home.teamEyebrow}</p>
+          <h2 className="mt-3 font-display text-3xl sm:text-4xl">{copy.home.teamTitle}</h2>
         </Reveal>
         <Reveal delay={0.06}>
           <figure className="card-lift relative mt-10 aspect-[3/2] overflow-hidden">
             <Image
               src="/images/team/equipa.jpg"
-              alt="A equipa do Gabinete Jurídico Laranjeiras."
+              alt={copy.home.teamGroupAlt}
               fill
               className="object-cover object-[50%_30%]"
               sizes="100vw"
@@ -64,6 +68,7 @@ export default function Team() {
                 <TeamPhoto
                   member={featured}
                   sizes="300px"
+                  fallbackAlt={copy.home.teamFallbackAlt}
                   priority
                 />
               </div>
@@ -102,6 +107,7 @@ export default function Team() {
                     <TeamPhoto
                       member={member}
                       sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                      fallbackAlt={copy.home.teamFallbackAlt}
                     />
                   </div>
                   {member.name || member.role ? (

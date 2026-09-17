@@ -1,4 +1,7 @@
+"use client";
+
 import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
+import { useCopy } from "@/i18n/use-locale";
 import Link from "next/link";
 
 export default function PageHero({
@@ -12,10 +15,12 @@ export default function PageHero({
   description: string;
   crumbs: { label: string; href?: string }[];
 }) {
+  const { copy } = useCopy();
+
   return (
     <section className="bg-navy py-16 text-white md:py-20">
       <div className="container">
-        <nav aria-label="Navegação estrutural" className="mb-6 text-sm text-white/50">
+        <nav aria-label={copy.common.breadcrumb} className="mb-6 text-sm text-white/50">
           <ol className="flex flex-wrap items-center gap-2">
             {crumbs.map((crumb, i) => (
               <li key={`${crumb.label}-${i}`} className="flex items-center gap-2">
@@ -40,7 +45,7 @@ export default function PageHero({
         </p>
         <CtaLink>
           <WhatsAppIcon />
-          Falar no WhatsApp
+          {copy.common.whatsapp}
         </CtaLink>
       </div>
     </section>

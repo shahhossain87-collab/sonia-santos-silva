@@ -4,8 +4,11 @@ import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { site } from "@/config/site";
+import { localeHtmlLang, localeOg, type Locale } from "@/i18n/locales";
+import { getLocaleFromPathname } from "@/i18n/routes";
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { headers } from "next/headers";
 import { Providers } from "./providers";
 import "../styles/index.css";
 
@@ -31,19 +34,39 @@ export const metadata: Metadata = {
   openGraph: {
     title: site.title,
     description: site.description,
-    locale: "pt_PT",
+    locale: localeOg.pt,
     type: "website",
   },
 };
 
-export default function RootLayout({
+async function readLocale(): Promise<Locale> {
+  const headerList = await headers();
+  const fromHeader = headerList.get("x-locale");
+  if (fromHeader === "en" || fromHeader === "pt") {
+    return fromHeader;
+  }
+
+  const nextUrl = headerList.get("next-url") ?? headerList.get("x-url") ?? "";
+  try {
+    if (nextUrl.startsWith("http")) {
+      return getLocaleFromPathname(new URL(nextUrl).pathname);
+    }
+  } catch {
+    /* ignore */
+  }
+  return getLocaleFromPathname(nextUrl || "/");
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await readLocale();
+
   return (
     <html
-      lang="pt"
+      lang={localeHtmlLang[locale]}
       className={`${inter.variable} ${playfair.variable}`}
       suppressHydrationWarning
     >

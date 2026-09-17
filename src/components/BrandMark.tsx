@@ -1,4 +1,8 @@
+"use client";
+
 import { site } from "@/config/site";
+import { pathFor } from "@/i18n/routes";
+import { useLocale } from "@/i18n/use-locale";
 import Link from "next/link";
 
 type BrandMarkProps = {
@@ -7,13 +11,14 @@ type BrandMarkProps = {
 };
 
 export default function BrandMark({ inverted, compact }: BrandMarkProps) {
+  const locale = useLocale();
   const nameColor = inverted ? "text-white" : "text-navy";
   const box = inverted
     ? "border-gold text-gold"
     : "border-gold text-navy";
 
   return (
-    <Link href="/" className="flex items-center gap-3" aria-label={site.title}>
+    <Link href={pathFor(locale, "home")} className="flex items-center gap-3" aria-label={site.title}>
       <span
         className={`flex h-11 w-11 shrink-0 items-center justify-center border ${box} font-display text-lg`}
       >

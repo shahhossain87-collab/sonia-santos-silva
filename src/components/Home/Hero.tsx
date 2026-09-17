@@ -1,13 +1,19 @@
+"use client";
+
 import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
 import { site } from "@/config/site";
+import { pathFor } from "@/i18n/routes";
+import { useCopy } from "@/i18n/use-locale";
 import Image from "next/image";
 
 export default function Hero() {
+  const { locale, copy } = useCopy();
+
   return (
     <section className="relative isolate min-h-[calc(100svh-7.25rem)] overflow-hidden text-white">
       <Image
         src="/images/office/05-establishing.jpg"
-        alt="Visualização arquitectónica da recepção e do corredor do escritório em Laranjeiras. Não é uma fotografia das instalações existentes."
+        alt={copy.aboutPage.galleryDisclaimer}
         fill
         priority
         className="animate-hero-zoom object-cover object-center"
@@ -20,20 +26,20 @@ export default function Hero() {
         <div className="hero-copy max-w-2xl">
           <p className="gold-rule">{site.title}</p>
           <h1 className="mt-4 font-display text-[2.15rem] leading-[1.12] sm:text-5xl lg:text-[3.4rem]">
-            Imigração e nacionalidade em Portugal.
+            {copy.home.heroTitle}
           </h1>
           <p className="mt-4 max-w-md text-sm leading-snug text-white/80 sm:text-base">
-            Vistos, residência e cidadania.
+            {copy.home.heroLead}
             <br />
-            Análise caso a caso — sem garantia de resultado.
+            {copy.home.heroNote}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <CtaLink>
               <WhatsAppIcon />
-              Falar com a advogada
+              {copy.home.heroTalk}
             </CtaLink>
-            <CtaLink href="/servicos" variant="outline-light">
-              Ver serviços
+            <CtaLink href={pathFor(locale, "services")} variant="outline-light">
+              {copy.home.heroServices}
             </CtaLink>
           </div>
         </div>

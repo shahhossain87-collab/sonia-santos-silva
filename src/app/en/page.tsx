@@ -9,9 +9,9 @@ import Team from "@/components/Home/Team";
 import Testimonials from "@/components/Home/Testimonials";
 import { homeMetadata } from "@/i18n/metadata";
 
-export const metadata = homeMetadata("pt");
+export const metadata = homeMetadata("en");
 
-export default function Home() {
+export default function EnglishHome() {
   return (
     <>
       <Hero />

@@ -1,22 +1,24 @@
 "use client";
 
 import Reveal from "@/components/Reveal";
-import { officeVisualDisclaimer, officeVisuals } from "@/data/content";
+import { officeVisuals } from "@/data/content";
+import { useCopy } from "@/i18n/use-locale";
 import Image from "next/image";
 
 export default function OfficeGallery() {
+  const { copy } = useCopy();
   const [hero, ...rest] = officeVisuals;
 
   return (
     <section className="bg-cream py-16 md:py-20">
       <div className="container">
         <Reveal>
-          <p className="gold-rule">Laranjeiras</p>
+          <p className="gold-rule">{copy.aboutPage.galleryEyebrow}</p>
           <h2 className="mt-3 font-display text-3xl sm:text-4xl">
-            O espaço de trabalho
+            {copy.aboutPage.galleryTitle}
           </h2>
           <p className="mt-3 max-w-2xl text-sm text-body-color">
-            {officeVisualDisclaimer}
+            {copy.aboutPage.galleryDisclaimer}
           </p>
         </Reveal>
 
