@@ -11,7 +11,7 @@ export default function OfficePresence() {
   const { copy } = useCopy();
 
   return (
-    <section id="em-lisboa" className="bg-cream py-16 pb-24 md:py-20">
+    <section id="em-lisboa" className="scroll-mt-28 bg-cream py-16 pb-24 md:py-20">
       <div className="container grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
         <Reveal className="order-2 lg:order-1">
           <figure className="relative aspect-[3/4] overflow-hidden">
@@ -21,7 +21,7 @@ export default function OfficePresence() {
               fill
               className="object-cover object-[50%_42%]"
               sizes="(min-width: 1024px) 50vw, 100vw"
-              loading="eager"
+              priority
             />
           </figure>
         </Reveal>
