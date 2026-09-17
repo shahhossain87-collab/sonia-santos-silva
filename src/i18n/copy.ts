@@ -8,13 +8,12 @@ export const homeServiceIds = [
   "recuperacao-credito",
   "sociedades",
   "patrimonio",
+  "penal",
+  "administrativo",
 ] as const;
 
 export type HomeServiceId = (typeof homeServiceIds)[number];
-
-export const extraServiceIds = ["penal", "administrativo"] as const;
-
-export type ServiceId = HomeServiceId | (typeof extraServiceIds)[number];
+export type ServiceId = HomeServiceId;
 
 const immigrationItems = {
   pt: [
@@ -54,7 +53,7 @@ export const ui = {
     },
     footer: {
       office: "Escritório",
-      areas: "Áreas",
+      areas: "Áreas de Atuação",
       contact: "Contacto",
       tagline: "Acompanhamento jurídico em Lisboa, em português e inglês.",
       rights: "Todos os direitos reservados.",
@@ -82,8 +81,8 @@ export const ui = {
       heroRole: "Advogada",
       heroLicense: "Cédula profissional",
       metrics: ["Português e inglês", "Escritório em Portugal", "Atendimento com marcação"],
-      servicesEyebrow: "Áreas",
-      servicesTitle: "Serviços",
+      servicesEyebrow: "Lisboa",
+      servicesTitle: "Áreas de Atuação",
       servicesMore: "Saber mais →",
       aboutEyebrow: "O escritório",
       aboutTitle: "Acompanhamento próximo, sem atalhos.",
@@ -117,8 +116,8 @@ export const ui = {
       presenceImageAlt: "Fachada do Gabinete Jurídico Laranjeiras em Lisboa.",
     },
     servicesPage: {
-      eyebrow: "Áreas",
-      title: "Serviços",
+      eyebrow: "Lisboa",
+      title: "Áreas de Atuação",
       description:
         "Informação geral sobre as áreas de atuação. Cada processo é autónomo: a leitura destas páginas não cria mandato nem garante deferimento.",
       intro:
@@ -193,6 +192,8 @@ export const ui = {
         "Recuperação de Crédito",
         "Direito das Sociedades",
         "Património e Sucessões",
+        "Direito Penal",
+        "Direito Administrativo",
         "Outro",
       ],
     },
@@ -213,9 +214,9 @@ export const ui = {
         "Escritório em Lisboa. Informação geral, sem garantia de resultado.",
       contactTitle: "Contacto",
       contactDescription: "Contacto por WhatsApp, e-mail ou formulário.",
-      servicesTitle: "Serviços",
+      servicesTitle: "Áreas de Atuação",
       servicesDescription:
-        "Imigração e vistos, nacionalidade portuguesa, arrendamento, recuperação de crédito, direito das sociedades, património e sucessões.",
+        "Imigração e vistos, nacionalidade portuguesa, arrendamento, recuperação de crédito, direito das sociedades, património e sucessões, direito penal e direito administrativo.",
     },
     cards: {
       imigracao: {
@@ -242,10 +243,14 @@ export const ui = {
         title: "Património e Sucessões",
         blurb: "Património e sucessões.",
       },
-    },
-    extraServices: {
-      penal: { title: "Direito Penal" },
-      administrativo: { title: "Direito Administrativo" },
+      penal: {
+        title: "Direito Penal",
+        blurb: "Questões de direito penal.",
+      },
+      administrativo: {
+        title: "Direito Administrativo",
+        blurb: "Questões de direito administrativo.",
+      },
     },
   },
   en: {
@@ -266,7 +271,7 @@ export const ui = {
     },
     footer: {
       office: "Office",
-      areas: "Areas",
+      areas: "Areas of practice",
       contact: "Contact",
       tagline: "Legal support in Lisbon, in Portuguese and English.",
       rights: "All rights reserved.",
@@ -294,8 +299,8 @@ export const ui = {
       heroRole: "Lawyer",
       heroLicense: "Professional licence",
       metrics: ["Portuguese and English", "Office in Portugal", "Appointments by arrangement"],
-      servicesEyebrow: "Areas",
-      servicesTitle: "Services",
+      servicesEyebrow: "Lisbon",
+      servicesTitle: "Areas of practice",
       servicesMore: "Read more →",
       aboutEyebrow: "The office",
       aboutTitle: "Close support, without shortcuts.",
@@ -329,8 +334,8 @@ export const ui = {
       presenceImageAlt: "Façade of Gabinete Jurídico Laranjeiras in Lisbon.",
     },
     servicesPage: {
-      eyebrow: "Areas",
-      title: "Services",
+      eyebrow: "Lisbon",
+      title: "Areas of practice",
       description:
         "General information about the areas of work. Reading these pages does not create a mandate or guarantee a decision.",
       intro:
@@ -405,6 +410,8 @@ export const ui = {
         "Debt recovery",
         "Company law",
         "Property and inheritance",
+        "Criminal law",
+        "Administrative law",
         "Other",
       ],
     },
@@ -424,9 +431,9 @@ export const ui = {
       aboutDescription: "A Lisbon office. General information, with no guarantee of outcome.",
       contactTitle: "Contact",
       contactDescription: "Contact by WhatsApp, email or form.",
-      servicesTitle: "Services",
+      servicesTitle: "Areas of practice",
       servicesDescription:
-        "Immigration and visas, Portuguese nationality, tenancy and leases, debt recovery, company law, property and inheritance.",
+        "Immigration and visas, Portuguese nationality, tenancy and leases, debt recovery, company law, property and inheritance, criminal law and administrative law.",
     },
     cards: {
       imigracao: {
@@ -453,10 +460,14 @@ export const ui = {
         title: "Property & Inheritance",
         blurb: "Property and inheritance.",
       },
-    },
-    extraServices: {
-      penal: { title: "Criminal Law" },
-      administrativo: { title: "Administrative Law" },
+      penal: {
+        title: "Criminal Law",
+        blurb: "Criminal law matters.",
+      },
+      administrativo: {
+        title: "Administrative Law",
+        blurb: "Administrative law matters.",
+      },
     },
   },
 } as const;
@@ -468,6 +479,8 @@ export const homeServiceImages: Record<HomeServiceId, string> = {
   "recuperacao-credito": "/images/home/desk.jpg",
   sociedades: "/images/home/meeting.jpg",
   patrimonio: "/images/home/about-books.jpg",
+  penal: "/images/office/02-sonia-cabin.jpg",
+  administrativo: "/images/office/05-establishing.jpg",
 };
 
 export function homeServiceHref(locale: Locale, id: HomeServiceId) {

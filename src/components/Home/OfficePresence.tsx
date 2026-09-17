@@ -23,7 +23,7 @@ export default function OfficePresence() {
                 src={officeExterior.src}
                 alt={copy.home.presenceImageAlt}
                 fill
-                className="max-w-none object-cover object-[50%_38%] lg:object-[50%_42%]"
+                className="max-w-none origin-[16%_42%] scale-[1.72] object-cover object-[16%_42%] lg:origin-[14%_40%] lg:scale-[1.55] lg:object-[14%_40%]"
                 sizes="(min-width: 992px) 50vw, 100vw"
                 priority
               />

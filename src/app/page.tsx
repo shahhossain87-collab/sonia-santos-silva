@@ -3,11 +3,9 @@ import ConversionCta from "@/components/Home/ConversionCTA";
 import Hero from "@/components/Home/Hero";
 import Metrics from "@/components/Home/Metrics";
 import MidCta from "@/components/Home/MidCTA";
-import Office from "@/components/Home/Office";
 import OfficePresence from "@/components/Home/OfficePresence";
 import ServiceCards from "@/components/Home/ServiceCards";
 import Team from "@/components/Home/Team";
-import Testimonials from "@/components/Home/Testimonials";
 import { homeMetadata } from "@/i18n/metadata";
 
 export const metadata = homeMetadata("pt");
@@ -23,8 +21,6 @@ export default function Home() {
       <Team />
       <OfficePresence />
       <ConversionCta />
-      <Testimonials />
-      <Office />
     </>
   );
 }

@@ -1,7 +1,6 @@
 import CtaLink from "@/components/CtaLink";
 import Reveal from "@/components/Reveal";
 import {
-  extraServiceIds,
   getCopy,
   homeServiceHref,
   homeServiceIds,
@@ -13,7 +12,6 @@ import Link from "next/link";
 
 export default function ServicesIndex({ locale }: { locale: Locale }) {
   const copy = getCopy(locale);
-  const extra = copy.extraServices;
   const items = immigrationItems[locale];
 
   return (
@@ -74,21 +72,6 @@ export default function ServicesIndex({ locale }: { locale: Locale }) {
               </Reveal>
             );
           })}
-        </div>
-
-        <div className="mt-5 grid gap-5 sm:grid-cols-2">
-          {extraServiceIds.map((id) => (
-            <article
-              key={id}
-              id={id}
-              className="scroll-mt-28 border border-navy/10 bg-white p-6"
-            >
-              <h2 className="font-display text-2xl text-navy">{extra[id].title}</h2>
-              <p className="mt-2 text-sm text-body-color">
-                {copy.servicesPage.moreWhenReady}
-              </p>
-            </article>
-          ))}
         </div>
 
         <div className="mt-10">

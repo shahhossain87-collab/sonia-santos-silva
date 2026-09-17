@@ -14,7 +14,7 @@ export default function ServiceCards() {
   const { locale, copy } = useCopy();
 
   return (
-    <section className="py-16 md:py-20" id="residencia">
+    <section className="py-16 md:py-20" id="areas">
       <div className="container">
         <Reveal>
           <p className="gold-rule">{copy.home.servicesEyebrow}</p>

@@ -2,17 +2,14 @@
 
 import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
 import { site, whatsappHref } from "@/config/site";
-import { extraServiceIds, homeServiceIds } from "@/i18n/copy";
+import { homeServiceIds } from "@/i18n/copy";
 import { pathFor } from "@/i18n/routes";
 import { useCopy } from "@/i18n/use-locale";
 import Image from "next/image";
 
 export default function Hero() {
   const { locale, copy } = useCopy();
-  const areas = [
-    ...homeServiceIds.map((id) => copy.cards[id].title),
-    ...extraServiceIds.map((id) => copy.extraServices[id].title),
-  ];
+  const areas = homeServiceIds.map((id) => copy.cards[id].title);
 
   return (
     <section className="relative isolate overflow-hidden bg-navy pb-8 text-white">

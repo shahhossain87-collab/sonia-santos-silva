@@ -41,6 +41,8 @@ export const footerNav = {
     { title: "Recuperação de Crédito", path: "/servicos#recuperacao-credito" },
     { title: "Direito das Sociedades", path: "/servicos#sociedades" },
     { title: "Património e Sucessões", path: "/servicos#patrimonio" },
+    { title: "Direito Penal", path: "/servicos#penal" },
+    { title: "Direito Administrativo", path: "/servicos#administrativo" },
   ],
   legal: [
     { title: "Privacidade", path: "/privacidade" },
