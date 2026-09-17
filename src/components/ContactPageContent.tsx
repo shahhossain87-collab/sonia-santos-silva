@@ -1,3 +1,4 @@
+import BrandMark from "@/components/BrandMark";
 import ContactForm from "@/components/ContactForm";
 import OfficeMap from "@/components/OfficeMap";
 import PageHero from "@/components/PageHero";
@@ -23,6 +24,7 @@ export default function ContactPageContent({ locale }: { locale: Locale }) {
       <section className="py-16">
         <div className="container grid gap-10 lg:grid-cols-2">
           <div>
+            <BrandMark className="mb-8" />
             <h2 className="font-display text-3xl">{copy.contactPage.detailsTitle}</h2>
             <dl className="mt-8 space-y-5 text-sm">
               <div>

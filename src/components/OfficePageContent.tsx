@@ -1,3 +1,4 @@
+import BrandMark from "@/components/BrandMark";
 import Office from "@/components/Home/Office";
 import OfficeGallery from "@/components/Home/OfficeGallery";
 import Team from "@/components/Home/Team";
@@ -25,6 +26,7 @@ export default function OfficePageContent({ locale }: { locale: Locale }) {
       <section className="bg-cream py-16 dark:bg-navy">
         <div className="container grid gap-10 lg:grid-cols-2">
           <div className="prose-legal">
+            <BrandMark className="mb-8" />
             <h2 className="font-display mb-4 text-3xl text-navy dark:text-cream">
               {copy.aboutPage.missionTitle}
             </h2>

@@ -33,6 +33,14 @@ export const metadata: Metadata = {
     template: `%s | ${site.title}`,
   },
   description: site.description,
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/images/logo/jgl-icon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/images/logo/jgl-icon-192.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: [{ url: "/images/logo/jgl-icon-180.png", sizes: "180x180" }],
+  },
   openGraph: {
     title: site.title,
     description: site.description,

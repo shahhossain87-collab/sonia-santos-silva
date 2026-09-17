@@ -2,6 +2,8 @@ export const site = {
   lawyerName: "Sónia Santos Silva",
   title: "Sónia Santos Silva — Advogada",
   shortName: "Sónia Santos Silva",
+  officeName: "Gabinete Jurídico Laranjeiras",
+  shortMark: "JGL",
   role: "Advogada",
   license: "55852L",
   nif: "221986286",
