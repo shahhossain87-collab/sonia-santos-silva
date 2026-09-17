@@ -17,7 +17,11 @@ function routeKeyFromPath(pathname: string): RouteKey | null {
 
 export default async function LanguageHeadLinks() {
   const headerList = await headers();
-  const pathname = headerList.get("x-pathname") ?? "/";
+  const pathname = headerList.get("x-pathname");
+  if (!pathname) {
+    return null;
+  }
+
   const key = routeKeyFromPath(pathname);
 
   if (!key) {
