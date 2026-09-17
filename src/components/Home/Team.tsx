@@ -84,11 +84,7 @@ export default function Team() {
                 ) : null}
                 {featured.bio ? (
                   <p className="mt-1 text-sm text-body-color">{featured.bio}</p>
-                ) : (
-                  <p className="mt-1 text-sm text-body-color">
-                    Nacionalidade, vistos e reagrupamento.
-                  </p>
-                )}
+                ) : null}
                 <CtaLink className="mt-6 w-fit">
                   <WhatsAppIcon />
                   WhatsApp

@@ -107,7 +107,7 @@ export const team: TeamMember[] = [
     name: "Sónia Santos da Silva",
     role: "Advogada",
     license: "Cédula profissional 55852L",
-    bio: "Acompanhamento em nacionalidade, vistos e residência em Portugal.",
+    bio: "Advogada. Cédula profissional 55852L.",
     initials: "SSS",
     photo: "/images/team/sonia-santos.jpg",
     featured: true,

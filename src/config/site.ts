@@ -15,8 +15,7 @@ export const site = {
   email: "soniasantosdasilva-55852l@adv.oa.pt",
   phoneDisplay: "+351 913 724 450",
   phoneDigits: "351913724450",
-  whatsappMessage:
-    "Olá, gostaria de agendar uma consulta sobre imigração em Portugal.",
+  whatsappMessage: "Olá, gostaria de agendar uma consulta.",
   addressLine: "Rua Abranches Ferrão, 11 A, 1600-296 Lisboa",
   city: "Lisboa",
   hours: "Segunda a sexta, 10h–18h (hora de Lisboa)",
