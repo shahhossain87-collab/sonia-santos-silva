@@ -158,6 +158,8 @@ export default function Header() {
                         closeLabel={copy.header.closeServices}
                         open={servicesOpen}
                         onToggle={() => setServicesOpen((value) => !value)}
+                        onOpen={() => setServicesOpen(true)}
+                        onClose={() => setServicesOpen(false)}
                       />
                     ) : (
                       <Link

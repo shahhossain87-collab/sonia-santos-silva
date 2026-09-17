@@ -43,6 +43,8 @@ export default function ServicesMenu({
   closeLabel,
   open,
   onToggle,
+  onOpen,
+  onClose,
 }: {
   locale: Locale;
   pathname: string;
@@ -55,12 +57,33 @@ export default function ServicesMenu({
   closeLabel: string;
   open: boolean;
   onToggle: () => void;
+  onOpen: () => void;
+  onClose: () => void;
 }) {
   const menu = getNavServiceMenu(locale);
   const groups = [menu.immigration, menu.other];
 
+  const isDesktop = () =>
+    typeof window !== "undefined" && window.matchMedia("(min-width: 992px)").matches;
+
   return (
-    <div className="group relative">
+    <div
+      className="relative"
+      onMouseEnter={() => {
+        if (isDesktop()) onOpen();
+      }}
+      onMouseLeave={() => {
+        if (isDesktop()) onClose();
+      }}
+      onFocus={() => {
+        if (isDesktop()) onOpen();
+      }}
+      onBlur={(event) => {
+        if (isDesktop() && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          onClose();
+        }
+      }}
+    >
       <div className="flex items-center">
         <Link href={href} aria-current={active ? "page" : undefined} className={linkClassName}>
           {title}
@@ -84,7 +107,7 @@ export default function ServicesMenu({
         id="header-services-menu"
         className={`${
           open ? "block" : "hidden"
-        } border-t border-navy/10 pb-3 lg:absolute lg:top-full lg:left-1/2 lg:z-50 lg:w-[34rem] lg:-translate-x-1/2 lg:border lg:border-navy/10 lg:bg-white lg:p-5 lg:shadow-two lg:group-hover:block lg:group-focus-within:block`}
+        } border-t border-navy/10 pb-3 lg:absolute lg:top-full lg:left-1/2 lg:z-50 lg:w-[34rem] lg:-translate-x-1/2 lg:border lg:border-navy/10 lg:bg-white lg:p-5 lg:shadow-two`}
       >
         <div className="grid gap-5 pt-2 lg:grid-cols-2 lg:gap-6 lg:pt-0">
           {groups.map((group) => (
