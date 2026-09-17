@@ -132,6 +132,19 @@
   transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.hero-backdrop {
+  animation: hero-backdrop-pan 22s ease-in-out infinite alternate;
+}
+
+@keyframes hero-backdrop-pan {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.12) translate3d(-1.5%, -1%, 0);
+  }
+}
+
 .group:hover .img-zoom {
   transform: scale(1.03);
 }
@@ -151,8 +164,10 @@
   }
 
   .img-zoom,
-  .group:hover .img-zoom {
+  .group:hover .img-zoom,
+  .hero-backdrop {
     transform: none;
+    animation: none;
     transition: none;
   }
 
