@@ -72,8 +72,12 @@ export default function Footer() {
                 {site.email}
               </a>
             </li>
-            <li>Cédula {site.license}</li>
-            <li>NIF {site.nif}</li>
+            <li>
+              {copy.contactPage.license} {site.license}
+            </li>
+            <li>
+              {copy.contactPage.nif} {site.nif}
+            </li>
             <li>{copy.home.hours}</li>
           </ul>
           <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs text-white/50">

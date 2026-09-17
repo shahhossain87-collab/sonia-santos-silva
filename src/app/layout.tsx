@@ -72,7 +72,9 @@ export default async function RootLayout({
       className={`${inter.variable} ${playfair.variable}`}
       suppressHydrationWarning
     >
-      <LanguageHeadLinks />
+      <head>
+        <LanguageHeadLinks />
+      </head>
       <body className="bg-cream font-sans text-navy antialiased">
         <Providers>
           <HtmlLang />

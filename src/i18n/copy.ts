@@ -118,11 +118,12 @@ export const ui = {
       eyebrow: "Sobre",
       title: "O escritório",
       description:
-        "Prática em Lisboa. A informação neste sítio é geral e não substitui a análise do caso concreto.",
+        "Prática focada em nacionalidade portuguesa, vistos de residência e reagrupamento familiar.",
+      licensePrefix: "cédula profissional",
       missionTitle: "Missão e método",
       mission: [
         "O trabalho começa por ouvir a história do cliente e identificar o enquadramento legal possível. Só depois se organiza a prova e se decide se e como avançar com um pedido.",
-        "Não se publicam taxas de aprovação nem prazos de decisão. A advocacia depende de lei, de prova e de decisões administrativas ou judiciais que o mandatário não controla.",
+        "Não se publicam taxas de aprovação nem prazos de decisão. A advocacia em imigração depende de lei, de prova e de decisões administrativas ou judiciais que o mandatário não controla.",
         "A comunicação pretende ser clara: o que é requisito, o que é risco e o que depende de terceiros.",
       ],
       values: [
@@ -173,12 +174,10 @@ export const ui = {
       fallback:
         "Se o WhatsApp não abriu, utilize o botão flutuante ou o número indicado.",
       subjects: [
-        "Imigração e vistos",
-        "Nacionalidade portuguesa",
-        "Arrendamento",
-        "Recuperação de crédito",
-        "Direito das sociedades",
-        "Património e sucessões",
+        "Nacionalidade",
+        "Visto D7",
+        "Visto D2",
+        "Reagrupamento",
         "Outro",
       ],
     },
@@ -317,11 +316,12 @@ export const ui = {
       eyebrow: "About",
       title: "The office",
       description:
-        "A Lisbon office. The information on this site is general and does not replace a review of the specific case.",
+        "Practice focused on Portuguese nationality, residence visas and family reunification.",
+      licensePrefix: "professional licence",
       missionTitle: "Approach",
       mission: [
         "The work begins by listening to the client’s circumstances and identifying the possible legal framework. Only then is the evidence organised and a decision taken on whether and how to proceed.",
-        "Approval rates and decision times are not published. Legal work depends on the law, on evidence, and on administrative or judicial decisions that counsel does not control.",
+        "Approval rates and decision times are not published. Immigration law depends on the law, on evidence, and on administrative or judicial decisions that counsel does not control.",
         "The aim is clear communication: what is required, what is a risk, and what depends on third parties.",
       ],
       values: [
@@ -371,12 +371,10 @@ export const ui = {
         "Submitting opens WhatsApp with the message filled in. Do not send sensitive documents through this form.",
       fallback: "If WhatsApp did not open, use the floating button or the number shown.",
       subjects: [
-        "Immigration and visas",
         "Portuguese nationality",
-        "Tenancy and leases",
-        "Debt recovery",
-        "Company law",
-        "Property and inheritance",
+        "D7 visa",
+        "D2 visa",
+        "Family reunification",
         "Other",
       ],
     },

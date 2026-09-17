@@ -24,7 +24,9 @@ export default function Office() {
               <dd className="mt-1">{site.phoneDisplay}</dd>
             </div>
             <div>
-              <dt className="tracking-[0.16em] text-gold uppercase">E-mail</dt>
+              <dt className="tracking-[0.16em] text-gold uppercase">
+                {copy.contactPage.email}
+              </dt>
               <dd className="mt-1">{site.email}</dd>
             </div>
           </dl>
