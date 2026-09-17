@@ -138,7 +138,7 @@ export default function ServiceTemplate({ content }: { content: ServiceContent }
                 WhatsApp
               </CtaLink>
               <CtaLink
-                href="/contato"
+                href="/contacto"
                 variant="outline-light"
                 className="mt-3 w-full"
               >

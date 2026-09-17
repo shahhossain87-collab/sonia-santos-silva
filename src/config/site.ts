@@ -52,7 +52,7 @@ export const nav = [
   { id: "inicio", title: "Início", href: "/" },
   { id: "escritorio", title: "O Escritório", href: "/o-escritorio" },
   { id: "servicos", title: "Serviços", href: "/servicos" },
-  { id: "contato", title: "Contacto", href: "/contato" },
+  { id: "contato", title: "Contacto", href: "/contacto" },
 ] as const;
 
 export const footerLinks = {
@@ -60,7 +60,7 @@ export const footerLinks = {
     { title: "O Escritório", href: "/o-escritorio" },
     { title: "Serviços", href: "/servicos" },
     { title: "Equipa", href: "/o-escritorio#equipa" },
-    { title: "Contacto", href: "/contato" },
+    { title: "Contacto", href: "/contacto" },
   ],
   areas: [
     { title: "Imigração e Vistos", href: "/servicos#imigracao" },

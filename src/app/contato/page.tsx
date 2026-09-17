@@ -1,14 +1,5 @@
-import ContactPageContent from "@/components/ContactPageContent";
-import { getCopy } from "@/i18n/copy";
-import { pageMetadata } from "@/i18n/metadata";
+import { redirect } from "next/navigation";
 
-const copy = getCopy("pt");
-
-export const metadata = pageMetadata("pt", "contact", {
-  title: copy.meta.contactTitle,
-  description: copy.meta.contactDescription,
-});
-
-export default function ContatoPage() {
-  return <ContactPageContent locale="pt" />;
+export default function Page() {
+  redirect("/contacto");
 }

@@ -62,7 +62,7 @@ export const extraServiceCards: ServiceCard[] = [
     title: "Documentação e consultas",
     summary:
       "Esclarecimento jurídico e preparação de peças, sempre com avaliação individual do caso.",
-    href: "/contato",
+    href: "/contacto",
     tags: ["Consulta", "NIF", "Documentos"],
   },
 ];

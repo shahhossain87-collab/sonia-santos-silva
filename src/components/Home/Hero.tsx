@@ -2,12 +2,11 @@
 
 import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
 import { site, whatsappHref } from "@/config/site";
-import { pathFor } from "@/i18n/routes";
 import { useCopy } from "@/i18n/use-locale";
 import Image from "next/image";
 
 export default function Hero() {
-  const { locale, copy } = useCopy();
+  const { copy } = useCopy();
 
   return (
     <section className="relative isolate overflow-hidden bg-navy pb-8 text-white">
@@ -37,7 +36,7 @@ export default function Hero() {
               {copy.home.heroNote}
             </p>
             <div className="mt-6 flex flex-col gap-3 pr-20 sm:mt-8 sm:flex-row sm:pr-0">
-              <CtaLink href={`${pathFor(locale, "home")}#areas`} variant="outline-light">
+              <CtaLink href="#areas" variant="outline-light">
                 {copy.home.heroServices}
               </CtaLink>
               <CtaLink href={whatsappHref(copy.home.heroWhatsapp)}>
