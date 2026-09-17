@@ -5,12 +5,31 @@ import { pathFor } from "@/i18n/routes";
 import { useCopy } from "@/i18n/use-locale";
 import Link from "next/link";
 
+function Arrow() {
+  return (
+    <svg
+      className="h-4 w-4 shrink-0 text-gold-dark transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M3 8h10M9 4l4 4-4 4"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function ServiceFinder() {
   const { locale, copy } = useCopy();
   const items = getServiceFinder(locale);
 
   return (
-    <section className="scroll-mt-20 bg-cream py-10 md:scroll-mt-28 md:py-12" id="areas">
+    <section className="scroll-mt-20 bg-cream py-8 md:scroll-mt-28 md:py-10" id="areas">
       <div className="container">
         <p className="gold-rule">{copy.home.servicesEyebrow}</p>
         <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -20,14 +39,14 @@ export default function ServiceFinder() {
           </div>
           <Link
             href={pathFor(locale, "services")}
-            className="inline-flex items-center gap-1 text-sm font-semibold text-gold-dark transition-colors hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            className="group inline-flex items-center gap-1 text-sm font-semibold text-gold-dark transition-colors hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
           >
             {copy.home.finderAll}
-            <span aria-hidden="true">→</span>
+            <Arrow />
           </Link>
         </div>
 
-        <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {items.map((item) => (
             <li key={item.id}>
               <Link
@@ -42,12 +61,7 @@ export default function ServiceFinder() {
                     </span>
                   ) : null}
                 </span>
-                <span
-                  className="inline-block shrink-0 text-gold-dark transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"
-                  aria-hidden="true"
-                >
-                  →
-                </span>
+                <Arrow />
               </Link>
             </li>
           ))}

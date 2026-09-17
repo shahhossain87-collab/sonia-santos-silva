@@ -1,5 +1,4 @@
 import CtaLink from "@/components/CtaLink";
-import Reveal from "@/components/Reveal";
 import {
   getCopy,
   homeServiceHref,
@@ -9,6 +8,25 @@ import {
 import { pathFor } from "@/i18n/routes";
 import type { Locale } from "@/i18n/locales";
 import Link from "next/link";
+
+function Arrow() {
+  return (
+    <svg
+      className="h-4 w-4 shrink-0 text-gold-dark transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M3 8h10M9 4l4 4-4 4"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 export default function ServicesIndex({ locale }: { locale: Locale }) {
   const copy = getCopy(locale);
@@ -44,12 +62,7 @@ export default function ServicesIndex({ locale }: { locale: Locale }) {
                     </h2>
                     <p className="mt-2 text-sm text-body-color">{card.blurb}</p>
                   </span>
-                  <span
-                    className="mt-1 inline-block shrink-0 text-gold-dark transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"
-                    aria-hidden="true"
-                  >
-                    →
-                  </span>
+                  <Arrow />
                 </Link>
 
                 {isImmigration ? (
@@ -63,10 +76,10 @@ export default function ServicesIndex({ locale }: { locale: Locale }) {
                           {"href" in item && item.href ? (
                             <Link
                               href={item.href}
-                              className="inline-flex cursor-pointer items-center gap-1 font-medium text-navy underline-offset-4 hover:text-gold-dark hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                              className="group inline-flex cursor-pointer items-center gap-1 font-medium text-navy underline-offset-4 hover:text-gold-dark hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                             >
                               {item.label}
-                              <span aria-hidden="true">→</span>
+                              <Arrow />
                             </Link>
                           ) : (
                             <span>{item.label}</span>
@@ -81,7 +94,7 @@ export default function ServicesIndex({ locale }: { locale: Locale }) {
                     className="mt-4 inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-gold-dark hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                   >
                     {copy.home.servicesMore}
-                    <span aria-hidden="true">→</span>
+                    <Arrow />
                   </Link>
                 ) : (
                   <p className="mt-4 text-sm text-body-color">

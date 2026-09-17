@@ -13,7 +13,7 @@ export default function Hero() {
     <section className="relative isolate overflow-hidden bg-navy pb-8 text-white">
       <div className="grid lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
         <div className="flex items-end">
-          <div className="w-full px-4 py-8 pb-10 sm:px-6 sm:py-10 lg:px-12 lg:py-14 lg:pb-16 xl:px-16">
+          <div className="w-full px-4 py-8 pb-10 sm:px-6 sm:py-10 lg:px-12 lg:py-10 lg:pb-12 xl:px-16">
             <p className="gold-rule">{copy.home.heroKicker}</p>
             <Image
               src="/images/logo/jgl-lockup-on-dark.png"
@@ -21,13 +21,13 @@ export default function Hero() {
               width={963}
               height={416}
               priority
-              className="mt-4 h-12 w-auto sm:mt-5 sm:h-16 lg:h-[4.85rem] xl:h-[5.15rem]"
+              className="mt-4 h-12 w-auto sm:mt-5 sm:h-14 lg:h-[3.6rem] xl:h-[3.9rem]"
               style={{ width: "auto" }}
             />
             <p className="mt-2 text-[11px] font-semibold tracking-[0.22em] text-gold uppercase">
               {copy.brand.descriptor}
             </p>
-            <h1 className="mt-6 max-w-xl font-display text-[1.85rem] leading-[1.14] sm:mt-8 sm:text-5xl lg:text-[2.85rem] xl:text-[3.05rem]">
+            <h1 className="mt-5 max-w-xl font-display text-[1.85rem] leading-[1.14] sm:mt-6 sm:text-4xl lg:text-[2.45rem]">
               {copy.home.heroTitle}
             </h1>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/80 sm:mt-5 sm:text-base">
