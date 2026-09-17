@@ -11,9 +11,9 @@ export default function OfficePresence() {
   const { copy } = useCopy();
 
   return (
-    <section id="em-lisboa" className="bg-cream py-16 md:py-20">
+    <section id="em-lisboa" className="bg-cream py-16 pb-24 md:py-20">
       <div className="container grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
-        <Reveal>
+        <Reveal className="order-2 lg:order-1">
           <figure className="relative aspect-[3/4] overflow-hidden">
             <Image
               src={officeExterior.src}
@@ -21,10 +21,11 @@ export default function OfficePresence() {
               fill
               className="object-cover object-[50%_42%]"
               sizes="(min-width: 1024px) 50vw, 100vw"
+              loading="eager"
             />
           </figure>
         </Reveal>
-        <Reveal delay={0.08}>
+        <Reveal delay={0.08} className="order-1 lg:order-2">
           <p className="gold-rule">{copy.home.presenceLocation}</p>
           <h2 className="mt-3 font-display text-3xl sm:text-4xl">
             {copy.home.presenceTitle}
@@ -33,7 +34,7 @@ export default function OfficePresence() {
             {copy.home.presenceLead}
           </p>
           <p className="mt-6 max-w-sm text-sm text-navy">{site.addressLine}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <CtaLink href={mapsLink}>{copy.home.presenceMapCta}</CtaLink>
             <CtaLink variant="outline-navy">
               <WhatsAppIcon />
