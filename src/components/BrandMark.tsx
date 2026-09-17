@@ -15,13 +15,13 @@ type BrandMarkProps = {
 const monogram = {
   light: {
     src: "/images/logo/jgl-monogram-header.png",
-    width: 198,
-    height: 120,
+    width: 500,
+    height: 287,
   },
   dark: {
     src: "/images/logo/jgl-monogram-header-on-dark.png",
-    width: 198,
-    height: 120,
+    width: 500,
+    height: 287,
   },
 } as const;
 
@@ -47,18 +47,19 @@ export default function BrandMark({ inverted, compact, className = "" }: BrandMa
     <Link
       href={pathFor(locale, "home")}
       className={`inline-flex shrink-0 items-center ${className}`.trim()}
-      aria-label={compact ? site.officeName : undefined}
+      aria-label={site.officeName}
     >
       <Image
         src={asset.src}
-        alt={compact ? "" : site.officeName}
+        alt=""
         width={asset.width}
         height={asset.height}
         priority={compact}
-        sizes={compact ? "96px" : "280px"}
+        quality={100}
+        sizes={compact ? "112px" : "288px"}
         className={
           compact
-            ? "h-8 w-auto sm:h-9"
+            ? "h-8 w-auto sm:h-9 lg:h-10"
             : "h-14 w-auto max-w-[16.5rem] sm:h-16 sm:max-w-[18rem]"
         }
         style={{ width: "auto" }}

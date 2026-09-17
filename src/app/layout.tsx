@@ -38,6 +38,7 @@ export const metadata: Metadata = {
       { url: "/favicon.ico", sizes: "any" },
       { url: "/images/logo/jgl-icon-32.png", type: "image/png", sizes: "32x32" },
       { url: "/images/logo/jgl-icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/images/logo/jgl-icon-512.png", type: "image/png", sizes: "512x512" },
     ],
     apple: [{ url: "/images/logo/jgl-icon-180.png", sizes: "180x180" }],
   },
