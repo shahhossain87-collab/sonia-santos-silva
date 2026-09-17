@@ -19,13 +19,16 @@ export default function Hero() {
             <p className="gold-rule">{copy.home.heroKicker}</p>
             <Image
               src="/images/logo/jgl-lockup-on-dark.png"
-              alt={site.officeName}
+              alt={copy.brand.lockupLabel}
               width={963}
               height={416}
               priority
               className="mt-5 h-14 w-auto sm:h-16 lg:h-[4.35rem]"
               style={{ width: "auto" }}
             />
+            <p className="mt-2 text-[11px] font-semibold tracking-[0.22em] text-gold uppercase">
+              {copy.brand.descriptor}
+            </p>
             <h1 className="mt-8 max-w-xl font-display text-[2.15rem] leading-[1.12] sm:text-5xl lg:text-[3.15rem]">
               {copy.home.heroTitle}
             </h1>

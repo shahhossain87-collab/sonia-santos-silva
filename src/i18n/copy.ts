@@ -42,6 +42,11 @@ export const ui = {
       { id: "servicos", title: "Serviços", href: pathFor("pt", "services") },
       { id: "contato", title: "Contacto", href: pathFor("pt", "contact") },
     ],
+    brand: {
+      name: "Gabinete Jurídico Laranjeiras",
+      descriptor: "Advogados · Solicitadores",
+      lockupLabel: "Gabinete Jurídico Laranjeiras — Advogados · Solicitadores",
+    },
     header: {
       kicker: "Portugal · Lisboa",
       openMenu: "Abrir menu",
@@ -55,7 +60,7 @@ export const ui = {
       office: "Escritório",
       areas: "Áreas de Atuação",
       contact: "Contacto",
-      tagline: "Acompanhamento jurídico em Lisboa, em português e inglês.",
+      tagline: "Advogados · Solicitadores. Acompanhamento jurídico em Lisboa, em português e inglês.",
       rights: "Todos os direitos reservados.",
       officeLinks: [
         { title: "O Escritório", href: pathFor("pt", "about") },
@@ -130,7 +135,7 @@ export const ui = {
       eyebrow: "Sobre",
       title: "O escritório",
       description:
-        "Escritório em Lisboa, em Laranjeiras. Acompanhamento jurídico em português e inglês.",
+        "Gabinete Jurídico Laranjeiras. Advogados · Solicitadores. Escritório em Lisboa, em Laranjeiras. Acompanhamento jurídico em português e inglês.",
       licensePrefix: "cédula profissional",
       missionTitle: "Missão e método",
       mission: [
@@ -206,14 +211,15 @@ export const ui = {
       cookieOk: "OK",
     },
     meta: {
-      homeTitle: "Gabinete Jurídico Laranjeiras",
+      homeTitle: "Gabinete Jurídico Laranjeiras | Advogados e Solicitadores",
       homeDescription:
-        "Gabinete Jurídico Laranjeiras. Acompanhamento jurídico em Lisboa, em português e inglês. Informação clara, sem garantia de resultado.",
+        "Gabinete Jurídico Laranjeiras. Advogados · Solicitadores. Acompanhamento jurídico em Lisboa, em português e inglês. Informação clara, sem garantia de resultado.",
       aboutTitle: "O Escritório",
       aboutDescription:
-        "Escritório em Lisboa. Informação geral, sem garantia de resultado.",
+        "Gabinete Jurídico Laranjeiras. Advogados · Solicitadores. Escritório em Lisboa. Informação geral, sem garantia de resultado.",
       contactTitle: "Contacto",
-      contactDescription: "Contacto por WhatsApp, e-mail ou formulário.",
+      contactDescription:
+        "Gabinete Jurídico Laranjeiras. Advogados · Solicitadores. Contacto por WhatsApp, e-mail ou formulário.",
       servicesTitle: "Áreas de Atuação",
       servicesDescription:
         "Imigração e vistos, nacionalidade portuguesa, arrendamento, recuperação de crédito, direito das sociedades, património e sucessões, direito penal e direito administrativo.",
@@ -260,6 +266,11 @@ export const ui = {
       { id: "servicos", title: "Services", href: pathFor("en", "services") },
       { id: "contato", title: "Contact", href: pathFor("en", "contact") },
     ],
+    brand: {
+      name: "Gabinete Jurídico Laranjeiras",
+      descriptor: "Lawyers · Solicitors",
+      lockupLabel: "Gabinete Jurídico Laranjeiras — Lawyers · Solicitors",
+    },
     header: {
       kicker: "Portugal · Lisbon",
       openMenu: "Open menu",
@@ -273,7 +284,7 @@ export const ui = {
       office: "Office",
       areas: "Areas of practice",
       contact: "Contact",
-      tagline: "Legal support in Lisbon, in Portuguese and English.",
+      tagline: "Lawyers · Solicitors. Legal support in Lisbon, in Portuguese and English.",
       rights: "All rights reserved.",
       officeLinks: [
         { title: "About", href: pathFor("en", "about") },
@@ -349,7 +360,7 @@ export const ui = {
       eyebrow: "About",
       title: "The office",
       description:
-        "A Lisbon office in Laranjeiras. Legal support in Portuguese and English.",
+        "Gabinete Jurídico Laranjeiras. Lawyers · Solicitors. A Lisbon office in Laranjeiras. Legal support in Portuguese and English.",
       licensePrefix: "professional licence",
       missionTitle: "Approach",
       mission: [
@@ -424,13 +435,15 @@ export const ui = {
       cookieOk: "OK",
     },
     meta: {
-      homeTitle: "Gabinete Jurídico Laranjeiras",
+      homeTitle: "Gabinete Jurídico Laranjeiras | Lawyers & Solicitors",
       homeDescription:
-        "Gabinete Jurídico Laranjeiras. Legal support in Lisbon, in Portuguese and English. Clear information, with no guarantee of outcome.",
+        "Gabinete Jurídico Laranjeiras. Lawyers · Solicitors. Legal support in Lisbon, in Portuguese and English. Clear information, with no guarantee of outcome.",
       aboutTitle: "About",
-      aboutDescription: "A Lisbon office. General information, with no guarantee of outcome.",
+      aboutDescription:
+        "Gabinete Jurídico Laranjeiras. Lawyers · Solicitors. A Lisbon office. General information, with no guarantee of outcome.",
       contactTitle: "Contact",
-      contactDescription: "Contact by WhatsApp, email or form.",
+      contactDescription:
+        "Gabinete Jurídico Laranjeiras. Lawyers · Solicitors. Contact by WhatsApp, email or form.",
       servicesTitle: "Areas of practice",
       servicesDescription:
         "Immigration and visas, Portuguese nationality, tenancy and leases, debt recovery, company law, property and inheritance, criminal law and administrative law.",

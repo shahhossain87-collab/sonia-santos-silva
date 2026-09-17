@@ -48,6 +48,7 @@ export function pageMetadata(
     openGraph: {
       title,
       description: extras.description,
+      siteName: site.officeName,
       locale: localeOg[locale],
       alternateLocale: locale === "en" ? ["pt_PT"] : ["en"],
       url: absoluteUrl(pathFor(locale, key)),

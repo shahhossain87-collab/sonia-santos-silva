@@ -5,11 +5,19 @@ export const site = {
   officeName: "Gabinete Jurídico Laranjeiras",
   shortMark: "JGL",
   role: "Advogada",
+  descriptor: {
+    pt: "Advogados · Solicitadores",
+    en: "Lawyers · Solicitors",
+  },
+  documentTitle: {
+    pt: "Gabinete Jurídico Laranjeiras | Advogados e Solicitadores",
+    en: "Gabinete Jurídico Laranjeiras | Lawyers & Solicitors",
+  },
   license: "55852L",
   nif: "221986286",
   tagline: "Acompanhamento jurídico em Lisboa, em português e inglês.",
   description:
-    "Gabinete Jurídico Laranjeiras. Acompanhamento jurídico em Lisboa, em português e inglês. Informação clara, sem garantia de resultado.",
+    "Gabinete Jurídico Laranjeiras. Advogados · Solicitadores. Acompanhamento jurídico em Lisboa, em português e inglês. Informação clara, sem garantia de resultado.",
   locale: "pt-PT",
   url: "https://www.soniasantossilva.pt",
   email: "soniasantosdasilva-55852l@adv.oa.pt",

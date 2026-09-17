@@ -4,7 +4,6 @@ import OfficeGallery from "@/components/Home/OfficeGallery";
 import Team from "@/components/Home/Team";
 import PageHero from "@/components/PageHero";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { site } from "@/config/site";
 import { getCopy } from "@/i18n/copy";
 import { pathFor } from "@/i18n/routes";
 import type { Locale } from "@/i18n/locales";
@@ -17,7 +16,7 @@ export default function OfficePageContent({ locale }: { locale: Locale }) {
       <PageHero
         eyebrow={copy.aboutPage.eyebrow}
         title={copy.aboutPage.title}
-        description={`${site.officeName}. ${site.lawyerName}, ${copy.aboutPage.licensePrefix} ${site.license}. ${copy.aboutPage.description}`}
+        description={copy.aboutPage.description}
         crumbs={[
           { label: copy.nav[0].title, href: pathFor(locale, "home") },
           { label: copy.nav[1].title },

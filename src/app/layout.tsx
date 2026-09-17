@@ -2,6 +2,7 @@ import CookieBanner from "@/components/CookieBanner";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import HtmlLang from "@/components/HtmlLang";
+import JsonLd from "@/components/JsonLd";
 import LanguageHeadLinks from "@/components/LanguageHeadLinks";
 import ScrollToTop from "@/components/ScrollToTop";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
@@ -29,7 +30,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: site.officeName,
+    default: site.documentTitle.pt,
     template: `%s | ${site.officeName}`,
   },
   description: site.description,
@@ -43,8 +44,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/images/logo/jgl-icon-180.png", sizes: "180x180" }],
   },
   openGraph: {
-    title: site.officeName,
+    title: site.documentTitle.pt,
     description: site.description,
+    siteName: site.officeName,
     locale: localeOg.pt,
     type: "website",
   },
@@ -83,6 +85,7 @@ export default async function RootLayout({
     >
       <head>
         <LanguageHeadLinks />
+        <JsonLd locale={locale} />
       </head>
       <body className="bg-cream font-sans text-navy antialiased">
         <Providers>
