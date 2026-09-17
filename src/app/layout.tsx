@@ -29,8 +29,8 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.title} | Imigração em Portugal`,
-    template: `%s | ${site.title}`,
+    default: site.officeName,
+    template: `%s | ${site.officeName}`,
   },
   description: site.description,
   icons: {
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/images/logo/jgl-icon-180.png", sizes: "180x180" }],
   },
   openGraph: {
-    title: site.title,
+    title: site.officeName,
     description: site.description,
     locale: localeOg.pt,
     type: "website",

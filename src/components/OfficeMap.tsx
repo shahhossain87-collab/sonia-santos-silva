@@ -11,7 +11,7 @@ export default function OfficeMap({
         className={`w-full overflow-hidden bg-cream ${className ?? "aspect-[4/3] min-h-[280px]"}`}
       >
         <iframe
-          title={`Escritório de ${site.lawyerName} — ${site.addressLine}`}
+          title={`${site.officeName} — ${site.addressLine}`}
           src={mapsEmbedUrl}
           className="h-full min-h-[280px] w-full border-0"
           loading="lazy"

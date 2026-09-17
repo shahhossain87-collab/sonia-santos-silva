@@ -56,6 +56,7 @@ export const ui = {
       office: "Escritório",
       areas: "Áreas",
       contact: "Contacto",
+      tagline: "Acompanhamento jurídico em Lisboa, em português e inglês.",
       rights: "Todos os direitos reservados.",
       officeLinks: [
         { title: "O Escritório", href: pathFor("pt", "about") },
@@ -77,7 +78,7 @@ export const ui = {
       heroServices: "Ver serviços",
       heroTalk: "Fale connosco",
       heroWhatsapp: "Olá, gostaria de agendar uma consulta.",
-      heroPortraitAlt: "Sónia Santos Silva, advogada.",
+      heroPortraitAlt: "Sónia Santos da Silva, advogada.",
       heroRole: "Advogada",
       heroLicense: "Cédula profissional",
       metrics: ["Português e inglês", "Escritório em Portugal", "Atendimento com marcação"],
@@ -123,12 +124,12 @@ export const ui = {
       eyebrow: "Sobre",
       title: "O escritório",
       description:
-        "Prática focada em nacionalidade portuguesa, vistos de residência e reagrupamento familiar.",
+        "Escritório em Lisboa, em Laranjeiras. Acompanhamento jurídico em português e inglês.",
       licensePrefix: "cédula profissional",
       missionTitle: "Missão e método",
       mission: [
         "O trabalho começa por ouvir a história do cliente e identificar o enquadramento legal possível. Só depois se organiza a prova e se decide se e como avançar com um pedido.",
-        "Não se publicam taxas de aprovação nem prazos de decisão. A advocacia em imigração depende de lei, de prova e de decisões administrativas ou judiciais que o mandatário não controla.",
+        "Não se publicam taxas de aprovação nem prazos de decisão. O resultado de cada processo depende de lei, de prova e de decisões administrativas ou judiciais que o mandatário não controla.",
         "A comunicação pretende ser clara: o que é requisito, o que é risco e o que depende de terceiros.",
       ],
       values: [
@@ -179,10 +180,12 @@ export const ui = {
       fallback:
         "Se o WhatsApp não abriu, utilize o botão flutuante ou o número indicado.",
       subjects: [
-        "Nacionalidade",
-        "Visto D7",
-        "Visto D2",
-        "Reagrupamento",
+        "Imigração e Vistos",
+        "Nacionalidade Portuguesa",
+        "Arrendamento",
+        "Recuperação de Crédito",
+        "Direito das Sociedades",
+        "Património e Sucessões",
         "Outro",
       ],
     },
@@ -195,9 +198,9 @@ export const ui = {
       cookieOk: "OK",
     },
     meta: {
-      homeTitle: "Imigração, residência e nacionalidade",
+      homeTitle: "Gabinete Jurídico Laranjeiras",
       homeDescription:
-        "Acompanhamento jurídico em Portugal. Informação clara, sem garantia de resultado.",
+        "Gabinete Jurídico Laranjeiras. Acompanhamento jurídico em Lisboa, em português e inglês. Informação clara, sem garantia de resultado.",
       aboutTitle: "O Escritório",
       aboutDescription:
         "Escritório em Lisboa. Informação geral, sem garantia de resultado.",
@@ -258,6 +261,7 @@ export const ui = {
       office: "Office",
       areas: "Areas",
       contact: "Contact",
+      tagline: "Legal support in Lisbon, in Portuguese and English.",
       rights: "All rights reserved.",
       officeLinks: [
         { title: "About", href: pathFor("en", "about") },
@@ -279,7 +283,7 @@ export const ui = {
       heroServices: "View services",
       heroTalk: "Talk to us",
       heroWhatsapp: "Hello, I would like to book a consultation.",
-      heroPortraitAlt: "Sónia Santos Silva, lawyer.",
+      heroPortraitAlt: "Sónia Santos da Silva, lawyer.",
       heroRole: "Lawyer",
       heroLicense: "Professional licence",
       metrics: ["Portuguese and English", "Office in Portugal", "Appointments by arrangement"],
@@ -326,12 +330,12 @@ export const ui = {
       eyebrow: "About",
       title: "The office",
       description:
-        "Practice focused on Portuguese nationality, residence visas and family reunification.",
+        "A Lisbon office in Laranjeiras. Legal support in Portuguese and English.",
       licensePrefix: "professional licence",
       missionTitle: "Approach",
       mission: [
         "The work begins by listening to the client’s circumstances and identifying the possible legal framework. Only then is the evidence organised and a decision taken on whether and how to proceed.",
-        "Approval rates and decision times are not published. Immigration law depends on the law, on evidence, and on administrative or judicial decisions that counsel does not control.",
+        "Approval rates and decision times are not published. The outcome of each matter depends on the law, on evidence, and on administrative or judicial decisions that counsel does not control.",
         "The aim is clear communication: what is required, what is a risk, and what depends on third parties.",
       ],
       values: [
@@ -381,10 +385,12 @@ export const ui = {
         "Submitting opens WhatsApp with the message filled in. Do not send sensitive documents through this form.",
       fallback: "If WhatsApp did not open, use the floating button or the number shown.",
       subjects: [
-        "Portuguese nationality",
-        "D7 visa",
-        "D2 visa",
-        "Family reunification",
+        "Immigration and Visas",
+        "Portuguese Nationality",
+        "Tenancy and leases",
+        "Debt recovery",
+        "Company law",
+        "Property and inheritance",
         "Other",
       ],
     },
@@ -397,9 +403,9 @@ export const ui = {
       cookieOk: "OK",
     },
     meta: {
-      homeTitle: "Immigration, residence and nationality",
+      homeTitle: "Gabinete Jurídico Laranjeiras",
       homeDescription:
-        "Legal support in Portugal. Clear information, with no guarantee of outcome.",
+        "Gabinete Jurídico Laranjeiras. Legal support in Lisbon, in Portuguese and English. Clear information, with no guarantee of outcome.",
       aboutTitle: "About",
       aboutDescription: "A Lisbon office. General information, with no guarantee of outcome.",
       contactTitle: "Contact",

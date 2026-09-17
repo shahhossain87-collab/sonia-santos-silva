@@ -17,7 +17,7 @@ export default function OfficePageContent({ locale }: { locale: Locale }) {
       <PageHero
         eyebrow={copy.aboutPage.eyebrow}
         title={copy.aboutPage.title}
-        description={`${locale === "en" ? site.lawyerName : site.title}, ${copy.aboutPage.licensePrefix} ${site.license}. ${copy.aboutPage.description}`}
+        description={`${site.officeName}. ${site.lawyerName}, ${copy.aboutPage.licensePrefix} ${site.license}. ${copy.aboutPage.description}`}
         crumbs={[
           { label: copy.nav[0].title, href: pathFor(locale, "home") },
           { label: copy.nav[1].title },
