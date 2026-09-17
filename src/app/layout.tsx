@@ -2,6 +2,7 @@ import CookieBanner from "@/components/CookieBanner";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import HtmlLang from "@/components/HtmlLang";
+import LanguageHeadLinks from "@/components/LanguageHeadLinks";
 import ScrollToTop from "@/components/ScrollToTop";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { site } from "@/config/site";
@@ -71,6 +72,7 @@ export default async function RootLayout({
       className={`${inter.variable} ${playfair.variable}`}
       suppressHydrationWarning
     >
+      <LanguageHeadLinks />
       <body className="bg-cream font-sans text-navy antialiased">
         <Providers>
           <HtmlLang />

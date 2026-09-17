@@ -5,6 +5,7 @@ export function proxy(request: NextRequest) {
   const locale = getLocaleFromPathname(request.nextUrl.pathname);
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-locale", locale);
+  requestHeaders.set("x-pathname", request.nextUrl.pathname);
 
   return NextResponse.next({
     request: {
