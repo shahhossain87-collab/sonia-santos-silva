@@ -39,10 +39,10 @@ export default function Hero() {
                 </li>
               ))}
             </ul>
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-white/55">
+            <p className="mt-5 max-w-md pr-14 text-sm leading-relaxed text-white/55 sm:pr-0">
               {copy.home.heroNote}
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 pr-14 sm:flex-row sm:pr-0">
               <CtaLink href={whatsappHref(copy.home.heroWhatsapp)}>
                 <WhatsAppIcon />
                 {copy.home.heroTalk}
