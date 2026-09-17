@@ -11,9 +11,9 @@ export default function Hero() {
 
   return (
     <section className="relative isolate overflow-hidden bg-navy pb-8 text-white">
-      <div className="grid lg:min-h-[calc(100svh-7.25rem)] lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+      <div className="grid lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
         <div className="flex items-end">
-          <div className="w-full px-4 py-8 pb-10 sm:px-6 sm:py-12 lg:px-12 lg:py-20 lg:pb-24 xl:px-16">
+          <div className="w-full px-4 py-8 pb-10 sm:px-6 sm:py-10 lg:px-12 lg:py-14 lg:pb-16 xl:px-16">
             <p className="gold-rule">{copy.home.heroKicker}</p>
             <Image
               src="/images/logo/jgl-lockup-on-dark.png"
@@ -49,7 +49,7 @@ export default function Hero() {
         </div>
 
         <figure className="group relative overflow-hidden lg:h-auto lg:min-h-full">
-          <div className="relative h-[13.5rem] sm:h-[20rem] lg:absolute lg:inset-0 lg:h-auto">
+          <div className="relative h-[12.5rem] sm:h-[16rem] lg:absolute lg:inset-0 lg:h-auto">
             <Image
               src="/images/team/sonia-santos.jpg"
               alt={copy.home.heroPortraitAlt}

@@ -30,6 +30,23 @@ function LisbonClock() {
   return <span suppressHydrationWarning>{time || "--:--"}</span>;
 }
 
+const serviceLegacyPaths = ["/nacionalidade", "/visto-d2", "/visto-d7", "/reagrupamento"];
+
+function isNavActive(pathname: string, href: string, id: string) {
+  if (href === "/" || href === "/en") {
+    return pathname === href;
+  }
+  if (pathname === href || pathname.startsWith(`${href}/`)) {
+    return true;
+  }
+  if (id === "servicos") {
+    return serviceLegacyPaths.some(
+      (path) => pathname === path || pathname.startsWith(`${path}/`),
+    );
+  }
+  return false;
+}
+
 export default function Header() {
   const pathname = usePathname() ?? "/";
   const { locale, copy } = useCopy();
@@ -94,17 +111,17 @@ export default function Header() {
           >
             <ul className="flex flex-col lg:flex-row lg:items-center lg:gap-1">
               {copy.nav.map((item) => {
-                const active =
-                  item.href === "/" || item.href === "/en"
-                    ? pathname === item.href
-                    : pathname === item.href || pathname.startsWith(`${item.href}/`);
+                const active = isNavActive(pathname, item.href, item.id);
 
                 return (
                   <li key={item.id}>
                     <Link
                       href={item.href}
-                      className={`block px-3 py-3 text-[12px] font-semibold tracking-[0.16em] uppercase transition-colors duration-200 ${
-                        active ? "text-gold-dark" : "text-navy hover:text-gold-dark"
+                      aria-current={active ? "page" : undefined}
+                      className={`block border-b-2 px-3 py-3 text-[12px] font-semibold tracking-[0.16em] uppercase transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold lg:py-5 ${
+                        active
+                          ? "border-gold text-gold-dark"
+                          : "border-transparent text-navy hover:text-gold-dark"
                       }`}
                     >
                       {item.title}

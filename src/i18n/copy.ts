@@ -19,20 +19,96 @@ const immigrationItems = {
   pt: [
     { label: "Visto D2", href: "/servicos/visto-d2" },
     { label: "Visto D7", href: "/servicos/visto-d7" },
-    { label: "AIMA" },
-    { label: "Autorizações de residência" },
-    { label: "Renovações" },
+    { label: "AIMA", href: "/servicos#imigracao" },
+    { label: "Autorizações de residência", href: "/servicos#imigracao" },
+    { label: "Renovações", href: "/servicos#imigracao" },
     { label: "Reagrupamento familiar", href: "/servicos/reagrupamento" },
   ],
   en: [
-    { label: "D2 visa" },
-    { label: "D7 visa" },
-    { label: "AIMA" },
-    { label: "Residence permits" },
-    { label: "Renewals" },
-    { label: "Family reunification" },
+    { label: "D2 visa", href: "/servicos/visto-d2" },
+    { label: "D7 visa", href: "/servicos/visto-d7" },
+    { label: "AIMA", href: "/en/services#imigracao" },
+    { label: "Residence permits", href: "/en/services#imigracao" },
+    { label: "Renewals", href: "/en/services#imigracao" },
+    { label: "Family reunification", href: "/servicos/reagrupamento" },
   ],
 } as const;
+
+export const serviceFinderIds = [
+  "imigracao",
+  "visto-d2",
+  "visto-d7",
+  "aima-residencia",
+  "nacionalidade",
+  "reagrupamento",
+  "arrendamento",
+  "sociedades",
+  "recuperacao-credito",
+  "patrimonio",
+  "penal",
+  "administrativo",
+] as const;
+
+export type ServiceFinderId = (typeof serviceFinderIds)[number];
+
+const serviceFinderLabels: Record<Locale, Record<ServiceFinderId, string>> = {
+  pt: {
+    imigracao: "Imigração e Vistos",
+    "visto-d2": "Visto D2",
+    "visto-d7": "Visto D7",
+    "aima-residencia": "AIMA e residência",
+    nacionalidade: "Nacionalidade Portuguesa",
+    reagrupamento: "Reagrupamento familiar",
+    arrendamento: "Arrendamento",
+    sociedades: "Direito das Sociedades",
+    "recuperacao-credito": "Recuperação de Crédito",
+    patrimonio: "Património e Sucessões",
+    penal: "Direito Penal",
+    administrativo: "Direito Administrativo",
+  },
+  en: {
+    imigracao: "Immigration and Visas",
+    "visto-d2": "D2 Visa",
+    "visto-d7": "D7 Visa",
+    "aima-residencia": "AIMA and residence",
+    nacionalidade: "Portuguese Nationality",
+    reagrupamento: "Family reunification",
+    arrendamento: "Tenancy and leases",
+    sociedades: "Company law",
+    "recuperacao-credito": "Debt recovery",
+    patrimonio: "Property and inheritance",
+    penal: "Criminal law",
+    administrativo: "Administrative law",
+  },
+};
+
+const serviceFinderDetailHrefs: Partial<Record<ServiceFinderId, string>> = {
+  "visto-d2": "/servicos/visto-d2",
+  "visto-d7": "/servicos/visto-d7",
+  nacionalidade: "/servicos/nacionalidade",
+  reagrupamento: "/servicos/reagrupamento",
+};
+
+export function serviceFinderHref(locale: Locale, id: ServiceFinderId) {
+  const detail = serviceFinderDetailHrefs[id];
+  if (detail) return detail;
+  const hash =
+    id === "aima-residencia" ? "imigracao" : id === "reagrupamento" ? "imigracao" : id;
+  return `${pathFor(locale, "services")}#${hash}`;
+}
+
+export function serviceFinderHasDetail(id: ServiceFinderId) {
+  return Boolean(serviceFinderDetailHrefs[id]);
+}
+
+export function getServiceFinder(locale: Locale) {
+  return serviceFinderIds.map((id) => ({
+    id,
+    title: serviceFinderLabels[locale][id],
+    href: serviceFinderHref(locale, id),
+    overview: !serviceFinderHasDetail(id),
+  }));
+}
 
 export const ui = {
   pt: {
@@ -86,9 +162,13 @@ export const ui = {
       heroRole: "Advogada",
       heroLicense: "Cédula profissional",
       metrics: ["Português e inglês", "Escritório em Portugal", "Atendimento com marcação"],
-      servicesEyebrow: "Lisboa",
+      servicesEyebrow: "Serviços",
       servicesTitle: "Áreas de Atuação",
       servicesMore: "Saber mais",
+      finderTitle: "Em que podemos ajudar?",
+      finderLead: "Escolha a área mais próxima da sua situação.",
+      finderAll: "Ver todas as áreas",
+      finderOverview: "Informação geral",
       aboutEyebrow: "O escritório",
       aboutTitle: "Acompanhamento próximo, sem atalhos.",
       aboutCta: "O escritório",
@@ -310,9 +390,13 @@ export const ui = {
       heroRole: "Lawyer",
       heroLicense: "Professional licence",
       metrics: ["Portuguese and English", "Office in Portugal", "Appointments by arrangement"],
-      servicesEyebrow: "Lisbon",
+      servicesEyebrow: "Services",
       servicesTitle: "Areas of Practice",
       servicesMore: "Read more",
+      finderTitle: "How can we help?",
+      finderLead: "Choose the area closest to your situation.",
+      finderAll: "View all areas",
+      finderOverview: "Overview",
       aboutEyebrow: "The office",
       aboutTitle: "Close support, without shortcuts.",
       aboutCta: "The office",

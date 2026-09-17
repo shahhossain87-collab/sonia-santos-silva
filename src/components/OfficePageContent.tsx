@@ -1,6 +1,5 @@
 import BrandMark from "@/components/BrandMark";
 import Office from "@/components/Home/Office";
-import OfficeGallery from "@/components/Home/OfficeGallery";
 import Team from "@/components/Home/Team";
 import PageHero from "@/components/PageHero";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -22,10 +21,10 @@ export default function OfficePageContent({ locale }: { locale: Locale }) {
           { label: copy.nav[1].title },
         ]}
       />
-      <section className="bg-cream py-16 dark:bg-navy">
+      <section className="bg-cream py-10 md:py-12">
         <div className="container grid gap-10 lg:grid-cols-2">
           <div className="prose-legal">
-            <BrandMark className="mb-8" />
+            <BrandMark className="mb-6" />
             <h2 className="font-display mb-4 text-3xl text-navy dark:text-cream">
               {copy.aboutPage.missionTitle}
             </h2>
@@ -52,7 +51,6 @@ export default function OfficePageContent({ locale }: { locale: Locale }) {
         </div>
       </section>
       <Team />
-      <OfficeGallery />
       <Office />
     </>
   );

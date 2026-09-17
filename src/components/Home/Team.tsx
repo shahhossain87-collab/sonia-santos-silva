@@ -44,7 +44,7 @@ export default function Team() {
   const rest = team.filter((member) => member !== featured);
 
   return (
-    <section id="equipa" className="bg-white py-16 md:py-20">
+    <section id="equipa" className="bg-white py-10 md:py-12">
       <div className="container">
         <Reveal>
           <p className="gold-rule">{copy.home.teamEyebrow}</p>

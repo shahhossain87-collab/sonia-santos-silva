@@ -10,7 +10,7 @@ export default function ConversionCta() {
   const { locale, copy } = useCopy();
 
   return (
-    <section className="relative overflow-hidden py-20 text-white">
+    <section className="relative overflow-hidden py-12 text-white md:py-14">
       <Image
         src="/images/office/03-corridor-armando.jpg"
         alt=""

@@ -43,12 +43,12 @@ export default function OfficePresence() {
   return (
     <section
       id="em-lisboa"
-      className="scroll-mt-20 overflow-x-clip bg-white pt-10 pb-16 md:scroll-mt-28 md:py-20"
+      className="scroll-mt-20 overflow-x-clip bg-white pt-10 pb-12 md:scroll-mt-28 md:py-12"
     >
       <div className="container grid min-w-0 items-stretch gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-16">
         <Reveal className="order-2 min-w-0 max-w-full lg:order-1">
           <figure className="group min-w-0 max-w-full">
-            <div className="relative aspect-[4/3] overflow-hidden lg:aspect-[4/5] lg:min-h-[34rem]">
+            <div className="relative aspect-[4/3] overflow-hidden lg:aspect-[4/5] lg:min-h-[26rem]">
               <Image
                 src={officeExterior.src}
                 alt={copy.home.presenceImageAlt}

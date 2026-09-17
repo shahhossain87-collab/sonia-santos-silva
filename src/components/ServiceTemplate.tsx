@@ -23,9 +23,9 @@ const related = [
 export default function ServiceTemplate({ content }: { content: ServiceContent }) {
   return (
     <>
-      <section className="bg-navy py-16 text-white md:py-20">
+      <section className="bg-navy py-8 text-white md:py-10">
         <div className="container">
-          <nav aria-label="Navegação estrutural" className="mb-6 text-sm text-white/50">
+          <nav aria-label="Navegação estrutural" className="mb-4 text-sm text-white/50">
             <Link href="/" className="hover:text-gold">
               Início
             </Link>
@@ -37,13 +37,13 @@ export default function ServiceTemplate({ content }: { content: ServiceContent }
             <span className="text-gold">{content.title}</span>
           </nav>
           <p className="gold-rule">{content.eyebrow}</p>
-          <h1 className="mt-4 max-w-3xl font-display text-4xl md:text-5xl">
+          <h1 className="mt-3 max-w-3xl font-display text-3xl leading-tight md:text-4xl">
             {content.title}
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/75">
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/75 md:text-base">
             {content.summary}
           </p>
-          <CtaLink className="mt-8">
+          <CtaLink className="mt-5">
             <WhatsAppIcon />
             Falar no WhatsApp
           </CtaLink>
