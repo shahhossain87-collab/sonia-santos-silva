@@ -1,6 +1,7 @@
 import CookieBanner from "@/components/CookieBanner";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import HtmlLang from "@/components/HtmlLang";
 import ScrollToTop from "@/components/ScrollToTop";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { site } from "@/config/site";
@@ -72,6 +73,7 @@ export default async function RootLayout({
     >
       <body className="bg-cream font-sans text-navy antialiased">
         <Providers>
+          <HtmlLang />
           <Header />
           <main>{children}</main>
           <Footer />

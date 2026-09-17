@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { defaultLocale, type Locale } from "./locales";
+import type { Locale } from "./locales";
 import { getLocaleFromPathname } from "./routes";
 import { getCopy } from "./copy";
 

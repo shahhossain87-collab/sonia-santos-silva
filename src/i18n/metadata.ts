@@ -4,12 +4,17 @@ import { localeOg, type Locale } from "./locales";
 import { pathFor, type RouteKey } from "./routes";
 import { ui } from "./copy";
 
+export function absoluteUrl(path: string) {
+  return new URL(path || "/", site.url).toString();
+}
+
 export function languageAlternates(locale: Locale, key: RouteKey): NonNullable<Metadata["alternates"]> {
-  const pt = pathFor("pt", key);
-  const en = pathFor("en", key);
+  const pt = absoluteUrl(pathFor("pt", key));
+  const en = absoluteUrl(pathFor("en", key));
+  const canonical = locale === "en" ? en : pt;
 
   return {
-    canonical: locale === "en" ? en : pt,
+    canonical,
     languages: {
       "pt-PT": pt,
       en,
@@ -32,15 +37,17 @@ export function pageMetadata(
   },
 ): Metadata {
   const title = absoluteTitle(locale, extras.title);
+  const alternates = languageAlternates(locale, key);
   return {
     title: { absolute: title },
     description: extras.description,
-    alternates: languageAlternates(locale, key),
+    alternates,
     openGraph: {
       title,
       description: extras.description,
       locale: localeOg[locale],
       alternateLocale: locale === "en" ? ["pt_PT"] : ["en"],
+      url: alternates.canonical,
     },
   };
 }
