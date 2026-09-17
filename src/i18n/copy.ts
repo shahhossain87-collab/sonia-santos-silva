@@ -108,6 +108,13 @@ export const ui = {
       officeTitle: "Escritório em Portugal",
       officeCta: "Marcar conversa",
       hours: "Segunda a sexta, 10h–18h (hora de Lisboa)",
+      presenceTitle: "O escritório em Lisboa",
+      presenceLead:
+        "Gabinete Jurídico Laranjeiras. Atendimento jurídico presencial em Lisboa, em português e inglês.",
+      presenceLocation: "Laranjeiras · Lisboa",
+      presenceMapCta: "Ver localização",
+      presenceBookCta: "Marcar consulta",
+      presenceImageAlt: "Fachada do Gabinete Jurídico Laranjeiras em Lisboa.",
     },
     servicesPage: {
       eyebrow: "Áreas",
@@ -313,6 +320,13 @@ export const ui = {
       officeTitle: "Office in Portugal",
       officeCta: "Book a conversation",
       hours: "Monday to Friday, 10:00–18:00 (Lisbon time)",
+      presenceTitle: "Our office in Lisbon",
+      presenceLead:
+        "Gabinete Jurídico Laranjeiras. In-person legal assistance in Lisbon, in Portuguese and English.",
+      presenceLocation: "Laranjeiras · Lisboa",
+      presenceMapCta: "View location",
+      presenceBookCta: "Book a consultation",
+      presenceImageAlt: "Façade of Gabinete Jurídico Laranjeiras in Lisbon.",
     },
     servicesPage: {
       eyebrow: "Areas",

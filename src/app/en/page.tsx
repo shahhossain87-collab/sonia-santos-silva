@@ -4,6 +4,7 @@ import Hero from "@/components/Home/Hero";
 import Metrics from "@/components/Home/Metrics";
 import MidCta from "@/components/Home/MidCTA";
 import Office from "@/components/Home/Office";
+import OfficePresence from "@/components/Home/OfficePresence";
 import ServiceCards from "@/components/Home/ServiceCards";
 import Team from "@/components/Home/Team";
 import Testimonials from "@/components/Home/Testimonials";
@@ -20,6 +21,7 @@ export default function EnglishHome() {
       <MidCta />
       <About />
       <Team />
+      <OfficePresence />
       <ConversionCta />
       <Testimonials />
       <Office />

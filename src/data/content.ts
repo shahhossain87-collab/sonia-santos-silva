@@ -164,6 +164,10 @@ export const officeVisuals = [
 export const officeVisualDisclaimer =
   "Imagens de visualização arquitectónica inspiradas na descrição do escritório em Laranjeiras. Não são fotografias das instalações existentes.";
 
+export const officeExterior = {
+  src: "/images/office/exterior.jpg",
+} as const;
+
 export const testimonials = [
   {
     quote:
