@@ -92,7 +92,10 @@ export default function MobileDock() {
             aria-label={copy.header.closeServices}
             onClick={() => setOpen(false)}
           />
-          <div className="absolute inset-x-0 bottom-14 max-h-[70vh] overflow-y-auto border-t border-navy/10 bg-white px-4 py-4 shadow-two">
+          <div
+            id="mobile-services-sheet"
+            className="absolute inset-x-0 bottom-14 max-h-[70vh] overflow-y-auto border-t border-navy/10 bg-white px-4 py-4 shadow-two"
+          >
             <div className="grid gap-5">
               {[menu.immigration, menu.other].map((group) => (
                 <div key={group.title}>
