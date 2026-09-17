@@ -37,17 +37,16 @@ export function pageMetadata(
   },
 ): Metadata {
   const title = absoluteTitle(locale, extras.title);
-  const alternates = languageAlternates(locale, key);
   return {
     title: { absolute: title },
     description: extras.description,
-    alternates,
+    alternates: languageAlternates(locale, key),
     openGraph: {
       title,
       description: extras.description,
       locale: localeOg[locale],
       alternateLocale: locale === "en" ? ["pt_PT"] : ["en"],
-      url: alternates.canonical,
+      url: absoluteUrl(pathFor(locale, key)),
     },
   };
 }
