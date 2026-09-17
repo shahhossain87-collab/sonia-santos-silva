@@ -5,7 +5,11 @@ import { pathFor, type RouteKey } from "./routes";
 import { ui } from "./copy";
 
 export function absoluteUrl(path: string) {
-  return new URL(path || "/", site.url).toString();
+  const origin = site.url.replace(/\/$/, "");
+  if (!path || path === "/") {
+    return origin;
+  }
+  return new URL(path, `${origin}/`).toString().replace(/\/$/, "");
 }
 
 export function languageAlternates(locale: Locale, key: RouteKey): NonNullable<Metadata["alternates"]> {
