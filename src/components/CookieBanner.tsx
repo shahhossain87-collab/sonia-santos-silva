@@ -1,5 +1,6 @@
 "use client";
 
+import { useCopy } from "@/i18n/use-locale";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -7,6 +8,7 @@ const STORAGE_KEY = "sss-cookie-consent";
 
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
+  const { copy } = useCopy();
 
   useEffect(() => {
     try {
@@ -22,13 +24,13 @@ export default function CookieBanner() {
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-gold/20 bg-navy/95 px-3 py-1.5 text-cream backdrop-blur-sm">
       <div className="container flex items-center justify-between gap-3">
         <p className="min-w-0 truncate text-[11px] leading-none text-cream/80 sm:text-xs">
-          Cookies técnicos.{" "}
+          {copy.common.cookies}{" "}
           <Link href="/cookies" className="text-gold hover:underline">
             Cookies
           </Link>
           {" · "}
           <Link href="/privacidade" className="text-gold hover:underline">
-            Privacidade
+            {copy.common.privacy}
           </Link>
         </p>
         <button
@@ -43,7 +45,7 @@ export default function CookieBanner() {
             setVisible(false);
           }}
         >
-          OK
+          {copy.common.cookieOk}
         </button>
       </div>
     </div>

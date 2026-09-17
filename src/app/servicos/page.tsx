@@ -1,26 +1,29 @@
 import PageHero from "@/components/PageHero";
-import ServiceCards from "@/components/Home/ServiceCards";
-import type { Metadata } from "next";
+import ServicesIndex from "@/components/ServicesIndex";
+import { getCopy } from "@/i18n/copy";
+import { pageMetadata } from "@/i18n/metadata";
+import { pathFor } from "@/i18n/routes";
 
-export const metadata: Metadata = {
-  title: "Serviços",
-  description:
-    "Nacionalidade portuguesa, visto D7, visto D2, reagrupamento familiar e outros serviços de imigração em Portugal.",
-};
+const copy = getCopy("pt");
+
+export const metadata = pageMetadata("pt", "services", {
+  title: copy.meta.servicesTitle,
+  description: copy.meta.servicesDescription,
+});
 
 export default function ServicosPage() {
   return (
     <>
       <PageHero
-        eyebrow="Áreas"
-        title="Serviços"
-        description="Informação geral sobre os pedidos mais frequentes. Cada processo é autónomo: a leitura destas páginas não cria mandato nem garante deferimento."
+        eyebrow={copy.servicesPage.eyebrow}
+        title={copy.servicesPage.title}
+        description={copy.servicesPage.description}
         crumbs={[
-          { label: "Início", href: "/" },
-          { label: "Serviços" },
+          { label: copy.nav[0].title, href: pathFor("pt", "home") },
+          { label: copy.nav[2].title },
         ]}
       />
-      <ServiceCards />
+      <ServicesIndex locale="pt" />
     </>
   );
 }

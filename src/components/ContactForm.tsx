@@ -1,10 +1,12 @@
 "use client";
 
 import { site, whatsappHref } from "@/config/site";
+import { useCopy } from "@/i18n/use-locale";
 import { FormEvent, useState } from "react";
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
+  const { copy } = useCopy();
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -15,12 +17,12 @@ export default function ContactForm() {
     const assunto = String(data.get("assunto") || "");
     const mensagem = String(data.get("mensagem") || "");
     const text = [
-      "Pedido de contacto via sítio web",
-      `Nome: ${nome}`,
-      `E-mail: ${email}`,
-      `Telefone: ${telefone}`,
-      `Assunto: ${assunto}`,
-      `Mensagem: ${mensagem}`,
+      copy.form.prefix,
+      `${copy.form.name}: ${nome}`,
+      `${copy.form.email}: ${email}`,
+      `${copy.form.phone}: ${telefone}`,
+      `${copy.form.subject}: ${assunto}`,
+      `${copy.form.message}: ${mensagem}`,
     ].join("\n");
     window.open(whatsappHref(text), "_blank", "noopener,noreferrer");
     setSent(true);
@@ -28,29 +30,27 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
-      <Field label="Nome" name="nome" required />
-      <Field label="E-mail" name="email" type="email" required />
-      <Field label="Telefone" name="telefone" type="tel" />
+      <Field label={copy.form.name} name="nome" required />
+      <Field label={copy.form.email} name="email" type="email" required />
+      <Field label={copy.form.phone} name="telefone" type="tel" />
       <div>
         <label htmlFor="assunto" className="mb-1 block text-sm font-medium">
-          Assunto
+          {copy.form.subject}
         </label>
         <select
           id="assunto"
           name="assunto"
           className="w-full rounded-sm border border-gold/30 bg-white px-3 py-3 text-sm dark:bg-navy-soft"
-          defaultValue="Nacionalidade"
+          defaultValue={copy.form.subjects[0]}
         >
-          <option>Nacionalidade</option>
-          <option>Visto D7</option>
-          <option>Visto D2</option>
-          <option>Reagrupamento</option>
-          <option>Outro</option>
+          {copy.form.subjects.map((subject) => (
+            <option key={subject}>{subject}</option>
+          ))}
         </select>
       </div>
       <div>
         <label htmlFor="mensagem" className="mb-1 block text-sm font-medium">
-          Mensagem
+          {copy.form.message}
         </label>
         <textarea
           id="mensagem"
@@ -61,17 +61,13 @@ export default function ContactForm() {
         />
       </div>
       <p className="text-xs text-body-color dark:text-body-color-dark">
-        Ao enviar, abre o WhatsApp ({site.phoneDisplay}) com a mensagem
-        preenchida. Não envie documentos sensíveis neste formulário.
+        {copy.form.notice} ({site.phoneDisplay})
       </p>
       <button type="submit" className="btn-gold w-full sm:w-auto">
-        Enviar para WhatsApp
+        {copy.form.submit}
       </button>
       {sent && (
-        <p className="text-sm text-navy dark:text-cream">
-          Se o WhatsApp não abriu, utilize o botão flutuante ou o número
-          indicado.
-        </p>
+        <p className="text-sm text-navy dark:text-cream">{copy.form.fallback}</p>
       )}
     </form>
   );

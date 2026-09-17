@@ -1,6 +1,6 @@
-# Sonia Santos Silva — Advogada
+# Gabinete Jurídico Laranjeiras
 
-Sítio de marketing jurídico para imigração e nacionalidade em Portugal.
+Sítio do Gabinete Jurídico Laranjeiras, escritório em Lisboa. Sónia Santos da Silva é a advogada em destaque.
 
 Base: [startup-nextjs](https://github.com/NextJSTemplates/startup-nextjs) (MIT). A inspiração visual de [DAC International Lawyers](https://dacinternationallawyers.com/) limitou-se a paleta, tipografia e estrutura — sem copiar textos, imagens, logótipo ou métricas.
 

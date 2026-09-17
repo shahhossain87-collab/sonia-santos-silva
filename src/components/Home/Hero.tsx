@@ -1,42 +1,81 @@
+"use client";
+
 import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
-import { site } from "@/config/site";
+import { site, whatsappHref } from "@/config/site";
+import { homeServiceIds } from "@/i18n/copy";
+import { pathFor } from "@/i18n/routes";
+import { useCopy } from "@/i18n/use-locale";
 import Image from "next/image";
 
 export default function Hero() {
-  return (
-    <section className="relative isolate min-h-[calc(100svh-7.25rem)] overflow-hidden text-white">
-      <Image
-        src="/images/home/meeting.jpg"
-        alt="Sala de reuniões num escritório. Fotografia Unsplash."
-        fill
-        priority
-        className="animate-hero-zoom object-cover object-center"
-        sizes="100vw"
-      />
-      <div className="absolute inset-0 z-[1] bg-navy/50" />
-      <div className="absolute inset-0 z-[1] bg-linear-to-t from-navy via-navy/40 to-transparent" />
+  const { locale, copy } = useCopy();
+  const areas = homeServiceIds.map((id) => copy.cards[id].title);
 
-      <div className="container relative z-[2] flex min-h-[calc(100svh-7.25rem)] items-end pb-20 pt-10 sm:pb-24">
-        <div className="hero-copy max-w-2xl">
-          <p className="gold-rule">{site.title}</p>
-          <h1 className="mt-4 font-display text-[2.15rem] leading-[1.12] sm:text-5xl lg:text-[3.4rem]">
-            Imigração e nacionalidade em Portugal.
-          </h1>
-          <p className="mt-4 max-w-md text-sm leading-snug text-white/80 sm:text-base">
-            Vistos, residência e cidadania.
-            <br />
-            Análise caso a caso — sem garantia de resultado.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <CtaLink>
-              <WhatsAppIcon />
-              Falar com a advogada
-            </CtaLink>
-            <CtaLink href="/servicos" variant="outline-light">
-              Ver serviços
-            </CtaLink>
+  return (
+    <section className="relative isolate overflow-hidden bg-navy pb-8 text-white">
+      <div className="grid lg:min-h-[calc(100svh-7.25rem)] lg:grid-cols-2">
+        <div className="flex items-end">
+          <div className="w-full px-4 py-14 pb-16 sm:px-6 lg:px-12 lg:py-20 lg:pb-24 xl:px-16">
+            <p className="gold-rule">{copy.home.heroKicker}</p>
+            <Image
+              src="/images/logo/jgl-lockup-on-dark.png"
+              alt={copy.brand.lockupLabel}
+              width={963}
+              height={416}
+              priority
+              className="mt-5 h-14 w-auto sm:h-16 lg:h-[4.35rem]"
+              style={{ width: "auto" }}
+            />
+            <p className="mt-2 text-[11px] font-semibold tracking-[0.22em] text-gold uppercase">
+              {copy.brand.descriptor}
+            </p>
+            <h1 className="mt-8 max-w-xl font-display text-[2.15rem] leading-[1.12] sm:text-5xl lg:text-[3.15rem]">
+              {copy.home.heroTitle}
+            </h1>
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-white/80 sm:text-base">
+              {copy.home.heroLead}
+            </p>
+            <ul className="mt-6 grid max-w-lg grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-white/70 sm:gap-x-10">
+              {areas.map((area) => (
+                <li key={area} className="border-l border-gold/60 pl-3">
+                  {area}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-5 max-w-md pr-14 text-sm leading-relaxed text-white/55 sm:pr-0">
+              {copy.home.heroNote}
+            </p>
+            <div className="mt-8 flex flex-col gap-3 pr-14 sm:flex-row sm:pr-0">
+              <CtaLink href={whatsappHref(copy.home.heroWhatsapp)}>
+                <WhatsAppIcon />
+                {copy.home.heroTalk}
+              </CtaLink>
+              <CtaLink href={pathFor(locale, "services")} variant="outline-light">
+                {copy.home.heroServices}
+              </CtaLink>
+            </div>
           </div>
         </div>
+
+        <figure className="relative aspect-[4/5] min-h-[22rem] sm:aspect-[5/4] lg:aspect-auto lg:min-h-full">
+          <Image
+            src="/images/team/sonia-santos.jpg"
+            alt={copy.home.heroPortraitAlt}
+            fill
+            priority
+            className="object-cover object-[50%_12%]"
+            sizes="(min-width: 992px) 50vw, 100vw"
+          />
+          <figcaption className="absolute inset-x-0 bottom-0 bg-navy/90 px-5 py-4 lg:px-8 lg:py-5">
+            <p className="font-display text-2xl leading-tight">{site.lawyerName}</p>
+            <p className="mt-1 text-xs tracking-[0.18em] text-gold uppercase">
+              {copy.home.heroRole}
+            </p>
+            <p className="mt-1 text-xs text-white/65">
+              {copy.home.heroLicense} {site.license}
+            </p>
+          </figcaption>
+        </figure>
       </div>
     </section>
   );

@@ -3,17 +3,12 @@ import ConversionCta from "@/components/Home/ConversionCTA";
 import Hero from "@/components/Home/Hero";
 import Metrics from "@/components/Home/Metrics";
 import MidCta from "@/components/Home/MidCTA";
-import Office from "@/components/Home/Office";
+import OfficePresence from "@/components/Home/OfficePresence";
 import ServiceCards from "@/components/Home/ServiceCards";
 import Team from "@/components/Home/Team";
-import Testimonials from "@/components/Home/Testimonials";
-import { site } from "@/config/site";
-import type { Metadata } from "next";
+import { homeMetadata } from "@/i18n/metadata";
 
-export const metadata: Metadata = {
-  title: `${site.title} | Imigração, residência e nacionalidade`,
-  description: site.description,
-};
+export const metadata = homeMetadata("pt");
 
 export default function Home() {
   return (
@@ -24,9 +19,8 @@ export default function Home() {
       <MidCta />
       <About />
       <Team />
+      <OfficePresence />
       <ConversionCta />
-      <Testimonials />
-      <Office />
     </>
   );
 }
