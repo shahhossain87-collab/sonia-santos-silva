@@ -91,7 +91,7 @@ export default function ServicesIndex({ locale }: { locale: Locale }) {
                 ) : hasDedicatedPage ? (
                   <Link
                     href={href}
-                    className="mt-4 inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-gold-dark hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                    className="group mt-4 inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-gold-dark hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                   >
                     {copy.home.servicesMore}
                     <Arrow />
