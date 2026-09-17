@@ -10,39 +10,46 @@ export default function Hero() {
   const { locale, copy } = useCopy();
 
   return (
-    <section className="relative isolate min-h-[calc(100svh-7.25rem)] overflow-hidden text-white">
-      <Image
-        src="/images/office/05-establishing.jpg"
-        alt={copy.aboutPage.galleryDisclaimer}
-        fill
-        priority
-        className="animate-hero-zoom object-cover object-center"
-        sizes="100vw"
-      />
-      <div className="absolute inset-0 z-[1] bg-navy/50" />
-      <div className="absolute inset-0 z-[1] bg-linear-to-t from-navy via-navy/40 to-transparent" />
-
-      <div className="container relative z-[2] flex min-h-[calc(100svh-7.25rem)] items-end pb-20 pt-10 sm:pb-24">
-        <div className="hero-copy max-w-2xl">
-          <p className="gold-rule">{site.title}</p>
-          <h1 className="mt-4 font-display text-[2.15rem] leading-[1.12] sm:text-5xl lg:text-[3.4rem]">
-            {copy.home.heroTitle}
-          </h1>
-          <p className="mt-4 max-w-md text-sm leading-snug text-white/80 sm:text-base">
-            {copy.home.heroLead}
-            <br />
-            {copy.home.heroNote}
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <CtaLink>
-              <WhatsAppIcon />
-              {copy.home.heroTalk}
-            </CtaLink>
-            <CtaLink href={pathFor(locale, "services")} variant="outline-light">
-              {copy.home.heroServices}
-            </CtaLink>
+    <section className="relative isolate overflow-hidden bg-navy text-white">
+      <div className="grid lg:min-h-[calc(100svh-7.25rem)] lg:grid-cols-2">
+        <div className="flex items-end">
+          <div className="w-full px-4 py-14 pb-20 sm:px-6 sm:pb-24 lg:px-12 lg:py-20 lg:pb-28 xl:px-16">
+            <p className="gold-rule">{site.officeName}</p>
+            <h1 className="mt-4 max-w-xl font-display text-[2.15rem] leading-[1.12] sm:text-5xl lg:text-[3.15rem]">
+              {copy.home.heroTitle}
+            </h1>
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-white/80 sm:text-base">
+              {copy.home.heroLead}
+            </p>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-white/60">
+              {copy.home.heroNote}
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <CtaLink>
+                <WhatsAppIcon />
+                {copy.home.heroTalk}
+              </CtaLink>
+              <CtaLink href={pathFor(locale, "services")} variant="outline-light">
+                {copy.home.heroServices}
+              </CtaLink>
+            </div>
           </div>
         </div>
+
+        <figure className="relative aspect-[4/5] min-h-[22rem] sm:aspect-[5/4] lg:aspect-auto lg:min-h-full">
+          <Image
+            src="/images/team/sonia-santos.jpg"
+            alt={copy.home.heroPortraitAlt}
+            fill
+            priority
+            className="object-cover object-[50%_12%]"
+            sizes="(min-width: 992px) 50vw, 100vw"
+          />
+          <figcaption className="absolute inset-x-0 bottom-0 bg-linear-to-t from-navy/80 to-transparent px-5 pb-10 pt-16 lg:px-8 lg:pb-14">
+            <p className="font-display text-2xl leading-tight">{site.lawyerName}</p>
+            <p className="mt-1 text-xs tracking-[0.2em] text-gold uppercase">{site.role}</p>
+          </figcaption>
+        </figure>
       </div>
     </section>
   );

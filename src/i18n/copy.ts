@@ -70,11 +70,13 @@ export const ui = {
       ],
     },
     home: {
-      heroTitle: "Imigração e nacionalidade em Portugal.",
-      heroLead: "Vistos, residência e cidadania.",
+      heroTitle: "Um escritório em Lisboa.",
+      heroLead:
+        "Imigração e vistos, nacionalidade portuguesa, arrendamento, recuperação de crédito, direito das sociedades, património e sucessões.",
       heroNote: "Análise caso a caso — sem garantia de resultado.",
       heroServices: "Ver serviços",
-      heroTalk: "Falar com a advogada",
+      heroTalk: "Fale connosco",
+      heroPortraitAlt: "Sónia Santos Silva, advogada.",
       metrics: ["Português e inglês", "Escritório em Portugal", "Atendimento com marcação"],
       servicesEyebrow: "Áreas",
       servicesTitle: "Serviços",
@@ -267,11 +269,13 @@ export const ui = {
       ],
     },
     home: {
-      heroTitle: "Immigration and nationality in Portugal.",
-      heroLead: "Visas, residence and citizenship.",
+      heroTitle: "A law office in Lisbon.",
+      heroLead:
+        "Immigration and visas, Portuguese nationality, tenancy and leases, debt recovery, company law, property and inheritance.",
       heroNote: "Case-by-case review — no guarantee of outcome.",
       heroServices: "View services",
-      heroTalk: "Speak with the lawyer",
+      heroTalk: "Talk to us",
+      heroPortraitAlt: "Sónia Santos Silva, lawyer.",
       metrics: ["Portuguese and English", "Office in Portugal", "Appointments by arrangement"],
       servicesEyebrow: "Areas",
       servicesTitle: "Services",
