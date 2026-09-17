@@ -47,20 +47,20 @@ export default function BrandMark({ inverted, compact, className = "" }: BrandMa
     <Link
       href={pathFor(locale, "home")}
       className={`inline-flex shrink-0 items-center ${className}`.trim()}
-      aria-label={site.officeName}
+      aria-label={compact ? site.officeName : undefined}
     >
       <Image
         src={asset.src}
-        alt=""
+        alt={compact ? "" : site.officeName}
         width={asset.width}
         height={asset.height}
         priority={compact}
         quality={100}
-        sizes={compact ? "112px" : "288px"}
+        sizes={compact ? "112px" : "384px"}
         className={
           compact
             ? "h-8 w-auto sm:h-9 lg:h-10"
-            : "h-14 w-auto max-w-[16.5rem] sm:h-16 sm:max-w-[18rem]"
+            : "h-20 w-auto max-w-[20rem] sm:h-24 sm:max-w-[24rem]"
         }
         style={{ width: "auto" }}
       />
