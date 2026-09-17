@@ -48,11 +48,6 @@ export default function OfficePresence() {
           </div>
         </Reveal>
       </div>
-      {officeExterior.temporary ? (
-        <p className="container mt-6 text-xs leading-relaxed text-body-color">
-          {copy.home.presenceImageNote}
-        </p>
-      ) : null}
     </section>
   );
 }

@@ -115,8 +115,6 @@ export const ui = {
       presenceMapCta: "Ver localização",
       presenceBookCta: "Marcar consulta",
       presenceImageAlt: "Fachada do Gabinete Jurídico Laranjeiras em Lisboa.",
-      presenceImageNote:
-        "Imagem provisória da fachada, a substituir por uma fotografia real. Não comprova o número de porta.",
     },
     servicesPage: {
       eyebrow: "Áreas",
@@ -329,8 +327,6 @@ export const ui = {
       presenceMapCta: "View location",
       presenceBookCta: "Book a consultation",
       presenceImageAlt: "Façade of Gabinete Jurídico Laranjeiras in Lisbon.",
-      presenceImageNote:
-        "Temporary façade image, to be replaced with a real photograph. It does not confirm the door number.",
     },
     servicesPage: {
       eyebrow: "Areas",
