@@ -28,11 +28,6 @@ export default function OfficePresence() {
                 priority
               />
             </div>
-            {officeExterior.temporary ? (
-              <figcaption className="mt-3 text-xs leading-relaxed text-body-color">
-                {copy.home.presenceImageNote}
-              </figcaption>
-            ) : null}
           </figure>
         </Reveal>
         <Reveal delay={0.08} className="order-1 min-w-0 max-w-full lg:order-2">
@@ -53,6 +48,11 @@ export default function OfficePresence() {
           </div>
         </Reveal>
       </div>
+      {officeExterior.temporary ? (
+        <p className="container mt-6 text-xs leading-relaxed text-body-color">
+          {copy.home.presenceImageNote}
+        </p>
+      ) : null}
     </section>
   );
 }
