@@ -2,6 +2,7 @@
 
 import BrandMark from "@/components/BrandMark";
 import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
+import ServicesMenu from "@/components/Header/ServicesMenu";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { site } from "@/config/site";
 import { useCopy } from "@/i18n/use-locale";
@@ -57,6 +58,7 @@ export default function Header() {
   const pathname = usePathname() ?? "/";
   const { locale, copy } = useCopy();
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const [sticky, setSticky] = useState(false);
 
   useEffect(() => {
@@ -68,7 +70,24 @@ export default function Header() {
 
   useEffect(() => {
     setOpen(false);
+    setServicesOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!open) {
+      setServicesOpen(false);
+    }
+  }, [open]);
+
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setServicesOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50">
@@ -118,20 +137,37 @@ export default function Header() {
             <ul className="flex flex-col lg:flex-row lg:items-center lg:gap-1">
               {copy.nav.map((item) => {
                 const active = isNavActive(pathname, item.href, item.id);
+                const linkClassName = `block border-b-2 px-3 py-3 text-[12px] font-semibold tracking-[0.16em] uppercase transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold lg:py-5 ${
+                  active
+                    ? "border-gold text-gold-dark"
+                    : "border-transparent text-navy hover:text-gold-dark"
+                }`;
 
                 return (
                   <li key={item.id}>
-                    <Link
-                      href={item.href}
-                      aria-current={active ? "page" : undefined}
-                      className={`block border-b-2 px-3 py-3 text-[12px] font-semibold tracking-[0.16em] uppercase transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold lg:py-5 ${
-                        active
-                          ? "border-gold text-gold-dark"
-                          : "border-transparent text-navy hover:text-gold-dark"
-                      }`}
-                    >
-                      {item.title}
-                    </Link>
+                    {item.id === "servicos" ? (
+                      <ServicesMenu
+                        locale={locale}
+                        pathname={pathname}
+                        href={item.href}
+                        title={item.title}
+                        active={active}
+                        linkClassName={linkClassName}
+                        allServicesLabel={copy.header.allServices}
+                        openLabel={copy.header.openServices}
+                        closeLabel={copy.header.closeServices}
+                        open={servicesOpen}
+                        onToggle={() => setServicesOpen((value) => !value)}
+                      />
+                    ) : (
+                      <Link
+                        href={item.href}
+                        aria-current={active ? "page" : undefined}
+                        className={linkClassName}
+                      >
+                        {item.title}
+                      </Link>
+                    )}
                   </li>
                 );
               })}

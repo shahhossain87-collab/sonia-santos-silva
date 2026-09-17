@@ -110,6 +110,32 @@ export function getServiceFinder(locale: Locale) {
   }));
 }
 
+const otherAreaIds = homeServiceIds.filter((id) => id !== "imigracao");
+
+export function getNavServiceMenu(locale: Locale) {
+  const labels = serviceFinderLabels[locale];
+
+  return {
+    immigration: {
+      title: labels.imigracao,
+      items: [
+        { title: labels["visto-d2"], href: serviceFinderHref(locale, "visto-d2") },
+        { title: labels["visto-d7"], href: serviceFinderHref(locale, "visto-d7") },
+        { title: labels.nacionalidade, href: serviceFinderHref(locale, "nacionalidade") },
+        { title: labels.reagrupamento, href: serviceFinderHref(locale, "reagrupamento") },
+        { title: labels["aima-residencia"], href: serviceFinderHref(locale, "aima-residencia") },
+      ],
+    },
+    other: {
+      title: locale === "en" ? "Other areas" : "Outras áreas",
+      items: otherAreaIds.map((id) => ({
+        title: labels[id],
+        href: homeServiceHref(locale, id),
+      })),
+    },
+  };
+}
+
 export const ui = {
   pt: {
     nav: [
@@ -131,6 +157,9 @@ export const ui = {
       languageLabel: "Idioma",
       portuguese: "PT",
       english: "EN",
+      allServices: "Ver todos os serviços",
+      openServices: "Abrir lista de serviços",
+      closeServices: "Fechar lista de serviços",
     },
     footer: {
       office: "Escritório",
@@ -359,6 +388,9 @@ export const ui = {
       languageLabel: "Language",
       portuguese: "PT",
       english: "EN",
+      allServices: "View all services",
+      openServices: "Open services list",
+      closeServices: "Close services list",
     },
     footer: {
       office: "Office",
