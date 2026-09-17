@@ -32,10 +32,10 @@ export default function Hero() {
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/80 sm:mt-5 sm:text-base">
               {copy.home.heroLead}
             </p>
-            <p className="mt-4 max-w-md pr-20 text-sm leading-relaxed text-white/55 sm:mt-5 sm:pr-0">
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-white/55 sm:mt-5">
               {copy.home.heroNote}
             </p>
-            <div className="mt-6 flex flex-col gap-3 pr-20 sm:mt-8 sm:flex-row sm:pr-0">
+            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row">
               <CtaLink href="#areas" variant="outline-light">
                 {copy.home.heroServices}
               </CtaLink>

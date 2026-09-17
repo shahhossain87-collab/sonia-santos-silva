@@ -160,6 +160,7 @@ export const ui = {
       allServices: "Ver todos os serviços",
       openServices: "Abrir lista de serviços",
       closeServices: "Fechar lista de serviços",
+      mobileNav: "Navegação principal",
     },
     footer: {
       office: "Escritório",
@@ -391,6 +392,7 @@ export const ui = {
       allServices: "View all services",
       openServices: "Open services list",
       closeServices: "Close services list",
+      mobileNav: "Main navigation",
     },
     footer: {
       office: "Office",

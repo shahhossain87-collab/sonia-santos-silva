@@ -124,7 +124,7 @@ export default function ServicesMenu({
                       <Link
                         href={item.href}
                         aria-current={itemActive ? "page" : undefined}
-                        className={`block px-3 py-2 text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold lg:px-2 ${
+                        className={`block min-h-11 px-3 py-3 text-base transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold lg:min-h-0 lg:px-2 lg:py-2 lg:text-sm ${
                           itemActive
                             ? "font-semibold text-gold-dark"
                             : "text-navy hover:text-gold-dark"

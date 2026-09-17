@@ -3,6 +3,7 @@
 import BrandMark from "@/components/BrandMark";
 import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
 import ServicesMenu from "@/components/Header/ServicesMenu";
+import { isNavActive } from "@/components/Header/navActive";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { site } from "@/config/site";
 import { useCopy } from "@/i18n/use-locale";
@@ -31,29 +32,6 @@ function LisbonClock() {
   return <span suppressHydrationWarning>{time || "--:--"}</span>;
 }
 
-const serviceLegacyPaths = ["/nacionalidade", "/visto-d2", "/visto-d7", "/reagrupamento"];
-const contactLegacyPaths = ["/contato", "/contact", "/contacto"];
-
-function isNavActive(pathname: string, href: string, id: string) {
-  if (href === "/" || href === "/en") {
-    return pathname === href;
-  }
-  if (pathname === href || pathname.startsWith(`${href}/`)) {
-    return true;
-  }
-  if (id === "servicos") {
-    return serviceLegacyPaths.some(
-      (path) => pathname === path || pathname.startsWith(`${path}/`),
-    );
-  }
-  if (id === "contato") {
-    return contactLegacyPaths.some(
-      (path) => pathname === path || pathname.startsWith(`${path}/`),
-    );
-  }
-  return false;
-}
-
 export default function Header() {
   const pathname = usePathname() ?? "/";
   const { locale, copy } = useCopy();
@@ -74,9 +52,7 @@ export default function Header() {
   }, [pathname]);
 
   useEffect(() => {
-    if (!open) {
-      setServicesOpen(false);
-    }
+    setServicesOpen(open);
   }, [open]);
 
   useEffect(() => {
