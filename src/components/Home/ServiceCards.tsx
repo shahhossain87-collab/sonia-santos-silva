@@ -14,7 +14,7 @@ export default function ServiceCards() {
   const { locale, copy } = useCopy();
 
   return (
-    <section className="py-16 md:py-20" id="areas">
+    <section className="scroll-mt-20 py-14 md:scroll-mt-28 md:py-20" id="areas">
       <div className="container">
         <Reveal>
           <p className="gold-rule">{copy.home.servicesEyebrow}</p>
@@ -29,14 +29,17 @@ export default function ServiceCards() {
             const href = homeServiceHref(locale, id);
 
             return (
-              <Reveal key={id} delay={index * 0.08}>
-                <Link href={href} className="card-lift group block bg-white">
+              <Reveal key={id} delay={index * 0.05}>
+                <Link
+                  href={href}
+                  className="card-lift group block border border-transparent bg-white hover:border-navy/10"
+                >
                   <div className="relative h-52 overflow-hidden">
                     <Image
                       src={homeServiceImages[id]}
                       alt=""
                       fill
-                      className="object-cover transition duration-500 ease-out group-hover:scale-[1.05]"
+                      className="img-zoom object-cover"
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     />
                   </div>
@@ -45,8 +48,14 @@ export default function ServiceCards() {
                     <p className="mt-1.5 line-clamp-2 text-sm text-body-color">
                       {card.blurb}
                     </p>
-                    <span className="mt-3 inline-block text-sm font-semibold text-gold-dark">
+                    <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-gold-dark">
                       {copy.home.servicesMore}
+                      <span
+                        className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"
+                        aria-hidden="true"
+                      >
+                        →
+                      </span>
                     </span>
                   </div>
                 </Link>

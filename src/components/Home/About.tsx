@@ -13,12 +13,12 @@ export default function About() {
     <section className="py-16 md:py-20">
       <div className="container grid items-center gap-8 lg:grid-cols-2">
         <Reveal>
-          <div className="relative aspect-[4/3] overflow-hidden sm:min-h-[380px] sm:aspect-auto">
+          <div className="group relative aspect-[4/3] overflow-hidden sm:min-h-[380px] sm:aspect-auto">
             <Image
               src="/images/office/01-reception.jpg"
               alt={copy.aboutPage.galleryDisclaimer}
               fill
-              className="object-cover"
+              className="img-zoom object-cover"
               sizes="(min-width: 992px) 50vw, 100vw"
             />
           </div>

@@ -80,17 +80,17 @@ export default function Header() {
             aria-expanded={open}
             onClick={() => setOpen((value) => !value)}
           >
-            <span className={`h-0.5 w-6 bg-navy transition ${open ? "translate-y-2 rotate-45" : ""}`} />
-            <span className={`h-0.5 w-6 bg-navy transition ${open ? "opacity-0" : ""}`} />
-            <span className={`h-0.5 w-6 bg-navy transition ${open ? "-translate-y-2 -rotate-45" : ""}`} />
+            <span className={`h-0.5 w-6 bg-navy transition duration-300 ease-out ${open ? "translate-y-2 rotate-45" : ""}`} />
+            <span className={`h-0.5 w-6 bg-navy transition duration-300 ease-out ${open ? "opacity-0" : ""}`} />
+            <span className={`h-0.5 w-6 bg-navy transition duration-300 ease-out ${open ? "-translate-y-2 -rotate-45" : ""}`} />
           </button>
 
           <nav
             className={`${
               open
-                ? "visible top-full opacity-100"
-                : "invisible top-[120%] opacity-0 lg:visible lg:opacity-100"
-            } absolute top-full right-0 left-0 max-h-[80vh] overflow-y-auto border-t border-navy/10 bg-white px-4 py-4 shadow-two lg:static lg:flex lg:max-h-none lg:flex-1 lg:items-center lg:justify-center lg:overflow-visible lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none`}
+                ? "visible translate-y-0 opacity-100"
+                : "invisible translate-y-2 opacity-0 lg:visible lg:translate-y-0 lg:opacity-100"
+            } absolute top-full right-0 left-0 max-h-[80vh] overflow-y-auto border-t border-navy/10 bg-white px-4 py-4 shadow-two transition-[opacity,transform,visibility] duration-300 ease-out lg:static lg:flex lg:max-h-none lg:flex-1 lg:items-center lg:justify-center lg:overflow-visible lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none lg:transition-none`}
           >
             <ul className="flex flex-col lg:flex-row lg:items-center lg:gap-1">
               {copy.nav.map((item) => {
@@ -103,7 +103,7 @@ export default function Header() {
                   <li key={item.id}>
                     <Link
                       href={item.href}
-                      className={`block px-3 py-3 text-[12px] font-semibold tracking-[0.16em] uppercase ${
+                      className={`block px-3 py-3 text-[12px] font-semibold tracking-[0.16em] uppercase transition-colors duration-200 ${
                         active ? "text-gold-dark" : "text-navy hover:text-gold-dark"
                       }`}
                     >
