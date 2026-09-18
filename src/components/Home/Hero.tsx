@@ -16,14 +16,14 @@ export default function Hero() {
           alt={copy.home.teamGroupAlt}
           fill
           priority
-          className="hero-backdrop object-cover object-[50%_8%] lg:object-[68%_20%]"
+          className="hero-backdrop object-cover object-[50%_18%]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy from-35% via-navy/70 to-navy/10 lg:bg-gradient-to-r lg:from-navy/88 lg:via-navy/50 lg:to-navy/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy from-[12%] via-navy/35 to-transparent lg:bg-gradient-to-r lg:from-navy/78 lg:via-navy/32 lg:to-navy/5" />
       </div>
 
-      <div className="relative -mt-24 flex items-end sm:-mt-28 lg:mt-0 lg:min-h-[36rem]">
-        <div className="w-full max-w-xl px-4 pt-4 pb-8 sm:px-6 sm:pt-6 sm:pb-10 lg:max-w-2xl lg:px-12 lg:py-12 xl:px-16">
+      <div className="relative lg:flex lg:min-h-[36rem] lg:items-end">
+        <div className="w-full max-w-xl px-4 pt-5 pb-8 sm:px-6 sm:pt-6 sm:pb-10 lg:max-w-2xl lg:px-12 lg:py-12 xl:px-16">
           <p className="gold-rule">{copy.home.heroKicker}</p>
           <Image
             src="/images/logo/jgl-lockup-on-dark.png"

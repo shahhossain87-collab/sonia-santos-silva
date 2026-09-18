@@ -138,10 +138,10 @@
 
 @keyframes hero-backdrop-pan {
   from {
-    transform: scale(1.04);
+    transform: scale(1);
   }
   to {
-    transform: scale(1.12) translate3d(-1.5%, -1%, 0);
+    transform: scale(1.04);
   }
 }
 
