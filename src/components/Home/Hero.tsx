@@ -16,10 +16,10 @@ export default function Hero() {
           alt={copy.home.teamGroupAlt}
           fill
           priority
-          className="hero-backdrop object-cover object-[50%_16%] lg:object-[68%_20%]"
+          className="hero-backdrop object-cover object-[50%_8%] lg:object-[68%_20%]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-navy/10 lg:bg-gradient-to-r lg:from-navy/88 lg:via-navy/50 lg:to-navy/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy from-35% via-navy/70 to-navy/10 lg:bg-gradient-to-r lg:from-navy/88 lg:via-navy/50 lg:to-navy/10" />
       </div>
 
       <div className="relative -mt-24 flex items-end sm:-mt-28 lg:mt-0 lg:min-h-[36rem]">
