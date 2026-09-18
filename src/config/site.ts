@@ -87,37 +87,31 @@ export const homeServiceCards = [
     title: "Imigração e Vistos",
     blurb: "Visto D2, Visto D7, AIMA, residência, renovações e reagrupamento.",
     href: "/servicos#imigracao",
-    image: "/images/home/card-d7.jpg",
   },
   {
     title: "Nacionalidade Portuguesa",
     blurb: "Pedidos de nacionalidade portuguesa.",
     href: "/servicos/nacionalidade",
-    image: "/images/home/card-nacionalidade.jpg",
   },
   {
     title: "Arrendamento",
     blurb: "Questões de arrendamento.",
     href: "/servicos#arrendamento",
-    image: "/images/home/office.jpg",
   },
   {
     title: "Recuperação de Crédito",
     blurb: "Recuperação de créditos.",
     href: "/servicos#recuperacao-credito",
-    image: "/images/home/desk.jpg",
   },
   {
     title: "Direito das Sociedades",
     blurb: "Direito das sociedades.",
     href: "/servicos#sociedades",
-    image: "/images/home/meeting.jpg",
   },
   {
     title: "Património e Sucessões",
     blurb: "Património e sucessões.",
     href: "/servicos#patrimonio",
-    image: "/images/home/about-books.jpg",
   },
 ] as const;
 

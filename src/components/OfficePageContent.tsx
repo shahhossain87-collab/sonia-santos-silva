@@ -6,6 +6,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { getCopy } from "@/i18n/copy";
 import { pathFor } from "@/i18n/routes";
 import type { Locale } from "@/i18n/locales";
+import Image from "next/image";
 
 export default function OfficePageContent({ locale }: { locale: Locale }) {
   const copy = getCopy(locale);
@@ -22,7 +23,7 @@ export default function OfficePageContent({ locale }: { locale: Locale }) {
         ]}
       />
       <section className="bg-cream py-10 md:py-12">
-        <div className="container grid gap-10 lg:grid-cols-2">
+        <div className="container grid items-start gap-10 lg:grid-cols-2">
           <div className="prose-legal">
             <BrandMark className="mb-6" />
             <h2 className="font-display mb-4 text-3xl text-navy dark:text-cream">
@@ -33,7 +34,18 @@ export default function OfficePageContent({ locale }: { locale: Locale }) {
             ))}
             <WhatsAppButton label={copy.aboutPage.schedule} className="mt-4" />
           </div>
-          <ul className="space-y-4">
+          <figure className="relative aspect-[3/2] overflow-hidden">
+            <Image
+              src="/images/team/equipa.jpg"
+              alt={copy.home.teamGroupAlt}
+              fill
+              className="object-cover object-[50%_18%]"
+              sizes="(min-width: 992px) 50vw, 100vw"
+            />
+          </figure>
+        </div>
+        <div className="container mt-10">
+          <ul className="grid gap-4 md:grid-cols-3">
             {copy.aboutPage.values.map((item) => (
               <li
                 key={item.title}

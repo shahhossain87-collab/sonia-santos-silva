@@ -228,7 +228,6 @@ export const ui = {
       presenceLocation: "Laranjeiras",
       presenceMapCta: "Ver localização",
       presenceBookCta: "Marcar consulta",
-      presenceImageAlt: "Fachada do Gabinete Jurídico Laranjeiras em Lisboa.",
     },
     servicesPage: {
       eyebrow: "Lisboa",
@@ -268,10 +267,6 @@ export const ui = {
         },
       ],
       schedule: "Agendar conversa",
-      galleryEyebrow: "Laranjeiras",
-      galleryTitle: "O espaço de trabalho",
-      galleryDisclaimer:
-        "Imagens de visualização arquitectónica inspiradas na descrição do escritório em Laranjeiras. Não são fotografias das instalações existentes.",
     },
     contactPage: {
       eyebrow: "Contacto",
@@ -460,7 +455,6 @@ export const ui = {
       presenceLocation: "Laranjeiras",
       presenceMapCta: "View location",
       presenceBookCta: "Book a consultation",
-      presenceImageAlt: "Façade of Gabinete Jurídico Laranjeiras in Lisbon.",
     },
     servicesPage: {
       eyebrow: "Lisbon",
@@ -501,10 +495,6 @@ export const ui = {
         },
       ],
       schedule: "Arrange a conversation",
-      galleryEyebrow: "Laranjeiras",
-      galleryTitle: "The workplace",
-      galleryDisclaimer:
-        "Architectural visualisations inspired by the description of the office in Laranjeiras. They are not photographs of the existing premises.",
     },
     contactPage: {
       eyebrow: "Contact",
@@ -602,17 +592,6 @@ export const ui = {
     },
   },
 } as const;
-
-export const homeServiceImages: Record<HomeServiceId, string> = {
-  imigracao: "/images/home/card-d7.jpg",
-  nacionalidade: "/images/home/card-nacionalidade.jpg",
-  arrendamento: "/images/home/office.jpg",
-  "recuperacao-credito": "/images/home/desk.jpg",
-  sociedades: "/images/home/meeting.jpg",
-  patrimonio: "/images/home/about-books.jpg",
-  penal: "/images/office/02-sonia-cabin.jpg",
-  administrativo: "/images/office/05-establishing.jpg",
-};
 
 export function homeServiceHref(locale: Locale, id: HomeServiceId) {
   if (locale === "pt" && id === "nacionalidade") {

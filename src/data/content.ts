@@ -133,44 +133,6 @@ export const team: TeamMember[] = [
   },
 ];
 
-export const officeVisuals = [
-  {
-    src: "/images/office/01-reception.jpg",
-    alt: "Visualização da recepção compacta, com secretária em nogueira e vista para o gabinete vidrado.",
-    label: "Recepção",
-  },
-  {
-    src: "/images/office/02-sonia-cabin.jpg",
-    alt: "Visualização do gabinete vidrado junto à recepção, com secretária e cadeiras de consulta.",
-    label: "Gabinete",
-  },
-  {
-    src: "/images/office/03-corridor-armando.jpg",
-    alt: "Visualização do corredor, com um gabinete à esquerda e a sala de reuniões ao fundo.",
-    label: "Corredor",
-  },
-  {
-    src: "/images/office/04-conference.jpg",
-    alt: "Visualização da sala de consultas alongada, com mesa longa e estante de livros.",
-    label: "Sala de consultas",
-  },
-  {
-    src: "/images/office/05-establishing.jpg",
-    alt: "Vista de conjunto da recepção, do gabinete vidrado e do corredor até à sala de reuniões.",
-    label: "Vista geral",
-  },
-] as const;
-
-export const officeVisualDisclaimer =
-  "Imagens de visualização arquitectónica inspiradas na descrição do escritório em Laranjeiras. Não são fotografias das instalações existentes.";
-
-export const officeExterior = {
-  src: "/images/office/exterior.jpg",
-  // Temporary layout asset only. The file shows door plate "9A" and must not
-  // be treated as proof of site.addressLine ("Rua Abranches Ferrão, 11 A...").
-  temporary: true,
-} as const;
-
 export const testimonials = [
   {
     quote:
