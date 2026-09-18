@@ -2,6 +2,8 @@
 
 import BrandMark from "@/components/BrandMark";
 import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
+import ServicesMenu from "@/components/Header/ServicesMenu";
+import { isNavActive } from "@/components/Header/navActive";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { site } from "@/config/site";
 import { useCopy } from "@/i18n/use-locale";
@@ -34,6 +36,7 @@ export default function Header() {
   const pathname = usePathname() ?? "/";
   const { locale, copy } = useCopy();
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const [sticky, setSticky] = useState(false);
 
   useEffect(() => {
@@ -45,7 +48,22 @@ export default function Header() {
 
   useEffect(() => {
     setOpen(false);
+    setServicesOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    setServicesOpen(open);
+  }, [open]);
+
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setServicesOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50">
@@ -80,35 +98,54 @@ export default function Header() {
             aria-expanded={open}
             onClick={() => setOpen((value) => !value)}
           >
-            <span className={`h-0.5 w-6 bg-navy transition ${open ? "translate-y-2 rotate-45" : ""}`} />
-            <span className={`h-0.5 w-6 bg-navy transition ${open ? "opacity-0" : ""}`} />
-            <span className={`h-0.5 w-6 bg-navy transition ${open ? "-translate-y-2 -rotate-45" : ""}`} />
+            <span className={`h-0.5 w-6 bg-navy transition duration-300 ease-out ${open ? "translate-y-2 rotate-45" : ""}`} />
+            <span className={`h-0.5 w-6 bg-navy transition duration-300 ease-out ${open ? "opacity-0" : ""}`} />
+            <span className={`h-0.5 w-6 bg-navy transition duration-300 ease-out ${open ? "-translate-y-2 -rotate-45" : ""}`} />
           </button>
 
           <nav
             className={`${
               open
-                ? "visible top-full opacity-100"
-                : "invisible top-[120%] opacity-0 lg:visible lg:opacity-100"
-            } absolute top-full right-0 left-0 max-h-[80vh] overflow-y-auto border-t border-navy/10 bg-white px-4 py-4 shadow-two lg:static lg:flex lg:max-h-none lg:flex-1 lg:items-center lg:justify-center lg:overflow-visible lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none`}
+                ? "visible translate-y-0 opacity-100"
+                : "invisible translate-y-2 opacity-0 lg:visible lg:translate-y-0 lg:opacity-100"
+            } absolute top-full right-0 left-0 max-h-[80vh] overflow-y-auto border-t border-navy/10 bg-white px-4 py-4 shadow-two transition-[opacity,transform,visibility] duration-300 ease-out lg:static lg:flex lg:max-h-none lg:flex-1 lg:items-center lg:justify-center lg:overflow-visible lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none lg:transition-none`}
           >
             <ul className="flex flex-col lg:flex-row lg:items-center lg:gap-1">
               {copy.nav.map((item) => {
-                const active =
-                  item.href === "/" || item.href === "/en"
-                    ? pathname === item.href
-                    : pathname === item.href || pathname.startsWith(`${item.href}/`);
+                const active = isNavActive(pathname, item.href, item.id);
+                const linkClassName = `block border-b-2 px-3 py-3 text-[12px] font-semibold tracking-[0.16em] uppercase transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold lg:py-5 ${
+                  active
+                    ? "border-gold text-gold-dark"
+                    : "border-transparent text-navy hover:text-gold-dark"
+                }`;
 
                 return (
                   <li key={item.id}>
-                    <Link
-                      href={item.href}
-                      className={`block px-3 py-3 text-[12px] font-semibold tracking-[0.16em] uppercase ${
-                        active ? "text-gold-dark" : "text-navy hover:text-gold-dark"
-                      }`}
-                    >
-                      {item.title}
-                    </Link>
+                    {item.id === "servicos" ? (
+                      <ServicesMenu
+                        locale={locale}
+                        pathname={pathname}
+                        href={item.href}
+                        title={item.title}
+                        active={active}
+                        linkClassName={linkClassName}
+                        allServicesLabel={copy.header.allServices}
+                        openLabel={copy.header.openServices}
+                        closeLabel={copy.header.closeServices}
+                        open={servicesOpen}
+                        onToggle={() => setServicesOpen((value) => !value)}
+                        onOpen={() => setServicesOpen(true)}
+                        onClose={() => setServicesOpen(false)}
+                      />
+                    ) : (
+                      <Link
+                        href={item.href}
+                        aria-current={active ? "page" : undefined}
+                        className={linkClassName}
+                      >
+                        {item.title}
+                      </Link>
+                    )}
                   </li>
                 );
               })}

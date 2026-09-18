@@ -44,7 +44,7 @@ export const nacionalidade: ServiceContent = {
         "Os prazos dependem da via escolhida e da carga das entidades. Não publicamos estimativas genéricas como garantia.",
     },
     {
-      question: "A advogada garante a aprovação?",
+      question: "O escritório garante a aprovação?",
       answer:
         "Não. A decisão cabe às autoridades. O escritório assegura a análise jurídica e a instrução cuidadosa do pedido.",
     },

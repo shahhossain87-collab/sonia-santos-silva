@@ -1,22 +1,29 @@
 export const site = {
-  lawyerName: "Sónia Santos Silva",
-  title: "Sónia Santos Silva — Advogada",
-  shortName: "Sónia Santos Silva",
+  lawyerName: "Sónia Santos da Silva",
+  title: "Gabinete Jurídico Laranjeiras",
+  shortName: "JGL",
   officeName: "Gabinete Jurídico Laranjeiras",
   shortMark: "JGL",
   role: "Advogada",
+  descriptor: {
+    pt: "Advogados · Solicitadores",
+    en: "Lawyers · Solicitors",
+  },
+  documentTitle: {
+    pt: "Gabinete Jurídico Laranjeiras | Advogados e Solicitadores",
+    en: "Gabinete Jurídico Laranjeiras | Lawyers & Solicitors",
+  },
   license: "55852L",
   nif: "221986286",
-  tagline: "Imigração, residência e nacionalidade em Portugal.",
+  tagline: "Acompanhamento jurídico em Lisboa, em português e inglês.",
   description:
-    "Acompanhamento jurídico em Portugal para nacionalidade, vistos de residência e reagrupamento familiar. Informação clara, sem garantia de resultado.",
+    "Gabinete Jurídico Laranjeiras. Advogados · Solicitadores. Acompanhamento jurídico em Lisboa, em português e inglês. Informação clara, sem garantia de resultado.",
   locale: "pt-PT",
   url: "https://www.soniasantossilva.pt",
   email: "soniasantosdasilva-55852l@adv.oa.pt",
   phoneDisplay: "+351 913 724 450",
   phoneDigits: "351913724450",
-  whatsappMessage:
-    "Olá, gostaria de agendar uma consulta sobre imigração em Portugal.",
+  whatsappMessage: "Olá, gostaria de agendar uma consulta.",
   addressLine: "Rua Abranches Ferrão, 11 A, 1600-296 Lisboa",
   city: "Lisboa",
   hours: "Segunda a sexta, 10h–18h (hora de Lisboa)",
@@ -45,7 +52,7 @@ export const nav = [
   { id: "inicio", title: "Início", href: "/" },
   { id: "escritorio", title: "O Escritório", href: "/o-escritorio" },
   { id: "servicos", title: "Serviços", href: "/servicos" },
-  { id: "contato", title: "Contacto", href: "/contato" },
+  { id: "contato", title: "Contacto", href: "/contacto" },
 ] as const;
 
 export const footerLinks = {
@@ -53,7 +60,7 @@ export const footerLinks = {
     { title: "O Escritório", href: "/o-escritorio" },
     { title: "Serviços", href: "/servicos" },
     { title: "Equipa", href: "/o-escritorio#equipa" },
-    { title: "Contacto", href: "/contato" },
+    { title: "Contacto", href: "/contacto" },
   ],
   areas: [
     { title: "Imigração e Vistos", href: "/servicos#imigracao" },
@@ -80,37 +87,31 @@ export const homeServiceCards = [
     title: "Imigração e Vistos",
     blurb: "Visto D2, Visto D7, AIMA, residência, renovações e reagrupamento.",
     href: "/servicos#imigracao",
-    image: "/images/home/card-d7.jpg",
   },
   {
     title: "Nacionalidade Portuguesa",
     blurb: "Pedidos de nacionalidade portuguesa.",
     href: "/servicos/nacionalidade",
-    image: "/images/home/card-nacionalidade.jpg",
   },
   {
     title: "Arrendamento",
     blurb: "Questões de arrendamento.",
     href: "/servicos#arrendamento",
-    image: "/images/home/office.jpg",
   },
   {
     title: "Recuperação de Crédito",
     blurb: "Recuperação de créditos.",
     href: "/servicos#recuperacao-credito",
-    image: "/images/home/desk.jpg",
   },
   {
     title: "Direito das Sociedades",
     blurb: "Direito das sociedades.",
     href: "/servicos#sociedades",
-    image: "/images/home/meeting.jpg",
   },
   {
     title: "Património e Sucessões",
     blurb: "Património e sucessões.",
     href: "/servicos#patrimonio",
-    image: "/images/home/about-books.jpg",
   },
 ] as const;
 

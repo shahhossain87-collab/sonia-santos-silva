@@ -2,7 +2,7 @@
 
 import { site } from "@/config/site";
 import { pathFor } from "@/i18n/routes";
-import { useLocale } from "@/i18n/use-locale";
+import { useCopy } from "@/i18n/use-locale";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -39,19 +39,20 @@ const lockup = {
 } as const;
 
 export default function BrandMark({ inverted, compact, className = "" }: BrandMarkProps) {
-  const locale = useLocale();
+  const { locale, copy } = useCopy();
   const palette = inverted ? "dark" : "light";
   const asset = compact ? monogram[palette] : lockup[palette];
+  const descriptorClass = inverted ? "text-gold" : "text-gold-dark";
 
   return (
     <Link
       href={pathFor(locale, "home")}
-      className={`inline-flex shrink-0 items-center ${className}`.trim()}
-      aria-label={compact ? site.officeName : undefined}
+      className={`inline-flex shrink-0 ${compact ? "items-center" : "flex-col items-start"} ${className}`.trim()}
+      aria-label={copy.brand.lockupLabel}
     >
       <Image
         src={asset.src}
-        alt={compact ? "" : site.officeName}
+        alt={compact ? "" : copy.brand.name}
         width={asset.width}
         height={asset.height}
         priority={compact}
@@ -64,6 +65,20 @@ export default function BrandMark({ inverted, compact, className = "" }: BrandMa
         }
         style={{ width: "auto" }}
       />
+      {compact ? (
+        <span className="ml-3 hidden min-w-0 flex-col xl:flex">
+          <span className="font-display text-[15px] leading-tight text-navy">
+            {copy.brand.name}
+          </span>
+          <span className={`mt-0.5 text-[10px] font-semibold tracking-[0.16em] uppercase ${descriptorClass}`}>
+            {copy.brand.descriptor}
+          </span>
+        </span>
+      ) : (
+        <span className={`mt-2 text-[11px] font-semibold tracking-[0.18em] uppercase ${descriptorClass}`}>
+          {copy.brand.descriptor}
+        </span>
+      )}
     </Link>
   );
 }

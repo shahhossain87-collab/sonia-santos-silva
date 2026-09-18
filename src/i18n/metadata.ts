@@ -27,8 +27,8 @@ export function languageAlternates(locale: Locale, key: RouteKey): NonNullable<M
   };
 }
 
-function absoluteTitle(locale: Locale, title: string) {
-  const suffix = locale === "en" ? site.lawyerName : site.title;
+function absoluteTitle(_locale: Locale, title: string) {
+  const suffix = site.officeName;
   return title.includes(suffix) ? title : `${title} | ${suffix}`;
 }
 
@@ -48,6 +48,7 @@ export function pageMetadata(
     openGraph: {
       title,
       description: extras.description,
+      siteName: site.officeName,
       locale: localeOg[locale],
       alternateLocale: locale === "en" ? ["pt_PT"] : ["en"],
       url: absoluteUrl(pathFor(locale, key)),

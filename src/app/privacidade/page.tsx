@@ -19,13 +19,14 @@ export default function PrivacidadePage() {
       <section className="py-16">
         <div className="container max-w-3xl space-y-6 text-sm leading-relaxed text-body-color">
           <p>
-            O responsável pelo tratamento é {site.title}, cédula profissional{" "}
-            {site.license}, NIF {site.nif}, com domicílio profissional em{" "}
-            {site.addressLine}. Contacto: {site.email}.
+            O responsável pelo tratamento é {site.officeName} (
+            {site.descriptor.pt}), com domicílio profissional em {site.addressLine}.
+            Advogada responsável: {site.lawyerName}, cédula profissional {site.license},
+            NIF {site.nif}. Contacto: {site.email}.
           </p>
           <h2 className="font-display text-2xl text-navy">Dados que podemos tratar</h2>
           <p>
-            Identificação, contactos, informações sobre o seu processo migratório
+            Identificação, contactos, informações sobre o seu assunto jurídico
             e documentos que nos envie para análise jurídica.
           </p>
           <h2 className="font-display text-2xl text-navy">Finalidades</h2>

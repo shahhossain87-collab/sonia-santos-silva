@@ -44,25 +44,14 @@ export default function Team() {
   const rest = team.filter((member) => member !== featured);
 
   return (
-    <section id="equipa" className="bg-white py-16 md:py-20">
+    <section id="equipa" className="bg-white py-10 md:py-12">
       <div className="container">
         <Reveal>
           <p className="gold-rule">{copy.home.teamEyebrow}</p>
           <h2 className="mt-3 font-display text-3xl sm:text-4xl">{copy.home.teamTitle}</h2>
         </Reveal>
-        <Reveal delay={0.06}>
-          <figure className="card-lift relative mt-10 aspect-[3/2] overflow-hidden">
-            <Image
-              src="/images/team/equipa.jpg"
-              alt={copy.home.teamGroupAlt}
-              fill
-              className="object-cover object-[50%_30%]"
-              sizes="100vw"
-            />
-          </figure>
-        </Reveal>
         {featured ? (
-          <Reveal delay={0.1}>
+          <Reveal delay={0.06}>
             <article className="card-lift mt-10 grid overflow-hidden md:grid-cols-[300px_1fr]">
               <div className="relative aspect-square min-h-[280px] md:min-h-0">
                 <TeamPhoto
@@ -84,11 +73,7 @@ export default function Team() {
                 ) : null}
                 {featured.bio ? (
                   <p className="mt-1 text-sm text-body-color">{featured.bio}</p>
-                ) : (
-                  <p className="mt-1 text-sm text-body-color">
-                    Nacionalidade, vistos e reagrupamento.
-                  </p>
-                )}
+                ) : null}
                 <CtaLink className="mt-6 w-fit">
                   <WhatsAppIcon />
                   WhatsApp

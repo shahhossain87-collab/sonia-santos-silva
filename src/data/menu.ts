@@ -22,7 +22,7 @@ export const menuData: Menu[] = [
   {
     id: 4,
     title: "Contacto",
-    path: "/contato",
+    path: "/contacto",
     newTab: false,
   },
 ];
@@ -41,10 +41,12 @@ export const footerNav = {
     { title: "Recuperação de Crédito", path: "/servicos#recuperacao-credito" },
     { title: "Direito das Sociedades", path: "/servicos#sociedades" },
     { title: "Património e Sucessões", path: "/servicos#patrimonio" },
+    { title: "Direito Penal", path: "/servicos#penal" },
+    { title: "Direito Administrativo", path: "/servicos#administrativo" },
   ],
   legal: [
     { title: "Privacidade", path: "/privacidade" },
     { title: "Cookies", path: "/cookies" },
-    { title: "Contacto", path: "/contato" },
+    { title: "Contacto", path: "/contacto" },
   ],
 };

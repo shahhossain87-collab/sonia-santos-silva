@@ -62,7 +62,7 @@ export const extraServiceCards: ServiceCard[] = [
     title: "Documentação e consultas",
     summary:
       "Esclarecimento jurídico e preparação de peças, sempre com avaliação individual do caso.",
-    href: "/contato",
+    href: "/contacto",
     tags: ["Consulta", "NIF", "Documentos"],
   },
 ];
@@ -107,7 +107,6 @@ export const team: TeamMember[] = [
     name: "Sónia Santos da Silva",
     role: "Advogada",
     license: "Cédula profissional 55852L",
-    bio: "Acompanhamento em nacionalidade, vistos e residência em Portugal.",
     initials: "SSS",
     photo: "/images/team/sonia-santos.jpg",
     featured: true,
@@ -133,37 +132,6 @@ export const team: TeamMember[] = [
     photo: "/images/team/nadir.jpg",
   },
 ];
-
-export const officeVisuals = [
-  {
-    src: "/images/office/01-reception.jpg",
-    alt: "Visualização da recepção compacta, com secretária em nogueira e vista para o gabinete vidrado.",
-    label: "Recepção",
-  },
-  {
-    src: "/images/office/02-sonia-cabin.jpg",
-    alt: "Visualização do gabinete vidrado junto à recepção, com secretária e cadeiras de consulta.",
-    label: "Gabinete",
-  },
-  {
-    src: "/images/office/03-corridor-armando.jpg",
-    alt: "Visualização do corredor, com um gabinete à esquerda e a sala de reuniões ao fundo.",
-    label: "Corredor",
-  },
-  {
-    src: "/images/office/04-conference.jpg",
-    alt: "Visualização da sala de consultas alongada, com mesa longa e estante de livros.",
-    label: "Sala de consultas",
-  },
-  {
-    src: "/images/office/05-establishing.jpg",
-    alt: "Vista de conjunto da recepção, do gabinete vidrado e do corredor até à sala de reuniões.",
-    label: "Vista geral",
-  },
-] as const;
-
-export const officeVisualDisclaimer =
-  "Imagens de visualização arquitectónica inspiradas na descrição do escritório em Laranjeiras. Não são fotografias das instalações existentes.";
 
 export const testimonials = [
   {

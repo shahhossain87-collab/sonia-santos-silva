@@ -7,11 +7,14 @@ const copy = getCopy("en");
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.lawyerName} — ${copy.meta.homeTitle}`,
-    template: `%s | ${site.lawyerName}`,
+    default: site.documentTitle.en,
+    template: `%s | ${site.officeName}`,
   },
   description: copy.meta.homeDescription,
   openGraph: {
+    title: site.documentTitle.en,
+    description: copy.meta.homeDescription,
+    siteName: site.officeName,
     locale: localeOg.en,
     alternateLocale: ["pt_PT"],
   },

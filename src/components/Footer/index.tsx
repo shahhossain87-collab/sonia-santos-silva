@@ -13,12 +13,12 @@ export default function Footer() {
   const cards = getCopy(locale).cards;
 
   return (
-    <footer className="bg-navy text-white">
+    <footer className="bg-navy pb-20 text-white lg:pb-0">
       <div className="container grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <BrandMark inverted />
           <p className="mt-6 max-w-xs text-sm text-white/70">
-            {site.tagline}
+            {copy.footer.tagline}
           </p>
           <CtaLink className="mt-6">
             <WhatsAppIcon />
@@ -96,7 +96,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container flex flex-col gap-3 py-6 text-xs leading-relaxed text-white/45 md:flex-row md:items-center md:justify-between">
           <p>
-            © {new Date().getFullYear()} {site.title}. {copy.footer.rights}
+            © {new Date().getFullYear()} {site.officeName}. {copy.footer.rights}
           </p>
           <p className="max-w-xl">{site.disclaimer}</p>
         </div>

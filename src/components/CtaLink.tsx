@@ -1,4 +1,7 @@
-import { whatsappUrl } from "@/config/site";
+"use client";
+
+import { whatsappHref } from "@/config/site";
+import { useCopy } from "@/i18n/use-locale";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -24,13 +27,22 @@ export default function CtaLink({
   className = "",
   external,
 }: CtaLinkProps) {
+  const { copy } = useCopy();
   const classes = `${variants[variant]} ${className}`;
-  const target = href ?? whatsappUrl;
+  const target = href ?? whatsappHref(copy.home.heroWhatsapp);
   const isExternal = external ?? target.startsWith("http");
 
   if (isExternal) {
     return (
       <a href={target} className={classes} target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    );
+  }
+
+  if (target.startsWith("#")) {
+    return (
+      <a href={target} className={classes}>
         {children}
       </a>
     );
