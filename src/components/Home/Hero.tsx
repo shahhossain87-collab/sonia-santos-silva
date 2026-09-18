@@ -24,11 +24,11 @@ export default function Hero() {
           className="hero-backdrop object-cover object-[40%_50%]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-navy/78 lg:bg-navy/72" />
+        <div className="absolute inset-0 bg-navy/58 lg:bg-navy/68" />
       </div>
       <span className="sr-only">{officeBackdrop.alt}</span>
 
-      <div className="relative grid min-h-[28.5rem] grid-cols-[minmax(0,1fr)_7.5rem] sm:min-h-[32rem] sm:grid-cols-[minmax(0,1.35fr)_11rem] lg:min-h-0 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+      <div className="relative grid min-h-[28.5rem] grid-cols-[minmax(0,1fr)_8.25rem] sm:min-h-[32rem] sm:grid-cols-[minmax(0,1.35fr)_12rem] lg:min-h-0 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
         <div className="flex items-end">
           <div className="w-full px-4 py-7 sm:px-6 sm:py-10 lg:px-12 lg:py-10 lg:pb-12 xl:px-16">
             <p className="gold-rule">{copy.home.heroKicker}</p>
@@ -67,7 +67,7 @@ export default function Hero() {
                 <li key={member.photo}>
                   <Link
                     href="#equipa"
-                    className="relative block h-10 w-10 overflow-hidden border border-white/25"
+                    className="relative block h-11 w-11 overflow-hidden border border-white/30"
                   >
                     <Image
                       src={member.photo}
@@ -92,14 +92,12 @@ export default function Hero() {
             className="img-zoom object-cover object-[50%_12%]"
             sizes="(min-width: 992px) 34vw, 32vw"
           />
-          <figcaption className="absolute inset-x-0 bottom-0 bg-navy/90 px-2 py-2 sm:px-4 sm:py-3 lg:px-6 lg:py-4">
-            <p className="font-display text-[0.7rem] leading-tight sm:text-lg lg:text-xl">
-              {site.lawyerName}
-            </p>
-            <p className="mt-0.5 hidden text-[10px] tracking-[0.18em] text-gold uppercase sm:block">
+          <figcaption className="absolute inset-x-0 bottom-0 hidden bg-navy/90 px-4 py-3 lg:block lg:px-6 lg:py-4">
+            <p className="font-display text-lg leading-tight lg:text-xl">{site.lawyerName}</p>
+            <p className="mt-0.5 text-[10px] tracking-[0.18em] text-gold uppercase">
               {copy.home.heroRole}
             </p>
-            <p className="mt-0.5 hidden text-[11px] text-white/65 sm:block">
+            <p className="mt-0.5 text-[11px] text-white/65">
               {copy.home.heroLicense} {site.license}
             </p>
           </figcaption>
