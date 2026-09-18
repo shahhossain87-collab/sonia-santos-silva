@@ -10,20 +10,20 @@ export default function Hero() {
 
   return (
     <section className="relative isolate overflow-hidden bg-navy text-white">
-      <div className="absolute inset-0">
+      <div className="relative aspect-[3/2] sm:aspect-[16/10] lg:absolute lg:inset-0 lg:aspect-auto">
         <Image
           src="/images/team/equipa.jpg"
           alt={copy.home.teamGroupAlt}
           fill
           priority
-          className="hero-backdrop object-cover object-[50%_18%] lg:object-[68%_20%]"
+          className="hero-backdrop object-cover object-[50%_16%] lg:object-[68%_20%]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/88 via-navy/58 to-navy/20 sm:via-navy/50 sm:to-navy/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-navy/10 lg:bg-gradient-to-r lg:from-navy/88 lg:via-navy/50 lg:to-navy/10" />
       </div>
 
-      <div className="relative flex min-h-[30rem] items-end sm:min-h-[34rem] lg:min-h-[36rem]">
-        <div className="w-full max-w-xl px-4 py-8 sm:px-6 sm:py-10 lg:max-w-2xl lg:px-12 lg:py-12 xl:px-16">
+      <div className="relative -mt-24 flex items-end sm:-mt-28 lg:mt-0 lg:min-h-[36rem]">
+        <div className="w-full max-w-xl px-4 pt-4 pb-8 sm:px-6 sm:pt-6 sm:pb-10 lg:max-w-2xl lg:px-12 lg:py-12 xl:px-16">
           <p className="gold-rule">{copy.home.heroKicker}</p>
           <Image
             src="/images/logo/jgl-lockup-on-dark.png"
