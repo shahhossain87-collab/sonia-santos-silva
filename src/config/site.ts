@@ -52,7 +52,7 @@ export const nav = [
   { id: "inicio", title: "Início", href: "/" },
   { id: "escritorio", title: "O Escritório", href: "/o-escritorio" },
   { id: "servicos", title: "Serviços", href: "/servicos" },
-  { id: "contato", title: "Contacto", href: "/contato" },
+  { id: "contato", title: "Contacto", href: "/contacto" },
 ] as const;
 
 export const footerLinks = {
@@ -60,7 +60,7 @@ export const footerLinks = {
     { title: "O Escritório", href: "/o-escritorio" },
     { title: "Serviços", href: "/servicos" },
     { title: "Equipa", href: "/o-escritorio#equipa" },
-    { title: "Contacto", href: "/contato" },
+    { title: "Contacto", href: "/contacto" },
   ],
   areas: [
     { title: "Imigração e Vistos", href: "/servicos#imigracao" },
@@ -87,37 +87,31 @@ export const homeServiceCards = [
     title: "Imigração e Vistos",
     blurb: "Visto D2, Visto D7, AIMA, residência, renovações e reagrupamento.",
     href: "/servicos#imigracao",
-    image: "/images/home/card-d7.jpg",
   },
   {
     title: "Nacionalidade Portuguesa",
     blurb: "Pedidos de nacionalidade portuguesa.",
     href: "/servicos/nacionalidade",
-    image: "/images/home/card-nacionalidade.jpg",
   },
   {
     title: "Arrendamento",
     blurb: "Questões de arrendamento.",
     href: "/servicos#arrendamento",
-    image: "/images/home/office.jpg",
   },
   {
     title: "Recuperação de Crédito",
     blurb: "Recuperação de créditos.",
     href: "/servicos#recuperacao-credito",
-    image: "/images/home/desk.jpg",
   },
   {
     title: "Direito das Sociedades",
     blurb: "Direito das sociedades.",
     href: "/servicos#sociedades",
-    image: "/images/home/meeting.jpg",
   },
   {
     title: "Património e Sucessões",
     blurb: "Património e sucessões.",
     href: "/servicos#patrimonio",
-    image: "/images/home/about-books.jpg",
   },
 ] as const;
 

@@ -19,20 +19,122 @@ const immigrationItems = {
   pt: [
     { label: "Visto D2", href: "/servicos/visto-d2" },
     { label: "Visto D7", href: "/servicos/visto-d7" },
-    { label: "AIMA" },
-    { label: "Autorizações de residência" },
-    { label: "Renovações" },
+    { label: "AIMA", href: "/servicos#imigracao" },
+    { label: "Autorizações de residência", href: "/servicos#imigracao" },
+    { label: "Renovações", href: "/servicos#imigracao" },
     { label: "Reagrupamento familiar", href: "/servicos/reagrupamento" },
   ],
   en: [
-    { label: "D2 visa" },
-    { label: "D7 visa" },
-    { label: "AIMA" },
-    { label: "Residence permits" },
-    { label: "Renewals" },
-    { label: "Family reunification" },
+    { label: "D2 visa", href: "/servicos/visto-d2" },
+    { label: "D7 visa", href: "/servicos/visto-d7" },
+    { label: "AIMA", href: "/en/services#imigracao" },
+    { label: "Residence permits", href: "/en/services#imigracao" },
+    { label: "Renewals", href: "/en/services#imigracao" },
+    { label: "Family reunification", href: "/servicos/reagrupamento" },
   ],
 } as const;
+
+export const serviceFinderIds = [
+  "imigracao",
+  "visto-d2",
+  "visto-d7",
+  "aima-residencia",
+  "nacionalidade",
+  "reagrupamento",
+  "arrendamento",
+  "sociedades",
+  "recuperacao-credito",
+  "patrimonio",
+  "penal",
+  "administrativo",
+] as const;
+
+export type ServiceFinderId = (typeof serviceFinderIds)[number];
+
+const serviceFinderLabels: Record<Locale, Record<ServiceFinderId, string>> = {
+  pt: {
+    imigracao: "Imigração e Vistos",
+    "visto-d2": "Visto D2",
+    "visto-d7": "Visto D7",
+    "aima-residencia": "AIMA e residência",
+    nacionalidade: "Nacionalidade Portuguesa",
+    reagrupamento: "Reagrupamento familiar",
+    arrendamento: "Arrendamento",
+    sociedades: "Direito das Sociedades",
+    "recuperacao-credito": "Recuperação de Crédito",
+    patrimonio: "Património e Sucessões",
+    penal: "Direito Penal",
+    administrativo: "Direito Administrativo",
+  },
+  en: {
+    imigracao: "Immigration and Visas",
+    "visto-d2": "D2 Visa",
+    "visto-d7": "D7 Visa",
+    "aima-residencia": "AIMA and residence",
+    nacionalidade: "Portuguese Nationality",
+    reagrupamento: "Family reunification",
+    arrendamento: "Tenancy and leases",
+    sociedades: "Company law",
+    "recuperacao-credito": "Debt recovery",
+    patrimonio: "Property and inheritance",
+    penal: "Criminal law",
+    administrativo: "Administrative law",
+  },
+};
+
+const serviceFinderDetailHrefs: Partial<Record<ServiceFinderId, string>> = {
+  "visto-d2": "/servicos/visto-d2",
+  "visto-d7": "/servicos/visto-d7",
+  nacionalidade: "/servicos/nacionalidade",
+  reagrupamento: "/servicos/reagrupamento",
+};
+
+export function serviceFinderHref(locale: Locale, id: ServiceFinderId) {
+  const detail = serviceFinderDetailHrefs[id];
+  if (detail) return detail;
+  const hash =
+    id === "aima-residencia" ? "imigracao" : id === "reagrupamento" ? "imigracao" : id;
+  return `${pathFor(locale, "services")}#${hash}`;
+}
+
+export function serviceFinderHasDetail(id: ServiceFinderId) {
+  return Boolean(serviceFinderDetailHrefs[id]);
+}
+
+export function getServiceFinder(locale: Locale) {
+  return serviceFinderIds.map((id) => ({
+    id,
+    title: serviceFinderLabels[locale][id],
+    href: serviceFinderHref(locale, id),
+    overview: !serviceFinderHasDetail(id),
+  }));
+}
+
+const otherAreaIds = homeServiceIds.filter((id) => id !== "imigracao");
+
+export function getNavServiceMenu(locale: Locale) {
+  const labels = serviceFinderLabels[locale];
+
+  return {
+    immigration: {
+      title: labels.imigracao,
+      items: [
+        { title: labels["visto-d2"], href: serviceFinderHref(locale, "visto-d2") },
+        { title: labels["visto-d7"], href: serviceFinderHref(locale, "visto-d7") },
+        { title: labels.nacionalidade, href: serviceFinderHref(locale, "nacionalidade") },
+        { title: labels.reagrupamento, href: serviceFinderHref(locale, "reagrupamento") },
+        { title: labels["aima-residencia"], href: serviceFinderHref(locale, "aima-residencia") },
+      ],
+    },
+    other: {
+      title: locale === "en" ? "Other areas" : "Outras áreas",
+      items: otherAreaIds.map((id) => ({
+        title: labels[id],
+        href: homeServiceHref(locale, id),
+      })),
+    },
+  };
+}
 
 export const ui = {
   pt: {
@@ -55,6 +157,10 @@ export const ui = {
       languageLabel: "Idioma",
       portuguese: "PT",
       english: "EN",
+      allServices: "Ver todos os serviços",
+      openServices: "Abrir lista de serviços",
+      closeServices: "Fechar lista de serviços",
+      mobileNav: "Navegação principal",
     },
     footer: {
       office: "Escritório",
@@ -76,19 +182,23 @@ export const ui = {
     },
     home: {
       heroKicker: "Lisboa",
-      heroTitle: "Um escritório em Lisboa.",
-      heroLead: "Acompanhamento jurídico em português e inglês.",
+      heroTitle: "Acompanhamento jurídico em Lisboa.",
+      heroLead: "Para pessoas, famílias e empresas.",
       heroNote: "Análise caso a caso — sem garantia de resultado.",
-      heroServices: "Ver serviços",
-      heroTalk: "Fale connosco",
+      heroServices: "Áreas de Atuação",
+      heroTalk: "Marcar consulta",
       heroWhatsapp: "Olá, gostaria de agendar uma consulta.",
       heroPortraitAlt: "Sónia Santos da Silva, advogada.",
       heroRole: "Advogada",
       heroLicense: "Cédula profissional",
       metrics: ["Português e inglês", "Escritório em Portugal", "Atendimento com marcação"],
-      servicesEyebrow: "Lisboa",
+      servicesEyebrow: "Serviços",
       servicesTitle: "Áreas de Atuação",
-      servicesMore: "Saber mais →",
+      servicesMore: "Saber mais",
+      finderTitle: "Em que podemos ajudar?",
+      finderLead: "Escolha a área mais próxima da sua situação.",
+      finderAll: "Ver todas as áreas",
+      finderOverview: "Informação geral",
       aboutEyebrow: "O escritório",
       aboutTitle: "Acompanhamento próximo, sem atalhos.",
       aboutCta: "O escritório",
@@ -112,13 +222,12 @@ export const ui = {
       officeTitle: "Escritório em Portugal",
       officeCta: "Marcar conversa",
       hours: "Segunda a sexta, 10h–18h (hora de Lisboa)",
-      presenceTitle: "O escritório em Lisboa",
-      presenceLead:
-        "Gabinete Jurídico Laranjeiras. Atendimento jurídico presencial em Lisboa, em português e inglês.",
-      presenceLocation: "Laranjeiras · Lisboa",
+      presenceEyebrow: "Laranjeiras · Lisboa",
+      presenceTitle: "Visite-nos em Laranjeiras",
+      presenceLead: "Atendimento jurídico presencial, em português e inglês.",
+      presenceLocation: "Laranjeiras",
       presenceMapCta: "Ver localização",
       presenceBookCta: "Marcar consulta",
-      presenceImageAlt: "Fachada do Gabinete Jurídico Laranjeiras em Lisboa.",
     },
     servicesPage: {
       eyebrow: "Lisboa",
@@ -158,10 +267,6 @@ export const ui = {
         },
       ],
       schedule: "Agendar conversa",
-      galleryEyebrow: "Laranjeiras",
-      galleryTitle: "O espaço de trabalho",
-      galleryDisclaimer:
-        "Imagens de visualização arquitectónica inspiradas na descrição do escritório em Laranjeiras. Não são fotografias das instalações existentes.",
     },
     contactPage: {
       eyebrow: "Contacto",
@@ -279,6 +384,10 @@ export const ui = {
       languageLabel: "Language",
       portuguese: "PT",
       english: "EN",
+      allServices: "View all services",
+      openServices: "Open services list",
+      closeServices: "Close services list",
+      mobileNav: "Main navigation",
     },
     footer: {
       office: "Office",
@@ -300,19 +409,23 @@ export const ui = {
     },
     home: {
       heroKicker: "Lisbon",
-      heroTitle: "A law office in Lisbon.",
-      heroLead: "Legal support in Portuguese and English.",
+      heroTitle: "Legal support in Lisbon.",
+      heroLead: "For individuals, families and businesses.",
       heroNote: "Case-by-case review — no guarantee of outcome.",
-      heroServices: "View services",
-      heroTalk: "Talk to us",
+      heroServices: "Areas of Practice",
+      heroTalk: "Book a consultation",
       heroWhatsapp: "Hello, I would like to book a consultation.",
       heroPortraitAlt: "Sónia Santos da Silva, lawyer.",
       heroRole: "Lawyer",
       heroLicense: "Professional licence",
       metrics: ["Portuguese and English", "Office in Portugal", "Appointments by arrangement"],
-      servicesEyebrow: "Lisbon",
-      servicesTitle: "Areas of practice",
-      servicesMore: "Read more →",
+      servicesEyebrow: "Services",
+      servicesTitle: "Areas of Practice",
+      servicesMore: "Read more",
+      finderTitle: "How can we help?",
+      finderLead: "Choose the area closest to your situation.",
+      finderAll: "View all areas",
+      finderOverview: "Overview",
       aboutEyebrow: "The office",
       aboutTitle: "Close support, without shortcuts.",
       aboutCta: "The office",
@@ -336,13 +449,12 @@ export const ui = {
       officeTitle: "Office in Portugal",
       officeCta: "Book a conversation",
       hours: "Monday to Friday, 10:00–18:00 (Lisbon time)",
-      presenceTitle: "Our office in Lisbon",
-      presenceLead:
-        "Gabinete Jurídico Laranjeiras. In-person legal assistance in Lisbon, in Portuguese and English.",
-      presenceLocation: "Laranjeiras · Lisboa",
+      presenceEyebrow: "Laranjeiras · Lisbon",
+      presenceTitle: "Visit us in Laranjeiras",
+      presenceLead: "In-person legal assistance, in Portuguese and English.",
+      presenceLocation: "Laranjeiras",
       presenceMapCta: "View location",
       presenceBookCta: "Book a consultation",
-      presenceImageAlt: "Façade of Gabinete Jurídico Laranjeiras in Lisbon.",
     },
     servicesPage: {
       eyebrow: "Lisbon",
@@ -383,10 +495,6 @@ export const ui = {
         },
       ],
       schedule: "Arrange a conversation",
-      galleryEyebrow: "Laranjeiras",
-      galleryTitle: "The workplace",
-      galleryDisclaimer:
-        "Architectural visualisations inspired by the description of the office in Laranjeiras. They are not photographs of the existing premises.",
     },
     contactPage: {
       eyebrow: "Contact",
@@ -484,17 +592,6 @@ export const ui = {
     },
   },
 } as const;
-
-export const homeServiceImages: Record<HomeServiceId, string> = {
-  imigracao: "/images/home/card-d7.jpg",
-  nacionalidade: "/images/home/card-nacionalidade.jpg",
-  arrendamento: "/images/home/office.jpg",
-  "recuperacao-credito": "/images/home/desk.jpg",
-  sociedades: "/images/home/meeting.jpg",
-  patrimonio: "/images/home/about-books.jpg",
-  penal: "/images/office/02-sonia-cabin.jpg",
-  administrativo: "/images/office/05-establishing.jpg",
-};
 
 export function homeServiceHref(locale: Locale, id: HomeServiceId) {
   if (locale === "pt" && id === "nacionalidade") {

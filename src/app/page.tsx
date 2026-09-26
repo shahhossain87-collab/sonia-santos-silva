@@ -2,9 +2,8 @@ import About from "@/components/Home/About";
 import ConversionCta from "@/components/Home/ConversionCTA";
 import Hero from "@/components/Home/Hero";
 import Metrics from "@/components/Home/Metrics";
-import MidCta from "@/components/Home/MidCTA";
 import OfficePresence from "@/components/Home/OfficePresence";
-import ServiceCards from "@/components/Home/ServiceCards";
+import ServiceFinder from "@/components/Home/ServiceFinder";
 import Team from "@/components/Home/Team";
 import { homeMetadata } from "@/i18n/metadata";
 
@@ -15,11 +14,10 @@ export default function Home() {
     <>
       <Hero />
       <Metrics />
-      <ServiceCards />
-      <MidCta />
+      <ServiceFinder />
+      <OfficePresence />
       <About />
       <Team />
-      <OfficePresence />
       <ConversionCta />
     </>
   );

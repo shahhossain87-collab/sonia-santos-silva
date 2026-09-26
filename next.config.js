@@ -16,7 +16,13 @@ const nextConfig = {
   async redirects() {
     return [
       { source: "/about", destination: "/o-escritorio", permanent: false },
-      { source: "/contact", destination: "/contato", permanent: false },
+      { source: "/contact", destination: "/contacto", permanent: false },
+      { source: "/contato", destination: "/contacto", permanent: false },
+      { source: "/en/services/nationality", destination: "/en/services", permanent: false },
+      { source: "/en/faq", destination: "/en", permanent: false },
+      { source: "/en/privacy", destination: "/en", permanent: false },
+      { source: "/en/privacidade", destination: "/en", permanent: false },
+      { source: "/en/cookies", destination: "/en", permanent: false },
     ];
   },
 };

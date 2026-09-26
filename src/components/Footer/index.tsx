@@ -13,7 +13,7 @@ export default function Footer() {
   const cards = getCopy(locale).cards;
 
   return (
-    <footer className="bg-navy text-white">
+    <footer className="bg-navy pb-20 text-white lg:pb-0">
       <div className="container grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <BrandMark inverted />

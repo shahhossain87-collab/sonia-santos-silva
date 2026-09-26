@@ -18,15 +18,18 @@ export default function PageHero({
   const { copy } = useCopy();
 
   return (
-    <section className="bg-navy py-16 text-white md:py-20">
+    <section className="bg-navy py-8 text-white md:py-10">
       <div className="container">
-        <nav aria-label={copy.common.breadcrumb} className="mb-6 text-sm text-white/50">
+        <nav aria-label={copy.common.breadcrumb} className="mb-4 text-sm text-white/50">
           <ol className="flex flex-wrap items-center gap-2">
             {crumbs.map((crumb, i) => (
               <li key={`${crumb.label}-${i}`} className="flex items-center gap-2">
                 {i > 0 && <span className="text-gold/50">/</span>}
                 {crumb.href ? (
-                  <Link href={crumb.href} className="hover:text-gold">
+                  <Link
+                    href={crumb.href}
+                    className="hover:text-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                  >
                     {crumb.label}
                   </Link>
                 ) : (
@@ -37,10 +40,10 @@ export default function PageHero({
           </ol>
         </nav>
         {eyebrow && <p className="gold-rule">{eyebrow}</p>}
-        <h1 className="mt-4 max-w-3xl font-display text-3xl sm:text-4xl md:text-5xl">
+        <h1 className="mt-3 max-w-3xl font-display text-3xl leading-tight md:text-4xl">
           {title}
         </h1>
-        <p className="mt-5 mb-8 max-w-2xl text-base leading-relaxed text-white/75">
+        <p className="mt-3 mb-5 max-w-2xl text-sm leading-relaxed text-white/75 md:text-base">
           {description}
         </p>
         <CtaLink>

@@ -22,7 +22,7 @@ export const menuData: Menu[] = [
   {
     id: 4,
     title: "Contacto",
-    path: "/contato",
+    path: "/contacto",
     newTab: false,
   },
 ];
@@ -47,6 +47,6 @@ export const footerNav = {
   legal: [
     { title: "Privacidade", path: "/privacidade" },
     { title: "Cookies", path: "/cookies" },
-    { title: "Contacto", path: "/contato" },
+    { title: "Contacto", path: "/contacto" },
   ],
 };

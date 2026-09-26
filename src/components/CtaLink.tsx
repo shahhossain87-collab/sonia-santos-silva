@@ -40,6 +40,14 @@ export default function CtaLink({
     );
   }
 
+  if (target.startsWith("#")) {
+    return (
+      <a href={target} className={classes}>
+        {children}
+      </a>
+    );
+  }
+
   return (
     <Link href={target} className={classes}>
       {children}

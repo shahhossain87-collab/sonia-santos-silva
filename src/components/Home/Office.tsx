@@ -10,7 +10,7 @@ export default function Office() {
   const { copy } = useCopy();
 
   return (
-    <section className="bg-white py-16 md:py-20">
+    <section className="bg-white py-10 md:py-12">
       <div className="container grid min-w-0 gap-8 lg:grid-cols-2 lg:items-center">
         <Reveal className="min-w-0 max-w-full">
           <p className="gold-rule">{copy.home.officeEyebrow}</p>
