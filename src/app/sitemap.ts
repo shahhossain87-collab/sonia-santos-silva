@@ -14,6 +14,7 @@ const paths = [
   "/servicos/visto-d2",
   "/servicos/visto-d7",
   "/servicos/reagrupamento",
+  "/servicos/clientes-internacionais",
   "/faq",
   "/privacidade",
   "/cookies",

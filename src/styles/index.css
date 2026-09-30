@@ -56,6 +56,8 @@
 
   html {
     scroll-behavior: smooth;
+    --bottom-chrome-height: calc(7rem + env(safe-area-inset-bottom));
+    scroll-padding-bottom: calc(var(--bottom-chrome-height) + 1rem);
   }
 
   a:focus-visible,
@@ -65,6 +67,7 @@
   }
 
   body {
+    padding-bottom: var(--bottom-chrome-height);
     background-color: var(--color-cream);
     color: var(--color-navy);
     font-family: var(--font-sans);
@@ -75,6 +78,12 @@
   h3,
   .font-display {
     font-family: var(--font-display);
+  }
+}
+
+@media (min-width: 992px) {
+  html {
+    --bottom-chrome-height: 3rem;
   }
 }
 
@@ -109,6 +118,30 @@
   opacity: 1;
   transform: translateY(10px);
   transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* One decorative layer for the homepage. Licensed bridge photo pending:
+   public/images/background/README.md. Do not substitute an unlicensed image. */
+.home-background {
+  --home-landmark-image: none;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: var(--color-cream);
+}
+
+.home-background::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  background-image: var(--home-landmark-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+  filter: blur(2px);
 }
 
 .reveal.is-in {

@@ -13,6 +13,7 @@ export const paths = {
   visaD2: { pt: "/servicos/visto-d2" },
   visaD7: { pt: "/servicos/visto-d7" },
   familyReunification: { pt: "/servicos/reagrupamento" },
+  internationalClients: { pt: "/servicos/clientes-internacionais" },
 } as const;
 
 export type RouteKey = keyof typeof paths;

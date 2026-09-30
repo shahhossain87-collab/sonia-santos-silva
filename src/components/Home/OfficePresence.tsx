@@ -41,7 +41,7 @@ export default function OfficePresence() {
   return (
     <section
       id="em-lisboa"
-      className="scroll-mt-20 bg-white pt-10 pb-12 md:scroll-mt-28 md:py-12"
+      className="scroll-mt-20 border-t border-navy/10 pt-10 pb-12 md:scroll-mt-28 md:py-12"
     >
       <div className="container max-w-2xl">
         <Reveal>

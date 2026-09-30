@@ -29,7 +29,7 @@ export default function ServiceFinder() {
   const items = getServiceFinder(locale);
 
   return (
-    <section className="scroll-mt-20 bg-cream py-8 md:scroll-mt-28 md:py-10" id="areas">
+    <section className="scroll-mt-20 py-8 md:scroll-mt-28 md:py-10" id="areas">
       <div className="container">
         <p className="gold-rule">{copy.home.servicesEyebrow}</p>
         <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -46,16 +46,20 @@ export default function ServiceFinder() {
           </Link>
         </div>
 
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((item) => (
-            <li key={item.id}>
+            <li key={item.id} className={item.description ? "lg:col-span-2" : ""}>
               <Link
                 href={item.href}
                 className="group flex h-full min-h-[3.25rem] cursor-pointer items-center justify-between gap-3 border border-navy/10 bg-white px-4 py-3 text-left transition duration-200 hover:border-gold hover:shadow-one focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
               >
                 <span>
                   <span className="block font-semibold text-navy">{item.title}</span>
-                  {item.overview ? (
+                  {item.description ? (
+                    <span className="mt-2 block text-sm leading-relaxed text-body-color">
+                      {item.description}
+                    </span>
+                  ) : item.overview ? (
                     <span className="mt-0.5 block text-[11px] tracking-[0.12em] text-body-color uppercase">
                       {copy.home.finderOverview}
                     </span>

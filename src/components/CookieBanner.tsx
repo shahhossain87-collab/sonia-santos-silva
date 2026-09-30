@@ -21,9 +21,9 @@ export default function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-14 z-40 border-t border-gold/20 bg-navy/95 px-3 py-1.5 text-cream backdrop-blur-sm lg:bottom-0">
+    <div className="relative z-50 border-t border-gold/20 bg-navy/95 px-3 py-2 text-cream backdrop-blur-sm">
       <div className="container flex items-center justify-between gap-3">
-        <p className="min-w-0 truncate text-[11px] leading-none text-cream/80 sm:text-xs">
+        <p className="min-w-0 text-[11px] leading-relaxed text-cream/80 sm:text-xs">
           {copy.common.cookies}{" "}
           <Link href="/cookies" className="text-gold hover:underline">
             Cookies

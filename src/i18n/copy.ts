@@ -102,12 +102,34 @@ export function serviceFinderHasDetail(id: ServiceFinderId) {
 }
 
 export function getServiceFinder(locale: Locale) {
-  return serviceFinderIds.map((id) => ({
+  const clientCards = [
+    {
+      id: "imigracao",
+      title: serviceFinderLabels[locale].imigracao,
+      href: serviceFinderHref(locale, "imigracao"),
+      overview: false,
+      description: locale === "pt"
+        ? "Para quem já está em Portugal: AIMA, autorizações de residência, nacionalidade e reagrupamento familiar."
+        : "For people already in Portugal: AIMA, residence permits, nationality and family reunification.",
+    },
+    {
+      id: "clientes-internacionais",
+      title: locale === "pt" ? "Clientes internacionais" : "International clients",
+      href: "/servicos/clientes-internacionais",
+      overview: false,
+      description: locale === "pt"
+        ? "Para quem vive no estrangeiro e quer mudar-se e estabelecer-se em Portugal. Vistos D2, D7 e D8 são exemplos de vias a analisar caso a caso."
+        : "For people living abroad who want to move to and settle in Portugal. D2, D7 and D8 visas are examples of routes to consider individually. Details in Portuguese.",
+    },
+  ];
+  const otherCards = homeServiceIds.filter((id) => id !== "imigracao" && id !== "nacionalidade").map((id) => ({
     id,
     title: serviceFinderLabels[locale][id],
     href: serviceFinderHref(locale, id),
     overview: !serviceFinderHasDetail(id),
+    description: "",
   }));
+  return [...clientCards, ...otherCards];
 }
 
 const otherAreaIds = homeServiceIds.filter((id) => id !== "imigracao");

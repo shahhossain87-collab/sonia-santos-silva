@@ -28,7 +28,7 @@ export default function ScrollToTop() {
       type="button"
       onClick={scrollToTop}
       aria-label="Voltar ao topo"
-      className="fixed right-4 bottom-28 z-40 flex h-10 w-10 items-center justify-center rounded-sm border border-gold/40 bg-navy text-gold shadow-two lg:right-6 lg:bottom-24"
+      className="fixed right-4 bottom-[calc(var(--bottom-chrome-height)+1rem)] z-40 flex h-10 w-10 items-center justify-center rounded-sm border border-gold/40 bg-navy text-gold shadow-two lg:right-6 lg:bottom-[calc(var(--bottom-chrome-height)+5rem)]"
     >
       <span className="mt-[3px] h-2.5 w-2.5 rotate-45 border-t border-l border-gold" />
     </button>
