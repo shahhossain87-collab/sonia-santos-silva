@@ -3,7 +3,7 @@
 import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
 import Reveal from "@/components/Reveal";
 import { site } from "@/config/site";
-import { team, type TeamMember } from "@/data/content";
+import { team, type TeamMember } from "@/data/team";
 import { useCopy } from "@/i18n/use-locale";
 import Image from "next/image";
 

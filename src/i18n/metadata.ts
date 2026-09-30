@@ -1,7 +1,7 @@
 import { site } from "@/config/site";
 import type { Metadata } from "next";
 import { localeOg, type Locale } from "./locales";
-import { pathFor, type RouteKey } from "./routes";
+import { pathFor, paths, type RouteKey } from "./routes";
 import { ui } from "./copy";
 
 export function absoluteUrl(path: string) {
@@ -14,15 +14,15 @@ export function absoluteUrl(path: string) {
 
 export function languageAlternates(locale: Locale, key: RouteKey): NonNullable<Metadata["alternates"]> {
   const pt = absoluteUrl(pathFor("pt", key));
-  const en = absoluteUrl(pathFor("en", key));
-  const canonical = locale === "en" ? en : pt;
+  const englishPath = (paths[key] as { en?: string }).en;
+  const en = englishPath ? absoluteUrl(englishPath) : undefined;
+  const canonical = locale === "en" && en ? en : pt;
 
   return {
     canonical,
     languages: {
       "pt-PT": pt,
-      en,
-      "x-default": pt,
+      ...(en ? { en, "x-default": pt } : {}),
     },
   };
 }
@@ -41,6 +41,8 @@ export function pageMetadata(
   },
 ): Metadata {
   const title = absoluteTitle(locale, extras.title);
+  const englishPath = (paths[key] as { en?: string }).en;
+  const currentPath = locale === "en" && englishPath ? englishPath : pathFor("pt", key);
   return {
     title: { absolute: title },
     description: extras.description,
@@ -51,7 +53,7 @@ export function pageMetadata(
       siteName: site.officeName,
       locale: localeOg[locale],
       alternateLocale: locale === "en" ? ["pt_PT"] : ["en"],
-      url: absoluteUrl(pathFor(locale, key)),
+      url: absoluteUrl(currentPath),
     },
   };
 }

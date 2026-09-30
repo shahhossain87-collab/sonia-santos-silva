@@ -1,11 +1,11 @@
 import PageHero from "@/components/PageHero";
-import type { Metadata } from "next";
+import { pageMetadata } from "@/i18n/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata("pt", "faq", {
   title: "Perguntas frequentes",
   description:
     "Respostas sobre consultas, documentos, prazos e o que o escritório pode (e não pode) garantir.",
-};
+});
 
 const faqs = [
   {

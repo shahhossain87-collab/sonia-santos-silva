@@ -5,6 +5,14 @@ export const paths = {
   about: { pt: "/o-escritorio", en: "/en/about" },
   contact: { pt: "/contacto", en: "/en/contact" },
   services: { pt: "/servicos", en: "/en/services" },
+  faq: { pt: "/faq" },
+  privacy: { pt: "/privacidade" },
+  cookies: { pt: "/cookies" },
+  blog: { pt: "/blog" },
+  nationality: { pt: "/servicos/nacionalidade" },
+  visaD2: { pt: "/servicos/visto-d2" },
+  visaD7: { pt: "/servicos/visto-d7" },
+  familyReunification: { pt: "/servicos/reagrupamento" },
 } as const;
 
 export type RouteKey = keyof typeof paths;
@@ -17,7 +25,7 @@ export const routePairs: { pt: string; en: string }[] = [
 ];
 
 export function pathFor(locale: Locale, key: RouteKey) {
-  return paths[key][locale];
+  return paths[key][locale] ?? paths[key].pt;
 }
 
 export function getLocaleFromPathname(pathname: string): Locale {
