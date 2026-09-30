@@ -14,10 +14,10 @@ export type ServiceContent = {
 };
 
 const related = [
-  { href: "/nacionalidade", title: "Nacionalidade portuguesa" },
-  { href: "/visto-d7", title: "Visto D7" },
-  { href: "/visto-d2", title: "Visto D2" },
-  { href: "/reagrupamento", title: "Reagrupamento familiar" },
+  { href: "/servicos/nacionalidade", title: "Nacionalidade portuguesa" },
+  { href: "/servicos/visto-d7", title: "Visto D7" },
+  { href: "/servicos/visto-d2", title: "Visto D2" },
+  { href: "/servicos/reagrupamento", title: "Reagrupamento familiar" },
 ];
 
 export default function ServiceTemplate({ content }: { content: ServiceContent }) {

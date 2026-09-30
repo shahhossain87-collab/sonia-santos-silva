@@ -1,3 +1,18 @@
+function configuredSiteUrl() {
+  const value = [
+    process.env.NEXT_PUBLIC_SITE_URL,
+    process.env.VERCEL_PROJECT_PRODUCTION_URL,
+    process.env.VERCEL_URL,
+  ].find((url) => url?.trim());
+
+  if (!value) {
+    return "http://localhost:3000";
+  }
+
+  const url = /^https?:\/\//.test(value) ? value : `https://${value}`;
+  return url.replace(/\/$/, "");
+}
+
 export const site = {
   lawyerName: "Sónia Santos da Silva",
   title: "Gabinete Jurídico Laranjeiras",
@@ -19,7 +34,7 @@ export const site = {
   description:
     "Gabinete Jurídico Laranjeiras. Advogados · Solicitadores. Acompanhamento jurídico em Lisboa, em português e inglês. Informação clara, sem garantia de resultado.",
   locale: "pt-PT",
-  url: "https://www.soniasantossilva.pt",
+  url: configuredSiteUrl(),
   email: "soniasantosdasilva-55852l@adv.oa.pt",
   phoneDisplay: "+351 913 724 450",
   phoneDigits: "351913724450",

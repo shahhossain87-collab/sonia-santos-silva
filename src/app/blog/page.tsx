@@ -1,9 +1,12 @@
 import PageHero from "@/components/PageHero";
-import type { Metadata } from "next";
+import { pageMetadata } from "@/i18n/metadata";
 
-export const metadata: Metadata = {
+export const metadata = {
+  ...pageMetadata("pt", "blog", {
   title: "Notícias",
   description: "Artigos e notas sobre imigração e nacionalidade portuguesa — em breve.",
+  }),
+  robots: { index: false, follow: false },
 };
 
 export default function BlogPage() {

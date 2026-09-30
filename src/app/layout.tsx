@@ -4,7 +4,6 @@ import Header from "@/components/Header";
 import MobileDock from "@/components/MobileDock";
 import HtmlLang from "@/components/HtmlLang";
 import JsonLd from "@/components/JsonLd";
-import LanguageHeadLinks from "@/components/LanguageHeadLinks";
 import ScrollToTop from "@/components/ScrollToTop";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { site } from "@/config/site";
@@ -85,7 +84,6 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <LanguageHeadLinks />
         <JsonLd locale={locale} />
       </head>
       <body className="bg-cream font-sans text-navy antialiased">

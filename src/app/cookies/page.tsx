@@ -1,10 +1,10 @@
 import PageHero from "@/components/PageHero";
-import type { Metadata } from "next";
+import { pageMetadata } from "@/i18n/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata("pt", "cookies", {
   title: "Cookies",
   description: "Informação sobre a utilização de cookies neste sítio.",
-};
+});
 
 export default function CookiesPage() {
   return (

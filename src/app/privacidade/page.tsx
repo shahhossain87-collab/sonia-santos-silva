@@ -1,11 +1,11 @@
 import PageHero from "@/components/PageHero";
 import { site } from "@/config/site";
-import type { Metadata } from "next";
+import { pageMetadata } from "@/i18n/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata("pt", "privacy", {
   title: "Privacidade",
   description: "Informação sobre o tratamento de dados pessoais neste sítio.",
-};
+});
 
 export default function PrivacidadePage() {
   return (
