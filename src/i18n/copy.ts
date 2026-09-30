@@ -17,20 +17,20 @@ export type ServiceId = HomeServiceId;
 
 const immigrationItems = {
   pt: [
-    { label: "Visto D2", href: "/servicos/visto-d2" },
-    { label: "Visto D7", href: "/servicos/visto-d7" },
-    { label: "AIMA", href: "/servicos#imigracao" },
-    { label: "Autorizações de residência", href: "/servicos#imigracao" },
-    { label: "Renovações", href: "/servicos#imigracao" },
-    { label: "Reagrupamento familiar", href: "/servicos/reagrupamento" },
+    { label: "Vistos e Autorização de Residência", href: pathFor("pt", "immigrationVisas") },
+    { label: "Renovação e Regularização da Residência", href: pathFor("pt", "residenceRenewal") },
+    { label: "Reagrupamento Familiar", href: pathFor("pt", "familyReunificationTopic") },
+    { label: "Notificações, Audiência Prévia e Indeferimentos da AIMA", href: pathFor("pt", "aimaNotifications") },
+    { label: "Processos Judiciais contra a AIMA", href: pathFor("pt", "aimaCourtProceedings") },
+    { label: "Nacionalidade Portuguesa", href: pathFor("pt", "portugueseNationalityTopic") },
   ],
   en: [
-    { label: "D2 visa", href: "/servicos/visto-d2" },
-    { label: "D7 visa", href: "/servicos/visto-d7" },
-    { label: "AIMA", href: "/en/services#imigracao" },
-    { label: "Residence permits", href: "/en/services#imigracao" },
-    { label: "Renewals", href: "/en/services#imigracao" },
-    { label: "Family reunification", href: "/servicos/reagrupamento" },
+    { label: "Visas and Residence Permits", href: pathFor("en", "immigrationVisas") },
+    { label: "Residence Renewal and Regularisation", href: pathFor("en", "residenceRenewal") },
+    { label: "Family Reunification", href: pathFor("en", "familyReunificationTopic") },
+    { label: "AIMA Notices, Audiência Prévia and Refusals", href: pathFor("en", "aimaNotifications") },
+    { label: "Court Proceedings against AIMA", href: pathFor("en", "aimaCourtProceedings") },
+    { label: "Portuguese Nationality", href: pathFor("en", "portugueseNationalityTopic") },
   ],
 } as const;
 
@@ -150,13 +150,7 @@ export function getNavServiceMenu(locale: Locale) {
   return {
     immigration: {
       title: labels.imigracao,
-      items: [
-        { title: labels["visto-d2"], href: serviceFinderHref(locale, "visto-d2") },
-        { title: labels["visto-d7"], href: serviceFinderHref(locale, "visto-d7") },
-        { title: labels.nacionalidade, href: serviceFinderHref(locale, "nacionalidade") },
-        { title: labels.reagrupamento, href: serviceFinderHref(locale, "reagrupamento") },
-        { title: labels["aima-residencia"], href: serviceFinderHref(locale, "aima-residencia") },
-      ],
+      items: immigrationItems[locale].map((item) => ({ title: item.label, href: item.href })),
     },
     other: {
       title: locale === "en" ? "Other areas" : "Outras áreas",
@@ -626,6 +620,9 @@ export const ui = {
 } as const;
 
 export function homeServiceHref(locale: Locale, id: HomeServiceId) {
+  if (id === "imigracao") {
+    return pathFor(locale, "immigration");
+  }
   if (locale === "pt" && id === "nacionalidade") {
     return "/servicos/nacionalidade";
   }
