@@ -1,5 +1,6 @@
 import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
 import { site } from "@/config/site";
+import Image from "next/image";
 import Link from "next/link";
 
 export type ServiceContent = {
@@ -11,6 +12,7 @@ export type ServiceContent = {
   process: { title: string; text: string }[];
   documents: string[];
   faqs: { question: string; answer: string }[];
+  thumbnail?: { src: string; alt: string };
 };
 
 const related = [
@@ -53,6 +55,18 @@ export default function ServiceTemplate({ content }: { content: ServiceContent }
       <article className="py-16">
         <div className="container grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-8">
+            {content.thumbnail ? (
+              <figure className="mb-10 flex w-fit items-center gap-4 border border-navy/10 bg-white p-3">
+                <Image
+                  src={content.thumbnail.src}
+                  alt={content.thumbnail.alt}
+                  width={144}
+                  height={96}
+                  sizes="144px"
+                  className="h-24 w-36 shrink-0 object-cover"
+                />
+              </figure>
+            ) : null}
             <section>
               <h2 className="font-display text-3xl">A quem se destina</h2>
               <ul className="mt-6 space-y-3">

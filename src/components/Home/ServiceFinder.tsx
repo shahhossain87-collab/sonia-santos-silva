@@ -3,6 +3,8 @@
 import { getServiceFinder } from "@/i18n/copy";
 import { pathFor } from "@/i18n/routes";
 import { useCopy } from "@/i18n/use-locale";
+import { serviceThumbnails } from "@/data/service-thumbnails";
+import Image from "next/image";
 import Link from "next/link";
 
 function Arrow() {
@@ -47,28 +49,42 @@ export default function ServiceFinder() {
         </div>
 
         <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((item) => (
-            <li key={item.id} className={item.description ? "lg:col-span-2" : ""}>
-              <Link
-                href={item.href}
-                className="group flex h-full min-h-[3.25rem] cursor-pointer items-center justify-between gap-3 border border-navy/10 bg-white px-4 py-3 text-left transition duration-200 hover:border-gold hover:shadow-one focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-              >
-                <span>
-                  <span className="block font-semibold text-navy">{item.title}</span>
-                  {item.description ? (
-                    <span className="mt-2 block text-sm leading-relaxed text-body-color">
-                      {item.description}
-                    </span>
-                  ) : item.overview ? (
-                    <span className="mt-0.5 block text-[11px] tracking-[0.12em] text-body-color uppercase">
-                      {copy.home.finderOverview}
-                    </span>
+          {items.map((item) => {
+            const thumbnail = serviceThumbnails[item.id as keyof typeof serviceThumbnails];
+
+            return (
+              <li key={item.id} className={item.description ? "lg:col-span-2" : ""}>
+                <Link
+                  href={item.href}
+                  className="group flex h-full min-h-[3.25rem] cursor-pointer items-center justify-between gap-3 border border-navy/10 bg-white px-4 py-3 text-left transition duration-200 hover:border-gold hover:shadow-one focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                >
+                  {thumbnail ? (
+                    <Image
+                      src={thumbnail.src}
+                      alt={thumbnail.alt}
+                      width={80}
+                      height={56}
+                      sizes="80px"
+                      className="h-12 w-16 shrink-0 object-cover sm:h-14 sm:w-20"
+                    />
                   ) : null}
-                </span>
-                <Arrow />
-              </Link>
-            </li>
-          ))}
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-semibold text-navy">{item.title}</span>
+                    {item.description ? (
+                      <span className="mt-2 block text-sm leading-relaxed text-body-color">
+                        {item.description}
+                      </span>
+                    ) : item.overview ? (
+                      <span className="mt-0.5 block text-[11px] tracking-[0.12em] text-body-color uppercase">
+                        {copy.home.finderOverview}
+                      </span>
+                    ) : null}
+                  </span>
+                  <Arrow />
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>

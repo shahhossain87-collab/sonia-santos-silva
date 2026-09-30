@@ -4,6 +4,10 @@ export const nacionalidade: ServiceContent = {
   slug: "nacionalidade",
   title: "Nacionalidade portuguesa",
   eyebrow: "Cidadania",
+  thumbnail: {
+    src: "/images/services/nacionalidade.jpg",
+    alt: "Mão com caderno junto à bandeira portuguesa",
+  },
   summary:
     "Análise do caminho legal mais adequado — descendência, casamento/união ou residência — e preparação do pedido junto das entidades competentes.",
   whoFor: [
