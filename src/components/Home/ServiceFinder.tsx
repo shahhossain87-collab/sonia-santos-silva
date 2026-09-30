@@ -1,30 +1,11 @@
 "use client";
 
-import { getServiceFinder } from "@/i18n/copy";
-import { pathFor } from "@/i18n/routes";
-import { useCopy } from "@/i18n/use-locale";
+import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
+import { whatsappHref } from "@/config/site";
 import { serviceThumbnails } from "@/data/service-thumbnails";
+import { getServiceFinder } from "@/i18n/copy";
+import { useCopy } from "@/i18n/use-locale";
 import Image from "next/image";
-import Link from "next/link";
-
-function Arrow() {
-  return (
-    <svg
-      className="h-4 w-4 shrink-0 text-gold-dark transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M3 8h10M9 4l4 4-4 4"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 export default function ServiceFinder() {
   const { locale, copy } = useCopy();
@@ -39,49 +20,39 @@ export default function ServiceFinder() {
             <h2 className="font-display text-3xl sm:text-4xl">{copy.home.finderTitle}</h2>
             <p className="mt-2 max-w-xl text-sm text-body-color">{copy.home.finderLead}</p>
           </div>
-          <Link
-            href={pathFor(locale, "services")}
-            className="group inline-flex items-center gap-1 text-sm font-semibold text-gold-dark transition-colors hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-          >
-            {copy.home.finderAll}
-            <Arrow />
-          </Link>
         </div>
 
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-6 space-y-6">
           {items.map((item) => {
             const thumbnail = serviceThumbnails[item.id as keyof typeof serviceThumbnails];
+            const message =
+              locale === "pt"
+                ? `Olá, preciso de ajuda com ${item.title}.`
+                : `Hello, I need help with ${item.title}.`;
 
             return (
-              <li key={item.id} className={item.description ? "lg:col-span-2" : ""}>
-                <Link
-                  href={item.href}
-                  className="group flex h-full min-h-[3.25rem] cursor-pointer items-center justify-between gap-3 border border-navy/10 bg-white px-4 py-3 text-left transition duration-200 hover:border-gold hover:shadow-one focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-                >
+              <li key={item.id}>
+                <article className="overflow-hidden border border-navy/10 bg-white shadow-one">
                   {thumbnail ? (
-                    <Image
-                      src={thumbnail.src}
-                      alt={thumbnail.alt}
-                      width={80}
-                      height={56}
-                      sizes="80px"
-                      className="h-12 w-16 shrink-0 object-cover sm:h-14 sm:w-20"
-                    />
+                    <div className="relative aspect-[16/7]">
+                      <Image
+                        src={thumbnail.src}
+                        alt={thumbnail.alt}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 1120px"
+                        className="object-cover"
+                      />
+                    </div>
                   ) : null}
-                  <span className="min-w-0 flex-1">
-                    <span className="block font-semibold text-navy">{item.title}</span>
-                    {item.description ? (
-                      <span className="mt-2 block text-sm leading-relaxed text-body-color">
-                        {item.description}
-                      </span>
-                    ) : item.overview ? (
-                      <span className="mt-0.5 block text-[11px] tracking-[0.12em] text-body-color uppercase">
-                        {copy.home.finderOverview}
-                      </span>
-                    ) : null}
-                  </span>
-                  <Arrow />
-                </Link>
+                  <div className="p-5 md:p-6">
+                    <h3 className="font-display text-2xl text-navy">{item.title}</h3>
+                    <p className="mt-2 text-sm text-body-color">{item.description}</p>
+                    <CtaLink href={whatsappHref(message)} className="mt-5 flex w-full justify-center">
+                      <WhatsAppIcon />
+                      {copy.common.whatsapp}
+                    </CtaLink>
+                  </div>
+                </article>
               </li>
             );
           })}

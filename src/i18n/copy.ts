@@ -101,35 +101,45 @@ export function serviceFinderHasDetail(id: ServiceFinderId) {
   return Boolean(serviceFinderDetailHrefs[id]);
 }
 
+const homeServiceDescriptions: Record<Locale, Record<HomeServiceId, string>> = {
+  pt: {
+    imigracao: "Vistos, residência e reagrupamento familiar.",
+    nacionalidade: "Pedidos de nacionalidade portuguesa.",
+    arrendamento: "Questões de arrendamento.",
+    "recuperacao-credito": "Recuperação de créditos.",
+    sociedades: "Direito para empresas e sociedades.",
+    patrimonio: "Património e sucessões.",
+    penal: "Questões de direito penal.",
+    administrativo: "Questões de direito administrativo.",
+  },
+  en: {
+    imigracao: "Visas, residence and family reunification.",
+    nacionalidade: "Portuguese nationality applications.",
+    arrendamento: "Tenancy and lease matters.",
+    "recuperacao-credito": "Debt recovery.",
+    sociedades: "Support for companies and corporate matters.",
+    patrimonio: "Property and inheritance.",
+    penal: "Criminal law matters.",
+    administrativo: "Administrative law matters.",
+  },
+};
+
 export function getServiceFinder(locale: Locale) {
-  const clientCards = [
-    {
-      id: "imigracao",
-      title: serviceFinderLabels[locale].imigracao,
-      href: serviceFinderHref(locale, "imigracao"),
-      overview: false,
-      description: locale === "pt"
-        ? "Para quem já está em Portugal: AIMA, autorizações de residência, nacionalidade e reagrupamento familiar."
-        : "For people already in Portugal: AIMA, residence permits, nationality and family reunification.",
-    },
-    {
-      id: "clientes-internacionais",
-      title: locale === "pt" ? "Clientes internacionais" : "International clients",
-      href: "/servicos/clientes-internacionais",
-      overview: false,
-      description: locale === "pt"
-        ? "Para quem vive no estrangeiro e quer mudar-se e estabelecer-se em Portugal. Vistos D2, D7 e D8 são exemplos de vias a analisar caso a caso."
-        : "For people living abroad who want to move to and settle in Portugal. D2, D7 and D8 visas are examples of routes to consider individually. Details in Portuguese.",
-    },
-  ];
-  const otherCards = homeServiceIds.filter((id) => id !== "imigracao" && id !== "nacionalidade").map((id) => ({
+  const serviceCards = homeServiceIds.map((id) => ({
     id,
     title: serviceFinderLabels[locale][id],
-    href: serviceFinderHref(locale, id),
-    overview: !serviceFinderHasDetail(id),
-    description: "",
+    description: homeServiceDescriptions[locale][id],
   }));
-  return [...clientCards, ...otherCards];
+  const internationalClients = {
+    id: "clientes-internacionais",
+    title: locale === "pt" ? "Clientes internacionais" : "International clients",
+    description:
+      locale === "pt"
+        ? "Mudança e instalação em Portugal."
+        : "Moving to and settling in Portugal.",
+  };
+
+  return [serviceCards[0], internationalClients, ...serviceCards.slice(1)];
 }
 
 const otherAreaIds = homeServiceIds.filter((id) => id !== "imigracao");
@@ -316,7 +326,7 @@ export const ui = {
       notice:
         "Ao enviar, abre o WhatsApp com a mensagem preenchida. Não envie documentos sensíveis neste formulário.",
       fallback:
-        "Se o WhatsApp não abriu, utilize o botão flutuante ou o número indicado.",
+        "Se o WhatsApp não abriu, utilize o botão flutuante.",
       subjects: [
         "Imigração e Vistos",
         "Nacionalidade Portuguesa",
@@ -543,7 +553,7 @@ export const ui = {
       prefix: "Website contact request",
       notice:
         "Submitting opens WhatsApp with the message filled in. Do not send sensitive documents through this form.",
-      fallback: "If WhatsApp did not open, use the floating button or the number shown.",
+      fallback: "If WhatsApp did not open, use the floating button.",
       subjects: [
         "Immigration and Visas",
         "Portuguese Nationality",

@@ -1,6 +1,6 @@
 "use client";
 
-import { site, whatsappHref } from "@/config/site";
+import { whatsappHref } from "@/config/site";
 import { useCopy } from "@/i18n/use-locale";
 import { FormEvent, useState } from "react";
 
@@ -61,7 +61,7 @@ export default function ContactForm() {
         />
       </div>
       <p className="text-xs text-body-color dark:text-body-color-dark">
-        {copy.form.notice} ({site.phoneDisplay})
+        {copy.form.notice}
       </p>
       <button type="submit" className="btn-gold w-full sm:w-auto">
         {copy.form.submit}
