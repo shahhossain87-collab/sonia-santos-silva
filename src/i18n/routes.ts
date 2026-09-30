@@ -5,6 +5,31 @@ export const paths = {
   about: { pt: "/o-escritorio", en: "/en/about" },
   contact: { pt: "/contacto", en: "/en/contact" },
   services: { pt: "/servicos", en: "/en/services" },
+  immigration: { pt: "/servicos/imigracao-e-vistos", en: "/en/services/immigration-and-visas" },
+  immigrationVisas: {
+    pt: "/servicos/imigracao-e-vistos/vistos-e-autorizacao-de-residencia",
+    en: "/en/services/immigration-and-visas/visas-and-residence-permits",
+  },
+  residenceRenewal: {
+    pt: "/servicos/imigracao-e-vistos/renovacao-e-regularizacao-da-residencia",
+    en: "/en/services/immigration-and-visas/residence-renewal-and-regularisation",
+  },
+  familyReunificationTopic: {
+    pt: "/servicos/imigracao-e-vistos/reagrupamento-familiar",
+    en: "/en/services/immigration-and-visas/family-reunification",
+  },
+  aimaNotifications: {
+    pt: "/servicos/imigracao-e-vistos/notificacoes-audiencia-previa-e-indeferimentos-da-aima",
+    en: "/en/services/immigration-and-visas/aima-notices-audiencia-previa-and-refusals",
+  },
+  aimaCourtProceedings: {
+    pt: "/servicos/imigracao-e-vistos/processos-judiciais-contra-a-aima",
+    en: "/en/services/immigration-and-visas/court-proceedings-against-aima",
+  },
+  portugueseNationalityTopic: {
+    pt: "/servicos/imigracao-e-vistos/nacionalidade-portuguesa",
+    en: "/en/services/immigration-and-visas/portuguese-nationality",
+  },
   faq: { pt: "/faq" },
   privacy: { pt: "/privacidade" },
   cookies: { pt: "/cookies" },
@@ -13,6 +38,7 @@ export const paths = {
   visaD2: { pt: "/servicos/visto-d2" },
   visaD7: { pt: "/servicos/visto-d7" },
   familyReunification: { pt: "/servicos/reagrupamento" },
+  internationalClients: { pt: "/servicos/clientes-internacionais" },
 } as const;
 
 export type RouteKey = keyof typeof paths;
@@ -47,6 +73,13 @@ const exactPairs: { pt: string; en: string }[] = [
   paths.about,
   paths.services,
   paths.contact,
+  paths.immigration,
+  paths.immigrationVisas,
+  paths.residenceRenewal,
+  paths.familyReunificationTopic,
+  paths.aimaNotifications,
+  paths.aimaCourtProceedings,
+  paths.portugueseNationalityTopic,
   { pt: "/contato", en: "/en/contact" },
   { pt: "/servicos/nacionalidade", en: "/en/services/nationality" },
   { pt: "/faq", en: "/en/faq" },

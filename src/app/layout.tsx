@@ -1,7 +1,6 @@
-import CookieBanner from "@/components/CookieBanner";
+import BottomChrome from "@/components/BottomChrome";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import MobileDock from "@/components/MobileDock";
 import HtmlLang from "@/components/HtmlLang";
 import JsonLd from "@/components/JsonLd";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -90,12 +89,11 @@ export default async function RootLayout({
         <Providers>
           <HtmlLang />
           <Header />
-          <main className="pb-16 lg:pb-0">{children}</main>
+          <main>{children}</main>
           <Footer />
           <WhatsAppFloat />
           <ScrollToTop />
-          <CookieBanner />
-          <MobileDock />
+          <BottomChrome />
         </Providers>
       </body>
     </html>

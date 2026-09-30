@@ -17,20 +17,20 @@ export type ServiceId = HomeServiceId;
 
 const immigrationItems = {
   pt: [
-    { label: "Visto D2", href: "/servicos/visto-d2" },
-    { label: "Visto D7", href: "/servicos/visto-d7" },
-    { label: "AIMA", href: "/servicos#imigracao" },
-    { label: "Autorizações de residência", href: "/servicos#imigracao" },
-    { label: "Renovações", href: "/servicos#imigracao" },
-    { label: "Reagrupamento familiar", href: "/servicos/reagrupamento" },
+    { label: "Vistos e Autorização de Residência", href: pathFor("pt", "immigrationVisas") },
+    { label: "Renovação e Regularização da Residência", href: pathFor("pt", "residenceRenewal") },
+    { label: "Reagrupamento Familiar", href: pathFor("pt", "familyReunificationTopic") },
+    { label: "Notificações, Audiência Prévia e Indeferimentos da AIMA", href: pathFor("pt", "aimaNotifications") },
+    { label: "Processos Judiciais contra a AIMA", href: pathFor("pt", "aimaCourtProceedings") },
+    { label: "Nacionalidade Portuguesa", href: pathFor("pt", "portugueseNationalityTopic") },
   ],
   en: [
-    { label: "D2 visa", href: "/servicos/visto-d2" },
-    { label: "D7 visa", href: "/servicos/visto-d7" },
-    { label: "AIMA", href: "/en/services#imigracao" },
-    { label: "Residence permits", href: "/en/services#imigracao" },
-    { label: "Renewals", href: "/en/services#imigracao" },
-    { label: "Family reunification", href: "/servicos/reagrupamento" },
+    { label: "Visas and Residence Permits", href: pathFor("en", "immigrationVisas") },
+    { label: "Residence Renewal and Regularisation", href: pathFor("en", "residenceRenewal") },
+    { label: "Family Reunification", href: pathFor("en", "familyReunificationTopic") },
+    { label: "AIMA Notices, Audiência Prévia and Refusals", href: pathFor("en", "aimaNotifications") },
+    { label: "Court Proceedings against AIMA", href: pathFor("en", "aimaCourtProceedings") },
+    { label: "Portuguese Nationality", href: pathFor("en", "portugueseNationalityTopic") },
   ],
 } as const;
 
@@ -101,13 +101,45 @@ export function serviceFinderHasDetail(id: ServiceFinderId) {
   return Boolean(serviceFinderDetailHrefs[id]);
 }
 
+const homeServiceDescriptions: Record<Locale, Record<HomeServiceId, string>> = {
+  pt: {
+    imigracao: "Vistos, residência e reagrupamento familiar.",
+    nacionalidade: "Pedidos de nacionalidade portuguesa.",
+    arrendamento: "Questões de arrendamento.",
+    "recuperacao-credito": "Recuperação de créditos.",
+    sociedades: "Direito para empresas e sociedades.",
+    patrimonio: "Património e sucessões.",
+    penal: "Questões de direito penal.",
+    administrativo: "Questões de direito administrativo.",
+  },
+  en: {
+    imigracao: "Visas, residence and family reunification.",
+    nacionalidade: "Portuguese nationality applications.",
+    arrendamento: "Tenancy and lease matters.",
+    "recuperacao-credito": "Debt recovery.",
+    sociedades: "Support for companies and corporate matters.",
+    patrimonio: "Property and inheritance.",
+    penal: "Criminal law matters.",
+    administrativo: "Administrative law matters.",
+  },
+};
+
 export function getServiceFinder(locale: Locale) {
-  return serviceFinderIds.map((id) => ({
+  const serviceCards = homeServiceIds.map((id) => ({
     id,
     title: serviceFinderLabels[locale][id],
-    href: serviceFinderHref(locale, id),
-    overview: !serviceFinderHasDetail(id),
+    description: homeServiceDescriptions[locale][id],
   }));
+  const internationalClients = {
+    id: "clientes-internacionais",
+    title: locale === "pt" ? "Clientes internacionais" : "International clients",
+    description:
+      locale === "pt"
+        ? "Mudança e instalação em Portugal."
+        : "Moving to and settling in Portugal.",
+  };
+
+  return [serviceCards[0], internationalClients, ...serviceCards.slice(1)];
 }
 
 const otherAreaIds = homeServiceIds.filter((id) => id !== "imigracao");
@@ -118,13 +150,7 @@ export function getNavServiceMenu(locale: Locale) {
   return {
     immigration: {
       title: labels.imigracao,
-      items: [
-        { title: labels["visto-d2"], href: serviceFinderHref(locale, "visto-d2") },
-        { title: labels["visto-d7"], href: serviceFinderHref(locale, "visto-d7") },
-        { title: labels.nacionalidade, href: serviceFinderHref(locale, "nacionalidade") },
-        { title: labels.reagrupamento, href: serviceFinderHref(locale, "reagrupamento") },
-        { title: labels["aima-residencia"], href: serviceFinderHref(locale, "aima-residencia") },
-      ],
+      items: immigrationItems[locale].map((item) => ({ title: item.label, href: item.href })),
     },
     other: {
       title: locale === "en" ? "Other areas" : "Outras áreas",
@@ -294,7 +320,7 @@ export const ui = {
       notice:
         "Ao enviar, abre o WhatsApp com a mensagem preenchida. Não envie documentos sensíveis neste formulário.",
       fallback:
-        "Se o WhatsApp não abriu, utilize o botão flutuante ou o número indicado.",
+        "Se o WhatsApp não abriu, utilize o botão flutuante.",
       subjects: [
         "Imigração e Vistos",
         "Nacionalidade Portuguesa",
@@ -521,7 +547,7 @@ export const ui = {
       prefix: "Website contact request",
       notice:
         "Submitting opens WhatsApp with the message filled in. Do not send sensitive documents through this form.",
-      fallback: "If WhatsApp did not open, use the floating button or the number shown.",
+      fallback: "If WhatsApp did not open, use the floating button.",
       subjects: [
         "Immigration and Visas",
         "Portuguese Nationality",
@@ -594,6 +620,9 @@ export const ui = {
 } as const;
 
 export function homeServiceHref(locale: Locale, id: HomeServiceId) {
+  if (id === "imigracao") {
+    return pathFor(locale, "immigration");
+  }
   if (locale === "pt" && id === "nacionalidade") {
     return "/servicos/nacionalidade";
   }

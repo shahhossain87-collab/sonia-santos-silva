@@ -23,18 +23,7 @@ export default function ContactPageContent({ locale }: { locale: Locale }) {
         ]}
       />
       <section className="border-b border-navy/10 bg-white py-6 md:py-7">
-        <div className="container grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <p className="text-[11px] tracking-[0.16em] text-gold uppercase">
-              {copy.contactPage.whatsapp}
-            </p>
-            <a
-              href={`https://wa.me/${site.phoneDigits}`}
-              className="mt-1 block text-sm text-navy hover:text-gold-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-            >
-              {site.phoneDisplay}
-            </a>
-          </div>
+        <div className="container grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <div>
             <p className="text-[11px] tracking-[0.16em] text-gold uppercase">
               {copy.contactPage.email}
@@ -63,7 +52,7 @@ export default function ContactPageContent({ locale }: { locale: Locale }) {
             <p className="text-[11px] tracking-[0.16em] text-gold uppercase">
               {copy.contactPage.hours}
             </p>
-            <p className="mt-1 text-sm text-navy">{copy.home.hours}</p>
+            <p className="mt-1 whitespace-nowrap text-sm text-navy">{site.hours}</p>
           </div>
         </div>
         <div className="container mt-5">

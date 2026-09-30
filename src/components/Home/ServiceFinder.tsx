@@ -1,35 +1,20 @@
 "use client";
 
+import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
+import { whatsappHref } from "@/config/site";
+import { serviceThumbnails } from "@/data/service-thumbnails";
 import { getServiceFinder } from "@/i18n/copy";
 import { pathFor } from "@/i18n/routes";
 import { useCopy } from "@/i18n/use-locale";
+import Image from "next/image";
 import Link from "next/link";
-
-function Arrow() {
-  return (
-    <svg
-      className="h-4 w-4 shrink-0 text-gold-dark transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M3 8h10M9 4l4 4-4 4"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 export default function ServiceFinder() {
   const { locale, copy } = useCopy();
   const items = getServiceFinder(locale);
 
   return (
-    <section className="scroll-mt-20 bg-cream py-8 md:scroll-mt-28 md:py-10" id="areas">
+    <section className="scroll-mt-20 py-8 md:scroll-mt-28 md:py-10" id="areas">
       <div className="container">
         <p className="gold-rule">{copy.home.servicesEyebrow}</p>
         <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -37,34 +22,67 @@ export default function ServiceFinder() {
             <h2 className="font-display text-3xl sm:text-4xl">{copy.home.finderTitle}</h2>
             <p className="mt-2 max-w-xl text-sm text-body-color">{copy.home.finderLead}</p>
           </div>
-          <Link
-            href={pathFor(locale, "services")}
-            className="group inline-flex items-center gap-1 text-sm font-semibold text-gold-dark transition-colors hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-          >
-            {copy.home.finderAll}
-            <Arrow />
-          </Link>
         </div>
 
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {items.map((item) => (
-            <li key={item.id}>
-              <Link
-                href={item.href}
-                className="group flex h-full min-h-[3.25rem] cursor-pointer items-center justify-between gap-3 border border-navy/10 bg-white px-4 py-3 text-left transition duration-200 hover:border-gold hover:shadow-one focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-              >
-                <span>
-                  <span className="block font-semibold text-navy">{item.title}</span>
-                  {item.overview ? (
-                    <span className="mt-0.5 block text-[11px] tracking-[0.12em] text-body-color uppercase">
-                      {copy.home.finderOverview}
-                    </span>
-                  ) : null}
-                </span>
-                <Arrow />
-              </Link>
-            </li>
-          ))}
+        <ul className="mt-6 space-y-6">
+          {items.map((item) => {
+            const thumbnail = serviceThumbnails[item.id as keyof typeof serviceThumbnails];
+            const message =
+              locale === "pt"
+                ? `Olá, preciso de ajuda com ${item.title}.`
+                : `Hello, I need help with ${item.title}.`;
+            const serviceHref = item.id === "imigracao" ? pathFor(locale, "immigration") : null;
+
+            return (
+              <li key={item.id}>
+                <article className="overflow-hidden border border-navy/10 bg-white shadow-one">
+                  {serviceHref ? (
+                    <Link href={serviceHref} className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">
+                      {thumbnail ? (
+                        <div className="relative aspect-[16/7]">
+                          <Image
+                            src={thumbnail.src}
+                            alt={thumbnail.alt}
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 1120px"
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : null}
+                      <div className="p-5 md:p-6">
+                        <h3 className="font-display text-2xl text-navy group-hover:text-gold-dark">{item.title}</h3>
+                        <p className="mt-2 text-sm text-body-color">{item.description}</p>
+                      </div>
+                    </Link>
+                  ) : (
+                    <>
+                      {thumbnail ? (
+                        <div className="relative aspect-[16/7]">
+                          <Image
+                            src={thumbnail.src}
+                            alt={thumbnail.alt}
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 1120px"
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : null}
+                      <div className="p-5 md:p-6">
+                        <h3 className="font-display text-2xl text-navy">{item.title}</h3>
+                        <p className="mt-2 text-sm text-body-color">{item.description}</p>
+                      </div>
+                    </>
+                  )}
+                  <div className="px-5 pb-5 md:px-6 md:pb-6">
+                    <CtaLink href={whatsappHref(message)} className="flex w-full justify-center">
+                      <WhatsAppIcon />
+                      {copy.common.whatsapp}
+                    </CtaLink>
+                  </div>
+                </article>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>

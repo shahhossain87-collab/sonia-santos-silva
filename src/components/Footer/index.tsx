@@ -63,11 +63,6 @@ export default function Footer() {
           <ul className="space-y-3 text-sm text-white/75">
             <li>{site.addressLine}</li>
             <li>
-              <a href={`tel:+${site.phoneDigits}`} className="hover:text-gold">
-                {site.phoneDisplay}
-              </a>
-            </li>
-            <li>
               <a href={`mailto:${site.email}`} className="hover:text-gold">
                 {site.email}
               </a>
@@ -78,7 +73,7 @@ export default function Footer() {
             <li>
               {copy.contactPage.nif} {site.nif}
             </li>
-            <li>{copy.home.hours}</li>
+            <li className="whitespace-nowrap">{site.hours}</li>
           </ul>
           <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs text-white/50">
             {copy.footer.legalLinks.map((item) => (

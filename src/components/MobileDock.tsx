@@ -94,7 +94,7 @@ export default function MobileDock() {
           />
           <div
             id="mobile-services-sheet"
-            className="absolute inset-x-0 bottom-14 max-h-[70vh] overflow-y-auto border-t border-navy/10 bg-white px-4 py-4 shadow-two"
+            className="absolute inset-x-0 bottom-[var(--bottom-chrome-height)] max-h-[65dvh] overflow-y-auto border-t border-navy/10 bg-white px-4 py-4 shadow-two"
           >
             <div className="grid gap-5">
               {[menu.immigration, menu.other].map((group) => (
@@ -128,7 +128,7 @@ export default function MobileDock() {
       ) : null}
 
       <nav
-        className="fixed inset-x-0 bottom-0 z-50 border-t border-navy/10 bg-white pb-[max(0.4rem,env(safe-area-inset-bottom))]"
+        className="relative z-50 border-t border-navy/10 bg-white pb-[max(0.4rem,env(safe-area-inset-bottom))]"
         aria-label={copy.header.mobileNav}
       >
         <ul className="grid grid-cols-4">

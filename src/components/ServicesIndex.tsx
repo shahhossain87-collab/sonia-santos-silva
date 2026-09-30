@@ -1,4 +1,5 @@
 import CtaLink from "@/components/CtaLink";
+import { serviceThumbnails } from "@/data/service-thumbnails";
 import {
   getCopy,
   homeServiceHref,
@@ -7,6 +8,7 @@ import {
 } from "@/i18n/copy";
 import { pathFor } from "@/i18n/routes";
 import type { Locale } from "@/i18n/locales";
+import Image from "next/image";
 import Link from "next/link";
 
 function Arrow() {
@@ -45,6 +47,7 @@ export default function ServicesIndex({ locale }: { locale: Locale }) {
             const href = homeServiceHref(locale, id);
             const hasDedicatedPage = locale === "pt" && id === "nacionalidade";
             const isImmigration = id === "imigracao";
+            const thumbnail = serviceThumbnails[id];
 
             return (
               <article
@@ -56,7 +59,15 @@ export default function ServicesIndex({ locale }: { locale: Locale }) {
                   href={href}
                   className="flex cursor-pointer items-start justify-between gap-4 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                 >
-                  <span>
+                  <Image
+                    src={thumbnail.src}
+                    alt={thumbnail.alt}
+                    width={112}
+                    height={80}
+                    sizes="112px"
+                    className="h-16 w-24 shrink-0 object-cover sm:h-20 sm:w-28"
+                  />
+                  <span className="min-w-0 flex-1">
                     <h2 className="font-display text-2xl text-navy group-hover:text-gold-dark">
                       {card.title}
                     </h2>
