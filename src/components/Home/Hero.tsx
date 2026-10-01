@@ -26,6 +26,9 @@ export default function Hero() {
           <p className="mt-2 text-[11px] font-semibold tracking-[0.22em] text-gold uppercase">
             {copy.brand.descriptor}
           </p>
+          <p className="mt-4 text-sm font-semibold tracking-[0.08em] text-gold sm:mt-5">
+            {copy.brand.name}
+          </p>
           <h1 className="mt-4 font-display text-[1.7rem] leading-[1.14] sm:mt-6 sm:text-4xl lg:text-[2.45rem]">
             {copy.home.heroTitle}
           </h1>
