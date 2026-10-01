@@ -1,3 +1,4 @@
+import { practiceAreas, type PracticeAreaKey } from "@/data/practice-areas";
 import type { Locale } from "./locales";
 import { pathFor } from "./routes";
 
@@ -130,12 +131,31 @@ const homeServiceDescriptions: Record<Locale, Record<HomeServiceId, string>> = {
   },
 };
 
+const homePracticeAreaKeys = {
+  nacionalidade: "nationality",
+  arrendamento: "tenancy",
+  "recuperacao-credito": "debtRecovery",
+  sociedades: "companyLaw",
+  patrimonio: "propertyInheritance",
+  penal: "criminalLaw",
+  administrativo: "administrativeLaw",
+} as const satisfies Record<Exclude<HomeServiceId, "imigracao">, PracticeAreaKey>;
+
 export function getServiceFinder(locale: Locale) {
-  const serviceCards = homeServiceIds.map((id) => ({
-    id,
-    title: serviceFinderLabels[locale][id],
-    description: homeServiceDescriptions[locale][id],
-  }));
+  const serviceCards = homeServiceIds.map((id) => {
+    const subcardCount =
+      id === "imigracao"
+        ? immigrationItems[locale].length
+        : practiceAreas.find((area) => area.key === homePracticeAreaKeys[id])?.topics.length ?? 0;
+
+    return {
+      id,
+      title: serviceFinderLabels[locale][id],
+      description: homeServiceDescriptions[locale][id],
+      href: homeServiceHref(locale, id),
+      subcardCount,
+    };
+  });
   const internationalClients = {
     id: "clientes-internacionais",
     title: locale === "pt" ? "Clientes internacionais" : "International clients",
@@ -143,6 +163,8 @@ export function getServiceFinder(locale: Locale) {
       locale === "pt"
         ? "Mudança e instalação em Portugal."
         : "Moving to and settling in Portugal.",
+    href: pathFor(locale, "internationalClients"),
+    subcardCount: practiceAreas.find((area) => area.key === "internationalClients")?.topics.length ?? 0,
   };
 
   return [serviceCards[0], internationalClients, ...serviceCards.slice(1)];

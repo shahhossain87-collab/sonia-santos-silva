@@ -11,7 +11,8 @@ export default function Hero() {
   return (
     <section className="relative bg-navy/95 py-10 text-white md:py-14">
       <div className="container">
-        <div className="max-w-2xl">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_14rem] lg:items-center lg:gap-12">
+          <div className="max-w-2xl">
           <p className="gold-rule">{copy.home.heroKicker}</p>
           <Image
             src="/images/logo/jgl-lockup-on-dark.png"
@@ -43,6 +44,22 @@ export default function Hero() {
               {copy.home.heroServices}
             </CtaLink>
           </div>
+          </div>
+          <figure className="mx-auto w-56 text-center lg:mx-0 lg:justify-self-end">
+            <div className="relative h-48 overflow-hidden border border-white/20 bg-white/5">
+              <Image
+                src="/images/home/sonia-santos-da-silva.jpeg"
+                alt={copy.home.heroPortraitAlt}
+                fill
+                priority
+                sizes="224px"
+                className="object-cover object-top"
+              />
+            </div>
+            <figcaption className="mt-3 text-sm font-semibold text-gold">
+              Dra. Sónia Santos da Silva
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
