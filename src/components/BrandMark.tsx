@@ -14,12 +14,12 @@ type BrandMarkProps = {
 
 const monogram = {
   light: {
-    src: "/images/logo/jgl-monogram-header.png",
+    src: "/images/logo/gjl-monogram-header.png",
     width: 500,
     height: 287,
   },
   dark: {
-    src: "/images/logo/jgl-monogram-header-on-dark.png",
+    src: "/images/logo/gjl-monogram-header-on-dark.png",
     width: 500,
     height: 287,
   },
@@ -27,12 +27,12 @@ const monogram = {
 
 const lockup = {
   light: {
-    src: "/images/logo/jgl-lockup.png",
+    src: "/images/logo/gjl-lockup.png",
     width: 963,
     height: 416,
   },
   dark: {
-    src: "/images/logo/jgl-lockup-on-dark.png",
+    src: "/images/logo/gjl-lockup-on-dark.png",
     width: 963,
     height: 416,
   },

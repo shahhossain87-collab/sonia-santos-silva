@@ -15,7 +15,7 @@ export default function Hero() {
           <div className="max-w-2xl">
           <p className="gold-rule">{copy.home.heroKicker}</p>
           <Image
-            src="/images/logo/jgl-lockup-on-dark.png"
+            src="/images/logo/gjl-lockup-on-dark.png"
             alt={copy.brand.lockupLabel}
             width={963}
             height={416}
