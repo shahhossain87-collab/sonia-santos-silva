@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: "Trabalham com Golden Visa?",
-    a: "Esta versão do sítio concentra-se em nacionalidade, D7, D2 e reagrupamento. Outras vias podem ser analisadas em consulta, se se enquadrarem na prática do escritório.",
+    a: "Este sítio apresenta as áreas de prática do escritório, incluindo imigração, nacionalidade, arrendamento, recuperação de crédito, direito das sociedades, património e sucessões, direito penal e direito administrativo. Outras vias podem ser analisadas em consulta, se se enquadrarem na prática do escritório.",
   },
   {
     q: "Como tratam os meus dados?",
