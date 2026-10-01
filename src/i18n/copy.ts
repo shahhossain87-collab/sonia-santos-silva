@@ -99,8 +99,7 @@ export function serviceFinderHref(locale: Locale, id: ServiceFinderId) {
       ? "/servicos/clientes-internacionais/reagrupamento-familiar"
       : "/en/services/international-clients/family-reunification";
   }
-  const hash =
-    id === "aima-residencia" ? "imigracao" : id === "reagrupamento" ? "imigracao" : id;
+  const hash = id === "aima-residencia" ? "imigracao" : id;
   return `${pathFor(locale, "services")}#${hash}`;
 }
 
