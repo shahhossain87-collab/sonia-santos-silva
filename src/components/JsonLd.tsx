@@ -14,7 +14,7 @@ export default function JsonLd({ locale }: { locale: Locale }) {
     slogan: copy.brand.descriptor,
     description: copy.meta.homeDescription,
     url: absoluteUrl(pathFor(locale, "home")),
-    image: absoluteUrl("/images/logo/jgl-lockup.png"),
+    image: absoluteUrl("/images/logo/gjl-lockup.png"),
     telephone: `+${site.phoneDigits}`,
     email: site.email,
     areaServed: {

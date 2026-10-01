@@ -36,11 +36,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/images/logo/jgl-icon-32.png", type: "image/png", sizes: "32x32" },
-      { url: "/images/logo/jgl-icon-192.png", type: "image/png", sizes: "192x192" },
-      { url: "/images/logo/jgl-icon-512.png", type: "image/png", sizes: "512x512" },
+      { url: "/images/logo/gjl-icon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/images/logo/gjl-icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/images/logo/gjl-icon-512.png", type: "image/png", sizes: "512x512" },
     ],
-    apple: [{ url: "/images/logo/jgl-icon-180.png", sizes: "180x180" }],
+    apple: [{ url: "/images/logo/gjl-icon-180.png", sizes: "180x180" }],
   },
   openGraph: {
     title: site.documentTitle.pt,
