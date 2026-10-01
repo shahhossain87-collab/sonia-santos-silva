@@ -4,7 +4,6 @@ import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
 import { whatsappHref } from "@/config/site";
 import { serviceThumbnails } from "@/data/service-thumbnails";
 import { getServiceFinder } from "@/i18n/copy";
-import { pathFor } from "@/i18n/routes";
 import { useCopy } from "@/i18n/use-locale";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,48 +30,32 @@ export default function ServiceFinder() {
               locale === "pt"
                 ? `Olá, preciso de ajuda com ${item.title}.`
                 : `Hello, I need help with ${item.title}.`;
-            const serviceHref = item.id === "imigracao" ? pathFor(locale, "immigration") : null;
 
             return (
               <li key={item.id}>
                 <article className="overflow-hidden border border-navy/10 bg-white shadow-one">
-                  {serviceHref ? (
-                    <Link href={serviceHref} className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">
-                      {thumbnail ? (
-                        <div className="relative aspect-[16/7]">
-                          <Image
-                            src={thumbnail.src}
-                            alt={thumbnail.alt}
-                            fill
-                            sizes="(max-width: 1024px) 100vw, 1120px"
-                            className="object-cover"
-                          />
-                        </div>
-                      ) : null}
-                      <div className="p-5 md:p-6">
-                        <h3 className="font-display text-2xl text-navy group-hover:text-gold-dark">{item.title}</h3>
-                        <p className="mt-2 text-sm text-body-color">{item.description}</p>
+                  <Link href={item.href} className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">
+                    {thumbnail ? (
+                      <div className="relative aspect-[16/7]">
+                        <Image
+                          src={thumbnail.src}
+                          alt={thumbnail.alt}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 1120px"
+                          className="object-cover"
+                        />
                       </div>
-                    </Link>
-                  ) : (
-                    <>
-                      {thumbnail ? (
-                        <div className="relative aspect-[16/7]">
-                          <Image
-                            src={thumbnail.src}
-                            alt={thumbnail.alt}
-                            fill
-                            sizes="(max-width: 1024px) 100vw, 1120px"
-                            className="object-cover"
-                          />
-                        </div>
+                    ) : null}
+                    <div className="p-5 md:p-6">
+                      <h3 className="font-display text-2xl text-navy group-hover:text-gold-dark">{item.title}</h3>
+                      <p className="mt-2 text-sm text-body-color">{item.description}</p>
+                      {item.subcardCount > 0 ? (
+                        <p className="mt-4 text-sm font-semibold text-gold-dark">
+                          {`${item.subcardCount} ${locale === "pt" ? "serviços" : "services"}`} <span aria-hidden="true">→</span>
+                        </p>
                       ) : null}
-                      <div className="p-5 md:p-6">
-                        <h3 className="font-display text-2xl text-navy">{item.title}</h3>
-                        <p className="mt-2 text-sm text-body-color">{item.description}</p>
-                      </div>
-                    </>
-                  )}
+                    </div>
+                  </Link>
                   <div className="px-5 pb-5 md:px-6 md:pb-6">
                     <CtaLink href={whatsappHref(message)} className="flex w-full justify-center">
                       <WhatsAppIcon />

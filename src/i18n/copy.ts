@@ -1,3 +1,4 @@
+import { practiceAreas, type PracticeAreaKey } from "@/data/practice-areas";
 import type { Locale } from "./locales";
 import { pathFor } from "./routes";
 
@@ -82,23 +83,29 @@ const serviceFinderLabels: Record<Locale, Record<ServiceFinderId, string>> = {
   },
 };
 
-const serviceFinderDetailHrefs: Partial<Record<ServiceFinderId, string>> = {
-  "visto-d2": "/servicos/visto-d2",
-  "visto-d7": "/servicos/visto-d7",
-  nacionalidade: "/servicos/nacionalidade",
-  reagrupamento: "/servicos/reagrupamento",
-};
-
 export function serviceFinderHref(locale: Locale, id: ServiceFinderId) {
-  const detail = serviceFinderDetailHrefs[id];
-  if (detail) return detail;
-  const hash =
-    id === "aima-residencia" ? "imigracao" : id === "reagrupamento" ? "imigracao" : id;
+  if (id === "visto-d2") {
+    return locale === "pt"
+      ? "/servicos/clientes-internacionais/visto-d2-empreendedores"
+      : "/en/services/international-clients/d2-entrepreneurs";
+  }
+  if (id === "visto-d7") {
+    return locale === "pt"
+      ? "/servicos/clientes-internacionais/visto-d7-rendimentos"
+      : "/en/services/international-clients/d7-own-income";
+  }
+  if (id === "nacionalidade") return pathFor(locale, "nationality");
+  if (id === "reagrupamento") {
+    return locale === "pt"
+      ? "/servicos/clientes-internacionais/reagrupamento-familiar"
+      : "/en/services/international-clients/family-reunification";
+  }
+  const hash = id === "aima-residencia" ? "imigracao" : id;
   return `${pathFor(locale, "services")}#${hash}`;
 }
 
 export function serviceFinderHasDetail(id: ServiceFinderId) {
-  return Boolean(serviceFinderDetailHrefs[id]);
+  return ["visto-d2", "visto-d7", "nacionalidade", "reagrupamento"].includes(id);
 }
 
 const homeServiceDescriptions: Record<Locale, Record<HomeServiceId, string>> = {
@@ -124,12 +131,31 @@ const homeServiceDescriptions: Record<Locale, Record<HomeServiceId, string>> = {
   },
 };
 
+const homePracticeAreaKeys = {
+  nacionalidade: "nationality",
+  arrendamento: "tenancy",
+  "recuperacao-credito": "debtRecovery",
+  sociedades: "companyLaw",
+  patrimonio: "propertyInheritance",
+  penal: "criminalLaw",
+  administrativo: "administrativeLaw",
+} as const satisfies Record<Exclude<HomeServiceId, "imigracao">, PracticeAreaKey>;
+
 export function getServiceFinder(locale: Locale) {
-  const serviceCards = homeServiceIds.map((id) => ({
-    id,
-    title: serviceFinderLabels[locale][id],
-    description: homeServiceDescriptions[locale][id],
-  }));
+  const serviceCards = homeServiceIds.map((id) => {
+    const subcardCount =
+      id === "imigracao"
+        ? immigrationItems[locale].length
+        : practiceAreas.find((area) => area.key === homePracticeAreaKeys[id])?.topics.length ?? 0;
+
+    return {
+      id,
+      title: serviceFinderLabels[locale][id],
+      description: homeServiceDescriptions[locale][id],
+      href: homeServiceHref(locale, id),
+      subcardCount,
+    };
+  });
   const internationalClients = {
     id: "clientes-internacionais",
     title: locale === "pt" ? "Clientes internacionais" : "International clients",
@@ -137,6 +163,8 @@ export function getServiceFinder(locale: Locale) {
       locale === "pt"
         ? "Mudança e instalação em Portugal."
         : "Moving to and settling in Portugal.",
+    href: pathFor(locale, "internationalClients"),
+    subcardCount: practiceAreas.find((area) => area.key === "internationalClients")?.topics.length ?? 0,
   };
 
   return [serviceCards[0], internationalClients, ...serviceCards.slice(1)];
@@ -154,10 +182,16 @@ export function getNavServiceMenu(locale: Locale) {
     },
     other: {
       title: locale === "en" ? "Other areas" : "Outras áreas",
-      items: otherAreaIds.map((id) => ({
+      items: [
+        {
+          title: locale === "en" ? "International clients" : "Clientes internacionais",
+          href: pathFor(locale, "internationalClients"),
+        },
+        ...otherAreaIds.map((id) => ({
         title: labels[id],
         href: homeServiceHref(locale, id),
-      })),
+        })),
+      ],
     },
   };
 }
@@ -623,10 +657,16 @@ export function homeServiceHref(locale: Locale, id: HomeServiceId) {
   if (id === "imigracao") {
     return pathFor(locale, "immigration");
   }
-  if (locale === "pt" && id === "nacionalidade") {
-    return "/servicos/nacionalidade";
-  }
-  return `${pathFor(locale, "services")}#${id}`;
+  const practiceRoute = {
+    nacionalidade: "nationality",
+    arrendamento: "tenancy",
+    "recuperacao-credito": "debtRecovery",
+    sociedades: "companyLaw",
+    patrimonio: "propertyInheritance",
+    penal: "criminalLaw",
+    administrativo: "administrativeLaw",
+  } as const;
+  return pathFor(locale, practiceRoute[id]);
 }
 
 export function getCopy(locale: Locale) {

@@ -1,12 +1,8 @@
 import CtaLink from "@/components/CtaLink";
+import { practiceAreas } from "@/data/practice-areas";
 import { serviceThumbnails } from "@/data/service-thumbnails";
-import {
-  getCopy,
-  homeServiceHref,
-  homeServiceIds,
-  immigrationItems,
-} from "@/i18n/copy";
-import { pathFor } from "@/i18n/routes";
+import { getCopy } from "@/i18n/copy";
+import { pathFor, practiceAreaPath } from "@/i18n/routes";
 import type { Locale } from "@/i18n/locales";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,7 +28,20 @@ function Arrow() {
 
 export default function ServicesIndex({ locale }: { locale: Locale }) {
   const copy = getCopy(locale);
-  const items = immigrationItems[locale];
+  const areas = [
+    {
+      key: "imigracao",
+      title: copy.cards.imigracao.title,
+      line: copy.cards.imigracao.blurb,
+      href: pathFor(locale, "immigration"),
+    },
+    ...practiceAreas.map((area) => ({
+      key: area.slug.pt,
+      title: area.title[locale],
+      line: area.line[locale],
+      href: practiceAreaPath(locale, area),
+    })),
+  ];
 
   return (
     <section className="py-10 md:py-12">
@@ -42,21 +51,17 @@ export default function ServicesIndex({ locale }: { locale: Locale }) {
         </p>
 
         <div className="mt-8 grid gap-4 lg:grid-cols-2">
-          {homeServiceIds.map((id) => {
-            const card = copy.cards[id];
-            const href = homeServiceHref(locale, id);
-            const hasDedicatedPage = locale === "pt" && id === "nacionalidade";
-            const isImmigration = id === "imigracao";
-            const thumbnail = serviceThumbnails[id];
+          {areas.map((area) => {
+            const thumbnail = serviceThumbnails[area.key as keyof typeof serviceThumbnails];
 
             return (
               <article
-                key={id}
-                id={id}
+                key={area.key}
+                id={area.key}
                 className="group scroll-mt-28 border border-navy/10 bg-white p-6 transition duration-200 hover:border-gold hover:shadow-one"
               >
                 <Link
-                  href={href}
+                  href={area.href}
                   className="flex cursor-pointer items-start justify-between gap-4 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                 >
                   <Image
@@ -69,49 +74,13 @@ export default function ServicesIndex({ locale }: { locale: Locale }) {
                   />
                   <span className="min-w-0 flex-1">
                     <h2 className="font-display text-2xl text-navy group-hover:text-gold-dark">
-                      {card.title}
+                      {area.title}
                     </h2>
-                    <p className="mt-2 text-sm text-body-color">{card.blurb}</p>
+                    <p className="mt-2 text-sm text-body-color">{area.line}</p>
                   </span>
                   <Arrow />
                 </Link>
 
-                {isImmigration ? (
-                  <div className="mt-5">
-                    <p className="text-xs tracking-[0.16em] text-gold uppercase">
-                      {copy.servicesPage.immigrationNote}
-                    </p>
-                    <ul className="mt-3 space-y-2 text-sm">
-                      {items.map((item) => (
-                        <li key={item.label}>
-                          {"href" in item && item.href ? (
-                            <Link
-                              href={item.href}
-                              className="group inline-flex cursor-pointer items-center gap-1 font-medium text-navy underline-offset-4 hover:text-gold-dark hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-                            >
-                              {item.label}
-                              <Arrow />
-                            </Link>
-                          ) : (
-                            <span>{item.label}</span>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : hasDedicatedPage ? (
-                  <Link
-                    href={href}
-                    className="group mt-4 inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-gold-dark hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-                  >
-                    {copy.home.servicesMore}
-                    <Arrow />
-                  </Link>
-                ) : (
-                  <p className="mt-4 text-sm text-body-color">
-                    {copy.servicesPage.moreWhenReady}
-                  </p>
-                )}
               </article>
             );
           })}

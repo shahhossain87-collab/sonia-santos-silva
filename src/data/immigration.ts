@@ -7,6 +7,8 @@ export type ImmigrationTopic = {
   title: Record<Locale, string>;
   summary: Record<Locale, string>;
   points: Record<Locale, readonly string[]>;
+  image: string;
+  imageAlt: Record<Locale, string>;
 };
 
 export const immigrationTopics = [
@@ -36,6 +38,8 @@ export const immigrationTopics = [
         "Clarify the next steps after entry into Portugal or the issue of the residence title.",
       ],
     },
+    image: "vistos-autorizacao-residencia",
+    imageAlt: { pt: "Pastas sobre uma mesa", en: "Folders on a table" },
   },
   {
     key: "residenceRenewal",
@@ -63,6 +67,8 @@ export const immigrationTopics = [
         "Review AIMA communications and the appropriate steps while the process is pending.",
       ],
     },
+    image: "renovacao-regularizacao-residencia",
+    imageAlt: { pt: "Pessoa a preencher um formulário", en: "Person completing a form" },
   },
   {
     key: "familyReunificationTopic",
@@ -90,6 +96,8 @@ export const immigrationTopics = [
         "Review accommodation, means of support and other requirements that apply to the household.",
       ],
     },
+    image: "reagrupamento-familiar",
+    imageAlt: { pt: "Família a caminhar ao ar livre", en: "Family walking outdoors" },
   },
   {
     key: "aimaNotifications",
@@ -117,6 +125,8 @@ export const immigrationTopics = [
         "Prepare a response suited to the stage of the process, without assuming that an outcome is guaranteed.",
       ],
     },
+    image: "notificacoes-aima",
+    imageAlt: { pt: "Pessoa a analisar papéis", en: "Person reviewing papers" },
   },
   {
     key: "aimaCourtProceedings",
@@ -144,6 +154,8 @@ export const immigrationTopics = [
         "Explain the legal framework, risks and possible steps before proceeding.",
       ],
     },
+    image: "processos-judiciais-aima",
+    imageAlt: { pt: "Edifício visto da rua", en: "Building seen from the street" },
   },
   {
     key: "portugueseNationalityTopic",
@@ -171,6 +183,8 @@ export const immigrationTopics = [
         "Review requests for further information, delays or refusal decisions received in the process.",
       ],
     },
+    image: "nacionalidade-portuguesa-imigracao",
+    imageAlt: { pt: "Pessoa a escrever numa mesa", en: "Person writing at a table" },
   },
 ] as const satisfies readonly ImmigrationTopic[];
 

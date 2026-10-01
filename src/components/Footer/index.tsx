@@ -75,6 +75,18 @@ export default function Footer() {
             </li>
             <li className="whitespace-nowrap">{site.hours}</li>
           </ul>
+          <a
+            href="https://www.livroreclamacoes.pt/Inicio/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Livro de Reclamações"
+            className="mt-6 flex h-20 w-20 items-center justify-center rounded-full bg-white text-center text-[10px] leading-tight font-semibold tracking-[0.08em] text-navy transition hover:bg-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+          >
+            <span>
+              <span className="block">LIVRO DE</span>
+              <span className="block">RECLAMAÇÕES</span>
+            </span>
+          </a>
           <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs text-white/50">
             {copy.footer.legalLinks.map((item) => (
               <li key={item.href}>
