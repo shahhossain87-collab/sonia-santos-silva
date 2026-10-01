@@ -16,9 +16,9 @@ function configuredSiteUrl() {
 export const site = {
   lawyerName: "Sónia Santos da Silva",
   title: "Gabinete Jurídico Laranjeiras",
-  shortName: "JGL",
+  shortName: "GJL",
   officeName: "Gabinete Jurídico Laranjeiras",
-  shortMark: "JGL",
+  shortMark: "GJL",
   role: "Advogada",
   descriptor: {
     pt: "Advogados · Solicitadores",
