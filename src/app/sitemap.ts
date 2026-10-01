@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
+import { practiceAreas } from "@/data/practice-areas";
 import { absoluteUrl } from "@/i18n/metadata";
+import { practiceAreaPath, practiceTopicPath } from "@/i18n/routes";
 
 const paths = [
   "/",
@@ -24,18 +26,25 @@ const paths = [
   "/en/services/immigration-and-visas/court-proceedings-against-aima",
   "/servicos/imigracao-e-vistos/nacionalidade-portuguesa",
   "/en/services/immigration-and-visas/portuguese-nationality",
-  "/servicos/nacionalidade",
   "/servicos/visto-d2",
   "/servicos/visto-d7",
   "/servicos/reagrupamento",
-  "/servicos/clientes-internacionais",
   "/faq",
   "/privacidade",
   "/cookies",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return paths.map((path) => ({
+  const practicePaths = practiceAreas.flatMap((area) => [
+    practiceAreaPath("pt", area),
+    practiceAreaPath("en", area),
+    ...area.topics.flatMap((topic) => [
+      practiceTopicPath("pt", area, topic),
+      practiceTopicPath("en", area, topic),
+    ]),
+  ]);
+
+  return [...paths, ...practicePaths].map((path) => ({
     url: absoluteUrl(path),
     lastModified: new Date(),
   }));

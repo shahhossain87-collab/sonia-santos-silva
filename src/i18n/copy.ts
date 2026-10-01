@@ -82,23 +82,30 @@ const serviceFinderLabels: Record<Locale, Record<ServiceFinderId, string>> = {
   },
 };
 
-const serviceFinderDetailHrefs: Partial<Record<ServiceFinderId, string>> = {
-  "visto-d2": "/servicos/visto-d2",
-  "visto-d7": "/servicos/visto-d7",
-  nacionalidade: "/servicos/nacionalidade",
-  reagrupamento: "/servicos/reagrupamento",
-};
-
 export function serviceFinderHref(locale: Locale, id: ServiceFinderId) {
-  const detail = serviceFinderDetailHrefs[id];
-  if (detail) return detail;
+  if (id === "visto-d2") {
+    return locale === "pt"
+      ? "/servicos/clientes-internacionais/visto-d2-empreendedores"
+      : "/en/services/international-clients/d2-entrepreneurs";
+  }
+  if (id === "visto-d7") {
+    return locale === "pt"
+      ? "/servicos/clientes-internacionais/visto-d7-rendimentos"
+      : "/en/services/international-clients/d7-own-income";
+  }
+  if (id === "nacionalidade") return pathFor(locale, "nationality");
+  if (id === "reagrupamento") {
+    return locale === "pt"
+      ? "/servicos/clientes-internacionais/reagrupamento-familiar"
+      : "/en/services/international-clients/family-reunification";
+  }
   const hash =
     id === "aima-residencia" ? "imigracao" : id === "reagrupamento" ? "imigracao" : id;
   return `${pathFor(locale, "services")}#${hash}`;
 }
 
 export function serviceFinderHasDetail(id: ServiceFinderId) {
-  return Boolean(serviceFinderDetailHrefs[id]);
+  return ["visto-d2", "visto-d7", "nacionalidade", "reagrupamento"].includes(id);
 }
 
 const homeServiceDescriptions: Record<Locale, Record<HomeServiceId, string>> = {
@@ -154,10 +161,16 @@ export function getNavServiceMenu(locale: Locale) {
     },
     other: {
       title: locale === "en" ? "Other areas" : "Outras áreas",
-      items: otherAreaIds.map((id) => ({
+      items: [
+        {
+          title: locale === "en" ? "International clients" : "Clientes internacionais",
+          href: pathFor(locale, "internationalClients"),
+        },
+        ...otherAreaIds.map((id) => ({
         title: labels[id],
         href: homeServiceHref(locale, id),
-      })),
+        })),
+      ],
     },
   };
 }
@@ -623,10 +636,16 @@ export function homeServiceHref(locale: Locale, id: HomeServiceId) {
   if (id === "imigracao") {
     return pathFor(locale, "immigration");
   }
-  if (locale === "pt" && id === "nacionalidade") {
-    return "/servicos/nacionalidade";
-  }
-  return `${pathFor(locale, "services")}#${id}`;
+  const practiceRoute = {
+    nacionalidade: "nationality",
+    arrendamento: "tenancy",
+    "recuperacao-credito": "debtRecovery",
+    sociedades: "companyLaw",
+    patrimonio: "propertyInheritance",
+    penal: "criminalLaw",
+    administrativo: "administrativeLaw",
+  } as const;
+  return pathFor(locale, practiceRoute[id]);
 }
 
 export function getCopy(locale: Locale) {

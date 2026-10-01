@@ -2,6 +2,7 @@ import { site, whatsappHref } from "@/config/site";
 import { immigrationTopics, type ImmigrationTopic } from "@/data/immigration";
 import type { Locale } from "@/i18n/locales";
 import { pathFor } from "@/i18n/routes";
+import Image from "next/image";
 import Link from "next/link";
 
 const labels = {
@@ -102,16 +103,27 @@ export function ImmigrationLandingPage({ locale }: { locale: Locale }) {
           <ol className="mt-8 space-y-4">
             {immigrationTopics.map((topic, index) => (
               <li key={topic.key}>
-                <article className="border border-navy/10 bg-white p-5 transition hover:border-gold hover:shadow-one md:p-6">
-                  <p className="text-xs font-semibold tracking-[0.16em] text-gold uppercase">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <h2 className="mt-2 font-display text-2xl text-navy">
-                    <Link href={pathFor(locale, topic.key)} className="hover:text-gold-dark hover:underline">
-                      {topic.title[locale]}
-                    </Link>
-                  </h2>
-                  <p className="mt-2 text-sm leading-relaxed text-body-color">{topic.summary[locale]}</p>
+                <article className="overflow-hidden border border-navy/10 bg-white transition hover:border-gold hover:shadow-one">
+                  <Link href={pathFor(locale, topic.key)} className="group block">
+                    <div className="relative aspect-[16/8]">
+                      <Image
+                        src={`/images/services/subcards/${topic.image}.jpg`}
+                        alt={topic.imageAlt[locale]}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 896px"
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="p-5 md:p-6">
+                      <p className="text-xs font-semibold tracking-[0.16em] text-gold uppercase">
+                        {String(index + 1).padStart(2, "0")}
+                      </p>
+                      <h2 className="mt-2 font-display text-2xl text-navy group-hover:text-gold-dark">
+                        {topic.title[locale]}
+                      </h2>
+                      <p className="mt-2 text-sm leading-relaxed text-body-color">{topic.summary[locale]}</p>
+                    </div>
+                  </Link>
                 </article>
               </li>
             ))}
@@ -174,7 +186,16 @@ export function ImmigrationTopicPage({
       </section>
       <section className="py-10 md:py-12">
         <div className="container max-w-3xl">
-          <h2 className="font-display text-3xl text-navy">{copy.practicalTitle}</h2>
+          <div className="relative aspect-[16/8]">
+            <Image
+              src={`/images/services/subcards/${topic.image}.jpg`}
+              alt={topic.imageAlt[locale]}
+              fill
+              sizes="(max-width: 1024px) 100vw, 768px"
+              className="object-cover"
+            />
+          </div>
+          <h2 className="mt-8 font-display text-3xl text-navy">{copy.practicalTitle}</h2>
           <ul className="mt-6 space-y-3 text-sm leading-relaxed text-body-color">
             {topic.points[locale].map((point) => (
               <li key={point} className="border-l-2 border-gold pl-4">

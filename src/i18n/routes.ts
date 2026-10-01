@@ -1,3 +1,4 @@
+import { practiceAreas, type PracticeArea, type PracticeTopic } from "@/data/practice-areas";
 import { defaultLocale, type Locale } from "./locales";
 
 export const paths = {
@@ -5,6 +6,14 @@ export const paths = {
   about: { pt: "/o-escritorio", en: "/en/about" },
   contact: { pt: "/contacto", en: "/en/contact" },
   services: { pt: "/servicos", en: "/en/services" },
+  internationalClients: { pt: "/servicos/clientes-internacionais", en: "/en/services/international-clients" },
+  nationality: { pt: "/servicos/nacionalidade", en: "/en/services/portuguese-nationality" },
+  tenancy: { pt: "/servicos/arrendamento", en: "/en/services/tenancy-and-leases" },
+  debtRecovery: { pt: "/servicos/recuperacao-credito", en: "/en/services/debt-recovery" },
+  companyLaw: { pt: "/servicos/sociedades", en: "/en/services/company-law" },
+  propertyInheritance: { pt: "/servicos/patrimonio", en: "/en/services/property-and-inheritance" },
+  criminalLaw: { pt: "/servicos/penal", en: "/en/services/criminal-law" },
+  administrativeLaw: { pt: "/servicos/administrativo", en: "/en/services/administrative-law" },
   immigration: { pt: "/servicos/imigracao-e-vistos", en: "/en/services/immigration-and-visas" },
   immigrationVisas: {
     pt: "/servicos/imigracao-e-vistos/vistos-e-autorizacao-de-residencia",
@@ -34,11 +43,9 @@ export const paths = {
   privacy: { pt: "/privacidade" },
   cookies: { pt: "/cookies" },
   blog: { pt: "/blog" },
-  nationality: { pt: "/servicos/nacionalidade" },
   visaD2: { pt: "/servicos/visto-d2" },
   visaD7: { pt: "/servicos/visto-d7" },
   familyReunification: { pt: "/servicos/reagrupamento" },
-  internationalClients: { pt: "/servicos/clientes-internacionais" },
 } as const;
 
 export type RouteKey = keyof typeof paths;
@@ -52,6 +59,14 @@ export const routePairs: { pt: string; en: string }[] = [
 
 export function pathFor(locale: Locale, key: RouteKey) {
   return paths[key][locale] ?? paths[key].pt;
+}
+
+export function practiceAreaPath(locale: Locale, area: PracticeArea) {
+  return pathFor(locale, area.key);
+}
+
+export function practiceTopicPath(locale: Locale, area: PracticeArea, topic: PracticeTopic) {
+  return `${practiceAreaPath(locale, area)}/${topic.slug[locale]}`;
 }
 
 export function getLocaleFromPathname(pathname: string): Locale {
@@ -81,7 +96,13 @@ const exactPairs: { pt: string; en: string }[] = [
   paths.aimaCourtProceedings,
   paths.portugueseNationalityTopic,
   { pt: "/contato", en: "/en/contact" },
-  { pt: "/servicos/nacionalidade", en: "/en/services/nationality" },
+  ...practiceAreas.flatMap((area) => [
+    { pt: pathFor("pt", area.key), en: pathFor("en", area.key) },
+    ...area.topics.map((topic) => ({
+      pt: practiceTopicPath("pt", area, topic),
+      en: practiceTopicPath("en", area, topic),
+    })),
+  ]),
   { pt: "/faq", en: "/en/faq" },
   { pt: "/privacidade", en: "/en/privacy" },
   { pt: "/privacidade", en: "/en/privacidade" },
