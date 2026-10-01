@@ -41,7 +41,7 @@ export const site = {
   whatsappMessage: "Olá, gostaria de agendar uma consulta.",
   addressLine: "Rua Abranches Ferrão, 11 A, 1600-296 Lisboa",
   city: "Lisboa",
-  hours: "Monday to Friday, 10:00–18:00",
+  hours: "segunda a sexta, 10h00–18h00",
   languages: ["Português", "Inglês"],
   disclaimer:
     "A informação neste sítio não constitui aconselhamento jurídico nem garantia de resultado. Cada processo depende da análise do caso concreto e da decisão das autoridades competentes.",

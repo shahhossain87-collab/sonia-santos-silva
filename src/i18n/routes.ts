@@ -39,7 +39,7 @@ export const paths = {
     pt: "/servicos/imigracao-e-vistos/nacionalidade-portuguesa",
     en: "/en/services/immigration-and-visas/portuguese-nationality",
   },
-  faq: { pt: "/faq" },
+  faq: { pt: "/faq", en: "/en/faq" },
   privacy: { pt: "/privacidade" },
   cookies: { pt: "/cookies" },
   blog: { pt: "/blog" },

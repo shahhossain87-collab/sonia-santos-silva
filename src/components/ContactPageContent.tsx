@@ -52,7 +52,7 @@ export default function ContactPageContent({ locale }: { locale: Locale }) {
             <p className="text-[11px] tracking-[0.16em] text-gold uppercase">
               {copy.contactPage.hours}
             </p>
-            <p className="mt-1 whitespace-nowrap text-sm text-navy">{site.hours}</p>
+            <p className="mt-1 whitespace-nowrap text-sm text-navy">{copy.footer.hours}</p>
           </div>
         </div>
         <div className="container mt-5">
@@ -82,7 +82,7 @@ export default function ContactPageContent({ locale }: { locale: Locale }) {
               </div>
             </dl>
             <p className="mt-8 text-sm leading-relaxed text-body-color">
-              {site.disclaimer}
+              {copy.common.disclaimer}
             </p>
           </div>
           <ContactForm />

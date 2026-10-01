@@ -5,11 +5,13 @@ import Reveal from "@/components/Reveal";
 import { site } from "@/config/site";
 import { team, type TeamMember } from "@/data/team";
 import { useCopy } from "@/i18n/use-locale";
+import type { Locale } from "@/i18n/locales";
 import Image from "next/image";
 
-function memberAlt(member: TeamMember, fallback: string) {
-  if (member.name && member.role) {
-    return `${member.name}, ${member.role.toLowerCase()}`;
+function memberAlt(member: TeamMember, locale: Locale, fallback: string) {
+  const role = member.role?.[locale];
+  if (member.name && role) {
+    return `${member.name}, ${role.toLowerCase()}`;
   }
   if (member.name) return member.name;
   return fallback;
@@ -17,11 +19,13 @@ function memberAlt(member: TeamMember, fallback: string) {
 
 function TeamPhoto({
   member,
+  locale,
   sizes,
   fallbackAlt,
   priority = false,
 }: {
   member: TeamMember;
+  locale: Locale;
   sizes: string;
   fallbackAlt: string;
   priority?: boolean;
@@ -29,7 +33,7 @@ function TeamPhoto({
   return (
     <Image
       src={member.photo}
-      alt={memberAlt(member, fallbackAlt)}
+      alt={memberAlt(member, locale, fallbackAlt)}
       fill
       priority={priority}
       className="object-cover object-center"
@@ -39,7 +43,7 @@ function TeamPhoto({
 }
 
 export default function Team() {
-  const { copy } = useCopy();
+  const { locale, copy } = useCopy();
   const featured = team.find((member) => member.featured) ?? team[0];
   const rest = team.filter((member) => member !== featured);
 
@@ -56,6 +60,7 @@ export default function Team() {
               <div className="relative aspect-square min-h-[280px] md:min-h-0">
                 <TeamPhoto
                   member={featured}
+                  locale={locale}
                   sizes="300px"
                   fallbackAlt={copy.home.teamFallbackAlt}
                   priority
@@ -63,13 +68,13 @@ export default function Team() {
               </div>
               <div className="flex flex-col justify-center p-8">
                 <p className="text-xs tracking-[0.2em] text-gold uppercase">
-                  {featured.role ?? site.role}
+                  {featured.role?.[locale] ?? (locale === "en" ? "Lawyer / Advogada" : site.role)}
                 </p>
                 <h3 className="mt-2 font-display text-3xl">
                   {featured.name ?? site.lawyerName}
                 </h3>
-                {featured.license ? (
-                  <p className="mt-2 text-sm text-body-color">{featured.license}</p>
+                {featured.license?.[locale] ? (
+                  <p className="mt-2 text-sm text-body-color">{featured.license[locale]}</p>
                 ) : null}
                 {featured.bio ? (
                   <p className="mt-1 text-sm text-body-color">{featured.bio}</p>
@@ -91,15 +96,16 @@ export default function Team() {
                   <div className="relative aspect-square">
                     <TeamPhoto
                       member={member}
+                      locale={locale}
                       sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                       fallbackAlt={copy.home.teamFallbackAlt}
                     />
                   </div>
-                  {member.name || member.role ? (
+                  {member.name || member.role?.[locale] ? (
                     <div className="p-5">
-                      {member.role ? (
+                      {member.role?.[locale] ? (
                         <p className="text-xs tracking-[0.2em] text-gold uppercase">
-                          {member.role}
+                          {member.role[locale]}
                         </p>
                       ) : null}
                       {member.name ? (

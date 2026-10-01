@@ -73,20 +73,25 @@ export default function Footer() {
             <li>
               {copy.contactPage.nif} {site.nif}
             </li>
-            <li className="whitespace-nowrap">{site.hours}</li>
+            <li className="whitespace-nowrap">{copy.footer.hours}</li>
           </ul>
-          <a
-            href="https://www.livroreclamacoes.pt/Inicio/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Livro de Reclamações"
-            className="mt-6 flex h-20 w-20 items-center justify-center rounded-full bg-white text-center text-[10px] leading-tight font-semibold tracking-[0.08em] text-navy transition hover:bg-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-          >
-            <span>
-              <span className="block">LIVRO DE</span>
-              <span className="block">RECLAMAÇÕES</span>
-            </span>
-          </a>
+          <div className="mt-6 flex items-center gap-3">
+            <a
+              href="https://www.livroreclamacoes.pt/Inicio/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Livro de Reclamações"
+              className="flex h-20 w-20 items-center justify-center rounded-full bg-white text-center text-[10px] leading-tight font-semibold tracking-[0.08em] text-navy transition hover:bg-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            >
+              <span>
+                <span className="block">LIVRO DE</span>
+                <span className="block">RECLAMAÇÕES</span>
+              </span>
+            </a>
+            {locale === "en" ? (
+              <span className="text-xs text-white/75">complaints book</span>
+            ) : null}
+          </div>
           <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs text-white/50">
             {copy.footer.legalLinks.map((item) => (
               <li key={item.href}>
@@ -105,7 +110,7 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()} {site.officeName}. {copy.footer.rights}
           </p>
-          <p className="max-w-xl">{site.disclaimer}</p>
+          <p className="max-w-xl">{copy.common.disclaimer}</p>
         </div>
       </div>
     </footer>

@@ -228,6 +228,7 @@ export const ui = {
       contact: "Contacto",
       tagline: "Advogados · Solicitadores. Acompanhamento jurídico em Lisboa, em português e inglês.",
       rights: "Todos os direitos reservados.",
+      hours: "segunda a sexta, 10h00–18h00",
       officeLinks: [
         { title: "O Escritório", href: pathFor("pt", "about") },
         { title: "Serviços", href: pathFor("pt", "services") },
@@ -314,10 +315,6 @@ export const ui = {
       ],
       values: [
         {
-          title: "Independência profissional",
-          text: "Análise jurídica própria, sem copiar modelos de marketing de outros escritórios.",
-        },
-        {
           title: "Confidencialidade",
           text: "Dados e documentos tratados com reserva, nos termos da lei e da deontologia.",
         },
@@ -374,6 +371,11 @@ export const ui = {
       cookies: "Cookies técnicos.",
       privacy: "Privacidade",
       cookieOk: "OK",
+      disclaimer:
+        "A informação neste sítio não constitui aconselhamento jurídico nem garantia de resultado. Cada processo depende da análise do caso concreto e da decisão das autoridades competentes.",
+      mapNotice: "O mapa Google Maps só é carregado depois da sua escolha.",
+      viewMap: "Ver mapa",
+      openGoogleMaps: "Abrir no Google Maps →",
     },
     meta: {
       homeTitle: "Gabinete Jurídico Laranjeiras | Advogados e Solicitadores",
@@ -455,6 +457,7 @@ export const ui = {
       contact: "Contact",
       tagline: "Lawyers · Solicitors. Legal support in Lisbon, in Portuguese and English.",
       rights: "All rights reserved.",
+      hours: "Monday to Friday, 10:00–18:00",
       officeLinks: [
         { title: "About", href: pathFor("en", "about") },
         { title: "Services", href: pathFor("en", "services") },
@@ -462,7 +465,7 @@ export const ui = {
         { title: "Contact", href: pathFor("en", "contact") },
       ],
       legalLinks: [
-        { title: "FAQ", href: "/faq" },
+        { title: "FAQ", href: pathFor("en", "faq") },
         { title: "Privacy", href: "/privacidade" },
         { title: "Cookies", href: "/cookies" },
       ],
@@ -542,10 +545,6 @@ export const ui = {
       ],
       values: [
         {
-          title: "Professional independence",
-          text: "Independent legal analysis, without copying another firm’s marketing model.",
-        },
-        {
           title: "Confidentiality",
           text: "Data and documents are handled with reserve, under the law and professional rules.",
         },
@@ -601,6 +600,11 @@ export const ui = {
       cookies: "Technical cookies.",
       privacy: "Privacy",
       cookieOk: "OK",
+      disclaimer:
+        "Information on this website does not constitute legal advice or a guarantee of outcome. Each matter depends on the assessment of the specific circumstances and the decision of the competent authorities.",
+      mapNotice: "The Google Maps map is loaded only after you choose to view it.",
+      viewMap: "View map",
+      openGoogleMaps: "Open in Google Maps →",
     },
     meta: {
       homeTitle: "Gabinete Jurídico Laranjeiras | Lawyers & Solicitors",
