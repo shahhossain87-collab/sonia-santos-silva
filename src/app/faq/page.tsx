@@ -25,10 +25,6 @@ const faqs = [
     a: "Depende do tipo de pedido. Muitos processos começam à distância, com envio de documentos digitalizados e, depois, originais quando exigidos.",
   },
   {
-    q: "Trabalham com Golden Visa?",
-    a: "Este sítio apresenta as áreas de prática do escritório, incluindo imigração, nacionalidade, arrendamento, recuperação de crédito, direito das sociedades, património e sucessões, direito penal e direito administrativo. Outras vias podem ser analisadas em consulta, se se enquadrarem na prática do escritório.",
-  },
-  {
     q: "Como tratam os meus dados?",
     a: "Apenas para prestar o serviço jurídico e cumprir obrigações legais. Veja a página de Privacidade.",
   },

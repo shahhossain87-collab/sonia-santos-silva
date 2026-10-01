@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { mapsEmbedUrl, mapsLink, site } from "@/config/site";
+import { useCopy } from "@/i18n/use-locale";
 
 export default function OfficeMap({
   className,
@@ -9,6 +10,7 @@ export default function OfficeMap({
   className?: string;
 }) {
   const [mapLoaded, setMapLoaded] = useState(false);
+  const { copy } = useCopy();
 
   return (
     <div className="min-w-0 max-w-full">
@@ -27,14 +29,14 @@ export default function OfficeMap({
         ) : (
           <div className="flex h-full min-h-[280px] flex-col items-center justify-center gap-4 p-6 text-center">
             <p className="max-w-sm text-sm text-body-color">
-              O mapa Google Maps só é carregado depois da sua escolha.
+              {copy.common.mapNotice}
             </p>
             <button
               type="button"
               onClick={() => setMapLoaded(true)}
               className="bg-navy px-5 py-3 text-sm font-semibold text-white transition hover:bg-navy/90"
             >
-              Ver mapa
+              {copy.common.viewMap}
             </button>
           </div>
         )}
@@ -45,7 +47,7 @@ export default function OfficeMap({
         rel="noopener noreferrer"
         className="mt-3 inline-block text-sm font-semibold text-gold-dark hover:underline"
       >
-        Abrir no Google Maps →
+        {copy.common.openGoogleMaps}
       </a>
     </div>
   );
