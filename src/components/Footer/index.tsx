@@ -70,9 +70,6 @@ export default function Footer() {
             <li>
               {copy.contactPage.license} {site.license}
             </li>
-            <li>
-              {copy.contactPage.nif} {site.nif}
-            </li>
             <li className="whitespace-nowrap">{site.hours}</li>
           </ul>
           <a

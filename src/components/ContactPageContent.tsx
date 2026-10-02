@@ -74,12 +74,6 @@ export default function ContactPageContent({ locale }: { locale: Locale }) {
                 </dt>
                 <dd className="mt-1">{site.license}</dd>
               </div>
-              <div>
-                <dt className="tracking-[0.16em] text-gold uppercase">
-                  {copy.contactPage.nif}
-                </dt>
-                <dd className="mt-1">{site.nif}</dd>
-              </div>
             </dl>
             <p className="mt-8 text-sm leading-relaxed text-body-color">
               {site.disclaimer}

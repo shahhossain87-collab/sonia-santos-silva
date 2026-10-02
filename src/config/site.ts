@@ -29,7 +29,6 @@ export const site = {
     en: "Gabinete Jurídico Laranjeiras | Lawyers & Solicitors",
   },
   license: "55852L",
-  nif: "221986286",
   tagline: "Acompanhamento jurídico em Lisboa, em português e inglês.",
   description:
     "Gabinete Jurídico Laranjeiras. Advogados · Solicitadores. Acompanhamento jurídico em Lisboa, em português e inglês. Informação clara, sem garantia de resultado.",
