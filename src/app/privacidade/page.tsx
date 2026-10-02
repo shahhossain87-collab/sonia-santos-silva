@@ -21,8 +21,8 @@ export default function PrivacidadePage() {
           <p>
             O responsável pelo tratamento é {site.officeName} (
             {site.descriptor.pt}), com domicílio profissional em {site.addressLine}.
-            Advogada responsável: {site.lawyerName}, cédula profissional {site.license},
-            NIF {site.nif}. Contacto: {site.email}.
+            Advogada responsável: {site.lawyerName}, cédula profissional {site.license}.
+            Contacto: {site.email}.
           </p>
           <h2 className="font-display text-2xl text-navy">Dados que podemos tratar</h2>
           <p>
