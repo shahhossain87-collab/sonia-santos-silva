@@ -1,68 +1,105 @@
 "use client";
 
-import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
-import { whatsappHref } from "@/config/site";
+import { site } from "@/config/site";
+import { getServiceFinder } from "@/i18n/copy";
 import { useCopy } from "@/i18n/use-locale";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import styles from "./Hero.module.css";
 
 export default function Hero() {
-  const { copy } = useCopy();
+  const { locale, copy } = useCopy();
+  const [paused, setPaused] = useState(false);
+  const services = getServiceFinder(locale);
 
   return (
-    <section className="relative bg-navy/95 py-10 text-white md:py-14">
-      <div className="container">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_14rem] lg:items-center lg:gap-12">
-          <div className="max-w-2xl">
-          <p className="gold-rule">{copy.home.heroKicker}</p>
-          <Image
-            src="/images/logo/gjl-lockup-on-dark.png"
-            alt={copy.brand.lockupLabel}
-            width={963}
-            height={416}
-            priority
-            className="mt-3 h-11 w-auto sm:mt-5 sm:h-14 lg:h-[3.6rem] xl:h-[3.9rem]"
-            style={{ width: "auto" }}
-          />
-          <p className="mt-2 text-[11px] font-semibold tracking-[0.22em] text-gold uppercase">
-            {copy.brand.descriptor}
-          </p>
-          <p className="mt-4 text-sm font-semibold tracking-[0.08em] text-gold sm:mt-5">
-            {copy.brand.name}
-          </p>
-          <h1 className="mt-4 font-display text-[1.7rem] leading-[1.14] sm:mt-6 sm:text-4xl lg:text-[2.45rem]">
+    <section
+      className={styles.hero}
+      aria-labelledby="home-heading"
+      data-paused={paused}
+    >
+      <div className={styles.scene} aria-hidden="true">
+        <Image
+          src="/images/home/lisboa-editorial.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          preload
+          className={styles.image}
+        />
+      </div>
+      <div className={styles.light} aria-hidden="true" />
+      <div className={styles.overlay} aria-hidden="true" />
+
+      <div className={styles.content}>
+        <div className={styles.intro}>
+          <p className={styles.eyebrow}>{copy.brand.name}</p>
+          <h1 id="home-heading" className={styles.heading}>
             {copy.home.heroTitle}
           </h1>
-          <p className="mt-3 text-sm leading-relaxed text-white/80 sm:mt-5 sm:text-base">
-            {copy.home.heroLead}
-          </p>
-          <p className="mt-3 text-sm leading-relaxed text-white/55 sm:mt-5">
-            {copy.home.heroNote}
-          </p>
-          <div className="mt-5 flex flex-col gap-3 sm:mt-8 sm:flex-row">
-            <CtaLink href={whatsappHref(copy.home.heroWhatsapp)}>
-              <WhatsAppIcon />
-              {copy.home.heroTalk}
-            </CtaLink>
-            <CtaLink href="#areas" variant="outline-light">
-              {copy.home.heroServices}
-            </CtaLink>
+          <p className={styles.lead}>{copy.home.heroLead}</p>
+        </div>
+
+        <nav className={styles.services} aria-label={copy.home.heroServices}>
+          <p className={styles.servicesLabel}>{copy.home.heroServices}</p>
+          <ul className={styles.primary}>
+            {services.slice(0, 3).map((service) => (
+              <li key={service.id}>
+                <Link href={service.href}>
+                  {service.id === "clientes-internacionais" && locale === "pt"
+                    ? "Clientes Internacionais"
+                    : service.title}
+                  <span aria-hidden="true">↗</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <ul className={styles.secondary}>
+            {services.slice(3).map((service) => (
+              <li key={service.id}>
+                <Link href={service.href}>{service.title}</Link>
+              </li>
+            ))}
+          </ul>
+          <div className={styles.mobileGroups}>
+            <a href="#areas">
+              {locale === "pt"
+                ? "Arrendamento, património e empresas"
+                : "Tenancy, property and companies"}
+              <span aria-hidden="true">↓</span>
+            </a>
+            <a href="#areas">
+              {locale === "pt"
+                ? "Crédito, penal e administrativo"
+                : "Debt recovery, criminal and administrative law"}
+              <span aria-hidden="true">↓</span>
+            </a>
           </div>
-          </div>
-          <figure className="mx-auto w-56 text-center lg:mx-0 lg:justify-self-end">
-            <div className="relative h-48 overflow-hidden border border-white/20 bg-white/5">
-              <Image
-                src="/images/home/sonia-santos-da-silva.jpeg"
-                alt={copy.home.heroPortraitAlt}
-                fill
-                priority
-                sizes="224px"
-                className="object-cover object-top"
-              />
-            </div>
-            <figcaption className="mt-3 text-sm font-semibold text-gold">
-              Dra. Sónia Santos da Silva
-            </figcaption>
-          </figure>
+        </nav>
+
+        <div className={styles.identity}>
+          <p>
+            Dra. {site.lawyerName}
+            <span>
+              {copy.home.heroRole} · {copy.home.heroKicker}
+            </span>
+          </p>
+          <button
+            type="button"
+            className={styles.motionControl}
+            aria-pressed={paused}
+            onClick={() => setPaused((value) => !value)}
+          >
+            <span aria-hidden="true">{paused ? "▷" : "Ⅱ"}</span>
+            {locale === "pt"
+              ? paused
+                ? "Retomar movimento"
+                : "Pausar movimento"
+              : paused
+                ? "Resume motion"
+                : "Pause motion"}
+          </button>
         </div>
       </div>
     </section>

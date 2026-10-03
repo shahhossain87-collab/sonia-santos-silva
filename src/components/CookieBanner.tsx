@@ -21,7 +21,7 @@ export default function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div className="relative z-50 border-t border-gold/20 bg-navy/95 px-3 py-2 text-cream backdrop-blur-sm">
+    <div className="relative z-50 border-t border-gold/20 bg-navy/95 px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] text-cream backdrop-blur-sm">
       <div className="container flex items-center justify-between gap-3">
         <p className="min-w-0 text-[11px] leading-relaxed text-cream/80 sm:text-xs">
           {copy.common.cookies}{" "}
@@ -35,7 +35,7 @@ export default function CookieBanner() {
         </p>
         <button
           type="button"
-          className="shrink-0 rounded-sm bg-gold px-3 py-1 text-[11px] font-semibold tracking-wide text-navy uppercase"
+          className="min-h-11 min-w-11 shrink-0 rounded-sm bg-gold px-3 py-1 text-[11px] font-semibold tracking-wide text-navy uppercase"
           onClick={() => {
             try {
               localStorage.setItem(STORAGE_KEY, "accepted");

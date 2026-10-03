@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import CookieBanner from "./CookieBanner";
-import MobileDock from "./MobileDock";
 
 export default function BottomChrome() {
   const ref = useRef<HTMLDivElement>(null);
@@ -28,7 +27,6 @@ export default function BottomChrome() {
   return (
     <div ref={ref} id="bottom-chrome" className="fixed inset-x-0 bottom-0 z-50">
       <CookieBanner />
-      <MobileDock />
     </div>
   );
 }
