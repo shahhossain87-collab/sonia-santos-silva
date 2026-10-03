@@ -1,7 +1,6 @@
 "use client";
 
 import BrandMark from "@/components/BrandMark";
-import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
 import ServicesMenu from "@/components/Header/ServicesMenu";
 import { isNavActive } from "@/components/Header/navActive";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
@@ -9,7 +8,7 @@ import { site } from "@/config/site";
 import { useCopy } from "@/i18n/use-locale";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function LisbonClock() {
   const [time, setTime] = useState("");
@@ -38,6 +37,23 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [sticky, setSticky] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const update = () => document.documentElement.style.setProperty(
+      "--site-header-height",
+      `${header.getBoundingClientRect().height}px`,
+    );
+    const observer = new ResizeObserver(update);
+    observer.observe(header);
+    update();
+    return () => {
+      observer.disconnect();
+      document.documentElement.style.removeProperty("--site-header-height");
+    };
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setSticky(window.scrollY > 24);
@@ -58,6 +74,7 @@ export default function Header() {
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        setOpen(false);
         setServicesOpen(false);
       }
     };
@@ -66,7 +83,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50">
+    <header ref={headerRef} className="sticky top-0 z-50">
       <div className="hidden bg-navy text-[11px] tracking-[0.12em] text-white/70 uppercase sm:block">
         <div className="container flex items-center justify-between py-2">
           <p>{copy.header.kicker}</p>
@@ -152,21 +169,11 @@ export default function Header() {
               <li className="flex items-center px-3 py-3 lg:hidden">
                 <LanguageSwitcher />
               </li>
-              <li className="lg:hidden">
-                <CtaLink className="mt-3 w-full">
-                  <WhatsAppIcon />
-                  {copy.header.talk}
-                </CtaLink>
-              </li>
             </ul>
           </nav>
 
           <div className="hidden items-center gap-4 lg:flex">
             <LanguageSwitcher />
-            <CtaLink className="!px-4 !py-2.5 text-[11px] tracking-[0.14em] uppercase">
-              <WhatsAppIcon />
-              {copy.header.talk}
-            </CtaLink>
           </div>
         </div>
       </div>
