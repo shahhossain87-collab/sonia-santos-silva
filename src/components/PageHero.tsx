@@ -18,9 +18,9 @@ export default function PageHero({
   const { copy } = useCopy();
 
   return (
-    <section className="bg-navy py-8 text-white md:py-10">
+    <section className="bg-navy py-4 text-white md:py-5">
       <div className="container">
-        <nav aria-label={copy.common.breadcrumb} className="mb-4 text-sm text-white/50">
+        <nav aria-label={copy.common.breadcrumb} className="mb-2 text-sm text-white/50">
           <ol className="flex flex-wrap items-center gap-2">
             {crumbs.map((crumb, i) => (
               <li key={`${crumb.label}-${i}`} className="flex items-center gap-2">
@@ -40,10 +40,10 @@ export default function PageHero({
           </ol>
         </nav>
         {eyebrow && <p className="gold-rule">{eyebrow}</p>}
-        <h1 className="mt-3 max-w-3xl font-display text-3xl leading-tight md:text-4xl">
+        <h1 className="mt-2 max-w-3xl font-display text-2xl leading-tight md:text-3xl">
           {title}
         </h1>
-        <p className="mt-3 mb-5 max-w-2xl text-sm leading-relaxed text-white/75 md:text-base">
+        <p className="mt-2 mb-3 max-w-2xl text-sm leading-relaxed text-white/75">
           {description}
         </p>
         <CtaLink>

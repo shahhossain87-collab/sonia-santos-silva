@@ -12,11 +12,10 @@ export default function WhatsAppFloat() {
       href={whatsappHref(copy.home.heroWhatsapp)}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed right-6 bottom-[calc(var(--bottom-chrome-height)+1rem)] z-50 hidden items-center gap-2 rounded-sm bg-[#128C7E] px-4 py-3 text-sm font-semibold text-white shadow-two transition hover:bg-[#0e7a6e] lg:flex"
+      className="fixed right-4 bottom-[calc(var(--bottom-chrome-height)+1rem)] z-40 hidden h-12 w-12 items-center justify-center rounded-full bg-[#128C7E] text-white shadow-two transition hover:bg-[#0e7a6e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold lg:flex"
       aria-label={`${copy.common.whatsappFloat} — ${copy.brand.lockupLabel}`}
     >
       <WhatsAppIcon className="h-5 w-5" />
-      <span className="hidden sm:inline">WhatsApp</span>
     </a>
   );
 }

@@ -9,9 +9,9 @@ export default function Hero() {
   const { copy } = useCopy();
 
   return (
-    <section className="relative bg-navy/95 py-10 text-white md:py-14">
+    <section className="relative bg-navy/95 py-5 text-white md:py-6">
       <div className="container">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_14rem] lg:items-center lg:gap-12">
+        <div className="grid grid-cols-[minmax(0,1fr)_5.75rem] items-start gap-3 sm:items-center sm:gap-8">
           <div className="max-w-2xl">
           <p className="gold-rule">{copy.home.heroKicker}</p>
           <Image
@@ -20,7 +20,7 @@ export default function Hero() {
             width={963}
             height={416}
             priority
-            className="mt-3 h-11 w-auto sm:mt-5 sm:h-14 lg:h-[3.6rem] xl:h-[3.9rem]"
+            className="mt-2 h-9 w-auto sm:h-11"
             style={{ width: "auto" }}
           />
           <p className="mt-2 text-[11px] font-semibold tracking-[0.22em] text-gold uppercase">
@@ -29,16 +29,16 @@ export default function Hero() {
           <p className="mt-4 text-sm font-semibold tracking-[0.08em] text-gold sm:mt-5">
             {copy.brand.name}
           </p>
-          <h1 className="mt-4 font-display text-[1.7rem] leading-[1.14] sm:mt-6 sm:text-4xl lg:text-[2.45rem]">
+          <h1 className="mt-3 font-display text-2xl leading-tight sm:text-3xl">
             {copy.home.heroTitle}
           </h1>
-          <p className="mt-3 text-sm leading-relaxed text-white/80 sm:mt-5 sm:text-base">
+          <p className="mt-2 text-sm leading-relaxed text-white/80">
             {copy.home.heroLead}
           </p>
-          <p className="mt-3 text-sm leading-relaxed text-white/55 sm:mt-5">
+          <p className="mt-2 text-sm leading-relaxed text-white/55">
             {copy.home.heroNote}
           </p>
-          <div className="mt-5 flex flex-col gap-3 sm:mt-8 sm:flex-row">
+          <div className="mt-4 flex flex-col gap-3 sm:flex-row">
             <CtaLink href={whatsappHref(copy.home.heroWhatsapp)}>
               <WhatsAppIcon />
               {copy.home.heroTalk}
@@ -48,18 +48,18 @@ export default function Hero() {
             </CtaLink>
           </div>
           </div>
-          <figure className="mx-auto w-56 text-center lg:mx-0 lg:justify-self-end">
-            <div className="relative h-48 overflow-hidden border border-white/20 bg-white/5">
+          <figure className="w-[5.75rem] text-center sm:justify-self-end">
+            <div className="relative h-24 overflow-hidden border border-white/20 bg-white/5 sm:h-28">
               <Image
                 src="/images/home/sonia-santos-da-silva.jpeg"
                 alt={copy.home.heroPortraitAlt}
                 fill
                 priority
-                sizes="224px"
+                sizes="92px"
                 className="object-cover object-top"
               />
             </div>
-            <figcaption className="mt-3 text-sm font-semibold text-gold">
+            <figcaption className="mt-2 text-[11px] font-semibold leading-tight text-gold">
               Dra. Sónia Santos da Silva
             </figcaption>
           </figure>

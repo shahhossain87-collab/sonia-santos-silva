@@ -1,96 +1,76 @@
-import CtaLink from "@/components/CtaLink";
-import { practiceAreas } from "@/data/practice-areas";
-import { serviceThumbnails } from "@/data/service-thumbnails";
-import { getCopy } from "@/i18n/copy";
-import { pathFor, practiceAreaPath } from "@/i18n/routes";
+import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
+import { whatsappHref } from "@/config/site";
+import { getCopy, getServiceDirectory } from "@/i18n/copy";
 import type { Locale } from "@/i18n/locales";
-import Image from "next/image";
 import Link from "next/link";
 
-function Arrow() {
-  return (
-    <svg
-      className="h-4 w-4 shrink-0 text-gold-dark transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M3 8h10M9 4l4 4-4 4"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+const linkClass =
+  "cursor-pointer text-gold-dark underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold";
 
 export default function ServicesIndex({ locale }: { locale: Locale }) {
   const copy = getCopy(locale);
-  const areas = [
-    {
-      key: "imigracao",
-      title: copy.cards.imigracao.title,
-      line: copy.cards.imigracao.blurb,
-      href: pathFor(locale, "immigration"),
-    },
-    ...practiceAreas.map((area) => ({
-      key: area.slug.pt,
-      title: area.title[locale],
-      line: area.line[locale],
-      href: practiceAreaPath(locale, area),
-    })),
-  ];
+  const items = getServiceDirectory(locale);
 
   return (
-    <section className="py-10 md:py-12">
+    <section className="py-5 md:py-7">
       <div className="container">
-        <p className="max-w-2xl text-sm leading-relaxed text-body-color">
-          {copy.servicesPage.intro}
-        </p>
-
-        <div className="mt-8 grid gap-4 lg:grid-cols-2">
-          {areas.map((area) => {
-            const thumbnail = serviceThumbnails[area.key as keyof typeof serviceThumbnails];
-
-            return (
-              <article
-                key={area.key}
-                id={area.key}
-                className="group scroll-mt-28 border border-navy/10 bg-white p-6 transition duration-200 hover:border-gold hover:shadow-one"
-              >
-                <Link
-                  href={area.href}
-                  className="flex cursor-pointer items-start justify-between gap-4 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-                >
-                  <Image
-                    src={thumbnail.src}
-                    alt={thumbnail.alt}
-                    width={112}
-                    height={80}
-                    sizes="112px"
-                    className="h-16 w-24 shrink-0 object-cover sm:h-20 sm:w-28"
-                  />
-                  <span className="min-w-0 flex-1">
-                    <h2 className="font-display text-2xl text-navy group-hover:text-gold-dark">
-                      {area.title}
-                    </h2>
-                    <p className="mt-2 text-sm text-body-color">{area.line}</p>
-                  </span>
-                  <Arrow />
-                </Link>
-
-              </article>
-            );
-          })}
-        </div>
-
-        <div className="mt-10">
-          <CtaLink href={pathFor(locale, "contact")} variant="outline-navy">
-            {copy.servicesPage.contact}
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <p className="max-w-2xl text-sm leading-relaxed text-body-color">{copy.servicesPage.intro}</p>
+          <CtaLink className="shrink-0">
+            <WhatsAppIcon />
+            {copy.home.heroTalk}
           </CtaLink>
         </div>
+
+        <ul className="mt-5 grid gap-3 md:grid-cols-2">
+          {items.map((item) => {
+            const message =
+              locale === "pt"
+                ? `Olá, preciso de ajuda com ${item.title}.`
+                : `Hello, I need help with ${item.title}.`;
+            const combined = item.id === "arrendamento-patrimonio";
+
+            return (
+              <li
+                key={item.id}
+                id={item.id}
+                className="scroll-mt-28 border border-navy/10 bg-white p-4"
+              >
+                <h2 className="font-display text-xl text-navy">
+                  {combined ? (
+                    item.title
+                  ) : (
+                    <Link href={item.href} className={linkClass + " text-navy no-underline hover:text-gold-dark"}>
+                      {item.title}
+                    </Link>
+                  )}
+                </h2>
+                {item.overview && !combined ? (
+                  <p className="mt-1 text-[11px] font-semibold tracking-[0.14em] text-gold uppercase">
+                    {copy.home.finderOverview}
+                  </p>
+                ) : null}
+                <p className="mt-2 text-sm leading-relaxed text-body-color">{item.explanation}</p>
+                {item.extra ? <p className="mt-2 text-sm leading-relaxed text-body-color">{item.extra}</p> : null}
+                <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold">
+                  {combined ? (
+                    <Link href={item.href} className={linkClass}>
+                      {item.linkTitle}
+                    </Link>
+                  ) : null}
+                  {item.related ? (
+                    <Link href={item.related.href} className={linkClass}>
+                      {item.related.title}
+                    </Link>
+                  ) : null}
+                  <a href={whatsappHref(message)} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                    {copy.home.heroTalk}
+                  </a>
+                </p>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );

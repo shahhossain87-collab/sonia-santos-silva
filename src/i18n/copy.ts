@@ -1,6 +1,7 @@
 import { practiceAreas, type PracticeAreaKey } from "@/data/practice-areas";
 import type { Locale } from "./locales";
-import { pathFor } from "./routes";
+import { immigrationTopics } from "@/data/immigration";
+import { pathFor, practiceTopicPath } from "./routes";
 
 export const homeServiceIds = [
   "imigracao",
@@ -42,24 +43,28 @@ export const serviceFinderIds = [
   "aima-residencia",
   "nacionalidade",
   "reagrupamento",
-  "arrendamento",
+  "clientes-internacionais",
+  "arrendamento-patrimonio",
   "sociedades",
   "recuperacao-credito",
-  "patrimonio",
   "penal",
   "administrativo",
 ] as const;
 
 export type ServiceFinderId = (typeof serviceFinderIds)[number];
 
-const serviceFinderLabels: Record<Locale, Record<ServiceFinderId, string>> = {
+type ServiceLabelId = ServiceFinderId | HomeServiceId;
+
+const serviceFinderLabels: Record<Locale, Record<ServiceLabelId, string>> = {
   pt: {
     imigracao: "Imigração e Vistos",
     "visto-d2": "Visto D2",
     "visto-d7": "Visto D7",
-    "aima-residencia": "AIMA e residência",
+    "aima-residencia": "AIMA e Residência",
     nacionalidade: "Nacionalidade Portuguesa",
-    reagrupamento: "Reagrupamento familiar",
+    reagrupamento: "Reagrupamento Familiar",
+    "clientes-internacionais": "Clientes Internacionais",
+    "arrendamento-patrimonio": "Arrendamento e Património",
     arrendamento: "Arrendamento",
     sociedades: "Direito das Sociedades",
     "recuperacao-credito": "Recuperação de Crédito",
@@ -74,6 +79,8 @@ const serviceFinderLabels: Record<Locale, Record<ServiceFinderId, string>> = {
     "aima-residencia": "AIMA and residence",
     nacionalidade: "Portuguese Nationality",
     reagrupamento: "Family reunification",
+    "clientes-internacionais": "International clients",
+    "arrendamento-patrimonio": "Tenancy and leases / Property and inheritance",
     arrendamento: "Tenancy and leases",
     sociedades: "Company law",
     "recuperacao-credito": "Debt recovery",
@@ -83,92 +90,202 @@ const serviceFinderLabels: Record<Locale, Record<ServiceFinderId, string>> = {
   },
 };
 
+function practiceArea(key: PracticeAreaKey) {
+  const area = practiceAreas.find((item) => item.key === key);
+  if (!area) {
+    throw new Error(`Missing practice area ${key}`);
+  }
+  return area;
+}
+
+function internationalTopic(slugPt: string) {
+  const topic = practiceArea("internationalClients").topics.find((item) => item.slug.pt === slugPt);
+  if (!topic) {
+    throw new Error(`Missing topic ${slugPt}`);
+  }
+  return topic;
+}
+
 export function serviceFinderHref(locale: Locale, id: ServiceFinderId) {
+  if (id === "imigracao" || id === "aima-residencia") return pathFor(locale, "immigration");
   if (id === "visto-d2") {
     return locale === "pt"
-      ? "/servicos/clientes-internacionais/visto-d2-empreendedores"
-      : "/en/services/international-clients/d2-entrepreneurs";
+      ? pathFor("pt", "visaD2")
+      : practiceTopicPath("en", practiceArea("internationalClients"), internationalTopic("visto-d2-empreendedores"));
   }
   if (id === "visto-d7") {
     return locale === "pt"
-      ? "/servicos/clientes-internacionais/visto-d7-rendimentos"
-      : "/en/services/international-clients/d7-own-income";
+      ? pathFor("pt", "visaD7")
+      : practiceTopicPath("en", practiceArea("internationalClients"), internationalTopic("visto-d7-rendimentos"));
   }
   if (id === "nacionalidade") return pathFor(locale, "nationality");
   if (id === "reagrupamento") {
-    return locale === "pt"
-      ? "/servicos/clientes-internacionais/reagrupamento-familiar"
-      : "/en/services/international-clients/family-reunification";
+    return locale === "pt" ? pathFor("pt", "familyReunification") : pathFor("en", "familyReunificationTopic");
   }
-  const hash = id === "aima-residencia" ? "imigracao" : id;
-  return `${pathFor(locale, "services")}#${hash}`;
+  if (id === "clientes-internacionais") return pathFor(locale, "internationalClients");
+  if (id === "arrendamento-patrimonio") return `${pathFor(locale, "services")}#arrendamento-patrimonio`;
+  if (id === "sociedades") return pathFor(locale, "companyLaw");
+  if (id === "recuperacao-credito") return pathFor(locale, "debtRecovery");
+  if (id === "penal") return pathFor(locale, "criminalLaw");
+  return pathFor(locale, "administrativeLaw");
 }
 
 export function serviceFinderHasDetail(id: ServiceFinderId) {
-  return ["visto-d2", "visto-d7", "nacionalidade", "reagrupamento"].includes(id);
+  return id !== "aima-residencia" && id !== "arrendamento-patrimonio";
 }
 
-const homeServiceDescriptions: Record<Locale, Record<HomeServiceId, string>> = {
-  pt: {
-    imigracao: "Vistos, residência e reagrupamento familiar.",
-    nacionalidade: "Pedidos de nacionalidade portuguesa.",
-    arrendamento: "Questões de arrendamento.",
-    "recuperacao-credito": "Recuperação de créditos.",
-    sociedades: "Direito para empresas e sociedades.",
-    patrimonio: "Património e sucessões.",
-    penal: "Questões de direito penal.",
-    administrativo: "Questões de direito administrativo.",
-  },
-  en: {
-    imigracao: "Visas, residence and family reunification.",
-    nacionalidade: "Portuguese nationality applications.",
-    arrendamento: "Tenancy and lease matters.",
-    "recuperacao-credito": "Debt recovery.",
-    sociedades: "Support for companies and corporate matters.",
-    patrimonio: "Property and inheritance.",
-    penal: "Criminal law matters.",
-    administrativo: "Administrative law matters.",
-  },
+export type ServiceDirectoryItem = {
+  id: ServiceFinderId;
+  title: string;
+  explanation: string;
+  extra?: string;
+  href: string;
+  linkTitle: string;
+  finderHref: string;
+  related?: { title: string; href: string };
+  overview: boolean;
 };
 
-const homePracticeAreaKeys = {
-  nacionalidade: "nationality",
-  arrendamento: "tenancy",
-  "recuperacao-credito": "debtRecovery",
-  sociedades: "companyLaw",
-  patrimonio: "propertyInheritance",
-  penal: "criminalLaw",
-  administrativo: "administrativeLaw",
-} as const satisfies Record<Exclude<HomeServiceId, "imigracao">, PracticeAreaKey>;
+const vistoD2Summary = "Acompanhamento de quem pretende criar, transferir ou desenvolver uma atividade económica em Portugal, com um plano coerente e documentação alinhada.";
+const vistoD7Summary = "Apoio a quem pretende residir em Portugal com base em rendimentos, pensão ou outros meios de subsistência legalmente aceites.";
+const reagrupamentoSummary = "Orientação para reunir cônjuge, filhos ou outros familiares elegíveis com quem já reside legalmente em Portugal.";
+
+export function getServiceDirectory(locale: Locale): ServiceDirectoryItem[] {
+  const labels = serviceFinderLabels[locale];
+  const residence = immigrationTopics.find((topic) => topic.key === "residenceRenewal");
+  const family = immigrationTopics.find((topic) => topic.key === "familyReunificationTopic");
+  const tenancy = practiceArea("tenancy");
+  const property = practiceArea("propertyInheritance");
+
+  const items: Omit<ServiceDirectoryItem, "finderHref">[] = [
+    {
+      id: "imigracao",
+      title: labels.imigracao,
+      linkTitle: labels.imigracao,
+      explanation:
+        locale === "pt"
+          ? "Visto D2, Visto D7, AIMA, residência, renovações e reagrupamento."
+          : "D2 visa, D7 visa, AIMA, residence, renewals and family reunification.",
+      href: pathFor(locale, "immigration"),
+      related: { title: labels["visto-d2"], href: serviceFinderHref(locale, "visto-d2") },
+      overview: false,
+    },
+    {
+      id: "visto-d2",
+      title: labels["visto-d2"],
+      linkTitle: labels["visto-d2"],
+      explanation: locale === "pt" ? vistoD2Summary : internationalTopic("visto-d2-empreendedores").whoFor.en,
+      href: serviceFinderHref(locale, "visto-d2"),
+      related: { title: labels.imigracao, href: pathFor(locale, "immigration") },
+      overview: false,
+    },
+    {
+      id: "visto-d7",
+      title: labels["visto-d7"],
+      linkTitle: labels["visto-d7"],
+      explanation: locale === "pt" ? vistoD7Summary : internationalTopic("visto-d7-rendimentos").whoFor.en,
+      href: serviceFinderHref(locale, "visto-d7"),
+      related: { title: labels.imigracao, href: pathFor(locale, "immigration") },
+      overview: false,
+    },
+    {
+      id: "aima-residencia",
+      title: labels["aima-residencia"],
+      linkTitle: labels["aima-residencia"],
+      explanation: residence?.summary[locale] ?? "",
+      href: pathFor(locale, "immigration"),
+      related: residence
+        ? { title: residence.title[locale], href: pathFor(locale, "residenceRenewal") }
+        : undefined,
+      overview: true,
+    },
+    {
+      id: "nacionalidade",
+      title: labels.nacionalidade,
+      linkTitle: labels.nacionalidade,
+      explanation: practiceArea("nationality").line[locale],
+      href: pathFor(locale, "nationality"),
+      overview: false,
+    },
+    {
+      id: "reagrupamento",
+      title: labels.reagrupamento,
+      linkTitle: labels.reagrupamento,
+      explanation: locale === "pt" ? reagrupamentoSummary : family?.summary.en ?? "",
+      href: serviceFinderHref(locale, "reagrupamento"),
+      overview: false,
+    },
+    {
+      id: "clientes-internacionais",
+      title: labels["clientes-internacionais"],
+      linkTitle: labels["clientes-internacionais"],
+      explanation: practiceArea("internationalClients").line[locale],
+      href: pathFor(locale, "internationalClients"),
+      related: { title: labels.imigracao, href: pathFor(locale, "immigration") },
+      overview: false,
+    },
+    {
+      id: "arrendamento-patrimonio",
+      title: labels["arrendamento-patrimonio"],
+      linkTitle: tenancy.title[locale],
+      explanation: tenancy.line[locale],
+      extra: property.line[locale],
+      href: pathFor(locale, "tenancy"),
+      related: { title: property.title[locale], href: pathFor(locale, "propertyInheritance") },
+      overview: true,
+    },
+    {
+      id: "sociedades",
+      title: labels.sociedades,
+      linkTitle: labels.sociedades,
+      explanation: practiceArea("companyLaw").line[locale],
+      href: pathFor(locale, "companyLaw"),
+      overview: false,
+    },
+    {
+      id: "recuperacao-credito",
+      title: labels["recuperacao-credito"],
+      linkTitle: labels["recuperacao-credito"],
+      explanation: practiceArea("debtRecovery").line[locale],
+      href: pathFor(locale, "debtRecovery"),
+      overview: false,
+    },
+    {
+      id: "penal",
+      title: labels.penal,
+      linkTitle: labels.penal,
+      explanation: practiceArea("criminalLaw").line[locale],
+      href: pathFor(locale, "criminalLaw"),
+      overview: false,
+    },
+    {
+      id: "administrativo",
+      title: labels.administrativo,
+      linkTitle: labels.administrativo,
+      explanation: practiceArea("administrativeLaw").line[locale],
+      href: pathFor(locale, "administrativeLaw"),
+      overview: false,
+    },
+  ];
+
+  return items.map((item) => ({
+    ...item,
+    finderHref:
+      item.id === "arrendamento-patrimonio"
+        ? `${pathFor(locale, "services")}#arrendamento-patrimonio`
+        : item.href,
+  }));
+}
 
 export function getServiceFinder(locale: Locale) {
-  const serviceCards = homeServiceIds.map((id) => {
-    const subcardCount =
-      id === "imigracao"
-        ? immigrationItems[locale].length
-        : practiceAreas.find((area) => area.key === homePracticeAreaKeys[id])?.topics.length ?? 0;
-
-    return {
-      id,
-      title: serviceFinderLabels[locale][id],
-      description: homeServiceDescriptions[locale][id],
-      href: homeServiceHref(locale, id),
-      subcardCount,
-    };
-  });
-  const internationalClients = {
-    id: "clientes-internacionais",
-    title: locale === "pt" ? "Clientes internacionais" : "International clients",
-    description:
-      locale === "pt"
-        ? "Mudança e instalação em Portugal."
-        : "Moving to and settling in Portugal.",
-    href: pathFor(locale, "internationalClients"),
-    subcardCount: practiceAreas.find((area) => area.key === "internationalClients")?.topics.length ?? 0,
-  };
-
-  return [serviceCards[0], internationalClients, ...serviceCards.slice(1)];
+  return getServiceDirectory(locale).map((item) => ({
+    id: item.id,
+    title: item.title,
+    description: item.explanation,
+    href: item.finderHref,
+  }));
 }
+
 
 const otherAreaIds = homeServiceIds.filter((id) => id !== "imigracao");
 

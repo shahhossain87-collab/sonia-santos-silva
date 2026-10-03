@@ -155,7 +155,7 @@ export default function Header() {
               <li className="lg:hidden">
                 <CtaLink className="mt-3 w-full">
                   <WhatsAppIcon />
-                  {copy.header.talk}
+                  WhatsApp
                 </CtaLink>
               </li>
             </ul>
@@ -165,7 +165,7 @@ export default function Header() {
             <LanguageSwitcher />
             <CtaLink className="!px-4 !py-2.5 text-[11px] tracking-[0.14em] uppercase">
               <WhatsAppIcon />
-              {copy.header.talk}
+              WhatsApp
             </CtaLink>
           </div>
         </div>

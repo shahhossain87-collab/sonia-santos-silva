@@ -1,20 +1,16 @@
-import ConversionCta from "@/components/Home/ConversionCTA";
 import Hero from "@/components/Home/Hero";
 import OfficePresence from "@/components/Home/OfficePresence";
 import ServiceFinder from "@/components/Home/ServiceFinder";
-import HomeBackground from "@/components/Home/HomeBackground";
 import { homeMetadata } from "@/i18n/metadata";
 
 export const metadata = homeMetadata("en");
 
 export default function EnglishHome() {
   return (
-    <div className="home-page relative isolate">
-      <HomeBackground />
+    <div className="home-page">
       <Hero />
       <ServiceFinder />
       <OfficePresence />
-      <ConversionCta />
     </div>
   );
 }
