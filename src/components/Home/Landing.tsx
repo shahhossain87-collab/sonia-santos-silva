@@ -1,122 +1,219 @@
 import { mapsLink, site, whatsappHref } from "@/config/site";
+import { pathFor, type RouteKey } from "@/i18n/routes";
+import Link from "next/link";
 import styles from "./Landing.module.css";
 
-const services = {
-  pt: [
-    { title: "Imigração", href: "/servicos/imigracao-e-vistos", image: "/images/services/imigracao-vistos.jpg", items: ["Vistos D1, D2, D3 e D6", "Reagrupamento familiar", "AIMA e renovações"] },
-    { title: "Nacionalidade", href: "/servicos/nacionalidade", image: "/images/services/nacionalidade.jpg", items: ["Tempo de residência", "Descendência", "Casamento ou união"] },
-    { title: "Arrendamento", href: "/servicos#arrendamento", image: "/images/services/arrendamento.jpg", items: ["Contrato", "Despejo", "Obras e caução"] },
-    { title: "Crédito", href: "/servicos#recuperacao-credito", image: "/images/services/recuperacao-credito.jpg", items: ["Faturas por pagar", "Injunção", "Acordo de pagamento"] },
-    { title: "Sociedades", href: "/servicos#sociedades", image: "/images/services/sociedades.jpg", items: ["Abrir empresa", "Sócios", "Contratos comerciais"] },
-    { title: "Património", href: "/servicos#patrimonio", image: "/images/services/patrimonio.jpg", items: ["Compra e venda", "Heranças", "Partilhas"] },
-    { title: "Direito penal", href: "/servicos#penal", image: "/images/services/direito-penal.jpg", items: ["Queixa", "Defesa", "Primeiro atendimento"] },
-    { title: "Administrativo", href: "/servicos#administrativo", image: "/images/services/direito-administrativo.jpg", items: ["Finanças", "Licenças", "Atos da administração"] },
-  ],
-  en: [
-    { title: "Immigration", href: "/en/services/immigration-and-visas", image: "/images/services/imigracao-vistos.jpg", items: ["D1, D2, D3 and D6 visas", "Family reunion", "AIMA and renewals"] },
-    { title: "Nationality", href: "/en/services", image: "/images/services/nacionalidade.jpg", items: ["Residence time", "Descent", "Marriage or partnership"] },
-    { title: "Tenancy", href: "/en/services", image: "/images/services/arrendamento.jpg", items: ["Lease", "Eviction", "Works and deposit"] },
-    { title: "Debt recovery", href: "/en/services", image: "/images/services/recuperacao-credito.jpg", items: ["Unpaid invoices", "Payment order", "Payment plan"] },
-    { title: "Companies", href: "/en/services", image: "/images/services/sociedades.jpg", items: ["Open a company", "Shareholders", "Commercial contracts"] },
-    { title: "Property", href: "/en/services", image: "/images/services/patrimonio.jpg", items: ["Buying and selling", "Inheritance", "Division of assets"] },
-    { title: "Criminal law", href: "/en/services", image: "/images/services/direito-penal.jpg", items: ["Complaint", "Defence", "First meeting"] },
-    { title: "Administrative", href: "/en/services", image: "/images/services/direito-administrativo.jpg", items: ["Tax office", "Licences", "Public decisions"] },
-  ],
-} as const;
+type Locale = "pt" | "en";
 
 const copy = {
   pt: {
-    hint: "Escolha o serviço.",
-    more: "Dentro de cada área",
-    other: "Outro assunto",
-    otherLead: "Não encontrou o seu caso? Pode marcar uma conversa. Isto não é aconselhamento online.",
-    whatsapp: "Falar no WhatsApp",
-    book: "Marcar hora",
-    contact: "/contacto",
-    contactLabel: "Contactar",
-    message: "Olá, o meu caso não está na lista. Gostaria de marcar uma conversa.",
-    office: "Escritório",
+    place: "Lisboa · Laranjeiras",
+    lead: "Acompanhamento jurídico em Lisboa, em português e inglês.",
     role: "Advogada",
+    license: "Cédula",
+    whatsapp: "Falar no WhatsApp",
+    note: "A primeira conversa serve para perceber se o escritório pode aceitar o assunto. Não é aconselhamento online.",
+    areas: "Áreas de atuação",
+    areasTitle:
+      "Imigração e nacionalidade primeiro. O resto do escritório, a seguir.",
+    otherTitle: "O meu caso não está aqui",
+    otherLead:
+      "Pode marcar uma primeira conversa na mesma. O escritório confirma se o assunto se enquadra.",
+    office: "Escritório",
+    city: "Laranjeiras",
+    addressLabel: "Morada",
+    maps: "Abrir no Google Maps",
+    hoursLabel: "Atendimento",
+    hours: "Segunda a sexta, 10:00–18:00",
+    languages: "Português e inglês",
+    photoAlt: "Lisboa, junto ao escritório em Laranjeiras",
+    message: "Olá, gostaria de agendar uma consulta.",
   },
   en: {
-    hint: "Choose a service.",
-    more: "Inside each area",
-    other: "Other matter",
-    otherLead: "Did not find your case? Book a conversation. This is not online legal advice.",
-    whatsapp: "WhatsApp",
-    book: "Book a time",
-    contact: "/en/contact",
-    contactLabel: "Contact us",
-    message: "Hello, my case is not listed. I would like to book a conversation.",
-    office: "Office",
+    place: "Lisbon · Laranjeiras",
+    lead: "Legal support in Lisbon, in Portuguese and English.",
     role: "Lawyer",
+    license: "Professional licence",
+    whatsapp: "WhatsApp",
+    note: "The first conversation is to see whether the office can take the matter. It is not online legal advice.",
+    areas: "Areas of practice",
+    areasTitle: "Immigration and nationality first. The rest of the office follows.",
+    otherTitle: "My case is not listed",
+    otherLead:
+      "You can still book a first conversation. The office will confirm whether the matter fits.",
+    office: "Office",
+    city: "Laranjeiras",
+    addressLabel: "Address",
+    maps: "Open in Google Maps",
+    hoursLabel: "Hours",
+    hours: "Monday to Friday, 10:00–18:00",
+    languages: "Portuguese and English",
+    photoAlt: "Lisbon, near the office in Laranjeiras",
+    message: "Hello, I would like to book a consultation.",
   },
 } as const;
 
-export default function Landing({ locale = "pt" }: { locale?: "pt" | "en" }) {
+const primary: {
+  key: RouteKey;
+  image: string;
+  pt: { title: string; text: string };
+  en: { title: string; text: string };
+}[] = [
+  {
+    key: "immigration",
+    image: "/images/services/imigracao-vistos.jpg",
+    pt: {
+      title: "Imigração e vistos",
+      text: "Vistos, autorização de residência, renovações, reagrupamento familiar e notificações da AIMA.",
+    },
+    en: {
+      title: "Immigration and visas",
+      text: "Visas, residence permits, renewals, family reunification and AIMA notices.",
+    },
+  },
+  {
+    key: "nationality",
+    image: "/images/services/nacionalidade.jpg",
+    pt: {
+      title: "Nacionalidade portuguesa",
+      text: "Residência, filhos e netos, casamento ou união de facto, e crianças nascidas em Portugal.",
+    },
+    en: {
+      title: "Portuguese nationality",
+      text: "Residence, children and grandchildren, marriage or partnership, and children born in Portugal.",
+    },
+  },
+];
+
+const others: {
+  key: RouteKey;
+  pt: [string, string];
+  en: [string, string];
+}[] = [
+  {
+    key: "tenancy",
+    pt: ["Arrendamento", "Contratos, rendas e entrega do imóvel."],
+    en: ["Tenancy", "Leases, rent and return of the property."],
+  },
+  {
+    key: "debtRecovery",
+    pt: ["Recuperação de crédito", "Cobrança extrajudicial ou em tribunal."],
+    en: ["Debt recovery", "Recovery before court, or in court."],
+  },
+  {
+    key: "companyLaw",
+    pt: ["Direito das sociedades", "Constituição, quotas e gerência."],
+    en: ["Company law", "Formation, quotas and management."],
+  },
+  {
+    key: "propertyInheritance",
+    pt: ["Património e sucessões", "Heranças, partilhas e testamentos."],
+    en: ["Property and inheritance", "Estates, division and wills."],
+  },
+  {
+    key: "criminalLaw",
+    pt: ["Direito penal", "Defesa desde a denúncia ao tribunal."],
+    en: ["Criminal law", "Defence from the complaint through to court."],
+  },
+  {
+    key: "administrativeLaw",
+    pt: ["Direito administrativo", "Decisões e notificações de entidades públicas."],
+    en: ["Administrative law", "Decisions and notices from public bodies."],
+  },
+];
+
+export default function Landing({ locale = "pt" }: { locale?: Locale }) {
   const text = copy[locale];
 
   return (
-    <section className={styles.landing} aria-labelledby="home-heading">
-      <div className={styles.bg} aria-hidden="true">
-        <img src="/images/home/lisboa-editorial.webp" alt="" />
-      </div>
-      <div className={styles.wrap}>
-        <div className={styles.top}>
-          <div className={styles.logo}>GJL</div>
-          <div>
-            <small>LISBOA</small>
-            <strong>{site.officeName}</strong>
-          </div>
-          <div className={styles.langs}>
-            <a href="/" aria-current={locale === "pt" ? "page" : undefined}>PT</a>
-            <a className={styles.en} href="/en" aria-current={locale === "en" ? "page" : undefined}>EN · English</a>
-          </div>
-        </div>
+    <>
+      <section className={styles.hero} aria-labelledby="home-heading">
         <div className={styles.photo}>
-          <img src="/images/team/equipa.jpg" alt="Equipa do Gabinete Jurídico Laranjeiras" />
+          <img src="/images/home/lisboa-editorial.webp" alt={text.photoAlt} />
         </div>
-        <h1 id="home-heading">{site.lawyerName}</h1>
-        <p className={styles.role}>{text.role} · Cédula {site.license}</p>
-        <p className={styles.hint}>{text.hint}</p>
-        <div className={styles.grid}>
-          {services[locale].map((service) => (
-            <a className={styles.card} href={service.href} key={service.title}>
-              <img src={service.image} alt="" />
-              <span>{service.title}</span>
-            </a>
-          ))}
+        <div className={styles.copy}>
+          <p className={styles.kicker}>{text.place}</p>
+          <h1 id="home-heading">{site.officeName}</h1>
+          <p className={styles.lead}>{text.lead}</p>
+          <p className={styles.role}>
+            {site.lawyerName} · {text.role} · {text.license} {site.license}
+          </p>
+          <a className={styles.button} href={whatsappHref(text.message)}>
+            {text.whatsapp}
+          </a>
+          <p className={styles.note}>{text.note}</p>
         </div>
-        <h2 className={styles.more}>{text.more}</h2>
-        <div className={styles.groups}>
-          {services[locale].map((service) => (
-            <article className={styles.group} key={service.title}>
-              <a href={service.href}>{service.title}</a>
-              <ul>
-                {service.items.map((item) => (
-                  <li key={item}><a href={service.href}>{item}</a></li>
-                ))}
-              </ul>
-            </article>
-          ))}
+      </section>
+
+      <section className={styles.section} aria-labelledby="areas-heading">
+        <p className={styles.rule}>{text.areas}</p>
+        <h2 id="areas-heading">{text.areasTitle}</h2>
+        <div className={styles.cards}>
+          {primary.map((item, index) => {
+            const card = item[locale];
+            return (
+              <Link className={styles.card} href={pathFor(locale, item.key)} key={item.key}>
+                <img src={item.image} alt="" />
+                <div>
+                  <small>{String(index + 1).padStart(2, "0")}</small>
+                  <h3>{card.title}</h3>
+                  <p>{card.text}</p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
-        <div className={styles.other} id="outro">
-          <strong>{text.other}</strong>
-          <p>{text.otherLead}</p>
-          <div className={styles.actions}>
-            <a href={whatsappHref(text.message)}>{text.whatsapp}</a>
-            <a href={text.contact}>{text.book}</a>
-            <a href={text.contact}>{text.contactLabel}</a>
-          </div>
-        </div>
-        <a className={styles.place} href={mapsLink}>
+        <ul className={styles.list}>
+          {others.map((item) => {
+            const [title, description] = item[locale];
+            return (
+              <li key={item.key}>
+                <Link href={pathFor(locale, item.key)}>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+        <div className={styles.other}>
           <div>
-            <small>{text.office}</small>
-            <p>{site.addressLine}</p>
+            <strong>{text.otherTitle}</strong>
+            <p>{text.otherLead}</p>
           </div>
-          <span className={styles.map}>Google Maps</span>
-        </a>
-      </div>
-    </section>
+          <a className={styles.ghost} href={whatsappHref(text.message)}>
+            {text.whatsapp}
+          </a>
+        </div>
+      </section>
+
+      <section className={styles.office} aria-labelledby="office-heading">
+        <div className={styles.officeInner}>
+          <div>
+            <p className={styles.rule}>{text.office}</p>
+            <h2 id="office-heading">{text.city}</h2>
+          </div>
+          <div>
+            <h3>{text.addressLabel}</h3>
+            <p>
+              Rua Abranches Ferrão, 11 A
+              <br />
+              1600-296 Lisboa
+            </p>
+            <a href={mapsLink}>{text.maps}</a>
+          </div>
+          <div>
+            <h3>{text.hoursLabel}</h3>
+            <p>
+              {text.hours}
+              <br />
+              {text.languages}
+              <br />
+              {site.email}
+            </p>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
