@@ -56,8 +56,8 @@ const copy = {
 const primary: {
   key: RouteKey;
   image: string;
-  pt: { title: string; text: string };
-  en: { title: string; text: string };
+  pt: { title: string; text: string; alt: string };
+  en: { title: string; text: string; alt: string };
 }[] = [
   {
     key: "immigration",
@@ -65,10 +65,12 @@ const primary: {
     pt: {
       title: "Imigração e vistos",
       text: "Vistos, autorização de residência, renovações, reagrupamento familiar e notificações da AIMA.",
+      alt: "Passaporte português e visto junto a uma mala no aeroporto de Lisboa",
     },
     en: {
       title: "Immigration and visas",
       text: "Visas, residence permits, renewals, family reunification and AIMA notices.",
+      alt: "Portuguese passport and visa beside a suitcase at Lisbon airport",
     },
   },
   {
@@ -77,10 +79,12 @@ const primary: {
     pt: {
       title: "Nacionalidade portuguesa",
       text: "Residência, filhos e netos, casamento ou união de facto, e crianças nascidas em Portugal.",
+      alt: "Mão a segurar um passaporte português com a bandeira de Portugal ao fundo",
     },
     en: {
       title: "Portuguese nationality",
       text: "Residence, children and grandchildren, marriage or partnership, and children born in Portugal.",
+      alt: "Hand holding a Portuguese passport with the flag of Portugal behind",
     },
   },
 ];
@@ -153,7 +157,7 @@ export default function Landing({ locale = "pt" }: { locale?: Locale }) {
             const card = item[locale];
             return (
               <Link className={styles.card} href={pathFor(locale, item.key)} key={item.key}>
-                <img src={item.image} alt="" />
+                <img src={item.image} alt={card.alt} />
                 <div>
                   <small>{String(index + 1).padStart(2, "0")}</small>
                   <h3>{card.title}</h3>

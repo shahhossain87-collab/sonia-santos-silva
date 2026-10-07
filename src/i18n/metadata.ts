@@ -3,6 +3,15 @@ import type { Metadata } from "next";
 import { localeOg, type Locale } from "./locales";
 import { pathFor, paths, type RouteKey } from "./routes";
 import { ui } from "./copy";
+import { seoTitles } from "./seo-titles";
+
+/** A route key, or the page's own PT/EN paths (used by dynamic subpages). */
+export type PageRoute = RouteKey | { pt: string; en?: string };
+
+function routePaths(route: PageRoute): { pt: string; en?: string } {
+  if (typeof route !== "string") return route;
+  return { pt: pathFor("pt", route), en: (paths[route] as { en?: string }).en };
+}
 
 export function absoluteUrl(path: string) {
   const origin = site.url.replace(/\/$/, "");
@@ -12,10 +21,10 @@ export function absoluteUrl(path: string) {
   return new URL(path, `${origin}/`).toString().replace(/\/$/, "");
 }
 
-export function languageAlternates(locale: Locale, key: RouteKey): NonNullable<Metadata["alternates"]> {
-  const pt = absoluteUrl(pathFor("pt", key));
-  const englishPath = (paths[key] as { en?: string }).en;
-  const en = englishPath ? absoluteUrl(englishPath) : undefined;
+export function languageAlternates(locale: Locale, route: PageRoute): NonNullable<Metadata["alternates"]> {
+  const own = routePaths(route);
+  const pt = absoluteUrl(own.pt);
+  const en = own.en ? absoluteUrl(own.en) : undefined;
   const canonical = locale === "en" && en ? en : pt;
 
   return {
@@ -34,19 +43,19 @@ function absoluteTitle(_locale: Locale, title: string) {
 
 export function pageMetadata(
   locale: Locale,
-  key: RouteKey,
+  route: PageRoute,
   extras: {
     title: string;
     description: string;
   },
 ): Metadata {
-  const title = absoluteTitle(locale, extras.title);
-  const englishPath = (paths[key] as { en?: string }).en;
-  const currentPath = locale === "en" && englishPath ? englishPath : pathFor("pt", key);
+  const own = routePaths(route);
+  const currentPath = locale === "en" && own.en ? own.en : own.pt;
+  const title = absoluteTitle(locale, seoTitles[currentPath] ?? extras.title);
   return {
     title: { absolute: title },
     description: extras.description,
-    alternates: languageAlternates(locale, key),
+    alternates: languageAlternates(locale, route),
     openGraph: {
       title,
       description: extras.description,
