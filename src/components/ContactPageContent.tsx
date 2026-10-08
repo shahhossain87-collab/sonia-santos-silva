@@ -47,12 +47,13 @@ export default function ContactPageContent({ locale }: { locale: Locale }) {
             >
               {site.addressLine}
             </a>
+            <p className="mt-1 text-sm text-body-color">{site.landmark[locale]}</p>
           </div>
           <div>
             <p className="text-[11px] tracking-[0.16em] text-gold uppercase">
               {copy.contactPage.hours}
             </p>
-            <p className="mt-1 whitespace-nowrap text-sm text-navy">{site.hours}</p>
+            <p className="mt-1 text-sm text-navy">{copy.home.hours}</p>
           </div>
         </div>
         <div className="container mt-5">
@@ -84,7 +85,7 @@ export default function ContactPageContent({ locale }: { locale: Locale }) {
         <div className="container mt-10">
           <h2 className="font-display text-3xl">{copy.contactPage.mapTitle}</h2>
           <p className="mt-2 text-sm text-body-color">{copy.contactPage.mapLead}</p>
-          <OfficeMap className="mt-6 h-[320px] md:h-[380px]" />
+          <OfficeMap locale={locale} className="mt-6 h-[300px] sm:h-[340px] md:h-[400px]" />
         </div>
       </section>
     </>

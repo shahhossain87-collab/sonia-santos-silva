@@ -1,5 +1,8 @@
+import ImmigrationArea from "@/components/ImmigrationArea";
+import TopicDetailPage from "@/components/TopicDetailPage";
 import { site, whatsappHref } from "@/config/site";
-import { immigrationTopics, type ImmigrationTopic } from "@/data/immigration";
+import type { ImmigrationTopic } from "@/data/immigration";
+import { getTopicDetail } from "@/data/topic-details";
 import type { Locale } from "@/i18n/locales";
 import { pathFor } from "@/i18n/routes";
 import Image from "next/image";
@@ -81,57 +84,7 @@ function WhatsAppMark() {
 }
 
 export function ImmigrationLandingPage({ locale }: { locale: Locale }) {
-  const copy = labels[locale];
-
-  return (
-    <>
-      <section className="bg-navy py-8 text-white md:py-10">
-        <div className="container">
-          <Breadcrumbs locale={locale} current={copy.parent} isParent />
-          <p className="gold-rule">{copy.eyebrow}</p>
-          <h1 className="mt-3 max-w-3xl font-display text-3xl leading-tight md:text-4xl">
-            {copy.parent}
-          </h1>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/75 md:text-base">
-            {copy.parentLead}
-          </p>
-        </div>
-      </section>
-      <section className="py-10 md:py-12">
-        <div className="container max-w-4xl">
-          <p className="text-sm leading-relaxed text-body-color">{copy.listLead}</p>
-          <ol className="mt-8 space-y-4">
-            {immigrationTopics.map((topic, index) => (
-              <li key={topic.key}>
-                <article className="overflow-hidden border border-navy/10 bg-white transition hover:border-gold hover:shadow-one">
-                  <Link href={pathFor(locale, topic.key)} className="group block">
-                    <div className="relative aspect-[16/8]">
-                      <Image
-                        src={`/images/services/subcards/${topic.image}.jpg`}
-                        alt={topic.imageAlt[locale]}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 896px"
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="p-5 md:p-6">
-                      <p className="text-xs font-semibold tracking-[0.16em] text-gold uppercase">
-                        {String(index + 1).padStart(2, "0")}
-                      </p>
-                      <h2 className="mt-2 font-display text-2xl text-navy group-hover:text-gold-dark">
-                        {topic.title[locale]}
-                      </h2>
-                      <p className="mt-2 text-sm leading-relaxed text-body-color">{topic.summary[locale]}</p>
-                    </div>
-                  </Link>
-                </article>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-    </>
-  );
+  return <ImmigrationArea locale={locale} />;
 }
 
 export function ImmigrationTopicPage({
@@ -141,6 +94,9 @@ export function ImmigrationTopicPage({
   locale: Locale;
   topic: ImmigrationTopic;
 }) {
+  const detail = getTopicDetail(topic.key);
+  if (detail) return <TopicDetailPage locale={locale} topic={topic} detail={detail} />;
+
   const copy = labels[locale];
   const message =
     locale === "pt"

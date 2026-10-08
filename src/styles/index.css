@@ -9,35 +9,37 @@
   --breakpoint-xl: 1200px;
   --breakpoint-2xl: 1400px;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-playfair), ui-serif, Georgia, "Times New Roman",
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-serif), ui-serif, Georgia, "Times New Roman",
     serif;
 
   --color-current: currentColor;
   --color-transparent: transparent;
   --color-white: #ffffff;
-  --color-navy: #0b1628;
-  --color-navy-soft: #1a2332;
-  --color-gold: #c9a96e;
-  --color-gold-dark: #b08d4f;
-  --color-cream: #f6f4ef;
-  --color-cream-dark: #ece7dc;
-  --color-primary: #c9a96e;
-  --color-black: #0b1628;
+  --color-navy: #1a2238;
+  --color-navy-deep: #121a2c;
+  --color-navy-soft: #2a3550;
+  --color-gold: #b8925a;
+  --color-gold-light: #d4bc8a;
+  --color-gold-dark: #8a6a38;
+  --color-cream: #f8f6f1;
+  --color-cream-dark: #efe9de;
+  --color-primary: #b8925a;
+  --color-black: #1a2238;
   --color-dark: #1a2332;
-  --color-body-color: #5b6472;
+  --color-body-color: #4f5869;
   --color-body-color-dark: #c5c0b6;
-  --color-bg-color-dark: #0b1628;
+  --color-bg-color-dark: #1a2238;
   --color-gray-dark: #1a2332;
   --color-gray-light: #f6f4ef;
-  --color-stroke-stroke: #e3ddd2;
+  --color-stroke-stroke: #e6dfd2;
   --color-stroke-dark: #2a3444;
 
-  --shadow-one: 0px 2px 3px rgba(11, 22, 40, 0.05);
-  --shadow-two: 0px 12px 40px rgba(11, 22, 40, 0.1);
-  --shadow-three: 0px 8px 24px rgba(11, 22, 40, 0.08);
-  --shadow-sticky: inset 0 -1px 0 0 rgba(11, 22, 40, 0.08);
-  --shadow-btn: 0px 1px 2px rgba(11, 22, 40, 0.15);
+  --shadow-one: 0px 2px 3px rgba(26, 34, 56, 0.05);
+  --shadow-two: 0px 12px 40px rgba(26, 34, 56, 0.1);
+  --shadow-three: 0px 8px 24px rgba(26, 34, 56, 0.08);
+  --shadow-sticky: inset 0 -1px 0 0 rgba(26, 34, 56, 0.08);
+  --shadow-btn: 0px 1px 2px rgba(26, 34, 56, 0.15);
 }
 
 @utility container {
@@ -106,19 +108,46 @@
   }
 
   .btn-gold {
-    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-gold px-6 py-3 text-sm font-semibold tracking-wide text-navy transition duration-300 ease-out hover:bg-gold-dark;
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-[2px] border border-gold bg-gold px-7 py-3 text-[15px] font-semibold tracking-[0.01em] text-navy-deep shadow-[0_8px_24px_-12px_rgba(184,146,90,0.7)] transition duration-300 ease-out hover:border-gold-light hover:bg-gold-light;
   }
 
   .btn-navy {
-    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-navy px-6 py-3 text-sm font-semibold tracking-wide text-white transition duration-300 ease-out hover:bg-navy-soft;
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-[2px] border border-navy bg-navy px-7 py-3 text-[15px] font-semibold tracking-[0.01em] text-white transition duration-300 ease-out hover:bg-navy-soft;
   }
 
   .btn-outline-light {
-    @apply inline-flex items-center justify-center gap-2 rounded-sm border border-white/40 px-6 py-3 text-sm font-semibold tracking-wide text-white transition duration-300 ease-out hover:border-gold hover:text-gold;
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-[2px] border border-white/45 px-7 py-3 text-[15px] font-semibold tracking-[0.01em] text-white transition duration-300 ease-out hover:border-gold-light hover:text-gold-light;
   }
 
   .btn-outline-navy {
-    @apply inline-flex items-center justify-center gap-2 rounded-sm border border-navy/15 px-6 py-3 text-sm font-semibold tracking-wide text-navy transition duration-300 ease-out hover:border-gold hover:text-gold-dark;
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-[2px] border border-navy/25 px-7 py-3 text-[15px] font-semibold tracking-[0.01em] text-navy transition duration-300 ease-out hover:border-gold hover:text-gold-dark;
+  }
+
+  .btn-outline-gold {
+    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2.5 rounded-[2px] border border-gold/70 px-5 py-2.5 text-[14px] font-semibold tracking-[0.01em] text-gold-dark transition duration-300 ease-out hover:border-gold hover:bg-gold hover:text-navy-deep;
+  }
+
+  /* Thin gold rule with a small diamond, used under centred section titles. */
+  .ornament {
+    @apply mx-auto flex w-28 items-center justify-center gap-2.5 text-gold;
+  }
+
+  .ornament::before,
+  .ornament::after {
+    content: "";
+    @apply block h-px flex-1 bg-current opacity-70;
+  }
+
+  .ornament > span {
+    @apply block h-1.5 w-1.5 rotate-45 bg-current;
+  }
+
+  .eyebrow {
+    @apply text-[12px] font-semibold tracking-[0.24em] text-gold-dark uppercase;
+  }
+
+  .eyebrow-light {
+    @apply text-[12px] font-semibold tracking-[0.24em] text-gold-light uppercase;
   }
 }
 
@@ -215,7 +244,59 @@
   .btn-gold,
   .btn-navy,
   .btn-outline-light,
-  .btn-outline-navy {
+  .btn-outline-navy,
+  .btn-outline-gold {
     transition: none;
+  }
+}
+
+/* Homepage practice-area cards. */
+.service-card {
+  box-shadow: 0 1px 2px rgba(26, 34, 56, 0.04);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease;
+}
+
+.service-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(184, 146, 90, 0.45);
+  box-shadow: 0 24px 48px -28px rgba(26, 34, 56, 0.35);
+}
+
+.service-card:hover::after {
+  transform: scaleX(1);
+}
+
+.service-card__image {
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service-card:hover .service-card__image {
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .service-card::after,
+  .service-card__image {
+    transition: none;
+  }
+
+  .service-card:hover,
+  .service-card:hover .service-card__image {
+    transform: none;
   }
 }
