@@ -1,9 +1,10 @@
 import { WhatsAppIcon } from "@/components/CtaLink";
 import Reveal from "@/components/Reveal";
-import { mapsLink, site, whatsappHref } from "@/config/site";
+import { OfficeMapFrame, OpenInMapsLink } from "@/components/OfficeMap";
+import { site, whatsappHref } from "@/config/site";
 import { practiceAreas } from "@/data/practice-areas";
 import { serviceThumbnails } from "@/data/service-thumbnails";
-import { team } from "@/data/team";
+import { memberLicence, memberRole, team } from "@/data/team";
 import { getCopy, getServiceFinder } from "@/i18n/copy";
 import type { Locale } from "@/i18n/locales";
 import { pathFor } from "@/i18n/routes";
@@ -194,14 +195,17 @@ export function TeamPreview({ locale }: { locale: Locale }) {
         </div>
 
         <ul className="mt-10 flex flex-wrap justify-center gap-x-3 gap-y-8 md:mt-16 lg:flex-nowrap lg:gap-x-6">
-          {team.map((member, index) => (
+          {team.map((member, index) => {
+            const role = memberRole(member, locale);
+            const licence = memberLicence(member, locale);
+            return (
             <li key={member.photo} className="w-[calc((100%-1.5rem)/3)] lg:w-1/5">
               <Reveal delay={index * 0.07}>
                 <Link href={teamHref} className="group block">
                   <span className="photo-zoom relative block aspect-[4/5] overflow-hidden bg-navy-soft">
                     <Image
                       src={member.photo}
-                      alt={member.name && member.role ? `${member.name}, ${member.role.toLowerCase()}` : copy.home.teamFallbackAlt}
+                      alt={member.name && role ? `${member.name}, ${role.toLowerCase()}` : copy.home.teamFallbackAlt}
                       fill
                       sizes="(min-width: 992px) 230px, (min-width: 576px) 33vw, 50vw"
                       className="object-cover object-center"
@@ -212,14 +216,15 @@ export function TeamPreview({ locale }: { locale: Locale }) {
                   <span className="mt-3 block font-display text-[16px] leading-snug text-white group-hover:text-gold-light sm:text-[20px]">
                     {member.name}
                   </span>
-                  <span className="mt-1 block text-[12px] leading-snug text-white/65 sm:text-[13px]">{member.role}</span>
-                  {member.license ? (
-                    <span className="mt-1 block text-[11.5px] leading-snug text-gold-light/90 sm:text-[12.5px]">{member.license}</span>
+                  <span className="mt-1 block text-[12px] leading-snug text-white/65 sm:text-[13px]">{role}</span>
+                  {licence ? (
+                    <span className="mt-1 block text-[11.5px] leading-snug text-gold-light/90 sm:text-[12.5px]">{licence}</span>
                   ) : null}
                 </Link>
               </Reveal>
             </li>
-          ))}
+            );
+          })}
         </ul>
       </div>
     </section>
@@ -268,22 +273,32 @@ export function VisitOffice({ locale }: { locale: Locale }) {
               </dd>
             </div>
           </dl>
-          <a href={mapsLink} target="_blank" rel="noopener noreferrer" className="btn-navy mt-10">
-            {t.mapLink}
-          </a>
         </Reveal>
 
-        <Reveal delay={0.1}>
-          <div className="relative overflow-hidden bg-navy-deep p-3 shadow-[0_40px_80px_-40px_rgba(26,34,56,0.55)]">
-            <div className="azulejo-texture-light absolute inset-0" aria-hidden="true" />
-            <div className="relative flex min-h-[280px] flex-col justify-between gap-10 border border-gold/40 p-7 text-white sm:min-h-[420px] sm:p-10">
-              <p className="text-[12px] font-semibold tracking-[0.26em] text-gold-light uppercase">{copy.home.presenceLocation} · {site.city}</p>
-              <address className="not-italic">
-                <p className="font-display text-[30px] leading-[1.15] sm:text-[40px]">{street}</p>
-                <p className="mt-2 font-display text-[22px] text-white/75 sm:text-[26px]">{postal}</p>
-                <span className="azulejo-rule mt-7 block w-40" aria-hidden="true" />
-                <p className="mt-6 max-w-xs text-[15px] leading-relaxed text-white/75">{site.landmark[locale]}</p>
-              </address>
+        <Reveal delay={0.1} className="relative -mx-4 sm:mx-0">
+          <div className="absolute -top-4 -right-4 hidden h-full w-full border border-gold/50 sm:block" aria-hidden="true" />
+          <div className="relative bg-navy-deep shadow-[0_40px_80px_-40px_rgba(26,34,56,0.55)]">
+            <div className="relative overflow-hidden bg-cream-dark">
+              <OfficeMapFrame locale={locale} className="h-[300px] sm:h-[380px] lg:h-[440px]" />
+              <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gold" aria-hidden="true" />
+            </div>
+            <div className="relative overflow-hidden px-6 py-6 text-white sm:px-8 sm:py-7">
+              <div className="azulejo-texture-light absolute inset-0" aria-hidden="true" />
+              <div className="relative">
+                <address className="not-italic">
+                  <p className="text-[11px] font-semibold tracking-[0.24em] text-gold-light uppercase">
+                    {copy.home.presenceLocation} · {site.city}
+                  </p>
+                  <p className="mt-3 font-display text-[24px] leading-tight sm:text-[28px]">{street}</p>
+                  <p className="mt-1 text-[15px] whitespace-nowrap text-white/75">{postal}</p>
+                  <p className="mt-2 text-[14.5px] leading-relaxed text-white/70">{site.landmark[locale]}</p>
+                </address>
+                <span className="azulejo-rule mt-5 block w-32 opacity-80" aria-hidden="true" />
+                <OpenInMapsLink
+                  locale={locale}
+                  className="mt-5 border-b border-gold pb-1 text-[12.5px] font-semibold tracking-[0.14em] text-gold-light uppercase hover:text-white"
+                />
+              </div>
             </div>
           </div>
         </Reveal>
