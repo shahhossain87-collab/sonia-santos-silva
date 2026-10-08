@@ -1,5 +1,6 @@
 import { ImmigrationTopicPage } from "@/components/ImmigrationPages";
 import { getImmigrationTopic, immigrationTopics } from "@/data/immigration";
+import { getTopicDetail } from "@/data/topic-details";
 import { pageMetadata } from "@/i18n/metadata";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return pageMetadata("en", topic.key, {
     title: topic.title.en,
-    description: topic.summary.en,
+    description: getTopicDetail(topic.key)?.metaDescription.en ?? topic.summary.en,
   });
 }
 
