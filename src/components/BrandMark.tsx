@@ -66,8 +66,8 @@ export default function BrandMark({ inverted, compact, className = "" }: BrandMa
         style={{ width: "auto" }}
       />
       {compact ? (
-        <span className="ml-3 hidden min-w-0 flex-col xl:flex">
-          <span className="font-display text-[15px] leading-tight text-navy">
+        <span className="ml-3 flex min-w-0 flex-col xl:hidden 2xl:flex">
+          <span className={`font-display text-[14.5px] leading-tight sm:text-[15.5px] ${inverted ? "text-white" : "text-navy"}`}>
             {copy.brand.name}
           </span>
           <span className={`mt-0.5 text-[10px] font-semibold tracking-[0.16em] uppercase ${descriptorClass}`}>

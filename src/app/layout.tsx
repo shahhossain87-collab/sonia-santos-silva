@@ -13,6 +13,7 @@ import { EB_Garamond, Source_Sans_3 } from "next/font/google";
 import { headers } from "next/headers";
 import { Providers } from "./providers";
 import "../styles/index.css";
+import "../styles/site.css";
 
 const sans = Source_Sans_3({
   subsets: ["latin", "latin-ext"],
@@ -84,6 +85,8 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* Marks that JavaScript runs, so scroll reveals may start hidden. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <JsonLd locale={locale} />
       </head>
       <body className="bg-cream font-sans text-navy antialiased">
