@@ -40,6 +40,10 @@ export const site = {
   whatsappMessage: "Olá, gostaria de agendar uma consulta.",
   addressLine: "Rua Abranches Ferrão, 11 A, 1600-296 Lisboa",
   city: "Lisboa",
+  landmark: {
+    pt: "Em frente à Loja do Cidadão das Laranjeiras",
+    en: "Opposite the Loja do Cidadão (Citizen Shop) in Laranjeiras",
+  },
   hours: "Monday to Friday, 10:00–18:00",
   languages: ["Português", "Inglês"],
   disclaimer:
