@@ -1,0 +1,235 @@
+/* Styles for the multi-page site structure (header menus, homepage rows,
+   inner-page template, azulejo decoration). Loaded after index.css. */
+
+/* Scroll reveal. Content is only hidden when JavaScript is running (html.js is
+   set by an inline script in the layout), so pages read fine without JS. */
+.reveal {
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.js .reveal:not(.is-in) {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  html.js .reveal:not(.is-in) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- Site navigation ---------- */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 22px;
+  height: 1px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link:hover::after,
+.nav-link[data-active="true"]::after,
+.nav-dropdown:hover > .nav-link::after,
+.nav-dropdown:focus-within > .nav-link::after {
+  transform: scaleX(1);
+}
+
+.nav-panel {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0.35s;
+}
+
+.nav-dropdown:hover > .nav-panel,
+.nav-dropdown:focus-within > .nav-panel {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition:
+    opacity 0.25s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s;
+}
+
+.mobile-menu {
+  height: calc(100dvh - var(--site-header-height, 65px) + 1px);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0.35s;
+}
+
+.mobile-menu.is-open {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.25s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s;
+}
+
+html.menu-open body {
+  overflow: hidden;
+}
+
+.mobile-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mobile-collapse[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+/* ---------- Portuguese tile (azulejo) inspired decoration ---------- */
+.azulejo-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%231a2238' stroke-opacity='0.055' stroke-width='1'%3E%3Cpath d='M32 8c5 10 11 16 24 24-13 8-19 14-24 24-5-10-11-16-24-24 13-8 19-14 24-24Z'/%3E%3Ccircle cx='32' cy='32' r='5'/%3E%3Cpath d='M0 0h64v64H0z'/%3E%3Cpath d='M0 10A10 10 0 0 0 10 0M54 0a10 10 0 0 0 10 10M64 54a10 10 0 0 0-10 10M10 64A10 10 0 0 0 0 54'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 64px 64px;
+}
+
+.azulejo-texture-light {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23d4bc8a' stroke-opacity='0.12' stroke-width='1'%3E%3Cpath d='M32 8c5 10 11 16 24 24-13 8-19 14-24 24-5-10-11-16-24-24 13-8 19-14 24-24Z'/%3E%3Ccircle cx='32' cy='32' r='5'/%3E%3Cpath d='M0 10A10 10 0 0 0 10 0M54 0a10 10 0 0 0 10 10M64 54a10 10 0 0 0-10 10M10 64A10 10 0 0 0 0 54'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 64px 64px;
+}
+
+/* A thin band of small tiles, used as a divider. */
+.azulejo-rule {
+  height: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12' viewBox='0 0 24 12'%3E%3Cg fill='none' stroke='%23b8925a' stroke-width='1'%3E%3Cpath d='M12 1.5 16.5 6 12 10.5 7.5 6Z'/%3E%3Cpath d='M0 6h4M20 6h4'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 24px 12px;
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+/* ---------- Editorial practice-area rows ---------- */
+.area-row {
+  position: relative;
+  transition: background-color 0.35s ease;
+}
+
+.area-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  height: 1px;
+  width: 100%;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.area-row:hover::before,
+.area-row:focus-within::before {
+  transform: scaleX(1);
+}
+
+.area-row__thumb img {
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.area-row:hover .area-row__thumb img {
+  transform: scale(1.06);
+}
+
+.area-row__arrow {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.area-row:hover .area-row__arrow {
+  transform: translateX(6px);
+}
+
+.link-arrow span {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-arrow:hover span {
+  transform: translateX(5px);
+}
+
+.photo-zoom img {
+  transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.photo-zoom:hover img {
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link::after,
+  .nav-panel,
+  .mobile-menu,
+  .mobile-collapse,
+  .area-row,
+  .area-row::before,
+  .area-row__thumb img,
+  .area-row__arrow,
+  .link-arrow span,
+  .photo-zoom img {
+    transition: none;
+  }
+
+  .area-row:hover .area-row__thumb img,
+  .area-row:hover .area-row__arrow,
+  .link-arrow:hover span,
+  .photo-zoom:hover img {
+    transform: none;
+  }
+}
+
+/* ---------- Inner-page banner ---------- */
+.banner-zoom {
+  animation: banner-zoom 24s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.banner-rise {
+  animation: banner-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+h1.banner-rise { animation-delay: 0.08s; }
+p.banner-rise + h1 + p.banner-rise { animation-delay: 0.16s; }
+
+@keyframes banner-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
+@keyframes banner-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner-zoom,
+  .banner-rise {
+    animation: none;
+  }
+}
