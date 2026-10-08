@@ -7,6 +7,7 @@ import { mapsLink, site, whatsappHref } from "@/config/site";
 import { getServiceFinder, immigrationItems } from "@/i18n/copy";
 import { pathFor } from "@/i18n/routes";
 import { areaTitle } from "@/components/Home/homeText";
+import { licenceLine } from "@/data/team";
 import { useCopy } from "@/i18n/use-locale";
 import Link from "next/link";
 
@@ -41,7 +42,7 @@ export default function Footer() {
           <p className="mt-6 text-[13px] leading-relaxed text-white/55">
             {site.lawyerName} · {copy.home.heroRole}
             <br />
-            {copy.home.heroLicense} {site.license}
+            {licenceLine[locale]}
           </p>
         </div>
 

@@ -210,6 +210,14 @@
   line-height: 1.45;
 }
 
+.bar {
+  margin-top: 1px;
+  color: rgb(255 255 255 / 70%);
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
 .meta b {
   color: var(--color-gold-light);
   font-weight: 600;

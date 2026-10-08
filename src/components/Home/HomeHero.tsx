@@ -3,6 +3,7 @@ import { site, whatsappHref } from "@/config/site";
 import { getCopy } from "@/i18n/copy";
 import type { Locale } from "@/i18n/locales";
 import Image from "next/image";
+import { barAssociation, licenceNumber } from "@/data/team";
 import { homeText } from "./homeText";
 import styles from "./HomeHero.module.css";
 
@@ -16,8 +17,9 @@ function LawyerIdentity({ locale, decorative = false }: { locale: Locale; decora
       <span>
         <span className={`${styles.name} block`}>Dra. {site.lawyerName}</span>
         <span className={`${styles.meta} block`}>
-          {copy.home.heroRole} · <b>{copy.home.heroLicense} {site.license}</b>
+          {copy.home.heroRole} · <b>{licenceNumber[locale]}</b>
         </span>
+        <span className={`${styles.bar} block`}>{barAssociation[locale]}</span>
       </span>
     </>
   );
