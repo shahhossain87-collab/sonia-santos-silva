@@ -9,20 +9,21 @@ import { site } from "@/config/site";
 import { localeHtmlLang, localeOg, type Locale } from "@/i18n/locales";
 import { getLocaleFromPathname } from "@/i18n/routes";
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { EB_Garamond, Source_Sans_3 } from "next/font/google";
 import { headers } from "next/headers";
 import { Providers } from "./providers";
 import "../styles/index.css";
 
-const inter = Inter({
+const sans = Source_Sans_3({
   subsets: ["latin", "latin-ext"],
-  variable: "--font-inter",
+  variable: "--font-body",
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+const serif = EB_Garamond({
   subsets: ["latin", "latin-ext"],
-  variable: "--font-playfair",
+  weight: ["400", "500", "600"],
+  variable: "--font-serif",
   display: "swap",
 });
 
@@ -79,7 +80,7 @@ export default async function RootLayout({
   return (
     <html
       lang={localeHtmlLang[locale]}
-      className={`${inter.variable} ${playfair.variable}`}
+      className={`${sans.variable} ${serif.variable}`}
       suppressHydrationWarning
     >
       <head>
