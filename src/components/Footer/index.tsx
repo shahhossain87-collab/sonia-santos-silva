@@ -13,11 +13,11 @@ export default function Footer() {
   const cards = getCopy(locale).cards;
 
   return (
-    <footer className="bg-navy pb-20 text-white lg:pb-0">
-      <div className="container grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="relative border-t-2 border-gold bg-navy-deep pb-20 text-white lg:pb-0">
+      <div className="container grid max-w-[1240px] gap-12 py-16 md:grid-cols-2 md:py-20 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
         <div>
           <BrandMark inverted />
-          <p className="mt-6 max-w-xs text-sm text-white/70">
+          <p className="mt-6 max-w-xs font-display text-[18px] leading-relaxed text-white/80">
             {copy.footer.tagline}
           </p>
           <CtaLink className="mt-6">
@@ -27,10 +27,10 @@ export default function Footer() {
         </div>
 
         <div>
-          <h2 className="mb-5 text-sm font-semibold tracking-[0.18em] text-gold uppercase">
+          <h2 className="mb-6 border-b border-white/10 pb-3 font-sans text-[12px] font-semibold tracking-[0.24em] text-gold-light uppercase">
             {copy.footer.office}
           </h2>
-          <ul className="space-y-3 text-sm text-white/75">
+          <ul className="space-y-3 text-[15px] text-white/75">
             {copy.footer.officeLinks.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="hover:text-gold">
@@ -42,10 +42,10 @@ export default function Footer() {
         </div>
 
         <div>
-          <h2 className="mb-5 text-sm font-semibold tracking-[0.18em] text-gold uppercase">
+          <h2 className="mb-6 border-b border-white/10 pb-3 font-sans text-[12px] font-semibold tracking-[0.24em] text-gold-light uppercase">
             {copy.footer.areas}
           </h2>
-          <ul className="space-y-3 text-sm text-white/75">
+          <ul className="space-y-3 text-[15px] text-white/75">
             {homeServiceIds.map((id) => (
               <li key={id}>
                 <Link href={homeServiceHref(locale, id)} className="hover:text-gold">
@@ -57,10 +57,10 @@ export default function Footer() {
         </div>
 
         <div>
-          <h2 className="mb-5 text-sm font-semibold tracking-[0.18em] text-gold uppercase">
+          <h2 className="mb-6 border-b border-white/10 pb-3 font-sans text-[12px] font-semibold tracking-[0.24em] text-gold-light uppercase">
             {copy.footer.contact}
           </h2>
-          <ul className="space-y-3 text-sm text-white/75">
+          <ul className="space-y-3 text-[15px] text-white/75">
             <li>{site.addressLine}</li>
             <li>
               <a href={`mailto:${site.email}`} className="hover:text-gold">
@@ -98,7 +98,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container flex flex-col gap-3 py-6 text-xs leading-relaxed text-white/45 md:flex-row md:items-center md:justify-between">
+        <div className="container flex max-w-[1240px] flex-col gap-3 py-6 text-xs leading-relaxed text-white/45 md:flex-row md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} {site.officeName}. {copy.footer.rights}
           </p>
