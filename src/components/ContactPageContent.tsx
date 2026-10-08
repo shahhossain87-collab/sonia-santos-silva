@@ -85,7 +85,7 @@ export default function ContactPageContent({ locale }: { locale: Locale }) {
         <div className="container mt-10">
           <h2 className="font-display text-3xl">{copy.contactPage.mapTitle}</h2>
           <p className="mt-2 text-sm text-body-color">{copy.contactPage.mapLead}</p>
-          <OfficeMap className="mt-6 h-[320px] md:h-[380px]" />
+          <OfficeMap locale={locale} className="mt-6 h-[300px] sm:h-[340px] md:h-[400px]" />
         </div>
       </section>
     </>

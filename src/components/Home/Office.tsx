@@ -7,7 +7,7 @@ import { site } from "@/config/site";
 import { useCopy } from "@/i18n/use-locale";
 
 export default function Office() {
-  const { copy } = useCopy();
+  const { locale, copy } = useCopy();
 
   return (
     <section className="bg-white py-10 md:py-12">
@@ -36,7 +36,7 @@ export default function Office() {
           </CtaLink>
         </Reveal>
         <Reveal delay={0.1} className="min-w-0 max-w-full overflow-hidden">
-          <OfficeMap className="aspect-[4/3] min-h-[280px]" />
+          <OfficeMap locale={locale} className="aspect-[4/3] min-h-[280px]" />
         </Reveal>
       </div>
     </section>
