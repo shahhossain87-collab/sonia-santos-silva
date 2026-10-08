@@ -4,7 +4,7 @@ import BrandMark from "@/components/BrandMark";
 import ServicesMenu from "@/components/Header/ServicesMenu";
 import { isNavActive } from "@/components/Header/navActive";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import { site } from "@/config/site";
+import { site, whatsappHref } from "@/config/site";
 import { useCopy } from "@/i18n/use-locale";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -84,7 +84,7 @@ export default function Header() {
 
   return (
     <header ref={headerRef} className="sticky top-0 z-50">
-      <div className="hidden bg-navy text-[11px] tracking-[0.12em] text-white/70 uppercase sm:block">
+      <div className="hidden border-b border-gold/25 bg-navy-deep text-[11px] tracking-[0.16em] text-white/70 uppercase sm:block">
         <div className="container flex items-center justify-between py-2">
           <p>{copy.header.kicker}</p>
           <p className="flex items-center gap-6">
@@ -99,10 +99,10 @@ export default function Header() {
       </div>
 
       <div
-        className={`border-b bg-white transition-shadow duration-300 ${
+        className={`border-b bg-white/95 backdrop-blur-md transition-shadow duration-300 ${
           sticky
-            ? "border-navy/10 shadow-[0_10px_30px_rgba(11,22,40,0.10)]"
-            : "border-transparent shadow-none"
+            ? "border-navy/10 shadow-[0_10px_30px_rgba(26,34,56,0.10)]"
+            : "border-navy/5 shadow-none"
         }`}
       >
         <div className="container relative flex items-center justify-between gap-4 py-3 lg:py-0">
@@ -130,7 +130,7 @@ export default function Header() {
             <ul className="flex flex-col lg:flex-row lg:items-center lg:gap-1">
               {copy.nav.map((item) => {
                 const active = isNavActive(pathname, item.href, item.id);
-                const linkClassName = `block border-b-2 px-3 py-3 text-[12px] font-semibold tracking-[0.16em] uppercase transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold lg:py-5 ${
+                const linkClassName = `block border-b-2 px-3 py-3 text-[12.5px] font-semibold tracking-[0.18em] uppercase transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold lg:py-5 ${
                   active
                     ? "border-gold text-gold-dark"
                     : "border-transparent text-navy hover:text-gold-dark"
@@ -172,8 +172,16 @@ export default function Header() {
             </ul>
           </nav>
 
-          <div className="hidden items-center gap-4 lg:flex">
+          <div className="hidden items-center gap-5 lg:flex">
             <LanguageSwitcher />
+            <a
+              href={whatsappHref(copy.home.heroWhatsapp)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-gold min-h-10 px-5 py-2 text-[14px]"
+            >
+              {copy.home.presenceBookCta}
+            </a>
           </div>
         </div>
       </div>
