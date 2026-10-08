@@ -1,6 +1,8 @@
 import ImmigrationArea from "@/components/ImmigrationArea";
+import TopicDetailPage from "@/components/TopicDetailPage";
 import { site, whatsappHref } from "@/config/site";
 import type { ImmigrationTopic } from "@/data/immigration";
+import { getTopicDetail } from "@/data/topic-details";
 import type { Locale } from "@/i18n/locales";
 import { pathFor } from "@/i18n/routes";
 import Image from "next/image";
@@ -92,6 +94,9 @@ export function ImmigrationTopicPage({
   locale: Locale;
   topic: ImmigrationTopic;
 }) {
+  const detail = getTopicDetail(topic.key);
+  if (detail) return <TopicDetailPage locale={locale} topic={topic} detail={detail} />;
+
   const copy = labels[locale];
   const message =
     locale === "pt"

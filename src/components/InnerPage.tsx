@@ -123,11 +123,13 @@ export function FaqList({ items }: { items: readonly { q: string; a: string }[] 
 export function CtaBand({
   eyebrow,
   title,
+  lead,
   button,
   href,
 }: {
   eyebrow: string;
   title: string;
+  lead?: string;
   button: string;
   href: string;
 }) {
@@ -141,6 +143,7 @@ export function CtaBand({
             {eyebrow}
           </p>
           <h2 className="mt-4 max-w-2xl font-display text-[34px] leading-[1.1] font-medium sm:text-[44px]">{title}</h2>
+          {lead ? <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-white/80">{lead}</p> : null}
         </Reveal>
         <Reveal delay={0.08} className="shrink-0">
           <a href={href} target="_blank" rel="noopener noreferrer" className="btn-gold w-full sm:w-auto">
