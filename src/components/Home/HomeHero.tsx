@@ -77,16 +77,15 @@ export default function HomeHero({ locale }: { locale: Locale }) {
                   <span className={styles.meta}>
                     {licenceNumber[locale]} · {barAssociation[locale]}
                   </span>
+                  <span className={styles.langLine} data-langline>
+                    {t.heroLanguages}
+                  </span>
                 </figcaption>
               </figure>
             </div>
             <span className={styles.ornament} aria-hidden="true">
               <span />
             </span>
-            <p className={styles.lead}>
-              {t.heroLead}
-              <span className={styles.attendance}>{t.heroAttendance}</span>
-            </p>
           </div>
 
           <nav className={styles.areas} aria-label={t.heroAreas}>
