@@ -8,10 +8,7 @@ import type { Locale } from "@/i18n/locales";
  */
 export const homeText = {
   pt: {
-    heroEyebrow: "Gabinete Jurídico Laranjeiras · Lisboa",
     heroTitle: "Advogada em Direito Penal, Imigração e Direito Civil",
-    heroPrefix: "Advogada em",
-    heroTitleRest: "Direito Penal, Imigração e Direito Civil",
     heroLead: "Para pessoas, famílias e empresas. Atendimento em português e inglês.",
     heroAttendance: "Atendimento presencial em Lisboa e online em todo o país.",
     heroAreasAll: "Ver todas as áreas",
@@ -33,10 +30,7 @@ export const homeText = {
     city: "Lisboa · Portugal",
   },
   en: {
-    heroEyebrow: "Gabinete Jurídico Laranjeiras · Lisbon",
     heroTitle: "Lawyer in Criminal, Immigration and Civil Law",
-    heroPrefix: "Lawyer in",
-    heroTitleRest: "Criminal, Immigration and Civil Law",
     heroLead: "For individuals, families and businesses. Assistance in Portuguese and English.",
     heroAttendance: "In person in Lisbon and online throughout Portugal.",
     heroAreasAll: "View all areas",

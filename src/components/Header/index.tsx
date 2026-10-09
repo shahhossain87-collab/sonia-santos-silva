@@ -6,6 +6,8 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { mapsLink, site, whatsappHref } from "@/config/site";
 import { getMainNav, isNavItemActive, type NavItem } from "@/data/navigation";
 import { useCopy } from "@/i18n/use-locale";
+import { pathFor } from "@/i18n/routes";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -48,10 +50,18 @@ function Pin() {
   );
 }
 
-function DesktopItem({ item, active }: { item: NavItem; active: boolean }) {
-  const linkClass = `nav-link relative flex items-center gap-1.5 px-3 py-[30px] text-[12.5px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200 2xl:px-3.5 ${
-    active ? "text-gold-dark" : "text-navy hover:text-gold-dark"
-  }`;
+type Tone = "light" | "dark";
+
+function DesktopItem({ item, active, tone }: { item: NavItem; active: boolean; tone: Tone }) {
+  const colors =
+    tone === "dark"
+      ? active
+        ? "text-gold-light"
+        : "text-white/90 hover:text-gold-light"
+      : active
+        ? "text-gold-dark"
+        : "text-navy hover:text-gold-dark";
+  const linkClass = `nav-link relative flex items-center gap-1.5 px-3 py-[30px] text-[12.5px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200 2xl:px-3.5 ${colors}`;
 
   if (!item.columns) {
     return (
@@ -178,38 +188,109 @@ function MobileGroup({ item, active, onNavigate }: { item: NavItem; active: bool
   );
 }
 
+/** Logo, desktop navigation, booking button and menu toggle in one row. */
+function BarRow({
+  tone,
+  open,
+  onToggle,
+  pathname,
+}: {
+  tone: Tone;
+  open: boolean;
+  onToggle: () => void;
+  pathname: string;
+}) {
+  const { locale, copy } = useCopy();
+  const nav = getMainNav(locale);
+  const dark = tone === "dark";
+  const line = `absolute left-0 block h-px w-5 transition duration-300 ${dark ? "bg-white" : "bg-navy"}`;
+
+  return (
+    <div className="container flex max-w-[1360px] items-center justify-between gap-4 py-3 xl:py-0">
+      <BrandMark compact inverted={dark} />
+
+      <nav aria-label={copy.header.mobileNav} className="hidden xl:block">
+        <ul className="flex items-center">
+          {nav.map((item) => (
+            <DesktopItem key={item.id} item={item} active={isNavItemActive(pathname, item)} tone={tone} />
+          ))}
+        </ul>
+      </nav>
+
+      <div className="flex items-center gap-3">
+        <a
+          href={whatsappHref(copy.home.heroWhatsapp)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-gold hidden min-h-11 px-6 py-2 text-[14px] md:inline-flex"
+        >
+          {copy.home.presenceBookCta}
+        </a>
+        <button
+          type="button"
+          className={`flex h-11 items-center gap-2.5 border px-3 text-[11px] font-semibold tracking-[0.18em] uppercase xl:hidden ${
+            dark ? "border-white/35 bg-navy-deep/30 text-white backdrop-blur-sm" : "border-navy/15 text-navy"
+          }`}
+          aria-label={open ? copy.header.closeMenu : copy.header.openMenu}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          onClick={onToggle}
+        >
+          <span className="hidden xs:inline">Menu</span>
+          <span className="relative block h-3 w-5" aria-hidden="true">
+            <span className={`${line} ${open ? "top-1.5 rotate-45" : "top-0"}`} />
+            <span className={`${line} top-1.5 ${open ? "opacity-0" : ""}`} />
+            <span className={`${line} ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
+          </span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function Header() {
   const pathname = usePathname() ?? "/";
   const { locale, copy } = useCopy();
   const nav = getMainNav(locale);
+  const isHome = pathname === pathFor(locale, "home");
   const [open, setOpen] = useState(false);
   const [sticky, setSticky] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
+  const [menuTop, setMenuTop] = useState(65);
   const headerRef = useRef<HTMLElement>(null);
+  const slimRef = useRef<HTMLDivElement>(null);
   const t =
     locale === "pt"
-      ? { kicker: "Gabinete jurídico em Lisboa · Laranjeiras", time: "Lisboa", menu: "Menu", street: "Rua Abranches Ferrão, 11 A · Lisboa" }
-      : { kicker: "Law office in Lisbon · Laranjeiras", time: "Lisbon", menu: "Menu", street: "Rua Abranches Ferrão, 11 A · Lisbon" };
+      ? { kicker: "Gabinete jurídico em Lisboa · Laranjeiras", time: "Lisboa", street: "Rua Abranches Ferrão, 11 A · Lisboa" }
+      : { kicker: "Law office in Lisbon · Laranjeiras", time: "Lisbon", street: "Rua Abranches Ferrão, 11 A · Lisbon" };
 
+  // --site-header-height is the height of whatever stays pinned to the top:
+  // the slim white bar on the homepage, the whole header elsewhere.
   useEffect(() => {
-    const header = headerRef.current;
-    if (!header) return;
+    const target = isHome ? slimRef.current : headerRef.current;
+    if (!target) return;
     const update = () =>
-      document.documentElement.style.setProperty("--site-header-height", `${header.getBoundingClientRect().height}px`);
+      document.documentElement.style.setProperty("--site-header-height", `${target.getBoundingClientRect().height}px`);
     const observer = new ResizeObserver(update);
-    observer.observe(header);
+    observer.observe(target);
     update();
     return () => {
       observer.disconnect();
       document.documentElement.style.removeProperty("--site-header-height");
     };
-  }, []);
+  }, [isHome]);
 
   useEffect(() => {
-    const onScroll = () => setSticky(window.scrollY > 24);
+    const onScroll = () => {
+      setSticky(window.scrollY > 24);
+      const header = headerRef.current;
+      const slim = slimRef.current;
+      if (isHome && header && slim) setCollapsed(window.scrollY > header.offsetHeight - slim.offsetHeight);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHome]);
 
   useEffect(() => {
     setOpen(false);
@@ -234,105 +315,111 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // The menu panel opens directly below whichever bar is visible.
+  const toggle = () => {
+    const bar = isHome && collapsed ? slimRef.current : headerRef.current;
+    if (bar) setMenuTop(Math.max(0, Math.round(bar.getBoundingClientRect().bottom)));
+    setOpen((value) => !value);
+  };
+
+  const whiteBar = (
+    <div
+      className={`relative border-b bg-white transition-shadow duration-300 ${
+        sticky ? "border-navy/10 shadow-[0_10px_30px_rgba(26,34,56,0.10)]" : "border-navy/8"
+      }`}
+    >
+      <BarRow tone="light" open={open} onToggle={toggle} pathname={pathname} />
+    </div>
+  );
+
   return (
-    <header ref={headerRef} className="sticky top-0 z-50">
-      <div className="hidden bg-navy-deep text-[11.5px] tracking-[0.12em] text-white/70 md:block">
-        <div className="container flex max-w-[1360px] items-center justify-between gap-6 py-2">
-          <p className="uppercase">{t.kicker}</p>
-          <div className="flex items-center gap-6">
-            <a href={mapsLink} target="_blank" rel="noopener noreferrer" className="hidden items-center gap-2 hover:text-gold-light lg:flex">
-              <Pin />
-              {t.street}
-            </a>
-            <span className="hidden xl:inline">
-              {t.time} <LisbonClock />
-            </span>
-            <a href={`mailto:${site.email}`} className="hidden hover:text-gold-light lg:inline">
-              {site.email}
-            </a>
-            <LanguageSwitcher className="border-l border-white/15 pl-6 [&_a]:text-white/55 [&_a:hover]:text-gold-light [&_a[aria-current=true]]:text-white [&_span]:text-white/25" />
+    <>
+      <header ref={headerRef} className={isHome ? "relative z-50" : "sticky top-0 z-50"}>
+        <div className="hidden bg-navy-deep text-[11.5px] tracking-[0.12em] text-white/70 md:block">
+          <div className="container flex max-w-[1360px] items-center justify-between gap-6 py-2">
+            <p className="uppercase">{t.kicker}</p>
+            <div className="flex items-center gap-6">
+              <a href={mapsLink} target="_blank" rel="noopener noreferrer" className="hidden items-center gap-2 hover:text-gold-light lg:flex">
+                <Pin />
+                {t.street}
+              </a>
+              <span className="hidden xl:inline">
+                {t.time} <LisbonClock />
+              </span>
+              <a href={`mailto:${site.email}`} className="hidden hover:text-gold-light lg:inline">
+                {site.email}
+              </a>
+              <LanguageSwitcher className="border-l border-white/15 pl-6 [&_a]:text-white/55 [&_a:hover]:text-gold-light [&_a[aria-current=true]]:text-white [&_span]:text-white/25" />
+            </div>
           </div>
         </div>
-      </div>
+
+        {isHome ? (
+          <div className="photo-header">
+            <div className="photo-header-scene" aria-hidden="true">
+              <Image
+                src="/images/team/gjl-team-header.svg"
+                alt=""
+                width={1536}
+                height={1024}
+                preload
+                unoptimized
+                className="photo-header-image"
+              />
+            </div>
+            <div className="photo-header-shade" aria-hidden="true" />
+            <div className="relative">
+              <BarRow tone="dark" open={open} onToggle={toggle} pathname={pathname} />
+            </div>
+          </div>
+        ) : (
+          whiteBar
+        )}
+      </header>
+
+      {isHome ? (
+        <div
+          ref={slimRef}
+          className={`fixed inset-x-0 top-0 z-50 transition-[transform,visibility] duration-300 ${
+            collapsed ? "visible translate-y-0" : "invisible -translate-y-full"
+          }`}
+          aria-hidden={!collapsed}
+          inert={!collapsed}
+        >
+          {whiteBar}
+        </div>
+      ) : null}
 
       <div
-        className={`relative border-b bg-white transition-shadow duration-300 ${
-          sticky ? "border-navy/10 shadow-[0_10px_30px_rgba(26,34,56,0.10)]" : "border-navy/8"
-        }`}
+        id="mobile-menu"
+        className={`mobile-menu fixed inset-x-0 z-50 overflow-y-auto border-t border-navy/10 bg-white xl:hidden ${open ? "is-open" : ""}`}
+        style={{ top: menuTop, height: `calc(100dvh - ${menuTop}px)` }}
+        aria-hidden={!open}
+        inert={!open}
       >
-        <div className="container flex max-w-[1360px] items-center justify-between gap-4 py-3 xl:py-0">
-          <BrandMark compact />
-
-          <nav aria-label={copy.header.mobileNav} className="hidden xl:block">
-            <ul className="flex items-center">
-              {nav.map((item) => (
-                <DesktopItem key={item.id} item={item} active={isNavItemActive(pathname, item)} />
-              ))}
-            </ul>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <a
-              href={whatsappHref(copy.home.heroWhatsapp)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-gold hidden min-h-11 px-6 py-2 text-[14px] md:inline-flex"
-            >
-              {copy.home.presenceBookCta}
-            </a>
-            <button
-              type="button"
-              className="flex h-11 items-center gap-2.5 border border-navy/15 px-3 text-[11px] font-semibold tracking-[0.18em] text-navy uppercase xl:hidden"
-              aria-label={open ? copy.header.closeMenu : copy.header.openMenu}
-              aria-expanded={open}
-              aria-controls="mobile-menu"
-              onClick={() => setOpen((value) => !value)}
-            >
-              <span className="hidden xs:inline">{t.menu}</span>
-              <span className="relative block h-3 w-5" aria-hidden="true">
-                <span className={`absolute left-0 block h-px w-5 bg-navy transition duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
-                <span className={`absolute top-1.5 left-0 block h-px w-5 bg-navy transition duration-300 ${open ? "opacity-0" : ""}`} />
-                <span className={`absolute left-0 block h-px w-5 bg-navy transition duration-300 ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
-              </span>
-            </button>
+        <div className="container max-w-[640px] pt-2 pb-10">
+          <ul>
+            {nav.map((item) => (
+              <MobileGroup key={item.id} item={item} active={isNavItemActive(pathname, item)} onNavigate={() => setOpen(false)} />
+            ))}
+          </ul>
+          <a href={whatsappHref(copy.home.heroWhatsapp)} target="_blank" rel="noopener noreferrer" className="btn-gold mt-8 w-full">
+            <WhatsAppIcon />
+            {copy.home.presenceBookCta}
+          </a>
+          <div className="mt-8 space-y-2 text-[14.5px] leading-relaxed text-body-color">
+            <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-dark uppercase">{t.kicker}</p>
+            <p>{site.addressLine}</p>
+            <p>{site.landmark[locale]}</p>
+            <p>
+              <a href={`tel:+${site.phoneDigits}`} className="text-navy">{site.phoneDisplay}</a>
+              {" · "}
+              <a href={`mailto:${site.email}`} className="break-all text-navy">{site.email}</a>
+            </p>
           </div>
-        </div>
-
-        <div
-          id="mobile-menu"
-          className={`mobile-menu absolute inset-x-0 top-full overflow-y-auto border-t border-navy/10 bg-white xl:hidden ${open ? "is-open" : ""}`}
-          aria-hidden={!open}
-          inert={!open}
-        >
-          <div className="container max-w-[640px] pt-2 pb-10">
-            <ul>
-              {nav.map((item) => (
-                <MobileGroup key={item.id} item={item} active={isNavItemActive(pathname, item)} onNavigate={() => setOpen(false)} />
-              ))}
-            </ul>
-            <a
-              href={whatsappHref(copy.home.heroWhatsapp)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-gold mt-8 w-full"
-            >
-              <WhatsAppIcon />
-              {copy.home.presenceBookCta}
-            </a>
-            <div className="mt-8 space-y-2 text-[14.5px] leading-relaxed text-body-color">
-              <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-dark uppercase">{t.kicker}</p>
-              <p>{site.addressLine}</p>
-              <p>{site.landmark[locale]}</p>
-              <p>
-                <a href={`tel:+${site.phoneDigits}`} className="text-navy">{site.phoneDisplay}</a>
-                {" · "}
-                <a href={`mailto:${site.email}`} className="break-all text-navy">{site.email}</a>
-              </p>
-            </div>
-            <LanguageSwitcher className="mt-6 text-[13px]" />
-          </div>
+          <LanguageSwitcher className="mt-6 text-[13px]" />
         </div>
       </div>
-    </header>
+    </>
   );
 }
