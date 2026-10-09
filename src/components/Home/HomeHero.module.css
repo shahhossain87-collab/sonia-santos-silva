@@ -17,16 +17,15 @@
   gap: 40px;
 }
 
-/* Desktop: headline, lead and buttons on the left; portrait and areas on the right. */
+/* Desktop: headline and buttons on the left; portrait and areas on the right. */
 .grid {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   grid-template-areas:
     "title lawyer"
     "ornament areas"
-    "lead areas"
     "actions areas";
-  grid-template-rows: auto auto auto 1fr;
+  grid-template-rows: auto auto 1fr;
   column-gap: clamp(48px, 6vw, 96px);
   align-items: start;
 }
@@ -39,20 +38,17 @@
 .heading { grid-area: title; }
 .lawyer { grid-area: lawyer; }
 .ornament { grid-area: ornament; }
-.lead { grid-area: lead; }
 .areas { grid-area: areas; }
 .actions { grid-area: actions; }
 
 .heading,
 .lawyer,
 .ornament,
-.lead,
 .areas,
 .actions {
   animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .lawyer { animation-delay: 0.08s; }
-.lead { animation-delay: 0.1s; }
 .areas { animation-delay: 0.14s; }
 .actions { animation-delay: 0.2s; }
 
@@ -134,18 +130,15 @@
   background: currentColor;
 }
 
-.lead {
-  margin-top: 22px;
-  max-width: 560px;
-  color: rgb(255 255 255 / 84%);
-  font-size: clamp(17px, 1.3vw, 19px);
-  line-height: 1.55;
-}
-
-.attendance {
-  display: block;
+/* Languages and attendance, one small muted line under the cédula. */
+.langLine {
   margin-top: 6px;
-  color: var(--color-gold-light);
+  color: rgb(212 188 138 / 78%);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
 }
 
 /* Practice areas: two columns of real links. */
@@ -316,7 +309,6 @@
   .heading,
   .lawyer,
   .ornament,
-  .lead,
   .areas,
   .actions {
     grid-area: auto;
@@ -390,13 +382,11 @@
   .ornament {
     display: none;
   }
-  .lead {
-    margin-top: 14px;
-    font-size: 15px;
-    line-height: 1.5;
-  }
-  .attendance {
+  .langLine {
+    flex-basis: 100%;
     margin-top: 4px;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
   }
   .areas {
     margin-top: 20px;
@@ -450,7 +440,6 @@
   .heading,
   .lawyer,
   .ornament,
-  .lead,
   .areas,
   .actions,
   :global(html.js) .areaList li .areaText,
