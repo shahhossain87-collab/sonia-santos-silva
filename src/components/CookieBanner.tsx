@@ -21,9 +21,9 @@ export default function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div className="relative z-50 border-t border-gold/20 bg-navy/95 px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] text-cream backdrop-blur-sm">
+    <div className="relative z-50 border-t border-gold/20 bg-navy/95 px-3 pt-1 pb-[max(0.25rem,env(safe-area-inset-bottom))] text-cream backdrop-blur-sm">
       <div className="container flex items-center justify-between gap-3">
-        <p className="min-w-0 text-[11px] leading-relaxed text-cream/80 sm:text-xs">
+        <p className="min-w-0 text-[10.5px] leading-snug text-cream/75 sm:text-[11.5px]">
           {copy.common.cookies}{" "}
           <Link href="/cookies" className="text-gold hover:underline">
             Cookies
@@ -35,7 +35,7 @@ export default function CookieBanner() {
         </p>
         <button
           type="button"
-          className="min-h-11 min-w-11 shrink-0 rounded-sm bg-gold px-3 py-1 text-[11px] font-semibold tracking-wide text-navy uppercase"
+          className="min-h-8 shrink-0 rounded-sm border border-gold/70 px-3 py-1 text-[10.5px] font-semibold tracking-wide text-gold-light uppercase hover:bg-gold hover:text-navy"
           onClick={() => {
             try {
               localStorage.setItem(STORAGE_KEY, "accepted");
