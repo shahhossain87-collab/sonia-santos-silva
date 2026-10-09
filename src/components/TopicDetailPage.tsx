@@ -44,8 +44,8 @@ export default function TopicDetailPage({
         image={`/images/services/subcards/${topic.image}.jpg`}
         imageAlt={topic.imageAlt[locale]}
         eyebrow={t.parent}
-        title={shortTitle}
-        lead={topic.summary[locale]}
+        title={d.bannerTitle ?? shortTitle}
+        lead={d.bannerTitle ? d.intro[0] : topic.summary[locale]}
         breadcrumbLabel={t.breadcrumb}
         crumbs={[
           { label: t.home, href: pathFor(locale, "home") },
@@ -68,6 +68,17 @@ export default function TopicDetailPage({
                 {paragraph}
               </p>
             ))}
+            {d.relatedTopics?.length ? (
+              <ul className="mt-6 space-y-3">
+                {d.relatedTopics.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href} className="text-[14px] font-semibold text-gold-dark underline underline-offset-4 hover:text-navy">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
             <Link
               href={pathFor(locale, "immigration")}
               className="link-arrow mt-8 inline-flex items-center gap-2 text-[14px] font-semibold text-gold-dark hover:text-navy"
