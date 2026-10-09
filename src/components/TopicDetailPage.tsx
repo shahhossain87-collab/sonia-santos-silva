@@ -9,8 +9,8 @@ import { pathFor } from "@/i18n/routes";
 import Link from "next/link";
 
 const labels = {
-  pt: { home: "Início", services: "Serviços", parent: "Imigração e Vistos", breadcrumb: "Navegação estrutural", back: "Ver todos os temas de Imigração e Vistos" },
-  en: { home: "Home", services: "Services", parent: "Immigration and Visas", breadcrumb: "Breadcrumb", back: "See all Immigration and Visas topics" },
+  pt: { home: "Início", services: "Serviços", parent: "Imigração e Vistos", breadcrumb: "Navegação estrutural", related: "Páginas relacionadas", back: "Ver todos os temas de Imigração e Vistos" },
+  en: { home: "Home", services: "Services", parent: "Immigration and Visas", breadcrumb: "Breadcrumb", related: "Related pages", back: "See all Immigration and Visas topics" },
 } as const;
 
 function Eyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
@@ -36,6 +36,7 @@ export default function TopicDetailPage({
   const d = detail.text[locale];
   const copy = getCopy(locale);
   const shortTitle = immigrationItems[locale].find((item) => item.href === pathFor(locale, topic.key))?.label ?? topic.title[locale];
+  const bodyIntro = d.bannerTitle ? d.intro.slice(1) : d.intro;
   const stepCols = d.steps.length >= 5 ? "lg:grid-cols-5" : "lg:grid-cols-4";
 
   return (
@@ -44,8 +45,8 @@ export default function TopicDetailPage({
         image={`/images/services/subcards/${topic.image}.jpg`}
         imageAlt={topic.imageAlt[locale]}
         eyebrow={t.parent}
-        title={shortTitle}
-        lead={topic.summary[locale]}
+        title={d.bannerTitle ?? shortTitle}
+        lead={d.bannerTitle ? d.intro[0] : topic.summary[locale]}
         breadcrumbLabel={t.breadcrumb}
         crumbs={[
           { label: t.home, href: pathFor(locale, "home") },
@@ -63,7 +64,7 @@ export default function TopicDetailPage({
             <span className="ornament mt-6 ml-0 w-24" aria-hidden="true">
               <span />
             </span>
-            {d.intro.map((paragraph, index) => (
+            {bodyIntro.map((paragraph, index) => (
               <p key={paragraph} className={`text-[17px] leading-relaxed ${index === 0 ? "mt-6 text-navy" : "mt-4 text-body-color"}`}>
                 {paragraph}
               </p>
@@ -89,6 +90,21 @@ export default function TopicDetailPage({
               </ol>
               <p className="mt-7 border-l-2 border-gold/70 pl-4 text-[14px] leading-relaxed text-body-color">{d.helpNote}</p>
             </div>
+            {d.relatedTopics?.length ? (
+              <nav aria-label={t.related} className="mt-8">
+                <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-dark uppercase">{t.related}</p>
+                <ul className="mt-3 space-y-2.5">
+                  {d.relatedTopics.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className="link-arrow inline-flex items-start gap-2 text-[14px] font-semibold text-navy hover:text-gold-dark">
+                        <span aria-hidden="true" className="text-gold">→</span>
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ) : null}
           </Reveal>
         </div>
       </section>
