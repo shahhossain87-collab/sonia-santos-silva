@@ -2,10 +2,10 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  display: flex;
   color: #fff;
   background: var(--color-navy-deep);
   min-height: min(calc(100svh - var(--site-header-height, 65px)), 860px);
+  display: flex;
 }
 
 .scene {
@@ -27,39 +27,44 @@
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(90deg, rgb(18 26 44 / 94%) 0%, rgb(18 26 44 / 82%) 40%, rgb(26 34 56 / 42%) 72%, rgb(26 34 56 / 28%) 100%),
-    linear-gradient(0deg, rgb(18 26 44 / 92%) 0%, transparent 42%);
+    linear-gradient(90deg, rgb(18 26 44 / 95%) 0%, rgb(18 26 44 / 86%) 48%, rgb(18 26 44 / 72%) 100%),
+    linear-gradient(0deg, rgb(18 26 44 / 92%) 0%, transparent 40%);
 }
 
 .inner {
   width: 100%;
-  max-width: 1360px;
+  max-width: 1280px;
   margin-inline: auto;
-  padding: clamp(64px, 11vh, 128px) 1rem 0;
+  padding: clamp(56px, 9vh, 104px) 1.25rem 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 56px;
+  gap: 48px;
 }
 
-.intro {
-  max-width: 700px;
+/* Desktop: text on the left, practice areas on the right. */
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  grid-template-areas:
+    "intro areas"
+    "actions areas";
+  column-gap: clamp(48px, 7vw, 112px);
+  row-gap: 36px;
+  align-items: start;
 }
 
-.eyebrow,
-.heading,
-.ornament,
-.lead,
-.lawyer,
-.actions {
+.intro { grid-area: intro; max-width: 660px; }
+.areas { grid-area: areas; }
+.actionsBlock { grid-area: actions; }
+
+.intro,
+.areas,
+.actionsBlock {
   animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-
-.heading { animation-delay: 0.08s; }
-.ornament { animation-delay: 0.16s; }
-.lead { animation-delay: 0.22s; }
-.lawyer { animation-delay: 0.28s; }
-.actions { animation-delay: 0.34s; }
+.areas { animation-delay: 0.12s; }
+.actionsBlock { animation-delay: 0.2s; }
 
 .eyebrow {
   display: inline-flex;
@@ -80,20 +85,49 @@
 }
 
 .heading {
-  margin-top: 26px;
-  font-size: clamp(50px, 5.6vw, 86px);
+  margin-top: 24px;
+  font-size: clamp(44px, 4.6vw, 70px);
   font-weight: 500;
-  line-height: 1.02;
+  line-height: 1.04;
   letter-spacing: -0.015em;
   text-wrap: balance;
+}
+
+/* Animated headline: prefix on its own line, phrase below. Height is reserved
+   for three lines so the layout does not move while typing. */
+.typed {
+  display: block;
+  min-height: calc(3 * 1.04em);
+}
+
+.prefix {
+  display: block;
+}
+
+.phrase {
+  color: var(--color-gold-light);
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 0.82em;
+  margin-left: 4px;
+  vertical-align: -0.04em;
+  background: var(--color-gold);
+  animation: caret-blink 1.05s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
 }
 
 .ornament {
   display: flex;
   align-items: center;
   gap: 10px;
-  width: 112px;
-  margin-top: 30px;
+  width: 104px;
+  margin-top: 26px;
   color: var(--color-gold);
 }
 
@@ -114,79 +148,121 @@
 }
 
 .lead {
-  margin-top: 26px;
+  margin-top: 22px;
   max-width: 560px;
   color: rgb(255 255 255 / 84%);
-  font-size: clamp(18px, 1.45vw, 21px);
+  font-size: clamp(17px, 1.3vw, 19.5px);
   line-height: 1.55;
 }
 
-/* Mobile-only compact lawyer row (desktop uses the card in the strip). */
-.lawyer {
-  display: none;
+.attendance {
+  display: block;
+  margin-top: 6px;
+  color: var(--color-gold-light);
 }
 
-.actions {
-  margin-top: 40px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+/* Practice areas: a typographic list with hairlines, not cards. */
+.areas {
+  border-top: 1px solid var(--color-gold);
+  padding-top: 18px;
+  align-self: center;
 }
 
-.strip {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 32px;
-  padding: 26px 0 30px;
-  border-top: 1px solid rgb(255 255 255 / 14%);
-  padding-right: 76px; /* keeps clear of the floating WhatsApp button */
-  animation: rise 1s 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.facts {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 0.8fr;
-  gap: 32px;
-  margin: 0;
-}
-
-.facts dt {
+.areasLabel {
   color: var(--color-gold-light);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
 }
 
-.facts dd {
-  margin: 8px 0 0;
-  color: rgb(255 255 255 / 86%);
-  font-size: 15px;
-  line-height: 1.5;
+.areaList {
+  margin-top: 10px;
 }
 
-.facts dd small {
-  display: block;
-  color: rgb(255 255 255 / 60%);
-  font-size: 13.5px;
+.areaList li + li {
+  border-top: 1px solid rgb(255 255 255 / 12%);
 }
 
-.card {
+.areaLink {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 12px 20px 12px 12px;
-  border: 1px solid rgb(212 188 138 / 35%);
-  background: rgb(18 26 44 / 55%);
-  backdrop-filter: blur(6px);
+  gap: 14px;
+  padding: 11px 0;
+  color: rgb(255 255 255 / 90%);
+  font-size: 16px;
+  line-height: 1.35;
+  transition: color 0.25s ease;
+}
+
+.marker {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  transform: rotate(45deg);
+  background: var(--color-gold);
+}
+
+.areaText {
+  flex: 1;
+}
+
+.areaArrow {
+  color: var(--color-gold);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.areaLink:hover {
+  color: var(--color-gold-light);
+}
+
+.areaLink:hover .areaArrow,
+.areaLink:focus-visible .areaArrow {
+  opacity: 1;
+  transform: none;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 28px;
+}
+
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgb(212 188 138 / 60%);
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 600;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.textLink:hover {
+  color: var(--color-gold-light);
+  border-color: var(--color-gold-light);
+}
+
+.lawyer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgb(255 255 255 / 14%);
+  max-width: 560px;
 }
 
 .portrait {
   position: relative;
   flex-shrink: 0;
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   overflow: hidden;
   border-radius: 9999px;
   box-shadow: 0 0 0 1px var(--color-gold), 0 0 0 4px rgb(18 26 44 / 80%);
@@ -195,6 +271,12 @@
 .portrait img {
   object-fit: cover;
   object-position: 42% 22%;
+}
+
+.lawyerText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .name {
@@ -210,21 +292,43 @@
   line-height: 1.45;
 }
 
-.bar {
-  margin-top: 1px;
-  color: rgb(255 255 255 / 70%);
-  font-size: 12.5px;
-  letter-spacing: 0.02em;
-  line-height: 1.4;
-}
-
 .meta b {
   color: var(--color-gold-light);
   font-weight: 600;
 }
 
+/* Slim fact row along the bottom edge (desktop). */
+.facts {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 0.8fr;
+  gap: 32px;
+  margin: 0;
+  padding: 18px 76px 22px 0; /* right padding clears the floating WhatsApp button */
+  border-top: 1px solid rgb(255 255 255 / 14%);
+  animation: rise 1s 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.facts dt {
+  color: var(--color-gold-light);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.facts dd {
+  margin: 5px 0 0;
+  color: rgb(255 255 255 / 84%);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.muted {
+  color: rgb(255 255 255 / 58%);
+}
+
 @keyframes hero-zoom {
-  from { transform: scale(1.0); }
+  from { transform: scale(1); }
   to { transform: scale(1.09); }
 }
 
@@ -234,8 +338,17 @@
 }
 
 @media (max-width: 991px) {
-  .strip {
+  .grid {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "areas"
+      "actions";
+    row-gap: 28px;
+  }
+  .areas {
+    align-self: start;
+    max-width: 640px;
   }
   .facts {
     grid-template-columns: 1fr 1fr;
@@ -245,88 +358,125 @@
   }
 }
 
+/* Mobile: compact typography, areas as an inline wrapped list, auto-width buttons. */
 @media (max-width: 767px) {
   .hero {
     min-height: 0;
   }
   .inner {
-    padding-top: 48px;
-    gap: 40px;
+    padding: 36px 1.25rem 0;
+    gap: 28px;
   }
   .image {
     object-position: 74% center;
   }
   .overlay {
-    background: linear-gradient(180deg, rgb(18 26 44 / 86%), rgb(18 26 44 / 74%) 45%, rgb(18 26 44 / 95%));
+    background: linear-gradient(180deg, rgb(18 26 44 / 90%), rgb(18 26 44 / 84%) 45%, rgb(18 26 44 / 96%));
+  }
+  .grid {
+    row-gap: 22px;
   }
   .eyebrow {
-    font-size: 11px;
+    font-size: 10.5px;
     letter-spacing: 0.18em;
     gap: 10px;
   }
   .eyebrow::before {
-    width: 24px;
+    width: 22px;
   }
   .heading {
-    margin-top: 20px;
-    font-size: clamp(42px, 11.6vw, 54px);
-    line-height: 1.04;
+    margin-top: 16px;
+    font-size: clamp(34px, 9.6vw, 42px);
+    line-height: 1.06;
+  }
+  .typed {
+    min-height: calc(3 * 1.06em);
   }
   .ornament {
-    margin-top: 22px;
-    width: 88px;
+    margin-top: 16px;
+    width: 80px;
   }
   .lead {
-    margin-top: 18px;
-    font-size: 17.5px;
+    margin-top: 14px;
+    font-size: 15.5px;
+    line-height: 1.5;
   }
-  .lawyer {
+  .attendance {
+    margin-top: 4px;
+  }
+  .areas {
+    padding-top: 12px;
+  }
+  .areasLabel {
+    font-size: 10px;
+  }
+  .areaList {
     display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-top: 26px;
-    padding-top: 20px;
-    border-top: 1px solid rgb(255 255 255 / 14%);
+    flex-wrap: wrap;
+    margin-top: 8px;
+    gap: 2px 16px;
   }
-  .lawyer .portrait {
-    width: 60px;
-    height: 60px;
+  .areaList li + li {
+    border-top: 0;
   }
-  .lawyer .name {
-    font-size: 18px;
+  .areaLink {
+    padding: 4px 0;
+    gap: 7px;
+    font-size: 14.5px;
+  }
+  .areaText {
+    border-bottom: 1px solid rgb(212 188 138 / 35%);
+    padding-bottom: 1px;
+  }
+  .marker {
+    width: 4px;
+    height: 4px;
+  }
+  .areaArrow {
+    display: none;
   }
   .actions {
-    margin-top: 28px;
+    gap: 12px 20px;
   }
-  .actions a {
-    flex: 1 1 100%;
+  .primary {
+    min-height: 44px;
+    padding: 10px 18px;
+    font-size: 14.5px;
   }
-  .card {
-    display: none;
+  .textLink {
+    font-size: 13.5px;
   }
-  .strip {
-    padding: 22px 0 28px;
-    padding-right: 0;
-    gap: 0;
+  .lawyer {
+    margin-top: 22px;
+    padding-top: 16px;
+    padding-right: 48px; /* keeps the text clear of the floating WhatsApp button */
+    gap: 12px;
+  }
+  .portrait {
+    width: 48px;
+    height: 48px;
+  }
+  .name {
+    font-size: 17px;
+  }
+  .meta {
+    font-size: 12px;
   }
   .facts {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .facts > div:last-child {
     display: none;
+  }
+  .actionsBlock {
+    padding-bottom: 32px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .image,
-  .eyebrow,
-  .heading,
-  .ornament,
-  .lead,
-  .lawyer,
-  .actions,
-  .strip {
+  .intro,
+  .areas,
+  .actionsBlock,
+  .facts,
+  .caret {
     animation: none;
   }
 }
