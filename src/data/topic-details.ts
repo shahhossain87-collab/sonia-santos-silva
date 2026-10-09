@@ -117,7 +117,7 @@ export const topicDetails: Partial<Record<RouteKey, TopicDetail>> = {
       },
       en: {
         ...shared.en,
-        bannerTitle: "Family reunification in Portugal",
+        bannerTitle: "Family Reunification in Portugal",
         introTitle: "Reuniting your family: legal route and application",
         intro: [
           "We review the resident's permit, family ties, accommodation and means of subsistence to assess whether there is a right to family reunification.",
@@ -200,12 +200,12 @@ export const topicDetails: Partial<Record<RouteKey, TopicDetail>> = {
           { q: "Um indeferimento pode ser contestado?", a: "Pode haver meios de reação, mas o fundamento, o prazo e a via adequada exigem a análise da decisão completa." },
         ],
         ctaTitle: "Envie-nos a notificação e a data em que a recebeu",
-        ctaLead: "Para avaliarmos o prazo e a resposta adequada. O envio de documentos deve ocorrer por canal privado e seguro, não num formulário público.",
+        ctaLead: "Avaliamos o prazo e a resposta adequada. Os documentos devem ser enviados por um canal privado e seguro, não num formulário público.",
         message: "Olá, gostaria de marcar uma consulta sobre uma notificação da AIMA e confirmar o canal privado e seguro para enviar documentos.",
       },
       en: {
         ...shared.en,
-        bannerTitle: "Have you received a notice from AIMA?",
+        bannerTitle: "Have You Received a Notice from AIMA?",
         introTitle: "Understanding the notice and preparing a response",
         intro: [
           "A notice may request documents, allow a response before a decision or communicate a refusal.",
@@ -239,7 +239,7 @@ export const topicDetails: Partial<Record<RouteKey, TopicDetail>> = {
           { q: "Can a refusal be challenged?", a: "There may be ways to challenge it, but the grounds, deadline and appropriate route require a review of the complete decision." },
         ],
         ctaTitle: "Send us the notice and the date you received it",
-        ctaLead: "So we can assess the deadline and appropriate response. Documents should be sent through a private, secure channel, not a public form.",
+        ctaLead: "We will assess the deadline and the appropriate response. Documents should be sent through a private, secure channel, not a public form.",
         message: "Hello, I would like to book a consultation about an AIMA notice and confirm the private, secure channel for sending documents.",
       },
     },
@@ -252,6 +252,7 @@ export const topicDetails: Partial<Record<RouteKey, TopicDetail>> = {
     text: {
       pt: {
         ...shared.pt,
+        helpNote: "O acompanhamento não garante o deferimento. A decisão cabe sempre aos tribunais e às entidades competentes.",
         bannerTitle: "Processos Judiciais contra a AIMA",
         introTitle: "Avaliar o recurso ao tribunal",
         intro: [
@@ -287,12 +288,13 @@ export const topicDetails: Partial<Record<RouteKey, TopicDetail>> = {
           { q: "Preciso de ter feito um pedido à AIMA?", a: "Antes de escolher a ação, é essencial analisar a origem e o estado do procedimento, os comprovativos existentes e a atuação da Administração." },
         ],
         ctaTitle: "Peça uma avaliação jurídica do seu processo",
-        ctaLead: "E da medida judicial adequada.",
+        ctaLead: "Avaliamos também a medida judicial adequada ao seu caso.",
         message: "Olá, gostaria de marcar uma consulta para avaliar o meu processo e a medida judicial adequada perante a AIMA.",
       },
       en: {
         ...shared.en,
-        bannerTitle: "Court proceedings against AIMA",
+        helpNote: "Our assistance does not guarantee approval. The decision always rests with the courts and the competent authorities.",
+        bannerTitle: "Court Proceedings against AIMA",
         introTitle: "Assessing court action",
         intro: [
           "A decision that can be challenged or a failure to act may require court intervention. We assess the facts, evidence and value of taking court action.",
@@ -327,7 +329,7 @@ export const topicDetails: Partial<Record<RouteKey, TopicDetail>> = {
           { q: "Do I need to have made an application to AIMA?", a: "Before choosing an action, it is essential to assess the origin and stage of the procedure, the available records and the administration's conduct." },
         ],
         ctaTitle: "Request a legal assessment of your case",
-        ctaLead: "And the appropriate court procedure.",
+        ctaLead: "We will also assess the appropriate court procedure for your case.",
         message: "Hello, I would like to book a consultation to assess my case and the appropriate court procedure concerning AIMA.",
       },
     },
@@ -381,7 +383,7 @@ export const topicDetails: Partial<Record<RouteKey, TopicDetail>> = {
       },
       en: {
         ...shared.en,
-        bannerTitle: "Portuguese nationality: which route is right for your case?",
+        bannerTitle: "Portuguese Nationality: Which Route Is Right for Your Case?",
         introTitle: "Choosing the grounds for your application",
         intro: [
           "Nationality may arise through parentage, residence, marriage or a de facto partnership, and other situations recognised by law. Each basis has its own requirements, documents and effects.",
