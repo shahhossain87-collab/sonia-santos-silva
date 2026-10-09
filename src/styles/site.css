@@ -233,3 +233,62 @@ p.banner-rise + h1 + p.banner-rise { animation-delay: 0.16s; }
     animation: none;
   }
 }
+
+/* ---------- Homepage photo header ----------
+   The team photo sits behind the logo and navigation. It is sized so the
+   faces fill the upper part and the navigation row sits over the shoulders. */
+.photo-header {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 180px;
+  background: var(--color-navy-deep);
+}
+
+/* Only the photo is clipped, so the dropdown panels can hang below the header. */
+.photo-header-scene {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+
+/* Mobile: zoom on the three people in the middle. */
+.photo-header-image {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  width: 560px;
+  max-width: none;
+  height: auto;
+  transform: translateX(-50%);
+}
+
+.photo-header-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgb(18 26 44 / 30%) 0%, rgb(18 26 44 / 20%) 35%, rgb(18 26 44 / 82%) 68%, rgb(18 26 44 / 96%) 100%);
+}
+
+@media (min-width: 768px) {
+  .photo-header {
+    height: 240px;
+  }
+  .photo-header-image {
+    top: -52px;
+    width: 1024px;
+  }
+  /* Wider screens: the photo fades into navy at both sides. */
+  .photo-header-scene {
+    -webkit-mask-image: linear-gradient(90deg, transparent calc(50% - 512px), #000 calc(50% - 300px), #000 calc(50% + 300px), transparent calc(50% + 512px));
+    mask-image: linear-gradient(90deg, transparent calc(50% - 512px), #000 calc(50% - 300px), #000 calc(50% + 300px), transparent calc(50% + 512px));
+  }
+  .photo-header-shade {
+    background:
+      linear-gradient(180deg, rgb(18 26 44 / 34%) 0%, rgb(18 26 44 / 22%) 40%, rgb(18 26 44 / 80%) 72%, rgb(18 26 44 / 96%) 100%);
+  }
+}
