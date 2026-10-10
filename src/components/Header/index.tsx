@@ -6,7 +6,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { mapsLink, site, whatsappHref } from "@/config/site";
 import { getMainNav, isNavItemActive, type NavItem } from "@/data/navigation";
 import { useCopy } from "@/i18n/use-locale";
-import { pathFor } from "@/i18n/routes";
+import { pathFor, switchLocalePath } from "@/i18n/routes";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -188,6 +188,38 @@ function MobileGroup({ item, active, onNavigate }: { item: NavItem; active: bool
   );
 }
 
+/**
+ * Compact PT | EN switch for phones, where the dark info bar (with its own
+ * switch) is hidden. With only two languages the whole control is one 40px+
+ * target that leads to the same page in the other language; the current
+ * language is highlighted.
+ */
+function MobileLanguageSwitch({ dark, pathname }: { dark: boolean; pathname: string }) {
+  const { locale, copy } = useCopy();
+  const other = locale === "pt" ? "en" : "pt";
+  const labels = { pt: copy.header.portuguese, en: copy.header.english };
+  const active = dark ? "text-gold-light" : "text-gold-dark";
+  const idle = dark ? "text-white/80" : "text-navy/60";
+  return (
+    <Link
+      href={switchLocalePath(pathname, other) || pathFor(other, "home")}
+      hrefLang={other === "pt" ? "pt-PT" : "en"}
+      lang={other === "pt" ? "pt-PT" : "en"}
+      aria-label={other === "pt" ? "Ver em português" : "View in English"}
+      className={`flex h-10 min-w-10 items-center justify-center gap-1 px-1 text-[12px] tracking-[0.08em] md:hidden ${
+        dark ? "[text-shadow:0_1px_6px_rgb(10_16_30/60%)]" : ""
+      }`}
+    >
+      {(["pt", "en"] as const).map((code, index) => (
+        <span key={code} className="flex items-center gap-1" aria-hidden="true">
+          {index > 0 ? <span className={dark ? "text-white/40" : "text-navy/25"}>|</span> : null}
+          <span className={code === locale ? `font-bold ${active}` : `font-semibold ${idle}`}>{labels[code]}</span>
+        </span>
+      ))}
+    </Link>
+  );
+}
+
 /** Logo, desktop navigation, booking button and menu toggle in one row. */
 function BarRow({
   tone,
@@ -206,7 +238,7 @@ function BarRow({
   const line = `absolute left-0 block h-px w-5 transition duration-300 ${dark ? "bg-white" : "bg-navy"}`;
 
   return (
-    <div className="container flex max-w-[1360px] items-center justify-between gap-4 py-3 xl:py-0">
+    <div className="container flex max-w-[1360px] items-center justify-between gap-2.5 py-3 xs:gap-4 xl:py-0">
       <BrandMark compact inverted={dark} />
 
       <nav aria-label={copy.header.mobileNav} className="hidden xl:block">
@@ -217,7 +249,8 @@ function BarRow({
         </ul>
       </nav>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1 md:gap-3">
+        <MobileLanguageSwitch dark={dark} pathname={pathname} />
         <a
           href={whatsappHref(copy.home.heroWhatsapp)}
           target="_blank"
@@ -228,7 +261,7 @@ function BarRow({
         </a>
         <button
           type="button"
-          className={`flex h-11 items-center gap-2.5 border px-3 text-[11px] font-semibold tracking-[0.18em] uppercase xl:hidden ${
+          className={`flex h-11 items-center gap-2.5 border px-3 text-[11px] max-xs:px-2.5 font-semibold tracking-[0.18em] uppercase xl:hidden ${
             dark ? "border-white/35 bg-navy-deep/30 text-white backdrop-blur-sm" : "border-navy/15 text-navy"
           }`}
           aria-label={open ? copy.header.closeMenu : copy.header.openMenu}
