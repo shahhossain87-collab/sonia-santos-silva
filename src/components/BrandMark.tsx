@@ -60,17 +60,17 @@ export default function BrandMark({ inverted, compact, className = "" }: BrandMa
         sizes={compact ? "112px" : "384px"}
         className={
           compact
-            ? "h-8 w-auto sm:h-9 lg:h-10"
+            ? "h-8 w-auto max-xs:h-7 sm:h-9 lg:h-10"
             : "h-20 w-auto max-w-[20rem] sm:h-24 sm:max-w-[24rem]"
         }
         style={{ width: "auto" }}
       />
       {compact ? (
-        <span className="ml-3 flex min-w-0 flex-col xl:hidden 2xl:flex">
-          <span className={`font-display text-[14.5px] leading-tight sm:text-[15.5px] ${inverted ? "text-white" : "text-navy"}`}>
+        <span className="ml-3 flex min-w-0 flex-col max-xs:ml-2 xl:hidden 2xl:flex">
+          <span className={`font-display text-[14.5px] leading-tight max-xs:text-[12.5px] sm:text-[15.5px] ${inverted ? "text-white" : "text-navy"}`}>
             {copy.brand.name}
           </span>
-          <span className={`mt-0.5 text-[10px] font-semibold tracking-[0.16em] uppercase ${descriptorClass}`}>
+          <span className={`mt-0.5 text-[10px] font-semibold tracking-[0.16em] uppercase max-xs:text-[8.5px] max-xs:tracking-[0.13em] ${descriptorClass}`}>
             {copy.brand.descriptor}
           </span>
         </span>
