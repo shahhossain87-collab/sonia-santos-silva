@@ -1,4 +1,5 @@
 import { getCopy } from "@/i18n/copy";
+import { site } from "@/config/site";
 import type { Locale } from "@/i18n/locales";
 
 /**
@@ -14,7 +15,7 @@ export const homeText = {
     heroAreas: "Áreas de atuação",
     addressLabel: "Morada",
     hoursLabel: "Horário",
-    hoursShort: "Segunda a sexta, 10h–18h",
+    hoursShort: site.hours.pt,
     languagesLabel: "Idiomas",
     languages: "Português · Inglês",
     areasEyebrow: "Áreas de atuação",
@@ -35,7 +36,7 @@ export const homeText = {
     heroAreas: "Areas of practice",
     addressLabel: "Address",
     hoursLabel: "Hours",
-    hoursShort: "Monday to Friday, 10:00–18:00",
+    hoursShort: site.hours.en,
     languagesLabel: "Languages",
     languages: "Portuguese · English",
     areasEyebrow: "Areas of practice",

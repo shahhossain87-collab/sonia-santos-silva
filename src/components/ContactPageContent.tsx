@@ -4,6 +4,7 @@ import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
 import OfficeMap from "@/components/OfficeMap";
 import PageHero from "@/components/PageHero";
 import { mapsLink, site } from "@/config/site";
+import { licenceLine } from "@/data/team";
 import { getCopy } from "@/i18n/copy";
 import { pathFor } from "@/i18n/routes";
 import type { Locale } from "@/i18n/locales";
@@ -73,7 +74,7 @@ export default function ContactPageContent({ locale }: { locale: Locale }) {
                 <dt className="tracking-[0.16em] text-gold uppercase">
                   {copy.contactPage.license}
                 </dt>
-                <dd className="mt-1">{site.license}</dd>
+                <dd className="mt-1">{licenceLine[locale]}</dd>
               </div>
             </dl>
             <p className="mt-8 text-sm leading-relaxed text-body-color">

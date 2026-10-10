@@ -42,6 +42,14 @@ export default function PrivacidadePage() {
             limitação, oposição e portabilidade, bem como apresentar reclamação
             à Comissão Nacional de Proteção de Dados.
           </p>
+          <p>
+            As páginas inicial e de contacto incluem um mapa Google Maps incorporado,
+            que carrega conteúdo da Google e pode instalar cookies da Google,
+            conforme a sua{" "}
+            <a href="https://policies.google.com/privacy?hl=pt-PT" className="text-gold-dark underline hover:text-navy">
+              política de privacidade
+            </a>.
+          </p>
           <p>{site.disclaimer}</p>
         </div>
       </section>

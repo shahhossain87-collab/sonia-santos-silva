@@ -1,6 +1,7 @@
 "use client";
 
 import { useCopy } from "@/i18n/use-locale";
+import { pathFor } from "@/i18n/routes";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -8,7 +9,7 @@ const STORAGE_KEY = "sss-cookie-consent";
 
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
-  const { copy } = useCopy();
+  const { locale, copy } = useCopy();
 
   useEffect(() => {
     try {
@@ -29,7 +30,7 @@ export default function CookieBanner() {
             Cookies
           </Link>
           {" · "}
-          <Link href="/privacidade" className="text-gold hover:underline">
+          <Link href={pathFor(locale, "privacy")} className="text-gold hover:underline">
             {copy.common.privacy}
           </Link>
         </p>

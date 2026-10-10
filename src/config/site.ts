@@ -44,7 +44,10 @@ export const site = {
     pt: "Em frente à Loja do Cidadão das Laranjeiras",
     en: "Opposite the Loja do Cidadão (Citizen Shop) in Laranjeiras",
   },
-  hours: "Monday to Friday, 10:00–18:00",
+  hours: {
+    pt: "Segunda a sexta, 10h–18h",
+    en: "Monday to Friday, 10:00–18:00",
+  },
   languages: ["Português", "Inglês"],
   disclaimer:
     "A informação neste sítio não constitui aconselhamento jurídico nem garantia de resultado. Cada processo depende da análise do caso concreto e da decisão das autoridades competentes.",
