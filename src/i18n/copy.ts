@@ -1,4 +1,5 @@
 import { practiceAreas, type PracticeAreaKey } from "@/data/practice-areas";
+import { site } from "@/config/site";
 import type { Locale } from "./locales";
 import { pathFor } from "./routes";
 
@@ -281,7 +282,7 @@ export const ui = {
       officeEyebrow: "Lisboa",
       officeTitle: "Escritório em Portugal",
       officeCta: "Marcar conversa",
-      hours: "Segunda a sexta, 10h–18h (hora de Lisboa)",
+      hours: `${site.hours.pt} (hora de Lisboa)`,
       presenceEyebrow: "Laranjeiras · Lisboa",
       presenceTitle: "Visite-nos em Laranjeiras",
       presenceLead: "Atendimento jurídico presencial, em português e inglês.",
@@ -462,7 +463,7 @@ export const ui = {
       ],
       legalLinks: [
         { title: "FAQ", href: "/faq" },
-        { title: "Privacy", href: "/privacidade" },
+        { title: "Privacy", href: pathFor("en", "privacy") },
         { title: "Cookies", href: "/cookies" },
       ],
     },
@@ -507,7 +508,7 @@ export const ui = {
       officeEyebrow: "Lisbon",
       officeTitle: "Office in Portugal",
       officeCta: "Book a conversation",
-      hours: "Monday to Friday, 10:00–18:00 (Lisbon time)",
+      hours: `${site.hours.en} (Lisbon time)`,
       presenceEyebrow: "Laranjeiras · Lisbon",
       presenceTitle: "Visit us in Laranjeiras",
       presenceLead: "In-person legal assistance, in Portuguese and English.",
