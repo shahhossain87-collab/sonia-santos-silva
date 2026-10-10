@@ -2,6 +2,7 @@ import Reveal from "@/components/Reveal";
 import { CtaBand, FaqList, PageBanner } from "@/components/InnerPage";
 import { whatsappHref } from "@/config/site";
 import type { ImmigrationTopic } from "@/data/immigration";
+import type { PracticeArea, PracticeTopic } from "@/data/practice-areas";
 import type { TopicDetail } from "@/data/topic-details";
 import { getCopy, immigrationItems } from "@/i18n/copy";
 import type { Locale } from "@/i18n/locales";
@@ -22,20 +23,34 @@ function Eyebrow({ children, light = false }: { children: React.ReactNode; light
   );
 }
 
-/** Detailed immigration topic page in the inner-page template. */
+type TopicDetailPageProps = {
+  locale: Locale;
+  detail: TopicDetail;
+} & (
+  | { topic: ImmigrationTopic; area?: never }
+  | { topic: PracticeTopic; area: PracticeArea }
+);
+
+/** Shared detailed template; immigration keeps its existing labels and content. */
 export default function TopicDetailPage({
   locale,
   topic,
   detail,
-}: {
-  locale: Locale;
-  topic: ImmigrationTopic;
-  detail: TopicDetail;
-}) {
+  area,
+}: TopicDetailPageProps) {
   const t = labels[locale];
   const d = detail.text[locale];
   const copy = getCopy(locale);
-  const shortTitle = immigrationItems[locale].find((item) => item.href === pathFor(locale, topic.key))?.label ?? topic.title[locale];
+  const shortTitle = "key" in topic
+    ? immigrationItems[locale].find((item) => item.href === pathFor(locale, topic.key))?.label ?? topic.title[locale]
+    : d.bannerTitle ?? topic.title[locale];
+  const parent = area ? area.title[locale] : t.parent;
+  const parentHref = pathFor(locale, area ? area.key : "immigration");
+  const back = area
+    ? locale === "pt" ? `Ver todos os temas de ${area.title.pt}` : `See all ${area.title.en} topics`
+    : t.back;
+  const imageAlt = "imageAlt" in topic ? topic.imageAlt[locale] : topic.title[locale];
+  const lead = d.bannerTitle ? d.intro[0] : "summary" in topic ? topic.summary[locale] : topic.whoFor[locale];
   const bodyIntro = d.bannerTitle ? d.intro.slice(1) : d.intro;
   const stepCols = d.steps.length >= 5 ? "lg:grid-cols-5" : "lg:grid-cols-4";
 
@@ -43,15 +58,15 @@ export default function TopicDetailPage({
     <>
       <PageBanner
         image={`/images/services/subcards/${topic.image}.jpg`}
-        imageAlt={topic.imageAlt[locale]}
-        eyebrow={t.parent}
+        imageAlt={imageAlt}
+        eyebrow={parent}
         title={d.bannerTitle ?? shortTitle}
-        lead={d.bannerTitle ? d.intro[0] : topic.summary[locale]}
+        lead={lead}
         breadcrumbLabel={t.breadcrumb}
         crumbs={[
           { label: t.home, href: pathFor(locale, "home") },
           { label: t.services, href: pathFor(locale, "services") },
-          { label: t.parent, href: pathFor(locale, "immigration") },
+          { label: parent, href: parentHref },
           { label: shortTitle },
         ]}
       />
@@ -59,7 +74,7 @@ export default function TopicDetailPage({
       <section className="bg-white py-16 md:py-24">
         <div className="container grid max-w-[1240px] gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <Reveal>
-            <Eyebrow>{t.parent}</Eyebrow>
+            <Eyebrow>{parent}</Eyebrow>
             <h2 className="mt-5 font-display text-[34px] leading-[1.1] font-medium text-navy sm:text-[44px]">{d.introTitle}</h2>
             <span className="ornament mt-6 ml-0 w-24" aria-hidden="true">
               <span />
@@ -70,10 +85,10 @@ export default function TopicDetailPage({
               </p>
             ))}
             <Link
-              href={pathFor(locale, "immigration")}
+              href={parentHref}
               className="link-arrow mt-8 inline-flex items-center gap-2 text-[14px] font-semibold text-gold-dark hover:text-navy"
             >
-              {t.back} <span aria-hidden="true">→</span>
+              {back} <span aria-hidden="true">→</span>
             </Link>
           </Reveal>
 

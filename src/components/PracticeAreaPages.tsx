@@ -1,4 +1,6 @@
 import { site, whatsappHref } from "@/config/site";
+import TopicDetailPage from "@/components/TopicDetailPage";
+import { getPracticeTopicDetail } from "@/data/practice-topic-details";
 import type { Locale } from "@/i18n/locales";
 import { pathFor, practiceAreaPath, practiceTopicPath } from "@/i18n/routes";
 import type { PracticeArea, PracticeTopic } from "@/data/practice-areas";
@@ -28,6 +30,8 @@ export function PracticeAreaLanding({ locale, area }: { locale: Locale; area: Pr
 }
 
 export function PracticeTopicPage({ locale, area, topic }: { locale: Locale; area: PracticeArea; topic: PracticeTopic }) {
+  const detail = getPracticeTopicDetail(area, topic);
+  if (detail) return <TopicDetailPage locale={locale} area={area} topic={topic} detail={detail} />;
   const copy = labels[locale];
   const message = locale === "pt" ? `Olá, preciso de ajuda com ${topic.title.pt}.` : `Hello, I need help with ${topic.title.en}.`;
   return <><section className="bg-navy py-8 text-white md:py-10"><div className="container"><div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between"><div><Crumbs locale={locale} area={area} current={topic.title[locale]} /><p className="gold-rule">{area.title[locale]}</p><h1 className="mt-3 max-w-3xl font-display text-3xl leading-tight md:text-4xl">{topic.title[locale]}</h1></div><aside className="flex shrink-0 items-center gap-3 rounded-sm border border-white/20 px-3 py-2 text-white/80"><a href={whatsappHref(message)} target="_blank" rel="noopener noreferrer" aria-label={copy.whatsapp} title={copy.whatsapp} className="flex h-8 w-8 items-center justify-center rounded-sm bg-[#128C7E] text-white hover:bg-[#0e7a6e]"><WhatsAppMark /></a><a href={`mailto:${site.email}`} className="text-xs hover:text-gold hover:underline">{site.email}</a></aside></div></div></section><section className="py-10 md:py-12"><div className="container max-w-3xl"><div className="relative aspect-[16/8]"><Image src={imagePath(topic.image)} alt={`Imagem ilustrativa de ${topic.title[locale]}`} fill sizes="(max-width: 1024px) 100vw, 768px" className="object-cover" /></div><h2 className="mt-8 font-display text-3xl text-navy">{copy.whoFor}</h2><p className="mt-3 text-sm leading-relaxed text-body-color">{topic.whoFor[locale]}</p></div></section></>;
