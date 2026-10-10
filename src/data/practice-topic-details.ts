@@ -42,8 +42,511 @@ const consularDocs = {
   ],
 } as const;
 
+const nationalityShared = {
+  pt: {
+    ...shared.pt,
+    docsLead: "A documentação é definida após a análise do caso e confirmada junto da Conservatória / IRN (Instituto dos Registos e do Notariado).",
+    docsNote: "Lista indicativa: os documentos dependem da via, do caso concreto e das indicações da Conservatória / IRN.",
+  },
+  en: {
+    ...shared.en,
+    docsLead: "The documents are identified after reviewing the case and confirmed with the civil registry office / IRN (Instituto dos Registos e do Notariado).",
+    docsNote: "This list is indicative only; documents depend on the route, individual case and guidance from the civil registry office / IRN.",
+  },
+} as const;
+
+const nationalityLawNote = {
+  pt: "Confirmamos os requisitos aplicáveis após a análise do caso, de acordo com a lei em vigor, incluindo a Lei Orgânica n.º 1/2026 e a regulamentação aplicável.",
+  en: "We confirm the applicable requirements after reviewing the case under the law in force, including Organic Law 1/2026 and the applicable regulations.",
+} as const;
+
+const nationalitySubmission = {
+  pt: { title: "Apresentação e acompanhamento", text: "Quando há representação, um advogado ou solicitador pode apresentar o pedido online e acompanhá-lo na área profissional reservada." },
+  en: { title: "Submission and follow-up", text: "When acting as your representative, a lawyer or solicitor can submit the application online and follow it in the reserved professional area." },
+} as const;
+
 // Stable area key + Portuguese topic slug; both languages use the same entry.
 export const practiceTopicDetails: Partial<Record<`${PracticeAreaKey}/${string}`, TopicDetail>> = {
+  "nationality/netos-de-cidadaos-portugueses": {
+    metaDescription: {
+      pt: "Nacionalidade para netos de portugueses: análise da ascendência, das certidões familiares e do enquadramento da atribuição segundo a lei em vigor.",
+      en: "Nationality for grandchildren of Portuguese citizens: review of ancestry, family certificates and the attribution route under the law in force.",
+    },
+    text: {
+      pt: {
+        ...nationalityShared.pt,
+        bannerTitle: "Nacionalidade para Netos de Cidadãos Portugueses",
+        introTitle: "Compreender a ligação ao ascendente português",
+        intro: [
+          "Ter um avô ou uma avó portuguesa pode justificar a análise de uma via de atribuição da nacionalidade. Estudamos a ascendência e os registos que ligam o interessado à família portuguesa.",
+          nationalityLawNote.pt,
+        ],
+        help: [
+          "Analisar a ascendência e o histórico de nacionalidade do avô ou da avó.",
+          "Rever a ligação documental entre o interessado, o progenitor e o ascendente português.",
+          "Identificar divergências nas certidões e elementos por esclarecer.",
+          "Preparar o pedido e acompanhar as comunicações da Conservatória / IRN.",
+        ],
+        docs: [
+          "Identificação e certidão de nascimento do interessado, para análise.",
+          "Certidão de nascimento do progenitor que estabelece a ligação familiar.",
+          "Assento português ou outros registos disponíveis do avô ou da avó.",
+          "Certidões de casamento ou documentos de alteração de nome, quando relevantes.",
+          "Decisões, retificações ou comunicações anteriores relacionadas com os registos, se existirem.",
+        ],
+        steps: [
+          { title: "Ascendência e enquadramento", text: "Analisamos o percurso familiar e a possibilidade de enquadramento na atribuição." },
+          { title: "Ligação entre registos", text: "Conferimos as certidões e identificamos os elementos a esclarecer." },
+          nationalitySubmission.pt,
+          { title: "Seguimento e decisão", text: "Acompanhamos as comunicações e explicamos a decisão e os seus efeitos." },
+        ],
+        faqs: [
+          { q: "Ter um avô português garante a nacionalidade?", a: "A ascendência permite iniciar a análise, mas não garante o resultado. O enquadramento e os requisitos são confirmados no caso concreto." },
+          { q: "O meu pai ou a minha mãe também tem de apresentar um pedido?", a: "Não presumimos essa necessidade sem analisar o percurso familiar. Comparamos as vias que possam ser relevantes para a sua situação." },
+          { q: "Falta uma certidão da família. Posso começar pela consulta?", a: "Podemos começar pelos elementos de que já dispõe. A análise permite identificar os registos a procurar e as questões ainda por esclarecer." },
+        ],
+        ctaTitle: "Tem um avô ou uma avó portuguesa?",
+        ctaLead: "Marque uma consulta para rever a ligação familiar e os registos disponíveis.",
+        message: "Olá, gostaria de marcar uma consulta sobre a nacionalidade portuguesa para netos de cidadãos portugueses.",
+      },
+      en: {
+        ...nationalityShared.en,
+        bannerTitle: "Nationality for Grandchildren of Portuguese Citizens",
+        introTitle: "Understanding the Link to Your Portuguese Ancestor",
+        intro: [
+          "Having a Portuguese grandparent may provide a reason to assess an attribution route to nationality. We examine the ancestry and records connecting the applicant to the Portuguese family.",
+          nationalityLawNote.en,
+        ],
+        help: [
+          "Assess ancestry and the grandparent's nationality history.",
+          "Review the documentary link between the applicant, parent and Portuguese ancestor.",
+          "Identify discrepancies in certificates and matters needing clarification.",
+          "Prepare the application and follow communications from the civil registry office / IRN.",
+        ],
+        docs: [
+          "The applicant's identification and birth certificate, for review.",
+          "Birth certificate of the parent through whom the family connection is traced.",
+          "Portuguese birth registration or other available records of the grandparent.",
+          "Marriage certificates or name-change documents, where relevant.",
+          "Previous decisions, corrections or communications relating to the records, if any.",
+        ],
+        steps: [
+          { title: "Ancestry and legal route", text: "We assess the family history and whether an attribution route may be relevant." },
+          { title: "Connecting the records", text: "We check certificates and identify matters to clarify." },
+          nationalitySubmission.en,
+          { title: "Follow-up and decision", text: "We follow communications and explain the decision and its effects." },
+        ],
+        faqs: [
+          { q: "Does having a Portuguese grandparent guarantee nationality?", a: "Ancestry provides a starting point for the assessment, but does not guarantee the outcome. The legal route and requirements are confirmed for the individual case." },
+          { q: "Does my parent also need to apply?", a: "We do not assume this is necessary without reviewing the family history. We compare the routes that may be relevant to your circumstances." },
+          { q: "A family certificate is missing. Can I start with a consultation?", a: "We can start with the information you already have. The review helps identify records to locate and questions still to clarify." },
+        ],
+        ctaTitle: "Do you have a Portuguese grandparent?",
+        ctaLead: "Book a consultation to review your family connection and available records.",
+        message: "Hello, I would like to book a consultation about nationality for grandchildren of Portuguese citizens.",
+      },
+    },
+  },
+  "nationality/criancas-nascidas-em-portugal": {
+    metaDescription: {
+      pt: "Nacionalidade para crianças nascidas em Portugal: análise do nascimento, dos registos e da situação familiar para confirmar a via aplicável.",
+      en: "Nationality for children born in Portugal: review of the birth, records and family circumstances to confirm the applicable route.",
+    },
+    text: {
+      pt: {
+        ...nationalityShared.pt,
+        bannerTitle: "Nacionalidade para Crianças Nascidas em Portugal",
+        introTitle: "Analisar o nascimento e a situação familiar",
+        intro: [
+          "O nascimento em Portugal é o ponto de partida para analisar a situação da criança, incluindo uma eventual via de atribuição da nacionalidade. Os registos e o percurso dos pais ajudam a distinguir esse enquadramento de outras vias possíveis.",
+          nationalityLawNote.pt,
+        ],
+        help: [
+          "Analisar o registo de nascimento e a situação familiar da criança.",
+          "Rever os registos e o percurso dos progenitores nas datas relevantes.",
+          "Distinguir a eventual atribuição de outras vias e analisar a representação da criança.",
+          "Organizar o pedido e acompanhar o processo junto da Conservatória / IRN.",
+        ],
+        docs: [
+          "Assento de nascimento da criança disponível para análise.",
+          "Documentos de identificação dos progenitores e da criança, quando aplicáveis.",
+          "Certidões ou outros registos dos progenitores relevantes para o caso.",
+          "Elementos sobre o percurso de residência dos pais, quando pertinentes.",
+          "Documentos de responsabilidades parentais, representação ou comunicações anteriores, se relevantes.",
+        ],
+        steps: [
+          { title: "Contexto familiar", text: "Analisamos o nascimento, o percurso dos pais e os registos disponíveis." },
+          { title: "Via e elementos", text: "Confirmamos o enquadramento legal e a documentação adequada ao caso." },
+          nationalitySubmission.pt,
+          { title: "Acompanhamento e registo", text: "Acompanhamos as comunicações e esclarecemos a decisão e os passos relativos ao registo." },
+        ],
+        faqs: [
+          { q: "Nascer em Portugal permite presumir a nacionalidade?", a: "Não deve presumir o resultado apenas pelo local de nascimento. A situação familiar, os registos e a lei aplicável são analisados em conjunto." },
+          { q: "A situação dos pais é relevante?", a: "O percurso dos pais pode ser relevante para identificar a via. Confirmamos quais os elementos a analisar na situação concreta da criança." },
+          { q: "Existe apenas uma via para crianças nascidas em Portugal?", a: "A análise distingue a eventual atribuição de outras possibilidades de aquisição. Não aplicamos uma solução única a todas as famílias." },
+        ],
+        ctaTitle: "Pretende esclarecer a situação de uma criança nascida em Portugal?",
+        ctaLead: "Marque uma consulta para analisar o registo de nascimento e o contexto familiar.",
+        message: "Olá, gostaria de marcar uma consulta sobre a nacionalidade portuguesa para uma criança nascida em Portugal.",
+      },
+      en: {
+        ...nationalityShared.en,
+        bannerTitle: "Nationality for Children Born in Portugal",
+        introTitle: "Reviewing the Birth and Family Circumstances",
+        intro: [
+          "Birth in Portugal is the starting point for assessing a child's position, including a possible attribution route to nationality. The records and the parents' history help distinguish this route from other possibilities.",
+          nationalityLawNote.en,
+        ],
+        help: [
+          "Assess the child's birth record and family circumstances.",
+          "Review the parents' records and history at the relevant dates.",
+          "Distinguish possible attribution from other routes and assess the child's representation.",
+          "Organise the application and follow the proceedings with the civil registry office / IRN.",
+        ],
+        docs: [
+          "The child's birth registration available for review.",
+          "Identification documents for the parents and child, where applicable.",
+          "Certificates or other parental records relevant to the case.",
+          "Information about the parents' residence history, where relevant.",
+          "Parental responsibility or representation documents, or previous communications, where relevant.",
+        ],
+        steps: [
+          { title: "Family circumstances", text: "We assess the birth, the parents' history and the available records." },
+          { title: "Route and evidence", text: "We confirm the applicable legal route and documents appropriate to the case." },
+          nationalitySubmission.en,
+          { title: "Follow-up and registration", text: "We follow communications and explain the decision and registration-related steps." },
+        ],
+        faqs: [
+          { q: "Can nationality be assumed from birth in Portugal?", a: "The outcome should not be assumed from the place of birth alone. The family circumstances, records and applicable law are assessed together." },
+          { q: "Are the parents' circumstances relevant?", a: "The parents' history may be relevant to identifying the route. We confirm which information needs to be reviewed for the child's individual circumstances." },
+          { q: "Is there only one route for children born in Portugal?", a: "The review distinguishes possible attribution from other acquisition routes. We do not apply a single solution to every family." },
+        ],
+        ctaTitle: "Would you like to clarify the position of a child born in Portugal?",
+        ctaLead: "Book a consultation to review the birth registration and family circumstances.",
+        message: "Hello, I would like to book a consultation about Portuguese nationality for a child born in Portugal.",
+      },
+    },
+  },
+  "nationality/outras-formas-de-aquisicao": {
+    metaDescription: {
+      pt: "Outras formas de aquisição da nacionalidade portuguesa: análise do percurso pessoal e familiar para identificar a via e os documentos adequados.",
+      en: "Other ways of acquiring Portuguese nationality: review of personal and family history to identify the appropriate route and documents.",
+    },
+    text: {
+      pt: {
+        ...nationalityShared.pt,
+        bannerTitle: "Outras Formas de Aquisição da Nacionalidade Portuguesa",
+        introTitle: "Encontrar o enquadramento do seu percurso",
+        intro: [
+          "Alguns percursos pessoais e familiares exigem uma análise para além das vias mais conhecidas. Questões de adoção, alterações de nacionalidade na família ou ausência de nacionalidade podem orientar a avaliação de uma eventual via de aquisição.",
+          nationalityLawNote.pt,
+        ],
+        help: [
+          "Reconstituir o percurso pessoal e familiar e as datas relevantes.",
+          "Analisar qual a via de aquisição que possa corresponder aos factos apresentados.",
+          "Rever decisões e registos nacionais ou estrangeiros relacionados com o caso.",
+          "Preparar o pedido e acompanhar comunicações e decisões da Conservatória / IRN.",
+        ],
+        docs: [
+          "Identificação e certidão de nascimento disponíveis para análise.",
+          "Registos familiares relevantes para o percurso apresentado.",
+          "Decisões sobre adoção ou outros atos de registo, quando relacionados com o caso.",
+          "Elementos sobre o histórico de nacionalidade ou a ausência de nacionalidade, se pertinentes.",
+          "Comprovativos de residência ou comunicações anteriores, quando relevantes para a via em análise.",
+        ],
+        steps: [
+          { title: "Percurso pessoal", text: "Ouvimos o histórico e identificamos os factos e registos relevantes." },
+          { title: "Enquadramento e prova", text: "Confirmamos a via a analisar e os elementos adequados à situação." },
+          nationalitySubmission.pt,
+          { title: "Seguimento e esclarecimento", text: "Acompanhamos o processo e explicamos o conteúdo da decisão e os passos seguintes." },
+        ],
+        faqs: [
+          { q: "Não encontro o meu caso nas outras páginas. Pode ser analisado?", a: "Podemos rever o percurso e os documentos disponíveis. A análise permite verificar se existe uma via aplicável, sem presumir o resultado." },
+          { q: "Uma adoção ou uma alteração de nacionalidade na família resolve o pedido?", a: "Esses factos precisam de ser enquadrados no histórico pessoal e nos registos. Não devem ser tratados como garantia de aquisição da nacionalidade." },
+          { q: "Há uma lista de documentos igual para todos estes casos?", a: "Não usamos uma lista única para situações diferentes. Os documentos são definidos após a identificação da via e a análise do caso concreto." },
+        ],
+        ctaTitle: "O seu percurso não se enquadra nas vias mais conhecidas?",
+        ctaLead: "Marque uma consulta para analisar a sua situação pessoal e familiar.",
+        message: "Olá, gostaria de marcar uma consulta para analisar outras formas de aquisição da nacionalidade portuguesa no meu caso.",
+      },
+      en: {
+        ...nationalityShared.en,
+        bannerTitle: "Other Ways of Acquiring Portuguese Nationality",
+        introTitle: "Finding the Legal Route for Your Circumstances",
+        intro: [
+          "Some personal and family histories need assessment beyond the best-known routes. Adoption, changes of nationality within the family or statelessness may guide a review of a possible acquisition route.",
+          nationalityLawNote.en,
+        ],
+        help: [
+          "Reconstruct the personal and family history and relevant dates.",
+          "Assess which acquisition route may correspond to the facts presented.",
+          "Review Portuguese or foreign decisions and records relating to the case.",
+          "Prepare the application and follow communications and decisions from the civil registry office / IRN.",
+        ],
+        docs: [
+          "Identification and birth certificate available for review.",
+          "Family records relevant to the history presented.",
+          "Adoption decisions or other registration documents, where related to the case.",
+          "Evidence of nationality history or statelessness, where relevant.",
+          "Residence records or previous communications, where relevant to the route being assessed.",
+        ],
+        steps: [
+          { title: "Personal history", text: "We listen to your history and identify the relevant facts and records." },
+          { title: "Legal route and evidence", text: "We confirm the route to assess and the evidence appropriate to your circumstances." },
+          nationalitySubmission.en,
+          { title: "Follow-up and explanation", text: "We follow the proceedings and explain the decision and next steps." },
+        ],
+        faqs: [
+          { q: "My case is not covered by the other pages. Can it be reviewed?", a: "We can review your history and available documents. The assessment helps establish whether a route applies, without presuming the outcome." },
+          { q: "Does an adoption or a family member's change of nationality settle the application?", a: "Those facts need to be considered alongside your personal history and records. They should not be treated as a guarantee of acquiring nationality." },
+          { q: "Is there one document list for all these cases?", a: "We do not use a single checklist for different situations. Documents are identified after establishing the route and reviewing the individual case." },
+        ],
+        ctaTitle: "Does your history fall outside the best-known routes?",
+        ctaLead: "Book a consultation to review your personal and family circumstances.",
+        message: "Hello, I would like to book a consultation to review other ways of acquiring Portuguese nationality in my circumstances.",
+      },
+    },
+  },
+  "nationality/por-residencia": {
+    metaDescription: {
+      pt: "Nacionalidade portuguesa por residência: análise do percurso de residência, enquadramento na lei em vigor e preparação do pedido junto do IRN.",
+      en: "Portuguese nationality by residence: review of your residence history, the applicable law and preparation of the application to the IRN.",
+    },
+    text: {
+      pt: {
+        ...nationalityShared.pt,
+        bannerTitle: "Nacionalidade Portuguesa por Residência",
+        introTitle: "Analisar o seu percurso em Portugal",
+        intro: [
+          "A residência em Portugal pode ser o ponto de partida para analisar uma via de aquisição da nacionalidade. Revemos o seu percurso e os registos disponíveis para identificar o enquadramento adequado.",
+          nationalityLawNote.pt,
+        ],
+        help: [
+          "Rever o histórico de residência e as datas relevantes para a análise.",
+          "Identificar a via de aquisição e confirmar os requisitos aplicáveis ao caso.",
+          "Organizar os documentos e esclarecer divergências nos registos.",
+          "Preparar o pedido, acompanhar o processo e analisar comunicações da Conservatória / IRN.",
+        ],
+        docs: [
+          "Documento de identificação, a confirmar na análise inicial.",
+          "Certidão de nascimento e elementos de registo civil relevantes.",
+          "Títulos e comprovativos do percurso de residência disponíveis.",
+          "Comunicações de processos anteriores, se existirem.",
+          "Outros comprovativos e procuração, quando aplicáveis, a definir após a análise.",
+        ],
+        steps: [
+          { title: "Histórico e enquadramento", text: "Analisamos o percurso de residência e a lei aplicável à sua situação." },
+          { title: "Revisão documental", text: "Conferimos os registos e definimos os elementos a reunir." },
+          nationalitySubmission.pt,
+          { title: "Comunicações e decisão", text: "Acompanhamos as comunicações e explicamos a decisão e os passos seguintes." },
+        ],
+        faqs: [
+          { q: "O título de residência basta para obter a nacionalidade?", a: "O título, por si só, não permite concluir que o pedido será aprovado. É necessário analisar o percurso e confirmar os requisitos aplicáveis ao caso." },
+          { q: "Como é analisado o meu tempo de residência?", a: "Revemos os títulos, os registos e as datas do seu percurso. O enquadramento é confirmado segundo a lei em vigor, sem presumir uma contagem a partir de regras anteriores." },
+          { q: "Já tenho um processo iniciado. Podem analisá-lo?", a: "Podemos rever o pedido e as comunicações disponíveis. Confirmamos o regime aplicável à situação antes de indicar os passos seguintes." },
+        ],
+        ctaTitle: "Pretende analisar a nacionalidade por residência?",
+        ctaLead: "Marque uma consulta para rever o seu percurso e os documentos disponíveis.",
+        message: "Olá, gostaria de marcar uma consulta sobre a nacionalidade portuguesa por residência.",
+      },
+      en: {
+        ...nationalityShared.en,
+        bannerTitle: "Portuguese Nationality by Residence",
+        introTitle: "Reviewing Your Time in Portugal",
+        intro: [
+          "Residence in Portugal may be the starting point for assessing a route to acquiring nationality. We review your history and available records to identify the appropriate legal route.",
+          nationalityLawNote.en,
+        ],
+        help: [
+          "Review your residence history and the dates relevant to the assessment.",
+          "Identify the acquisition route and confirm the requirements applicable to your case.",
+          "Organise documents and clarify discrepancies in the records.",
+          "Prepare the application, follow the proceedings and review communications from the civil registry office / IRN.",
+        ],
+        docs: [
+          "Identification document, to be confirmed at the initial review.",
+          "Birth certificate and relevant civil registration records.",
+          "Available permits and evidence of your residence history.",
+          "Communications from previous proceedings, if any.",
+          "Other evidence and a power of attorney, where applicable, to be identified after the review.",
+        ],
+        steps: [
+          { title: "History and legal route", text: "We assess your residence history and the law applicable to your circumstances." },
+          { title: "Document review", text: "We check the records and identify the documents to gather." },
+          nationalitySubmission.en,
+          { title: "Communications and decision", text: "We follow communications and explain the decision and next steps." },
+        ],
+        faqs: [
+          { q: "Is a residence permit enough to obtain nationality?", a: "The permit alone does not establish that an application will be approved. Your history must be reviewed and the applicable requirements confirmed." },
+          { q: "How is my time in residence assessed?", a: "We review the permits, records and dates in your history. The legal position is confirmed under the law in force, without assuming that earlier counting rules apply." },
+          { q: "I already have an application in progress. Can you review it?", a: "We can review the application and available communications. We confirm the regime applicable to your situation before explaining the next steps." },
+        ],
+        ctaTitle: "Would you like to explore nationality by residence?",
+        ctaLead: "Book a consultation to review your history and available documents.",
+        message: "Hello, I would like to book a consultation about Portuguese nationality by residence.",
+      },
+    },
+  },
+  "nationality/por-casamento-ou-uniao-de-facto": {
+    metaDescription: {
+      pt: "Nacionalidade por casamento ou união de facto: análise do vínculo, dos registos e da via de aquisição aplicável, com acompanhamento junto do IRN.",
+      en: "Nationality by marriage or de facto partnership: review of the relationship, records and applicable acquisition route, with follow-up through the IRN.",
+    },
+    text: {
+      pt: {
+        ...nationalityShared.pt,
+        bannerTitle: "Nacionalidade por Casamento ou União de Facto",
+        introTitle: "Enquadrar o vínculo e os registos",
+        intro: [
+          "O casamento ou a união de facto com uma pessoa portuguesa pode dar lugar à análise de uma via de aquisição da nacionalidade. O vínculo, o seu histórico e os registos orientam essa avaliação.",
+          nationalityLawNote.pt,
+        ],
+        help: [
+          "Analisar o histórico do casamento ou da união de facto.",
+          "Conferir os registos dos interessados e o enquadramento do vínculo.",
+          "Avaliar se há registos ou documentos estrangeiros a regularizar.",
+          "Preparar o pedido e acompanhar comunicações e decisões da Conservatória / IRN.",
+        ],
+        docs: [
+          "Documentos de identificação dos interessados, quando relevantes.",
+          "Certidões de nascimento e elementos do registo português disponíveis.",
+          "Certidão de casamento ou elementos relativos à união de facto, conforme o caso.",
+          "Documentos estrangeiros ou decisões sobre o vínculo, se existirem.",
+          "Comunicações anteriores e procuração, quando aplicáveis.",
+        ],
+        steps: [
+          { title: "Análise do vínculo", text: "Revemos o histórico da relação e confirmamos o enquadramento legal." },
+          { title: "Conferência dos registos", text: "Analisamos os documentos e identificamos eventuais questões a esclarecer." },
+          nationalitySubmission.pt,
+          { title: "Seguimento do processo", text: "Acompanhamos as comunicações e explicamos a decisão da entidade competente." },
+        ],
+        faqs: [
+          { q: "O casamento dá nacionalidade automaticamente?", a: "Não deve presumir uma aquisição automática. A possibilidade de apresentar o pedido e o respetivo enquadramento são confirmados após a análise do caso." },
+          { q: "Casamento e união de facto seguem o mesmo procedimento?", a: "Não se deve usar a mesma lista documental sem analisar o vínculo. Confirmamos o procedimento e os elementos adequados à sua situação." },
+          { q: "O vínculo foi formalizado no estrangeiro. Pode ser analisado?", a: "Podemos rever os documentos e os registos disponíveis. A necessidade de outros atos ou elementos é avaliada no caso concreto." },
+        ],
+        ctaTitle: "Pretende analisar a nacionalidade pelo seu vínculo familiar?",
+        ctaLead: "Marque uma consulta para rever o casamento ou a união de facto e os respetivos registos.",
+        message: "Olá, gostaria de marcar uma consulta sobre a nacionalidade portuguesa por casamento ou união de facto.",
+      },
+      en: {
+        ...nationalityShared.en,
+        bannerTitle: "Nationality by Marriage or De Facto Partnership",
+        introTitle: "Assessing the Relationship and Records",
+        intro: [
+          "Marriage or a de facto partnership with a Portuguese person may provide a basis for assessing a route to acquiring nationality. The relationship, its history and the records guide that assessment.",
+          nationalityLawNote.en,
+        ],
+        help: [
+          "Review the history of the marriage or de facto partnership.",
+          "Check the individuals' records and the legal position of the relationship.",
+          "Assess whether any foreign records or documents need to be put in order.",
+          "Prepare the application and follow communications and decisions from the civil registry office / IRN.",
+        ],
+        docs: [
+          "Identification documents for the individuals concerned, where relevant.",
+          "Birth certificates and available Portuguese registration records.",
+          "Marriage certificate or evidence relating to the de facto partnership, as applicable.",
+          "Foreign documents or decisions relating to the relationship, if any.",
+          "Previous communications and a power of attorney, where applicable.",
+        ],
+        steps: [
+          { title: "Relationship assessment", text: "We review the relationship's history and confirm the applicable legal route." },
+          { title: "Checking the records", text: "We assess the documents and identify any matters to clarify." },
+          nationalitySubmission.en,
+          { title: "Following the proceedings", text: "We follow communications and explain the competent authority's decision." },
+        ],
+        faqs: [
+          { q: "Does marriage automatically confer nationality?", a: "You should not assume automatic acquisition. The possibility of applying and the applicable legal route are confirmed after reviewing the case." },
+          { q: "Do marriage and a de facto partnership follow the same procedure?", a: "The same document checklist should not be used without reviewing the relationship. We confirm the procedure and evidence appropriate to your circumstances." },
+          { q: "The relationship was formalised abroad. Can it be reviewed?", a: "We can review the available documents and records. Any need for further formalities or evidence is assessed in the individual case." },
+        ],
+        ctaTitle: "Would you like to explore nationality through your relationship?",
+        ctaLead: "Book a consultation to review your marriage or de facto partnership and the relevant records.",
+        message: "Hello, I would like to book a consultation about Portuguese nationality by marriage or de facto partnership.",
+      },
+    },
+  },
+  "nationality/filhos-de-cidadaos-portugueses": {
+    metaDescription: {
+      pt: "Nacionalidade para filhos de cidadãos portugueses: análise da filiação, dos registos familiares e do enquadramento da atribuição no caso concreto.",
+      en: "Nationality for children of Portuguese citizens: review of parentage, family records and the attribution route in the individual case.",
+    },
+    text: {
+      pt: {
+        ...nationalityShared.pt,
+        bannerTitle: "Nacionalidade para Filhos de Cidadãos Portugueses",
+        introTitle: "Analisar a filiação e o percurso familiar",
+        intro: [
+          "A filiação de uma pessoa portuguesa pode orientar a análise de uma via de atribuição da nacionalidade. Revemos os registos familiares e a situação do progenitor para distinguir esse enquadramento de outras vias possíveis.",
+          nationalityLawNote.pt,
+        ],
+        help: [
+          "Analisar a filiação e o histórico de nacionalidade do progenitor.",
+          "Conferir as certidões do filho e do progenitor português.",
+          "Identificar divergências nos registos e questões de representação de menores, quando relevantes.",
+          "Preparar o pedido e acompanhar o processo junto da Conservatória / IRN.",
+        ],
+        docs: [
+          "Identificação do interessado e do progenitor, quando relevante.",
+          "Certidão de nascimento do filho disponível para análise.",
+          "Assento português ou outros registos do progenitor.",
+          "Documentos sobre filiação, alterações de nome ou registos familiares, se aplicáveis.",
+          "Elementos de representação de menores ou decisões anteriores, quando relevantes.",
+        ],
+        steps: [
+          { title: "Histórico familiar", text: "Analisamos a filiação e a situação do progenitor nas datas relevantes." },
+          { title: "Via e documentação", text: "Confirmamos o enquadramento e revemos os registos disponíveis." },
+          nationalitySubmission.pt,
+          { title: "Decisão e registo", text: "Acompanhamos as comunicações e verificamos os efeitos da decisão no registo." },
+        ],
+        faqs: [
+          { q: "Ter mãe ou pai português permite concluir logo qual é a via?", a: "A filiação é o ponto de partida da análise. Os registos e o histórico do progenitor permitem confirmar se está em causa atribuição ou outra via." },
+          { q: "O meu progenitor tornou-se português depois do meu nascimento. É a mesma situação?", a: "Essa sequência deve ser analisada de forma própria. Não se deve aplicar automaticamente o enquadramento de outro caso familiar." },
+          { q: "Existem diferenças de nomes nas certidões. O que devo fazer?", a: "Reunimos os elementos disponíveis para compreender as divergências. A necessidade de esclarecimento ou regularização é avaliada antes da apresentação." },
+        ],
+        ctaTitle: "É filho de uma pessoa portuguesa e pretende esclarecer a sua situação?",
+        ctaLead: "Marque uma consulta para analisar a filiação e os registos familiares.",
+        message: "Olá, gostaria de marcar uma consulta sobre a nacionalidade portuguesa para filhos de cidadãos portugueses.",
+      },
+      en: {
+        ...nationalityShared.en,
+        bannerTitle: "Nationality for Children of Portuguese Citizens",
+        introTitle: "Reviewing Parentage and Family History",
+        intro: [
+          "Having a Portuguese parent may provide a basis for assessing an attribution route to nationality. We review family records and the parent's circumstances to distinguish this route from other possibilities.",
+          nationalityLawNote.en,
+        ],
+        help: [
+          "Assess parentage and the parent's nationality history.",
+          "Check the child's and Portuguese parent's certificates.",
+          "Identify discrepancies in records and matters concerning representation of minors, where relevant.",
+          "Prepare the application and follow the proceedings with the civil registry office / IRN.",
+        ],
+        docs: [
+          "Identification for the applicant and parent, where relevant.",
+          "The child's birth certificate available for review.",
+          "Portuguese birth registration or other records of the parent.",
+          "Documents relating to parentage, name changes or family records, where applicable.",
+          "Evidence of representation of minors or previous decisions, where relevant.",
+        ],
+        steps: [
+          { title: "Family history", text: "We assess parentage and the parent's circumstances at the relevant dates." },
+          { title: "Route and documents", text: "We confirm the legal route and review the available records." },
+          nationalitySubmission.en,
+          { title: "Decision and registration", text: "We follow communications and check the decision's effects on registration." },
+        ],
+        faqs: [
+          { q: "Does having a Portuguese parent immediately establish the route?", a: "Parentage is the starting point for the assessment. The records and the parent's history help confirm whether attribution or another route is relevant." },
+          { q: "My parent became Portuguese after I was born. Is this the same situation?", a: "That sequence needs its own assessment. The legal route used in another family's case should not be applied automatically." },
+          { q: "Names differ between the certificates. What should I do?", a: "We gather the available evidence to understand the discrepancies. Any need for clarification or correction is assessed before submission." },
+        ],
+        ctaTitle: "Do you have a Portuguese parent and want to understand your position?",
+        ctaLead: "Book a consultation to review parentage and family records.",
+        message: "Hello, I would like to book a consultation about nationality for children of Portuguese citizens.",
+      },
+    },
+  },
   "internationalClients/visto-d7-rendimentos": {
     metaDescription: {
       pt: "Visto D7 para rendimentos próprios: análise da origem e regularidade dos rendimentos, prova financeira, agregado, pedido consular e residência.",
