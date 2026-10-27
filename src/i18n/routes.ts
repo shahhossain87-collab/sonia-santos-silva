@@ -39,9 +39,10 @@ export const paths = {
     pt: "/servicos/imigracao-e-vistos/nacionalidade-portuguesa",
     en: "/en/services/immigration-and-visas/portuguese-nationality",
   },
-  faq: { pt: "/faq" },
+  faq: { pt: "/faq", en: "/en/faq" },
   privacy: { pt: "/privacidade", en: "/en/privacy" },
-  cookies: { pt: "/cookies" },
+  cookies: { pt: "/cookies", en: "/en/cookies" },
+  legalNotice: { pt: "/aviso-legal", en: "/en/legal-notice" },
   blog: { pt: "/blog" },
   visaD2: { pt: "/servicos/visto-d2" },
   visaD7: { pt: "/servicos/visto-d7" },
@@ -107,6 +108,7 @@ const exactPairs: { pt: string; en: string }[] = [
   { pt: "/privacidade", en: "/en/privacy" },
   { pt: "/privacidade", en: "/en/privacidade" },
   { pt: "/cookies", en: "/en/cookies" },
+  { pt: "/aviso-legal", en: "/en/legal-notice" },
 ];
 
 const ptPrefixes: { prefix: string; en: string }[] = [

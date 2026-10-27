@@ -1,16 +1,31 @@
-function configuredSiteUrl() {
-  const value = [
-    process.env.NEXT_PUBLIC_SITE_URL,
-    process.env.VERCEL_PROJECT_PRODUCTION_URL,
-    process.env.VERCEL_URL,
-  ].find((url) => url?.trim());
+/** Public production origin. Canonicals, hreflang, Open Graph, JSON-LD, sitemap and robots use this. */
+export const productionSiteUrl = "https://gjladvogados.pt";
 
-  if (!value) {
-    return "http://localhost:3000";
-  }
+export const canonicalHost = "gjladvogados.pt";
 
+/**
+ * Hosts that 308-redirect to the apex domain.
+ * Keep this list in sync with `vercel.json`.
+ * Preview deployments use other `*.vercel.app` hostnames and must not be listed here.
+ */
+export const redirectHosts = ["www.gjladvogados.pt", "sonia-santos-silva.vercel.app"] as const;
+
+function normalizeOrigin(value: string) {
   const url = /^https?:\/\//.test(value) ? value : `https://${value}`;
   return url.replace(/\/$/, "");
+}
+
+function configuredSiteUrl() {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  // Ignore a leftover *.vercel.app value so it cannot replace the public domain.
+  if (explicit && !/vercel\.app/i.test(explicit)) {
+    return normalizeOrigin(explicit);
+  }
+  // Same value on the server and in the browser. NODE_ENV is inlined in both.
+  if (process.env.NODE_ENV === "development") {
+    return "http://localhost:3000";
+  }
+  return productionSiteUrl;
 }
 
 export const site = {
@@ -93,6 +108,7 @@ export const footerLinks = {
   ],
   legal: [
     { title: "Perguntas frequentes", href: "/faq" },
+    { title: "Aviso legal", href: "/aviso-legal" },
     { title: "Privacidade", href: "/privacidade" },
     { title: "Cookies", href: "/cookies" },
   ],

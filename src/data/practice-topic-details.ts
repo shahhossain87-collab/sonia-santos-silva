@@ -1,3 +1,4 @@
+import { expandedPracticeTopics } from "@/data/expanded-practice-topics";
 import type { PracticeArea, PracticeAreaKey, PracticeTopic } from "@/data/practice-areas";
 import type { TopicDetail } from "@/data/topic-details";
 import { pathFor } from "@/i18n/routes";
@@ -697,5 +698,6 @@ export const practiceTopicDetails: Partial<Record<`${PracticeAreaKey}/${string}`
 };
 
 export function getPracticeTopicDetail(area: PracticeArea, topic: PracticeTopic) {
-  return practiceTopicDetails[`${area.key}/${topic.slug.pt}`];
+  const key = `${area.key}/${topic.slug.pt}` as const;
+  return practiceTopicDetails[key] ?? expandedPracticeTopics[key];
 }

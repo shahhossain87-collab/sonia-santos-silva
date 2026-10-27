@@ -27,8 +27,13 @@ const paths = [
   "/servicos/imigracao-e-vistos/nacionalidade-portuguesa",
   "/en/services/immigration-and-visas/portuguese-nationality",
   "/faq",
+  "/en/faq",
+  "/aviso-legal",
+  "/en/legal-notice",
   "/privacidade",
+  "/en/privacy",
   "/cookies",
+  "/en/cookies",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -1,4 +1,5 @@
 import { site, whatsappHref } from "@/config/site";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import TopicDetailPage from "@/components/TopicDetailPage";
 import { getPracticeTopicDetail } from "@/data/practice-topic-details";
 import type { Locale } from "@/i18n/locales";
@@ -21,7 +22,49 @@ function WhatsAppMark() {
 }
 
 function Crumbs({ locale, area, current }: { locale: Locale; area: PracticeArea; current: string }) {
-  return <nav aria-label="Breadcrumb" className="mb-4 text-sm text-white/50"><ol className="flex flex-wrap items-center gap-2"><li><Link href={pathFor(locale, "home")} className="hover:text-gold">{locale === "pt" ? "Início" : "Home"}</Link></li><li className="flex items-center gap-2"><span>/</span><Link href={pathFor(locale, "services")} className="hover:text-gold">{labels[locale].services}</Link></li><li className="flex items-center gap-2"><span>/</span><Link href={practiceAreaPath(locale, area)} className="hover:text-gold">{area.title[locale]}</Link></li>{current !== area.title[locale] ? <li className="flex items-center gap-2"><span>/</span><span className="text-gold">{current}</span></li> : null}</ol></nav>;
+  const home = locale === "pt" ? "Início" : "Home";
+  const crumbs = [
+    { label: home, href: pathFor(locale, "home") },
+    { label: labels[locale].services, href: pathFor(locale, "services") },
+    { label: area.title[locale], href: current === area.title[locale] ? undefined : practiceAreaPath(locale, area) },
+    ...(current !== area.title[locale] ? [{ label: current }] : []),
+  ];
+  return (
+    <>
+      <BreadcrumbJsonLd crumbs={crumbs} />
+      <nav aria-label="Breadcrumb" className="mb-4 text-sm text-white/50">
+        <ol className="flex flex-wrap items-center gap-2">
+          <li>
+            <Link href={pathFor(locale, "home")} className="hover:text-gold">
+              {home}
+            </Link>
+          </li>
+          <li className="flex items-center gap-2">
+            <span>/</span>
+            <Link href={pathFor(locale, "services")} className="hover:text-gold">
+              {labels[locale].services}
+            </Link>
+          </li>
+          <li className="flex items-center gap-2">
+            <span>/</span>
+            {current !== area.title[locale] ? (
+              <Link href={practiceAreaPath(locale, area)} className="hover:text-gold">
+                {area.title[locale]}
+              </Link>
+            ) : (
+              <span className="text-gold">{area.title[locale]}</span>
+            )}
+          </li>
+          {current !== area.title[locale] ? (
+            <li className="flex items-center gap-2">
+              <span>/</span>
+              <span className="text-gold">{current}</span>
+            </li>
+          ) : null}
+        </ol>
+      </nav>
+    </>
+  );
 }
 
 export function PracticeAreaLanding({ locale, area }: { locale: Locale; area: PracticeArea }) {
