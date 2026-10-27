@@ -50,8 +50,12 @@ export const site = {
   locale: "pt-PT",
   url: configuredSiteUrl(),
   email: "soniasantosdasilva-55852l@adv.oa.pt",
-  phoneDisplay: "+351 913 724 450",
-  phoneDigits: "351913724450",
+  // Primary phone: the office landline.
+  phoneDisplay: "+351 21 353 5099",
+  phoneDigits: "351213535099",
+  // Secondary phone: the mobile, also the WhatsApp number.
+  mobileDisplay: "+351 913 724 450",
+  mobileDigits: "351913724450",
   whatsappMessage: "Olá, gostaria de agendar uma consulta.",
   addressLine: "Rua Abranches Ferrão, 11 A, 1600-296 Lisboa",
   city: "Lisboa",
@@ -76,12 +80,12 @@ export const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encod
   site.addressLine,
 )}`;
 
-export const whatsappUrl = `https://wa.me/${site.phoneDigits}?text=${encodeURIComponent(
+export const whatsappUrl = `https://wa.me/${site.mobileDigits}?text=${encodeURIComponent(
   site.whatsappMessage,
 )}`;
 
 export function whatsappHref(message: string = site.whatsappMessage) {
-  return `https://wa.me/${site.phoneDigits}?text=${encodeURIComponent(message)}`;
+  return `https://wa.me/${site.mobileDigits}?text=${encodeURIComponent(message)}`;
 }
 
 export const nav = [

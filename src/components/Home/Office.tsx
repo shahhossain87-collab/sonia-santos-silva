@@ -20,8 +20,12 @@ export default function Office() {
           <p className="mt-3 text-sm text-body-color">{site.addressLine}</p>
           <dl className="mt-6 grid gap-3 text-sm sm:grid-cols-2">
             <div>
-              <dt className="tracking-[0.16em] text-gold uppercase">WhatsApp</dt>
+              <dt className="tracking-[0.16em] text-gold uppercase">{copy.form.phone}</dt>
               <dd className="mt-1">{site.phoneDisplay}</dd>
+            </div>
+            <div>
+              <dt className="tracking-[0.16em] text-gold uppercase">WhatsApp</dt>
+              <dd className="mt-1">{site.mobileDisplay}</dd>
             </div>
             <div>
               <dt className="tracking-[0.16em] text-gold uppercase">

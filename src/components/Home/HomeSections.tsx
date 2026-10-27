@@ -262,6 +262,10 @@ export function VisitOffice({ locale }: { locale: Locale }) {
                 <a href={`tel:+${site.phoneDigits}`} className="text-navy hover:text-gold-dark">
                   {site.phoneDisplay}
                 </a>
+                {" · "}
+                <a href={`tel:+${site.mobileDigits}`} className="text-navy hover:text-gold-dark">
+                  {site.mobileDisplay}
+                </a>
               </dd>
             </div>
             <div className="sm:col-span-2">

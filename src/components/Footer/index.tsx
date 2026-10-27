@@ -102,6 +102,8 @@ export default function Footer() {
               <dt className="text-[11px] font-semibold tracking-[0.2em] text-white/45 uppercase">{t.phone}</dt>
               <dd className="mt-1">
                 <a href={`tel:+${site.phoneDigits}`} className="hover:text-gold-light">{site.phoneDisplay}</a>
+                <br />
+                <a href={`tel:+${site.mobileDigits}`} className="hover:text-gold-light">{site.mobileDisplay}</a>
               </dd>
             </div>
             <div>

@@ -447,6 +447,8 @@ export default function Header() {
             <p>
               <a href={`tel:+${site.phoneDigits}`} className="text-navy">{site.phoneDisplay}</a>
               {" · "}
+              <a href={`tel:+${site.mobileDigits}`} className="text-navy">{site.mobileDisplay}</a>
+              {" · "}
               <a href={`mailto:${site.email}`} className="break-all text-navy">{site.email}</a>
             </p>
           </div>
