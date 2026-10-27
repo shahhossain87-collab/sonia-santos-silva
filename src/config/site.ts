@@ -64,8 +64,8 @@ export const site = {
     en: "Opposite the Loja do Cidadão (Citizen Shop) in Laranjeiras",
   },
   hours: {
-    pt: "Segunda a sexta, 10h–18h",
-    en: "Monday to Friday, 10:00–18:00",
+    pt: "Segunda a sexta, 9h00–13h00 e 14h00–18h00",
+    en: "Monday to Friday, 9:00–13:00 and 14:00–18:00",
   },
   languages: ["Português", "Inglês"],
   disclaimer:

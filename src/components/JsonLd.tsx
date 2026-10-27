@@ -44,12 +44,20 @@ export default function JsonLd({ locale }: { locale: Locale }) {
           addressLocality: "Lisboa",
           addressCountry: "PT",
         },
-        openingHoursSpecification: {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "10:00",
-          closes: "18:00",
-        },
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            opens: "09:00",
+            closes: "13:00",
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            opens: "14:00",
+            closes: "18:00",
+          },
+        ],
         areaServed: {
           "@type": "Country",
           name: "Portugal",
