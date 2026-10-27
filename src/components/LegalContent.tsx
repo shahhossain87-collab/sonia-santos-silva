@@ -62,7 +62,7 @@ function PrivacyPt() {
         Responsável: {site.officeName}. Advogada responsável: {site.lawyerName}, inscrita na Ordem dos Advogados com a cédula profissional n.º {site.license}.
       </p>
       <p>
-        Morada profissional: {site.addressLine}. Telefone e WhatsApp: {site.phoneDisplay}. E-mail: {site.email}. Horário: {site.hours.pt}.
+        Morada profissional: {site.addressLine}. Telefone: {site.phoneDisplay}. Telemóvel e WhatsApp: {site.mobileDisplay}. E-mail: {site.email}. Horário: {site.hours.pt}.
       </p>
       <p>
         Não está nomeado um encarregado de proteção de dados. Os pedidos de exercício de direitos devem ser enviados para o e-mail acima, com informação suficiente para identificar o pedido.
@@ -154,7 +154,7 @@ function PrivacyEn() {
         Controller: {site.officeName}. Responsible lawyer: {site.lawyerName}, admitted to the Portuguese Bar Association (Ordem dos Advogados), professional licence no. {site.license}.
       </p>
       <p>
-        Professional address: {site.addressLine}. Phone and WhatsApp: {site.phoneDisplay}. Email: {site.email}. Hours: {site.hours.en}.
+        Professional address: {site.addressLine}. Phone: {site.phoneDisplay}. Mobile and WhatsApp: {site.mobileDisplay}. Email: {site.email}. Hours: {site.hours.en}.
       </p>
       <p>
         No data protection officer has been appointed. Rights requests should be sent to the email above, with enough detail to identify the request.
@@ -379,7 +379,7 @@ function LegalPt() {
         {site.officeName} ({site.descriptor.pt}). Advogada responsável: {site.lawyerName}, cédula profissional n.º {site.license}, inscrita na Ordem dos Advogados.
       </p>
       <p>
-        Morada: {site.addressLine}. {site.landmark.pt}. Telefone e WhatsApp: {site.phoneDisplay}. E-mail: {site.email}. Horário de atendimento: {site.hours.pt}. O atendimento é com marcação.
+        Morada: {site.addressLine}. {site.landmark.pt}. Telefone: {site.phoneDisplay}. Telemóvel e WhatsApp: {site.mobileDisplay}. E-mail: {site.email}. Horário de atendimento: {site.hours.pt}. O atendimento é com marcação.
       </p>
       <p>
         Outros profissionais do escritório estão identificados na página{" "}
@@ -436,7 +436,7 @@ function LegalEn() {
         {site.officeName} ({site.descriptor.en}). Responsible lawyer: {site.lawyerName}, professional licence no. {site.license}, admitted to the Portuguese Bar Association (Ordem dos Advogados).
       </p>
       <p>
-        Address: {site.addressLine}. {site.landmark.en}. Phone and WhatsApp: {site.phoneDisplay}. Email: {site.email}. Hours: {site.hours.en}. Meetings are by appointment.
+        Address: {site.addressLine}. {site.landmark.en}. Phone: {site.phoneDisplay}. Mobile and WhatsApp: {site.mobileDisplay}. Email: {site.email}. Hours: {site.hours.en}. Meetings are by appointment.
       </p>
       <p>
         Other professionals at the office are named on the{" "}

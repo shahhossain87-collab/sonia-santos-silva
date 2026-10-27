@@ -23,6 +23,20 @@ export default function JsonLd({ locale }: { locale: Locale }) {
         logo: absoluteUrl("/images/logo/gjl-lockup.png"),
         telephone: `+${site.phoneDigits}`,
         email: site.email,
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            contactType: "customer service",
+            telephone: `+${site.phoneDigits}`,
+            availableLanguage: ["pt-PT", "en"],
+          },
+          {
+            "@type": "ContactPoint",
+            contactType: "customer service",
+            telephone: `+${site.mobileDigits}`,
+            availableLanguage: ["pt-PT", "en"],
+          },
+        ],
         address: {
           "@type": "PostalAddress",
           streetAddress: "Rua Abranches Ferrão, 11 A",
