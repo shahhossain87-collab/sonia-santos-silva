@@ -21,6 +21,14 @@ export function absoluteUrl(path: string) {
   return new URL(path, `${origin}/`).toString().replace(/\/$/, "");
 }
 
+/** Default share image. Referenced by root metadata and by every pageMetadata() call. */
+export const ogImage = {
+  url: "/images/og/gjl-og.png",
+  width: 1200,
+  height: 630,
+  alt: "Gabinete Jurídico Laranjeiras — Advogados · Solicitadores, Lisboa",
+} as const;
+
 export function languageAlternates(locale: Locale, route: PageRoute): NonNullable<Metadata["alternates"]> {
   const own = routePaths(route);
   const pt = absoluteUrl(own.pt);
@@ -30,8 +38,31 @@ export function languageAlternates(locale: Locale, route: PageRoute): NonNullabl
   return {
     canonical,
     languages: {
+      pt,
       "pt-PT": pt,
-      ...(en ? { en, "x-default": pt } : {}),
+      ...(en ? { en } : {}),
+      "x-default": pt,
+    },
+  };
+}
+
+function socialMetadata(locale: Locale, title: string, description: string, url: string): Pick<Metadata, "openGraph" | "twitter"> {
+  return {
+    openGraph: {
+      title,
+      description,
+      siteName: site.officeName,
+      locale: localeOg[locale],
+      alternateLocale: locale === "en" ? ["pt_PT"] : ["en"],
+      type: "website",
+      url,
+      images: [ogImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage.url],
     },
   };
 }
@@ -56,14 +87,7 @@ export function pageMetadata(
     title: { absolute: title },
     description: extras.description,
     alternates: languageAlternates(locale, route),
-    openGraph: {
-      title,
-      description: extras.description,
-      siteName: site.officeName,
-      locale: localeOg[locale],
-      alternateLocale: locale === "en" ? ["pt_PT"] : ["en"],
-      url: absoluteUrl(currentPath),
-    },
+    ...socialMetadata(locale, title, extras.description, absoluteUrl(currentPath)),
   };
 }
 

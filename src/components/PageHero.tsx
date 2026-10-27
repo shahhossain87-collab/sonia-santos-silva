@@ -1,6 +1,7 @@
 "use client";
 
 import CtaLink, { WhatsAppIcon } from "@/components/CtaLink";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import { useCopy } from "@/i18n/use-locale";
 import Link from "next/link";
 
@@ -20,6 +21,7 @@ export default function PageHero({
   return (
     <section className="bg-navy py-8 text-white md:py-10">
       <div className="container">
+        <BreadcrumbJsonLd crumbs={crumbs} />
         <nav aria-label={copy.common.breadcrumb} className="mb-4 text-sm text-white/50">
           <ol className="flex flex-wrap items-center gap-2">
             {crumbs.map((crumb, i) => (

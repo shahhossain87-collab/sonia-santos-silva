@@ -7,6 +7,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { site } from "@/config/site";
 import { localeHtmlLang, localeOg, type Locale } from "@/i18n/locales";
+import { ogImage } from "@/i18n/metadata";
 import { getLocaleFromPathname } from "@/i18n/routes";
 import type { Metadata } from "next";
 import { EB_Garamond, Source_Sans_3 } from "next/font/google";
@@ -50,6 +51,14 @@ export const metadata: Metadata = {
     siteName: site.officeName,
     locale: localeOg.pt,
     type: "website",
+    url: site.url,
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.documentTitle.pt,
+    description: site.description,
+    images: [ogImage.url],
   },
 };
 

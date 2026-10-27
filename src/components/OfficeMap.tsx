@@ -1,3 +1,4 @@
+import { OfficeMapFrame } from "@/components/OfficeMapFrame";
 import { mapsEmbedUrl, mapsLink, site } from "@/config/site";
 import type { Locale } from "@/i18n/locales";
 
@@ -16,19 +17,7 @@ export function officeMapTitle(locale: Locale) {
   return `${labels[locale].title}: ${site.officeName}, ${site.addressLine}`;
 }
 
-/** Embedded Google Map, visible by default. The browser only loads it when it nears the viewport. */
-export function OfficeMapFrame({ locale, className = "" }: { locale: Locale; className?: string }) {
-  return (
-    <iframe
-      title={officeMapTitle(locale)}
-      src={officeMapSrc(locale)}
-      className={`block w-full max-w-full border-0 ${className}`.trim()}
-      loading="lazy"
-      referrerPolicy="no-referrer-when-downgrade"
-      allowFullScreen
-    />
-  );
-}
+export { OfficeMapFrame };
 
 export function OpenInMapsLink({ locale, className = "" }: { locale: Locale; className?: string }) {
   return (

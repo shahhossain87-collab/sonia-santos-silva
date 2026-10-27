@@ -1,5 +1,6 @@
 import { WhatsAppIcon } from "@/components/CtaLink";
 import Reveal from "@/components/Reveal";
+import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/StructuredData";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -34,6 +35,7 @@ export function PageBanner({
         aria-hidden="true"
       />
       <div className="container max-w-[1240px] py-16 md:py-24 lg:py-28">
+        <BreadcrumbJsonLd crumbs={crumbs} />
         <nav aria-label={breadcrumbLabel} className="text-[13px] text-white/60">
           <ol className="flex flex-wrap items-center gap-2">
             {crumbs.map((crumb, index) => (
@@ -104,6 +106,7 @@ export function AlternatingRow({
 export function FaqList({ items }: { items: readonly { q: string; a: string }[] }) {
   return (
     <div className="divide-y divide-navy/10 border-y border-navy/10">
+      <FaqJsonLd items={items} />
       {items.map((item) => (
         <details key={item.q} className="faq-item group">
           <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6 font-display text-[21px] leading-snug text-navy marker:hidden hover:text-gold-dark sm:text-[23px]">

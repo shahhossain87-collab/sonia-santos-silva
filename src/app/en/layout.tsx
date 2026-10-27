@@ -1,6 +1,7 @@
 import { site } from "@/config/site";
 import { getCopy } from "@/i18n/copy";
 import { localeOg } from "@/i18n/locales";
+import { ogImage } from "@/i18n/metadata";
 import type { Metadata } from "next";
 
 const copy = getCopy("en");
@@ -17,6 +18,14 @@ export const metadata: Metadata = {
     siteName: site.officeName,
     locale: localeOg.en,
     alternateLocale: ["pt_PT"],
+    url: `${site.url}/en`,
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.documentTitle.en,
+    description: copy.meta.homeDescription,
+    images: [ogImage.url],
   },
 };
 

@@ -15,4 +15,6 @@ Placeholders atuais (WhatsApp, morada, logótipo e estatísticas) devem ser subs
 
 ## Domínio e SEO
 
-Defina `NEXT_PUBLIC_SITE_URL` na Vercel quando o domínio definitivo GJL for escolhido (por exemplo, `https://www.exemplo.pt`). Esta é a única configuração da origem pública usada por canonicals, hreflang, Open Graph, JSON-LD, sitemap e robots. Sem essa variável, o sítio usa `VERCEL_PROJECT_PRODUCTION_URL` e depois `VERCEL_URL`; em desenvolvimento usa `http://localhost:3000`.
+A origem pública de produção é `https://gjladvogados.pt` (`productionSiteUrl` em `src/config/site.ts`). Canonicals, hreflang, Open Graph, JSON-LD, sitemap e robots usam essa origem. `NEXT_PUBLIC_SITE_URL` pode substituí-la, mas um valor em `*.vercel.app` é ignorado. Em `next dev`, sem essa variável, a origem é `http://localhost:3000`.
+
+`www.gjladvogados.pt` e o alias de produção `sonia-santos-silva.vercel.app` redirecionam com 308 para o apex (caminho e query preservados), em `vercel.json` e em `src/proxy.ts`. Os URL de preview da Vercel não são redirecionados. No painel da Vercel, `www.gjladvogados.pt` deve também estar adicionado como domínio (idealmente como domínio de redirecionamento).

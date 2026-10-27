@@ -1,5 +1,6 @@
 "use client";
 
+import { ConsentProvider } from "@/components/consent";
 import { ThemeProvider } from "next-themes";
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -10,7 +11,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       defaultTheme="light"
       forcedTheme="light"
     >
-      {children}
+      <ConsentProvider>{children}</ConsentProvider>
     </ThemeProvider>
   );
 }

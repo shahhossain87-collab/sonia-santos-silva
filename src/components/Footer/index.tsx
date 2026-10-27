@@ -8,6 +8,7 @@ import { getServiceFinder, immigrationItems } from "@/i18n/copy";
 import { pathFor } from "@/i18n/routes";
 import { areaTitle } from "@/components/Home/homeText";
 import { licenceLine } from "@/data/team";
+import { openConsentPreferences } from "@/components/consent";
 import { useCopy } from "@/i18n/use-locale";
 import Link from "next/link";
 
@@ -30,7 +31,7 @@ export default function Footer() {
     { title: locale === "pt" ? "Início" : "Home", href: pathFor(locale, "home") },
     ...copy.footer.officeLinks,
   ];
-  const legalLinks = locale === "pt" ? copy.footer.legalLinks : copy.footer.legalLinks.filter((item) => item.href !== "/faq");
+  const legalLinks = copy.footer.legalLinks;
 
   return (
     <footer className="relative bg-navy-deep pb-20 text-white lg:pb-0">
@@ -144,6 +145,11 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <button type="button" className="hover:text-gold-light" onClick={openConsentPreferences}>
+                  {copy.common.cookieManage}
+                </button>
+              </li>
             </ul>
           </div>
           <LanguageSwitcher className="[&_a]:text-white/60 [&_a:hover]:text-gold-light [&_a[aria-current=true]]:text-white [&_span]:text-white/25" />
